@@ -11,6 +11,10 @@
         <ImageBrush ImageSource="../../Resources/login_background.jpg" Opacity="0.6" />
     </Window.Background>
 
+    <Window.Icon>
+        <BitmapImage UriSource="../../Resources/icon.png" />
+    </Window.Icon>
+
     <Grid x:Name="LoginMainGrid" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
@@ -48,7 +52,7 @@
                         <CheckBox x:Name="cbRememberMe" VerticalAlignment="Center" FontSize="15" Foreground="DarkSlateGray" Margin="28,0,0,0" Content="Remember me" />
                     </StackPanel>
                     
-                    <Button x:Name="btnLogin" Grid.Row="4" Content="Login" FontSize="25" Foreground="White" Width="300" >
+                    <Button x:Name="btnLogin" Grid.Row="4" Content="Login" FontSize="25" Foreground="White" Width="300" Click="btnLogin_Clicked" >
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="Blue"/>

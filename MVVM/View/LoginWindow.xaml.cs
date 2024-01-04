@@ -89,6 +89,12 @@ namespace EduPartners.MVVM.View
             }
         }
 
-     
+        private void btnLogin_Clicked(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Owner = null;
+            this.Close();
+            mainWindow.Show();
+        }
     }
 }
