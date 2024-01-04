@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\
+C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\
 EduPartners
 none
 false
 DEBUG;TRACE
-D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\App.xaml
-8-299635228
+C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\App.xaml
+9375444164
 
-101458800504
+10-121556750
 13-1310406943
-Assets\Icons.xaml;MVVM\View\Controls\MenuItem.xaml;MVVM\View\Controls\UserPopup.xaml;MVVM\View\MainWindow.xaml;MVVM\View\Pages\Dashboard.xaml;MVVM\View\Pages\Home.xaml;Styles\MainStyle.xaml;Themes\DarkTheme.xaml;
+Assets\Icons.xaml;MVVM\View\Controls\MenuItem.xaml;MVVM\View\Controls\UserPopup.xaml;MVVM\View\LoginWindow.xaml;MVVM\View\MainWindow.xaml;MVVM\View\Pages\Dashboard.xaml;MVVM\View\Pages\Home.xaml;Styles\MainStyle.xaml;Themes\DarkTheme.xaml;
 
-True
+False
 
