@@ -59,15 +59,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\MenuItem.xaml">
+    <Page Include="MVVM\View\Controls\MenuItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\UserPopup.xaml">
+    <Page Include="MVVM\View\Controls\UserPopup.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="MVVM\View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -75,21 +75,21 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\MenuItem.xaml.cs">
+    <Compile Include="MVVM\View\Controls\MenuItem.xaml.cs">
       <DependentUpon>MenuItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\UserPopup.xaml.cs">
+    <Compile Include="MVVM\View\Controls\UserPopup.xaml.cs">
       <DependentUpon>UserPopup.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="MVVM\View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\Dashboard.xaml">
+    <Page Include="MVVM\View\Pages\Dashboard.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\Home.xaml">
+    <Page Include="MVVM\View\Pages\Home.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -103,10 +103,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pages\Dashboard.xaml.cs">
+    <Compile Include="MVVM\View\Pages\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Home.xaml.cs">
+    <Compile Include="MVVM\View\Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -136,6 +136,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\" />
+    <Folder Include="MVVM\Model\" />
+    <Folder Include="MVVM\ViewModel\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

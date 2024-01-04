@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EduPartners
+namespace EduPartners.MVVM.View
 {
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
@@ -143,7 +143,7 @@ namespace EduPartners
                 Popup.PlacementTarget = btnPointOfSale;
                 Popup.Placement = PlacementMode.Right;
                 Popup.IsOpen = true;
-                Header.PopupText.Text = "Poin Of Sale";
+                Header.PopupText.Text = "Point Of Sale";
             }
         }
 
@@ -209,12 +209,12 @@ namespace EduPartners
 
         private void btnHome_Click(object sender, RoutedEventArgs e)
         {
-            fContainer.Navigate(new System.Uri("Pages/Home.xaml", UriKind.RelativeOrAbsolute));
+            fContainer.Navigate(new System.Uri("MVVM/View/Pages/Home.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void btnDashboard_Click(object sender, RoutedEventArgs e)
         {
-            fContainer.Navigate(new System.Uri("Pages/Dashboard.xaml", UriKind.RelativeOrAbsolute));
+            fContainer.Navigate(new System.Uri("MVVM/View/Pages/Dashboard.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void Top_Clicked(object sender, MouseButtonEventArgs e)

@@ -1,10 +1,10 @@
-﻿<Window x:Class="EduPartners.MainWindow"
-        xmlns:ctls="clr-namespace:EduPartners.Controls" 
+﻿<Window x:Class="EduPartners.MVVM.View.MainWindow"
+        xmlns:ctls="clr-namespace:EduPartners.MVVM.View.Controls" 
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:EduPartners"
+        xmlns:local="clr-namespace:EduPartners.MVVM.View"
         mc:Ignorable="d" Name="home"
         Title="MainWindow" Height="650" Width="1000"
         WindowStartupLocation="CenterScreen" WindowStyle="None"
@@ -37,7 +37,7 @@
                               Width="32" Height="24"
                               HorizontalAlignment="Left">
                             <Border.Background>
-                                <ImageBrush ImageSource="Resources/logo.png" Stretch="Uniform"/>
+                                <ImageBrush ImageSource="../../Resources/logo.png" Stretch="Uniform"/>
                             </Border.Background>
                         </Border>
 

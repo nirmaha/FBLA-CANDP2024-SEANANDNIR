@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EduPartners.Controls
+namespace EduPartners.MVVM.View.Controls
 {
     /// <summary>
     /// Lógica de interacción para MenuItem.xaml

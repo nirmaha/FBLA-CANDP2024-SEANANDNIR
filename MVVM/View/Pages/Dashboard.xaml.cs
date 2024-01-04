@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EduPartners.Pages
+namespace EduPartners.MVVM.View.Pages
 {
     /// <summary>
     /// Lógica de interacción para Dashboard.xaml
