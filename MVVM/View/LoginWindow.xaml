@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EduPartners.MVVM.View"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="450" Width="800" FontFamily="Poppins" ResizeMode="CanMinimize">
+        Title="LoginWindow" Height="450" Width="800" FontFamily="Poppins" ResizeMode="CanMinimize" 
+        WindowStartupLocation="CenterScreen">
 
     <Window.Background>
         <ImageBrush ImageSource="../../Resources/login_background.jpg" Opacity="0.6" />
@@ -72,7 +73,7 @@
 
                     <StackPanel Grid.Row="5" Orientation="Horizontal">
                         <Label VerticalAlignment="Center" Content="Not signed up yet?" FontSize="18" Margin="50,0,0,0"/>
-                        <Label VerticalAlignment="Center" Content="SIGN UP NOW" Foreground="#8da4b4" FontSize="18"/>
+                        <TextBlock VerticalAlignment="Center" Text="Sign Up Now" Foreground="#8da4b4" FontSize="18" TextDecorations="Underline" MouseDown="SignUpRedirect_MouseDown" />
                     </StackPanel>
                 </Grid>
             </Border>

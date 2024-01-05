@@ -93,8 +93,18 @@ namespace EduPartners.MVVM.View
         {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Owner = null;
+            mainWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.Close();
             mainWindow.Show();
+        }
+
+        private void SignUpRedirect_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            SignUpWindow signUpWindow = new SignUpWindow();
+            signUpWindow.Owner = null;
+            signUpWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.Close();
+            signUpWindow.Show();
         }
     }
 }
