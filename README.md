@@ -11,7 +11,7 @@ individual. The program should enable users to search and filter the information
 
 ### Stack:
 * Front-end: We used WPF(Windows Presentation Foundation) which uses XAML forms to create the UI.
-  *  For the base template we used the WPF Modern Vertical Menu by [Jeyderht](https://github.com/Jeyderht/WPFModernVerticalMenu) (https://github.com/Jeyderht/WPFModernVerticalMenu).
+  *  For the base template we used the WPF Modern Vertical Menu by [Jeyderht](#Resources).
 * Back End: We used C# and other dotnet Core libraries.
 * Database: We used MongoDB Clusters.
 
@@ -20,6 +20,14 @@ individual. The program should enable users to search and filter the information
 - Administrators can add partners and keep track of their roles.
 
 ### References:
+#### Libraries
+- MongoDB
+   - https://www.mongodb.com/docs/
+- Nuget:
+  - https://learn.microsoft.com/en-us/nuget/
+ #### Resources
+ - Dashboard Template:
+   - https://github.com/Jeyderht/WPFModernVerticalMenu
 - Login Page Background Image:
   - https://www.freepik.com/free-photo/business-people-shaking-hands-together_2975988.htm#query=business&position=2&from_view=keyword&track=sph&uuid=dbc8f5b0-e242-4b1e-948d-f4c38f3b2b97
 - Signup Page Background Image:
