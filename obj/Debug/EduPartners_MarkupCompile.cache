@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\App.xaml
-101964693497
+11-713564436
 21947236976
-172054314824
-36-522923463
-Assets\Icons.xaml;MVVM\View\Controls\MenuItem.xaml;MVVM\View\Controls\UserPopup.xaml;MVVM\View\LoginWindow.xaml;MVVM\View\MainWindow.xaml;MVVM\View\Pages\Dashboard.xaml;MVVM\View\Pages\Home.xaml;MVVM\View\SignUpWindow.xaml;Styles\MainStyle.xaml;Themes\DarkTheme.xaml;
+182052008437
+37580449408
+Assets\Icons.xaml;MVVM\View\Controls\MenuItem.xaml;MVVM\View\Controls\UserPopup.xaml;MVVM\View\LoginWindow.xaml;MVVM\View\MainWindow.xaml;MVVM\View\Pages\Dashboard.xaml;MVVM\View\Pages\Home.xaml;MVVM\View\SchoolSelection.xaml;MVVM\View\SignUpWindow.xaml;Styles\MainStyle.xaml;Themes\DarkTheme.xaml;
 
 False
 

@@ -8,12 +8,13 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 
 using EduPartners.MVVM.Model;
+using System.Configuration;
 
 namespace EduPartners.Core
 {
     public class Database
     {
-        private const string ConnectionUri = "mongodb+srv://FBLANS2024:8D7T6rAW0Ihy30E9@management.wvovlna.mongodb.net/?retryWrites=true&w=majority";
+        private static string ConnectionUri = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString + "?retryWrites=true&w=majority";
         private MongoClientSettings Settings = MongoClientSettings.FromConnectionString(ConnectionUri);
 
         private MongoClient Client;

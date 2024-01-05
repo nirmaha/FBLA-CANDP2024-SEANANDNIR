@@ -174,7 +174,11 @@ namespace EduPartners.MVVM.View
 
         private void btnNext_Clicked(object sender, RoutedEventArgs e)
         {
-
+            SchoolSelection schoolSelection = new SchoolSelection();
+            schoolSelection.Owner = null;
+            schoolSelection.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.Close();
+            schoolSelection.Show();
         }
 
         private void LoginRedirect_MouseDown(object sender, MouseButtonEventArgs e)
