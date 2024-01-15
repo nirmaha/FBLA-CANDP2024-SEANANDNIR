@@ -25,12 +25,18 @@ namespace EduPartners.MVVM.View
     {
         DispatcherTimer switchTimer;
         DispatcherTimer animationTimer;
-        
+
         int panelNum = 0;
         string[] images = new string[]
         {   "../../Resources/first_panel_background.png",
             "../../Resources/second_panel_background.jpg",
             "../../Resources/third_panel_background.png"
+        };
+        string[] backgroundTexts = new string[]
+        {
+            "Manage your PartnerShips",
+            "Administer Accademic Growth",
+            "Promote Collaboration"
         };
 
 
@@ -52,6 +58,7 @@ namespace EduPartners.MVVM.View
                     if (isFadingIn)
                     {
                         ibBackground.Opacity += 0.05; // Adjust the increment as needed
+                        lBackgroundText.Opacity += 0.05;
 
                         if (ibBackground.Opacity >= 1)
                         {
@@ -63,6 +70,7 @@ namespace EduPartners.MVVM.View
                     else
                     {
                         ibBackground.Opacity -= 0.05; // Adjust the decrement as needed
+                        lBackgroundText.Opacity -= 0.05;
 
                         if (ibBackground.Opacity <= 0)
                         {
@@ -73,6 +81,7 @@ namespace EduPartners.MVVM.View
                                 panelNum = 0;
                             }
                             ibBackground.ImageSource = new BitmapImage(new Uri(images[panelNum], UriKind.RelativeOrAbsolute));
+                            lBackgroundText.Content = backgroundTexts[panelNum];
                             switch (panelNum)
                             {
                                 case 0:
@@ -137,6 +146,13 @@ namespace EduPartners.MVVM.View
             signUpWindow.Owner = this;
             this.Close();
             signUpWindow.Show();
+        }
+
+        private void Background_Clicked(object sender, MouseButtonEventArgs e)
+        {
+            switchTimer.Stop();
+            animationTimer.Stop();
+            animationTimer.Start();
         }
     }
 }

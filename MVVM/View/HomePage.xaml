@@ -21,7 +21,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition />
-            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
         <Grid Background="#152238">
@@ -31,10 +30,18 @@
                 <Button x:Name="btSignUp" Content="Sign Up" Background="DarkOrange" Margin="0,0,20,0" Height="35" Width="85" Click="SignUp_Clicked" />
             </StackPanel>
         </Grid>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Ellipse x:Name="firstPanelCircle" Fill="White" Width="35" Height="35" Opacity="0.7" />
-            <Ellipse x:Name="secondPanelCircle" Fill="Gray" Width="35" Height="35" Margin="20,0,0,0" Opacity="0.5" />
-            <Ellipse x:Name="thirdPanelCircle" Fill="Gray" Width="35" Height="35" Margin="20,0,0,0" Opacity="0.5" />
-        </StackPanel>
+        <Grid Grid.Row="1" PreviewMouseDown="Background_Clicked">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="60" />
+            </Grid.RowDefinitions>
+            <Rectangle Grid.RowSpan="2" Fill="Transparent" />
+            <Label x:Name="lBackgroundText" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="32" Content="Manage your PartnerShips" Foreground="White" />
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Ellipse x:Name="firstPanelCircle" Fill="White" Width="35" Height="35" Opacity="0.7" />
+                <Ellipse x:Name="secondPanelCircle" Fill="Gray" Width="35" Height="35" Margin="20,0,0,0" Opacity="0.5" />
+                <Ellipse x:Name="thirdPanelCircle" Fill="Gray" Width="35" Height="35" Margin="20,0,0,0" Opacity="0.5" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
