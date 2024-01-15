@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EduPartners.MVVM.View"
         mc:Ignorable="d"
-        Title="SignUpWindow" Height="450" Width="800" FontFamily="Poppins" ResizeMode="CanMinimize">
+        Title="SignUpWindow" Height="450" Width="800" FontFamily="Poppins" ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen">
 
     <Window.Background>
         <ImageBrush ImageSource="../../Resources/signup_background.jpg" Opacity="0.6" />
