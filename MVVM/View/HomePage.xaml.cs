@@ -34,7 +34,7 @@ namespace EduPartners.MVVM.View
         };
         string[] backgroundTexts = new string[]
         {
-            "Manage your PartnerShips",
+            "Manage your Partnerships",
             "Administer Accademic Growth",
             "Promote Collaboration"
         };
@@ -86,27 +86,27 @@ namespace EduPartners.MVVM.View
                             {
                                 case 0:
                                     firstPanelCircle.Opacity = 0.7;
-                                    firstPanelCircle.Fill = new SolidColorBrush(Colors.White);
+                                    firstPanelCircle.Background = new SolidColorBrush(Colors.White);
                                     secondPanelCircle.Opacity = 0.5;
-                                    secondPanelCircle.Fill = new SolidColorBrush(Colors.Gray);
+                                    secondPanelCircle.Background = new SolidColorBrush(Colors.Gray);
                                     thirdPanelCircle.Opacity = 0.5;
-                                    thirdPanelCircle.Fill = new SolidColorBrush(Colors.Gray);
+                                    thirdPanelCircle.Background = new SolidColorBrush(Colors.Gray);
                                     break;
                                 case 1:
                                     firstPanelCircle.Opacity = 0.5;
-                                    firstPanelCircle.Fill = new SolidColorBrush(Colors.Gray);
+                                    firstPanelCircle.Background = new SolidColorBrush(Colors.Gray);
                                     secondPanelCircle.Opacity = 0.7;
-                                    secondPanelCircle.Fill = new SolidColorBrush(Colors.White);
+                                    secondPanelCircle.Background = new SolidColorBrush(Colors.White);
                                     thirdPanelCircle.Opacity = 0.5;
-                                    thirdPanelCircle.Fill = new SolidColorBrush(Colors.Gray);
+                                    thirdPanelCircle.Background = new SolidColorBrush(Colors.Gray);
                                     break;
                                 case 2:
                                     firstPanelCircle.Opacity = 0.5;
-                                    firstPanelCircle.Fill = new SolidColorBrush(Colors.Gray);
+                                    firstPanelCircle.Background = new SolidColorBrush(Colors.Gray);
                                     secondPanelCircle.Opacity = 0.5;
-                                    secondPanelCircle.Fill = new SolidColorBrush(Colors.Gray);
+                                    secondPanelCircle.Background = new SolidColorBrush(Colors.Gray);
                                     thirdPanelCircle.Opacity = 0.7;
-                                    thirdPanelCircle.Fill = new SolidColorBrush(Colors.White);
+                                    thirdPanelCircle.Background = new SolidColorBrush(Colors.White);
                                     break;
                             }
                         }

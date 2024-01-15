@@ -36,11 +36,11 @@
                 <RowDefinition Height="60" />
             </Grid.RowDefinitions>
             <Rectangle Grid.RowSpan="2" Fill="Transparent" />
-            <Label x:Name="lBackgroundText" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="32" Content="Manage your PartnerShips" Foreground="White" />
-            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Ellipse x:Name="firstPanelCircle" Fill="White" Width="35" Height="35" Opacity="0.7" />
-                <Ellipse x:Name="secondPanelCircle" Fill="Gray" Width="35" Height="35" Margin="20,0,0,0" Opacity="0.5" />
-                <Ellipse x:Name="thirdPanelCircle" Fill="Gray" Width="35" Height="35" Margin="20,0,0,0" Opacity="0.5" />
+            <Label x:Name="lBackgroundText" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="32" Content="Manage your Partnerships" Foreground="#007BFF" />
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="12">
+                <Border CornerRadius="5" x:Name="firstPanelCircle" Background="White" Width="43" Height="12" Opacity="0.7" />
+                <Border CornerRadius="5" x:Name="secondPanelCircle" Background="Gray" Width="43" Height="12" Margin="20,0,0,0" Opacity="0.5" />
+                <Border CornerRadius="5" x:Name="thirdPanelCircle" Background="Gray" Width="43" Height="12" Margin="20,0,0,0" Opacity="0.5" />
             </StackPanel>
         </Grid>
     </Grid>
