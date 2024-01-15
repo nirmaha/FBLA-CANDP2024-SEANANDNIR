@@ -189,5 +189,13 @@ namespace EduPartners.MVVM.View
             this.Close();
             loginWindow.Show();
         }
+
+        private void btnBack_Clicked(object sender, RoutedEventArgs e)
+        {
+            HomePage homePage = new HomePage();
+            homePage.Owner = null;
+            this.Close();
+            homePage.Show();
+        }
     }
 }

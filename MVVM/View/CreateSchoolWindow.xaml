@@ -1,0 +1,73 @@
+﻿<Window x:Class="EduPartners.MVVM.View.CreateSchoolWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EduPartners.MVVM.View"
+        mc:Ignorable="d"
+        Title="CreateSchoolWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+
+    <Window.Background>
+        <ImageBrush ImageSource="../../Resources/create_school_background.jpg" Opacity="0.6" x:Name="ibBackground" />
+    </Window.Background>
+
+    <Window.Icon>
+        <BitmapImage UriSource="../../Resources/icon.png" />
+    </Window.Icon>
+
+        <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+
+        <Button Content="&#x2B05;" FontSize="48"  Background="#1d3b7a" Foreground="White" Height="60" Width="60" Click="btnBack_Clicked" Margin="10,13,130,340" />
+
+        <Grid x:Name="SecondColumnGrid" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="71" />
+                <RowDefinition />
+                <RowDefinition Height="71" />
+            </Grid.RowDefinitions>
+
+            <Border x:Name="bSchoolSelectionBorder" Grid.Row="1" Background="WhiteSmoke" CornerRadius="25" Opacity=".80" PreviewMouseDown="SchoolSelectionBorder_MouseDown">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Label Content="Select School" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                    <TextBox x:Name="tbSchoolName" Grid.Row="1" Background="#ededed" HorizontalAlignment="Center" Width="300" Height="30" FontSize="20" GotFocus="tbSchoolName_GotFocus" LostFocus="tbSchoolName_LostFocus" TextChanged="tbSchoolName_TextChanged" />
+
+                    <TextBox x:Name="tbSchoolId" Grid.Row="2" Background="#ededed" HorizontalAlignment="Center" Width="300" Height="30" FontSize="20" GotFocus="tbSchoolId_GotFocus" LostFocus="tbSchoolId_LostFocus" TextChanged="tbSchoolId_TextChanged" />
+                    <Label x:Name="lSchoolId" Content="School Id" Foreground="Gray" Grid.Row="2" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="IBeam" Margin="0,0,230,0" MouseDown="lSchoolId_Clicked"/>
+
+                    <Button x:Name="btnCreateSchool" Grid.Row="3" Content="Create School" FontSize="25" Foreground="White" Width="300" Click="btnCreateAccount_Clicked" >
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Blue"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Red"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="15"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

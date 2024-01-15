@@ -15,13 +15,15 @@
     <Window.Icon>
         <BitmapImage UriSource="../../Resources/icon.png" />
     </Window.Icon>
-    
+
     <Grid x:Name="SignUpMainGrid" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="200" />
         </Grid.ColumnDefinitions>
+           
+        <Button Content="&#x2B05;" FontSize="48" Background="#1d3b7a" Foreground="White" Height="60" Width="60" Click="btnBack_Clicked" Margin="10,13,130,340" />
 
         <Grid x:Name="SecondColumnGrid" Grid.Column="1">
             <Grid.RowDefinitions>
@@ -29,6 +31,7 @@
                 <RowDefinition />
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
+
 
             <Border x:Name="bSignUpBorder" Grid.Row="1" Background="WhiteSmoke" CornerRadius="25" Opacity=".80" PreviewMouseDown="SignUpBorder_MouseDown">
                 <Grid>

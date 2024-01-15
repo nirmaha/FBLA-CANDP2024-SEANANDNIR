@@ -23,6 +23,8 @@
             <ColumnDefinition Width="200" />
         </Grid.ColumnDefinitions>
 
+        <Button Content="&#x2B05;" FontSize="48"  Background="#1d3b7a" Foreground="White" Height="60" Width="60" Click="btnBack_Clicked" Margin="10,13,130,340" />
+
         <Grid x:Name="SecondColumnGrid" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="71" />

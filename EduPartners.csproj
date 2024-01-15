@@ -134,6 +134,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="MVVM\View\CreateSchoolWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\HomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -161,6 +165,9 @@
     </Compile>
     <Compile Include="MVVM\View\Controls\UserPopup.xaml.cs">
       <DependentUpon>UserPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\CreateSchoolWindow.xaml.cs">
+      <DependentUpon>CreateSchoolWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
@@ -250,6 +257,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="mongocrypt.dll" />
+    <Resource Include="Resources\create_school_background.jpg" />
     <Resource Include="Resources\third_panel_background.png" />
     <Resource Include="Resources\second_panel_background.jpg" />
     <Resource Include="Resources\first_panel_background.png" />

@@ -129,7 +129,10 @@ namespace EduPartners.MVVM.View
 
         private void CreateSchool_Clicked(object sender, RoutedEventArgs e)
         {
-
+            CreateSchoolWindow createSchoolWindow = new CreateSchoolWindow();
+            createSchoolWindow.Owner = null;
+            this.Close();
+            createSchoolWindow.Show();
         }
 
         private void Login_Clicked(object sender, RoutedEventArgs e)
@@ -143,7 +146,7 @@ namespace EduPartners.MVVM.View
         private void SignUp_Clicked(object sender, RoutedEventArgs e)
         {
             SignUpWindow signUpWindow = new SignUpWindow();
-            signUpWindow.Owner = this;
+            signUpWindow.Owner = null;
             this.Close();
             signUpWindow.Show();
         }
