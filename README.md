@@ -35,6 +35,8 @@ individual. The program should enable users to search and filter the information
    - https://www.mongodb.com/docs/
 - Nuget:
   - https://learn.microsoft.com/en-us/nuget/
+- Bcrypt:
+  - https://github.com/BcryptNet/bcrypt.net  
  #### Resources
  - Dashboard Template:
    - https://github.com/Jeyderht/WPFModernVerticalMenu
