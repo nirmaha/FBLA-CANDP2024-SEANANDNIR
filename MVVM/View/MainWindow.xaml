@@ -45,7 +45,7 @@
                             </Border.Background>
                         </Border>
 
-                        <Label Content="Poppins"
+                        <Label Content="EduPartners"
                                Foreground="{DynamicResource PrimaryTextColor}"
                                FontWeight="Bold"
                                FontSize="16"

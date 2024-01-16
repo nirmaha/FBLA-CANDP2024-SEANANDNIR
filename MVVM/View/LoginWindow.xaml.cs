@@ -12,6 +12,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using EduPartners.Core;
+using EduPartners.MVVM.Model;
+using BCrypts = BCrypt.Net.BCrypt;
 
 namespace EduPartners.MVVM.View
 {
@@ -20,9 +23,24 @@ namespace EduPartners.MVVM.View
     /// </summary>
     public partial class LoginWindow : Window
     {
+        private Database db;
         public LoginWindow()
         {
             InitializeComponent();
+
+            db = new Database();
+            IniFile iniFile = new IniFile("EduPartners.ini");
+            if (iniFile.GetValue("SECURITY", "EMAILLOGIN") != "")
+            {
+                cbRememberMe.IsChecked = true;
+                tbEmail.Text = iniFile.GetValue("SECURITY", "EMAILLOGIN");
+                pbPassword.Focus();
+            }
+            else 
+            {
+                tbEmail.Focus();
+            }
+            
         }
 
         private void pbPassword_GotFocus(object sender, RoutedEventArgs e)
@@ -89,8 +107,46 @@ namespace EduPartners.MVVM.View
             }
         }
 
-        private void btnLogin_Clicked(object sender, RoutedEventArgs e)
+        private async void btnLogin_Clicked(object sender, RoutedEventArgs e)
         {
+            if (tbEmail.Text == "" || pbPassword.Password == "")
+            {
+                MessageBox.Show("Please enter a username and a password.");
+                return;
+            }
+
+            List<User> users = await db.GetUsers();
+            User user = null;
+
+            IniFile iniFile = new IniFile("EduPartners.ini");
+
+            foreach (User tempUser in users)
+            {
+                if (tbEmail.Text == tempUser.Email && BCrypts.Verify(pbPassword.Password, tempUser.Password))
+                { 
+                    user = tempUser;
+                    App.Current.Properties["User"] = user.Id;
+                    break;
+                }
+            }
+
+            if (user == null)
+            {
+                MessageBox.Show("Username / Password is incorrect.");
+                return;
+            }
+
+            if (cbRememberMe.IsChecked == true)
+            {
+                iniFile.SetValue("SECURITY", "EMAILLOGIN", tbEmail.Text);
+                iniFile.Save();
+            }
+            else
+            {
+                iniFile.SetValue("SECURITY", "EMAILLOGIN", "");
+                iniFile.Save();
+            }
+
             MainWindow mainWindow = new MainWindow();
             mainWindow.Owner = null;
             mainWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;

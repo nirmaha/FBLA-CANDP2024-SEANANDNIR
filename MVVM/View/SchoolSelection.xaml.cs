@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BCrypt.Net;
+using EduPartners.Core;
+using EduPartners.MVVM.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +14,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BCrypts = BCrypt.Net.BCrypt;
+
 
 namespace EduPartners.MVVM.View
 {
@@ -19,9 +24,24 @@ namespace EduPartners.MVVM.View
     /// </summary>
     public partial class SchoolSelection : Window
     {
+        private Database db;
         public SchoolSelection()
         {
             InitializeComponent();
+            db = new Database();
+            
+            PopulateComboBox();
+
+        }
+
+        private async void PopulateComboBox()
+        {
+            List<School> schools = await db.GetSchools();
+
+            foreach (School school in schools)
+            { 
+                cbSchool.Items.Add(school.Name);
+            }
         }
 
         private void SchoolSelectionBorder_MouseDown(object sender, MouseButtonEventArgs e)
@@ -60,14 +80,6 @@ namespace EduPartners.MVVM.View
             tbSchoolId.Focus();
         }
 
-        private void btnCreateAccount_Clicked(object sender, RoutedEventArgs e)
-        {
-            LoginWindow loginWindow = new LoginWindow();
-            loginWindow.Owner = null;
-            loginWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            this.Close();
-            loginWindow.Show();
-        }
 
         private void SignUpRedirect_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -84,6 +96,54 @@ namespace EduPartners.MVVM.View
             homePage.Owner = null;
             this.Close();
             homePage.Show();
+        }
+        private async void btnCreateAccount_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (cbSchool.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a school.");
+                return;
+            }
+
+            if (tbSchoolId.Text == "")
+            {
+                MessageBox.Show("Please enter a school code.");
+                return;
+            }
+
+            List<School> schools = await db.GetSchools();
+
+            School school = new School();
+
+            foreach (School tempSchool in schools) 
+            {
+                if (tempSchool.Name == cbSchool.SelectedItem.ToString())
+                {
+                    school = tempSchool;
+                }
+            }
+
+            if (tbSchoolId.Text != school.Code)
+            {
+                MessageBox.Show("Please enter a valid code.");
+                return;
+            }
+            
+            User user = new User()
+            {
+                Name = App.Current.Properties["FirstName"].ToString() + " " + App.Current.Properties["LastName"].ToString(),
+                Email = App.Current.Properties["Email"].ToString(),
+                Password = BCrypts.HashPassword(App.Current.Properties["Password"].ToString()),
+                HomeSchool = school
+            };
+
+            await db.CreateUser(user);
+
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Owner = null;
+            loginWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.Close();
+            loginWindow.Show();
         }
     }
 }

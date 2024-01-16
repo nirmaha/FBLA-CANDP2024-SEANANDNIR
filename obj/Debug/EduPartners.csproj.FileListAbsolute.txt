@@ -162,3 +162,5 @@ C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\CreateSchoolWindow.g
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\CreateSchoolWindow.baml
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\CreateSchoolWindow.g.cs
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\CreateSchoolWindow.baml
+D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\bin\Debug\BCrypt.Net-Next.dll
+D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\bin\Debug\BCrypt.Net-Next.xml

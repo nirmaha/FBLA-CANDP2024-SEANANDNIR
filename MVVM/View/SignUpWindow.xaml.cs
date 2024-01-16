@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using EduPartners.Core;
+using EduPartners.MVVM.Model;
+using BCrypts = BCrypt.Net.BCrypt;
 
 namespace EduPartners.MVVM.View
 {
@@ -19,9 +22,11 @@ namespace EduPartners.MVVM.View
     /// </summary>
     public partial class SignUpWindow : Window
     {
+        private Database db;
         public SignUpWindow()
         {
             InitializeComponent();
+            db = new Database();
         }
 
         private void SignUpBorder_MouseDown(object sender, MouseButtonEventArgs e)
@@ -172,14 +177,6 @@ namespace EduPartners.MVVM.View
             pbConfirmPassword.Focus();
         }
 
-        private void btnNext_Clicked(object sender, RoutedEventArgs e)
-        {
-            SchoolSelection schoolSelection = new SchoolSelection();
-            schoolSelection.Owner = null;
-            schoolSelection.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            this.Close();
-            schoolSelection.Show();
-        }
 
         private void LoginRedirect_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -196,6 +193,49 @@ namespace EduPartners.MVVM.View
             homePage.Owner = null;
             this.Close();
             homePage.Show();
+        }
+
+        private async void btnNext_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (tbFirstName.Text == "" || tbLastName.Text == "" || tbEmail.Text == "" || pbPassword.Password == "" || pbConfirmPassword.Password == "")
+            {
+                MessageBox.Show("Please fill in all the fields.");
+                return;
+            }
+
+            List<User> users = await db.GetUsers();
+
+            foreach (User user in users)
+            {
+                if (tbEmail.Text == user.Email)
+                {
+                    MessageBox.Show("Cannot create account due to the email already existing.");
+                    return;
+                }
+            }
+
+            if (pbPassword.Password != pbConfirmPassword.Password)
+            {
+                MessageBox.Show("Confirmed password does not match given password.");
+                return;
+            }
+
+            if (cbTerms.IsChecked == false) 
+            {
+                MessageBox.Show("Please agree to the terms and conditions.");
+                return;
+            }
+
+            App.Current.Properties["FirstName"] = tbFirstName.Text;
+            App.Current.Properties["LastName"] = tbLastName.Text;
+            App.Current.Properties["Email"] = tbEmail.Text;
+            App.Current.Properties["Password"] = pbPassword.Password;
+
+            SchoolSelection schoolSelection = new SchoolSelection();
+            schoolSelection.Owner = null;
+            schoolSelection.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.Close();
+            schoolSelection.Show();
         }
     }
 }

@@ -21,7 +21,7 @@ namespace EduPartners.MVVM.View
     /// </summary>
     public partial class CreateSchoolWindow : Window
     {
-        Database db;
+        private Database db;
         public CreateSchoolWindow()
         {
             InitializeComponent();

@@ -67,7 +67,7 @@
 
 
 
-                    <Button x:Name="btnCreateSchool" Grid.Row="5" Content="Create School" Background="Blue" FontSize="25" Foreground="White" Click="btnCreateSchool_Clicked" Margin="56,45,56,13" Grid.RowSpan="2" >
+                    <Button x:Name="btnCreateSchool" IsDefault="True" Grid.Row="5" Content="Create School" Background="Blue" FontSize="25" Foreground="White" Click="btnCreateSchool_Clicked" Margin="56,45,56,13" Grid.RowSpan="2" >
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="15"/>

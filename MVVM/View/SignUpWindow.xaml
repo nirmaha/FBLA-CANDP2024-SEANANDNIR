@@ -64,9 +64,9 @@
                     <PasswordBox x:Name="pbConfirmPassword" Grid.Row="5" Background="#ededed" HorizontalAlignment="Center" Width="300" Height="30" FontSize="20" GotFocus="pbConfirmPassword_GotFocus" LostFocus="pbConfirmPassword_LostFocus" PasswordChanged="pbConfirmPassword_PasswordChanged" />
                     <Label x:Name="lConfirmPassword" Content="Confirm Password" Foreground="Gray" Grid.Row="5" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="IBeam" Margin="0,0,173,0" MouseDown="lConfirmPassword_Clicked"/>
 
-                    <CheckBox x:Name="cbRememberMe" Grid.Row="6" VerticalAlignment="Center" FontSize="15" Foreground="DarkSlateGray" HorizontalAlignment="Center" Content="I have read and agreed to the terms and conditions" />
+                    <CheckBox x:Name="cbTerms" Grid.Row="6" VerticalAlignment="Center" FontSize="15" Foreground="DarkSlateGray" HorizontalAlignment="Center" Content="I have read and agreed to the terms and conditions" />
 
-                    <Button x:Name="btnLogin" Grid.Row="7" Content="Next" FontSize="25" Foreground="White" Width="300" Click="btnNext_Clicked" >
+                    <Button x:Name="btnLogin" IsDefault="True" Grid.Row="7" Content="Next" FontSize="25" Foreground="White" Width="300" Click="btnNext_Clicked" >
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="Blue"/>
