@@ -16,50 +16,58 @@
         <BitmapImage UriSource="../../Resources/icon.png" />
     </Window.Icon>
 
-        <Grid>
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="200" />
         </Grid.ColumnDefinitions>
 
-        <Button Content="&#x2B05;" FontSize="48"  Background="#1d3b7a" Foreground="White" Height="60" Width="60" Click="btnBack_Clicked" Margin="10,13,130,340" />
+        <Button Content="&#x2B05;" FontSize="48" Background="#1d3b7a" Foreground="White" Height="60" Width="60" Click="btnBack_Clicked" Margin="10,13,130,340" VerticalAlignment="Top" Padding="0,-5,0,0"/>
 
         <Grid x:Name="SecondColumnGrid" Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="71" />
+                <RowDefinition Height="30" />
                 <RowDefinition />
-                <RowDefinition Height="71" />
+                <RowDefinition Height="30" />
             </Grid.RowDefinitions>
 
-            <Border x:Name="bSchoolSelectionBorder" Grid.Row="1" Background="WhiteSmoke" CornerRadius="25" Opacity=".80" PreviewMouseDown="SchoolSelectionBorder_MouseDown">
+            <Border x:Name="bCreateSchoolBorder" Background="WhiteSmoke" CornerRadius="25" Opacity=".80" PreviewMouseDown="CreateSchoolBorder_MouseDown" Grid.Row="1">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
+                        <RowDefinition Height="53*" />
+                        <RowDefinition Height="53*" />
+                        <RowDefinition Height="53*" />
+                        <RowDefinition Height="53*" />
+                        <RowDefinition Height="53*" />
+                        <RowDefinition Height="59*" />
+                        <RowDefinition Height="49*" />
                     </Grid.RowDefinitions>
 
-                    <Label Content="Select School" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Content="Create School" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Height="43" Width="162" />
 
-                    <TextBox x:Name="tbSchoolName" Grid.Row="1" Background="#ededed" HorizontalAlignment="Center" Width="300" Height="30" FontSize="20" GotFocus="tbSchoolName_GotFocus" LostFocus="tbSchoolName_LostFocus" TextChanged="tbSchoolName_TextChanged" />
+                    <TextBox x:Name="tbSchoolName" Grid.Row="1" Background="#ededed" HorizontalAlignment="Center" Width="300" FontSize="20" GotFocus="tbSchoolName_GotFocus" LostFocus="tbSchoolName_LostFocus" TextChanged="tbSchoolName_TextChanged" Margin="0,12,0,12" />
+                    <Label x:Name="lSchoolName" Content="School Name" Foreground="Gray" Grid.Row="1" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Cursor="IBeam" Margin="46,0,0,0" MouseDown="lSchoolName_Clicked" Height="30" Width="98"/>
 
-                    <TextBox x:Name="tbSchoolId" Grid.Row="2" Background="#ededed" HorizontalAlignment="Center" Width="300" Height="30" FontSize="20" GotFocus="tbSchoolId_GotFocus" LostFocus="tbSchoolId_LostFocus" TextChanged="tbSchoolId_TextChanged" />
-                    <Label x:Name="lSchoolId" Content="School Id" Foreground="Gray" Grid.Row="2" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="IBeam" Margin="0,0,230,0" MouseDown="lSchoolId_Clicked"/>
+                    <TextBox x:Name="tbAddress" Grid.Row="2" Background="#ededed" HorizontalAlignment="Center" Width="300" FontSize="20" GotFocus="tbAddress_GotFocus" LostFocus="tbAddress_LostFocus" TextChanged="tbAddress_TextChanged" Margin="0,11,0,12" />
+                    <Label x:Name="lAddress" Grid.Row="2" Content="Address" Foreground="Gray" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Cursor="IBeam" Margin="46,0,0,0" MouseDown="lAddress_Clicked" Height="30" Width="63"/>
 
-                    <Button x:Name="btnCreateSchool" Grid.Row="3" Content="Create School" FontSize="25" Foreground="White" Width="300" Click="btnCreateAccount_Clicked" >
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="Blue"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="Red"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
+                    <TextBox x:Name="tbCity" Grid.Row="3" Background="#ededed" HorizontalAlignment="Center" Width="300" FontSize="20" GotFocus="tbCity_GotFocus" LostFocus="tbCity_LostFocus" TextChanged="tbCity_TextChanged" Margin="0,12,0,11" />
+                    <Label x:Name="lCity" Grid.Row="3" Content="City" Foreground="Gray" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Cursor="IBeam" Margin="46,0,0,0" MouseDown="lCity_Clicked" Height="29" Width="35"/>
+
+                    <TextBox x:Name="tbState" Grid.Row="4" MaxLength="2" Background="#ededed" HorizontalAlignment="Left" Width="98" FontSize="20" GotFocus="tbState_GotFocus" LostFocus="tbState_LostFocus" TextChanged="tbState_TextChanged" Margin="86,12,0,11" />
+                    <Label x:Name="lState" Grid.Row="4" Content="State" Foreground="Gray" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Cursor="IBeam" Margin="86,0,0,0" MouseDown="lState_Clicked" Height="30" Width="43"/>
+
+                    <TextBox x:Name="tbZip" Grid.Row="4" MaxLength="5" Background="#ededed" HorizontalAlignment="Left" Width="98" FontSize="20" GotFocus="tbZip_GotFocus" LostFocus="tbZip_LostFocus" TextChanged="tbZip_TextChanged" Margin="221,12,0,11" />
+                    <Label x:Name="lZip" Grid.Row="4" Content="Zip" Foreground="Gray" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Cursor="IBeam" MouseDown="lZip_Clicked" Margin="221,0,0,0" Height="30" Width="31"/>
+
+                    <TextBox x:Name="tbSchoolCode" Grid.Row="5" IsReadOnly="True" Background="#ededed" HorizontalAlignment="Left" Width="298" FontSize="20" Margin="21,4,0,21" />
+                    <Label Content="&#x1f4cb;" Grid.Row="5" Cursor="Arrow" FontSize="20" Margin="320,0,0,0" MouseDown="lCopyCliboard_MouseDown"/>
+                    <Label Content="&#x27f3;" Grid.Row="5" Cursor="Arrow"  FontSize="25" Margin="345,-3.95,0,0" MouseDown="lCodeRefresh_MouseDown"/>
+
+
+
+                    <Button x:Name="btnCreateSchool" Grid.Row="5" Content="Create School" Background="Blue" FontSize="25" Foreground="White" Click="btnCreateSchool_Clicked" Margin="56,45,56,13" Grid.RowSpan="2" >
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="15"/>

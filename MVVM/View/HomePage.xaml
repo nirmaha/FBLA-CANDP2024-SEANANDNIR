@@ -25,9 +25,27 @@
 
         <Grid Background="#152238">
             <StackPanel Orientation="Horizontal" Opacity="1.0" HorizontalAlignment="Right">
-                <Button x:Name="btCreateSchool" Content="Create School" Background="Blue" Margin="5,0,15,0" Height="35" Width="85" Click="CreateSchool_Clicked" />
-                <Button x:Name="btLogin" Content="Login" Background="Green" Margin="0,0,15,0" Height="35" Width="85" Click="Login_Clicked" />
-                <Button x:Name="btSignUp" Content="Sign Up" Background="DarkOrange" Margin="0,0,20,0" Height="35" Width="85" Click="SignUp_Clicked" />
+                <Button x:Name="btCreateSchool" BorderThickness="0" Content="Create School" Background="Blue" Margin="5,0,15,0" Height="35" Width="85" Click="CreateSchool_Clicked">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="btLogin" Content="Login" BorderThickness="0" Background="Green" Margin="0,0,15,0" Height="35" Width="85" Click="Login_Clicked">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="btSignUp" Content="Sign Up" BorderThickness="0" Background="DarkOrange" Margin="0,0,20,0" Height="35" Width="85" Click="SignUp_Clicked">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1" PreviewMouseDown="Background_Clicked">
