@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
-using MongoDB.Driver;
 using MongoDB.Bson;
+using MongoDB.Driver;
 
 using EduPartners.MVVM.Model;
-using System.Configuration;
 
 namespace EduPartners.Core
 {
@@ -22,6 +22,7 @@ namespace EduPartners.Core
 
         private const string UserCollection = "Users";
         private const string SchoolCollection = "Schools";
+        private const string PartnerCollection = "Partners";
 
         public Database()
         {
@@ -56,10 +57,18 @@ namespace EduPartners.Core
             return results.ToList();
         }
 
-        public async Task<List<User>> GetUser(string UserId) 
+        public async Task<List<User>> GetUserById(string UserId) 
         {
             IMongoCollection<User> users = GetDBCollection<User>(UserCollection);
             IAsyncCursor<User> results = await users.FindAsync(user => user.Id == UserId);
+
+            return results.ToList();
+        }  
+        
+        public async Task<List<User>> GetUserByName(string UsersName) 
+        {
+            IMongoCollection<User> users = GetDBCollection<User>(UserCollection);
+            IAsyncCursor<User> results = await users.FindAsync(user => user.Name == UsersName);
 
             return results.ToList();
         }
@@ -95,10 +104,18 @@ namespace EduPartners.Core
             return results.ToList();
         }
 
-        public async Task<List<School>> GetSchool(string SchoolId) 
+        public async Task<List<School>> GetSchoolById(string SchoolId) 
         {
             IMongoCollection<School> schools = GetDBCollection<School>(SchoolCollection);
             IAsyncCursor<School> results = await schools.FindAsync(school => school.Id == SchoolId);
+
+            return results.ToList();
+        }    
+        
+        public async Task<List<School>> GetSchoolByName(string SchoolName) 
+        {
+            IMongoCollection<School> schools = GetDBCollection<School>(SchoolCollection);
+            IAsyncCursor<School> results = await schools.FindAsync(school => school.Name == SchoolName);
 
             return results.ToList();
         }
@@ -126,5 +143,51 @@ namespace EduPartners.Core
             return schools.DeleteOneAsync(filter);
         }
 
+        public async Task<List<Partner>> GetPartners()
+        {
+            IMongoCollection<Partner> partners = GetDBCollection<Partner>(PartnerCollection);
+            IAsyncCursor<Partner> results = await partners.FindAsync(_ => true);
+
+            return results.ToList();
+        }
+
+        public async Task<List<Partner>> GetPartnerById(string PartnerId)
+        {
+            IMongoCollection<Partner> partners = GetDBCollection<Partner>(PartnerCollection);
+            IAsyncCursor<Partner> results = await partners.FindAsync(partner => partner.Id == PartnerId);
+
+            return results.ToList();
+        }
+
+        public async Task<List<Partner>> GetPartnerByName(string PartnerName)
+        {
+            IMongoCollection<Partner> partners = GetDBCollection<Partner>(PartnerCollection);
+            IAsyncCursor<Partner> results = await partners.FindAsync(partner => partner.Name == PartnerName);
+
+            return results.ToList();
+        }
+
+        public Task CreatePartner(Partner CreatePartner)
+        {
+            IMongoCollection<Partner> partners = GetDBCollection<Partner>(PartnerCollection);
+
+            return partners.InsertOneAsync(CreatePartner);
+        }
+
+        public Task UpdatePartner(Partner UpdatePartner)
+        {
+            IMongoCollection<Partner> partners = GetDBCollection<Partner>(PartnerCollection);
+            FilterDefinition<Partner> filter = Builders<Partner>.Filter.Eq(p => p.Id, UpdatePartner.Id);
+
+            return partners.ReplaceOneAsync(filter, UpdatePartner, new ReplaceOptions { IsUpsert = true });
+        }
+
+        public Task DeletePartner(Partner DeletePartner)
+        {
+            IMongoCollection<Partner> partners = GetDBCollection<Partner>(PartnerCollection);
+            FilterDefinition<Partner> filter = Builders<Partner>.Filter.Eq(p => p.Id, DeletePartner.Id);
+
+            return partners.DeleteOneAsync(filter);
+        }
     }
 }

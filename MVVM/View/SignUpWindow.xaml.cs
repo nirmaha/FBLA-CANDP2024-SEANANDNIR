@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 using EduPartners.Core;
 using EduPartners.MVVM.Model;
-using BCrypts = BCrypt.Net.BCrypt;
 
 namespace EduPartners.MVVM.View
 {
@@ -27,6 +20,19 @@ namespace EduPartners.MVVM.View
         {
             InitializeComponent();
             db = new Database();
+
+            if (!(string.IsNullOrEmpty(App.Current.Properties["FirstName"]?.ToString())))
+            {
+                tbFirstName.Text = App.Current.Properties["FirstName"].ToString();
+            }
+            if (!(string.IsNullOrEmpty(App.Current.Properties["LastName"]?.ToString())))
+            {
+                tbLastName.Text = App.Current.Properties["LastName"]?.ToString();
+            }
+            if (!(string.IsNullOrEmpty(App.Current.Properties["Email"]?.ToString())))
+            {
+                tbEmail.Text = App.Current.Properties["Email"].ToString();
+            }
         }
 
         private void SignUpBorder_MouseDown(object sender, MouseButtonEventArgs e)
@@ -223,6 +229,12 @@ namespace EduPartners.MVVM.View
             if (cbTerms.IsChecked == false) 
             {
                 MessageBox.Show("Please agree to the terms and conditions.");
+                return;
+            }
+
+            if (!tbEmail.Text.Contains("@"))
+            {
+                MessageBox.Show("Please enter a valid email");
                 return;
             }
 

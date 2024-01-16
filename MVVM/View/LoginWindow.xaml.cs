@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
+using BCrypts = BCrypt.Net.BCrypt;
+
 using EduPartners.Core;
 using EduPartners.MVVM.Model;
-using BCrypts = BCrypt.Net.BCrypt;
+using System.IO;
 
 namespace EduPartners.MVVM.View
 {
@@ -24,23 +20,56 @@ namespace EduPartners.MVVM.View
     public partial class LoginWindow : Window
     {
         private Database db;
+
+        private static string localDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "EduPartners");
+        private string filePath = Path.Combine(localDataPath, "EduPartners.ini");
+
         public LoginWindow()
         {
             InitializeComponent();
 
             db = new Database();
-            IniFile iniFile = new IniFile("EduPartners.ini");
+
+            App.Current.Properties["FirstName"] = "";
+            App.Current.Properties["LastName"] = "";
+            App.Current.Properties["Email"] = "";
+            App.Current.Properties["Password"] = "";
+
+            IniFile iniFile = new IniFile(filePath, localDataPath);
             if (iniFile.GetValue("SECURITY", "EMAILLOGIN") != "")
             {
                 cbRememberMe.IsChecked = true;
                 tbEmail.Text = iniFile.GetValue("SECURITY", "EMAILLOGIN");
                 pbPassword.Focus();
             }
-            else 
+            else
             {
                 tbEmail.Focus();
             }
-            
+
+            if (iniFile.GetValue("SECURITY", "PASSWORDLOGIN") != "" && iniFile.GetValue("SECURITY", "DATELOGINSAVED") != "" && !HasPassedDays(Convert.ToDateTime(iniFile.GetValue("SECURITY", "DATELOGINSAVED")), 30))
+            {
+                cbRememberMe.IsChecked = true;
+                pbPassword.Password = iniFile.GetValue("SECURITY", "PASSWORDLOGIN");
+            }
+            else if (iniFile.GetValue("SECURITY", "DATELOGINSAVED") != "" && HasPassedDays(Convert.ToDateTime(iniFile.GetValue("SECURITY", "DATELOGINSAVED")), 30))
+            {
+                pbPassword.Password = "";
+                iniFile.SetValue("SECURITY", "PASSWORDLOGIN", "");
+                iniFile.Save();
+            }
+        }
+
+        private bool HasPassedDays(DateTime previousDate, int days)
+        {
+            // Calculate the current date
+            DateTime currentDate = DateTime.Now;
+
+            // Calculate the difference in days
+            int differenceInDays = (int)(currentDate - previousDate).TotalDays;
+
+            // Check if the difference is greater than or equal to the specified number of days
+            return differenceInDays >= days;
         }
 
         private void pbPassword_GotFocus(object sender, RoutedEventArgs e)
@@ -118,7 +147,7 @@ namespace EduPartners.MVVM.View
             List<User> users = await db.GetUsers();
             User user = null;
 
-            IniFile iniFile = new IniFile("EduPartners.ini");
+            IniFile iniFile = new IniFile(filePath, localDataPath);
 
             foreach (User tempUser in users)
             {
@@ -139,11 +168,15 @@ namespace EduPartners.MVVM.View
             if (cbRememberMe.IsChecked == true)
             {
                 iniFile.SetValue("SECURITY", "EMAILLOGIN", tbEmail.Text);
+                iniFile.SetValue("SECURITY", "PASSWORDLOGIN", pbPassword.Password);
+                iniFile.SetValue("SECURITY", "DATELOGINSAVED", DateTime.Now.ToString());
                 iniFile.Save();
             }
             else
             {
                 iniFile.SetValue("SECURITY", "EMAILLOGIN", "");
+                iniFile.SetValue("SECURITY", "PASSWORDLOGIN", "");
+                iniFile.SetValue("SECURITY", "DATELOGINSAVED", "");
                 iniFile.Save();
             }
 

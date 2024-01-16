@@ -159,8 +159,10 @@
     </Compile>
     <Compile Include="Core\Database.cs" />
     <Compile Include="Core\IniFile.cs" />
+    <Compile Include="MVVM\Model\Partner.cs" />
     <Compile Include="MVVM\Model\School.cs" />
     <Compile Include="MVVM\Model\User.cs" />
+    <Compile Include="MVVM\ViewModel\PartnerViewModel.cs" />
     <Compile Include="MVVM\ViewModel\SchoolViewModel.cs" />
     <Compile Include="MVVM\ViewModel\UserViewModel.cs" />
     <Compile Include="MVVM\View\Controls\MenuItem.xaml.cs">

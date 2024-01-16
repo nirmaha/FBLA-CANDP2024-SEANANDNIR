@@ -10,10 +10,12 @@ namespace EduPartners.Core
         private readonly Dictionary<string, Dictionary<string, string>> sections;
 
         private string filePath = "";
+        private string directoryPath = "";
 
-        public IniFile(string argPath)
+        public IniFile(string argPath, string directoryPath)
         {
             filePath = argPath;
+            this.directoryPath = directoryPath;
 
             sections = new Dictionary<string, Dictionary<string, string>>(StringComparer.OrdinalIgnoreCase);
 
@@ -25,6 +27,11 @@ namespace EduPartners.Core
             sections.Clear();
 
             string currentSection = string.Empty;
+
+            if (!Directory.Exists(directoryPath))
+            { 
+                Directory.CreateDirectory(directoryPath);
+            }
 
             if (!File.Exists(filePath))
             {

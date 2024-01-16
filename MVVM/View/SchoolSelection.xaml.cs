@@ -1,21 +1,14 @@
-﻿using BCrypt.Net;
-using EduPartners.Core;
-using EduPartners.MVVM.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 using BCrypts = BCrypt.Net.BCrypt;
 
+using EduPartners.Core;
+using EduPartners.MVVM.Model;
 
 namespace EduPartners.MVVM.View
 {
@@ -111,19 +104,9 @@ namespace EduPartners.MVVM.View
                 return;
             }
 
-            List<School> schools = await db.GetSchools();
+            List<School> school = await db.GetSchoolByName(cbSchool.SelectedItem.ToString());
 
-            School school = new School();
-
-            foreach (School tempSchool in schools) 
-            {
-                if (tempSchool.Name == cbSchool.SelectedItem.ToString())
-                {
-                    school = tempSchool;
-                }
-            }
-
-            if (tbSchoolId.Text != school.Code)
+            if (tbSchoolId.Text != school[0].Code)
             {
                 MessageBox.Show("Please enter a valid code.");
                 return;
@@ -134,7 +117,7 @@ namespace EduPartners.MVVM.View
                 Name = App.Current.Properties["FirstName"].ToString() + " " + App.Current.Properties["LastName"].ToString(),
                 Email = App.Current.Properties["Email"].ToString(),
                 Password = BCrypts.HashPassword(App.Current.Properties["Password"].ToString()),
-                HomeSchool = school
+                HomeSchool = school[0]
             };
 
             await db.CreateUser(user);

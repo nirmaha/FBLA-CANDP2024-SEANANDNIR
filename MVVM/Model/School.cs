@@ -1,6 +1,8 @@
-﻿using MongoDB.Bson;
+﻿using System.Collections.Generic;
+
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using System;
+using MongoDB.Driver;
 
 #pragma warning disable CS8618
 
@@ -17,5 +19,6 @@ namespace EduPartners.MVVM.Model
         public string City { get; set; }
         public string State { get; set; }
         public string Zip { get; set; }
+        public Optional<List<Partner>> Partners { get; set; } = new List<Partner>();
     }
 }

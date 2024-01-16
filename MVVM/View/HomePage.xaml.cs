@@ -1,20 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Timers;
-using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using System.Diagnostics;
+
 
 namespace EduPartners.MVVM.View
 {
@@ -27,6 +17,7 @@ namespace EduPartners.MVVM.View
         DispatcherTimer animationTimer;
 
         int panelNum = 0;
+
         string[] images = new string[]
         {   "../../Resources/first_panel_background.png",
             "../../Resources/second_panel_background.jpg",
@@ -39,11 +30,15 @@ namespace EduPartners.MVVM.View
             "Promote Collaboration"
         };
 
-
         public HomePage()
         {
             InitializeComponent();
 
+            this.Loaded += HomePage_Loaded;
+        }
+
+        private void HomePage_Loaded(object sender, RoutedEventArgs e)
+        {
             const double animTimeSpan = 20; // Adjust this value as needed
             bool isFadingIn = false;
 
@@ -129,6 +124,8 @@ namespace EduPartners.MVVM.View
 
         private void CreateSchool_Clicked(object sender, RoutedEventArgs e)
         {
+            switchTimer.Stop();
+            animationTimer.Stop();
             CreateSchoolWindow createSchoolWindow = new CreateSchoolWindow();
             createSchoolWindow.Owner = null;
             this.Close();
@@ -137,6 +134,8 @@ namespace EduPartners.MVVM.View
 
         private void Login_Clicked(object sender, RoutedEventArgs e)
         {
+            switchTimer.Stop();
+            animationTimer.Stop();
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Owner = null;
             this.Close();
@@ -145,6 +144,8 @@ namespace EduPartners.MVVM.View
 
         private void SignUp_Clicked(object sender, RoutedEventArgs e)
         {
+            switchTimer.Stop();
+            animationTimer.Stop();
             SignUpWindow signUpWindow = new SignUpWindow();
             signUpWindow.Owner = null;
             this.Close();
