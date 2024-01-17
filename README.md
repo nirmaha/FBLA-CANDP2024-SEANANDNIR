@@ -31,10 +31,12 @@ individual. The program should enable users to search and filter the information
 
 ### References:
 #### Libraries
+- Nuget Pack Manager:
+  - https://learn.microsoft.com/en-us/nuget/
+- Bcrypt:
+  - https://github.com/BcryptNet/bcrypt.net  
 - MongoDB:
    - https://www.mongodb.com/docs/
-- Nuget:
-  - https://learn.microsoft.com/en-us/nuget/
  #### Resources
  - Dashboard Template:
    - https://github.com/Jeyderht/WPFModernVerticalMenu
@@ -50,5 +52,5 @@ individual. The program should enable users to search and filter the information
    - https://www.freepik.com/free-photo/businesspeople-working-office_899406.htm#query=business%20meetings&position=5&from_view=search&track=ais&uuid=1e31ccdf-5daf-4c70-8ab7-285ea460a0df
    - https://www.freepik.com/free-photo/room-interior-design_13195263.htm#query=empty%20class%20room&position=44&from_view=search&track=ais&uuid=284763e4-6bdc-4d6f-9025-7e2ac57dfaa8
    - https://www.freepik.com/free-photo/modern-office-building_1283894.htm#query=empty%20school%20building&position=21&from_view=search&track=ais&uuid=0b8357c9-b426-4284-bb45-60fb0c6ce106
-- Create School Page Backgorund Image:
+- Create School Page Background Image:
   - https://www.freepik.com/free-photo/medium-shot-people-sitting-library_20942917.htm#query=school%20board%20meeting&position=26&from_view=search&track=ais&uuid=081fe36a-f545-4b27-bcf2-0bd5cf9d45d0  
