@@ -140,7 +140,8 @@ namespace EduPartners.MVVM.View
         {
             if (tbEmail.Text == "" || pbPassword.Password == "")
             {
-                MessageBox.Show("Please enter a username and a password.");
+                lErrorMessage.Visibility = Visibility.Visible;
+                lErrorMessage.Content = "Please enter a username and a password.";
                 return;
             }
 
@@ -161,7 +162,8 @@ namespace EduPartners.MVVM.View
 
             if (user == null)
             {
-                MessageBox.Show("Username / Password is incorrect.");
+                lErrorMessage.Visibility = Visibility.Visible;
+                lErrorMessage.Content = "Username / Password is incorrect.";
                 return;
             }
 

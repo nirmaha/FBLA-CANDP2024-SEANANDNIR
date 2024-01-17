@@ -205,7 +205,9 @@ namespace EduPartners.MVVM.View
         {
             if (tbFirstName.Text == "" || tbLastName.Text == "" || tbEmail.Text == "" || pbPassword.Password == "" || pbConfirmPassword.Password == "")
             {
-                MessageBox.Show("Please fill in all the fields.");
+                lErrorMessage.FontSize = 18;
+                lErrorMessage.Visibility = Visibility.Visible;
+                lErrorMessage.Content = "Please fill in all the fields.";
                 return;
             }
 
@@ -215,26 +217,34 @@ namespace EduPartners.MVVM.View
             {
                 if (tbEmail.Text == user.Email)
                 {
-                    MessageBox.Show("Cannot create account due to the email already existing.");
+                    lErrorMessage.FontSize = 18;
+                    lErrorMessage.Visibility = Visibility.Visible;
+                    lErrorMessage.Content = "Cannot create account due to the email already existing.";
                     return;
                 }
             }
 
             if (pbPassword.Password != pbConfirmPassword.Password)
             {
-                MessageBox.Show("Confirmed password does not match given password.");
+                lErrorMessage.Visibility = Visibility.Visible;
+                lErrorMessage.Content = "Confirmed password does not match given password.";
+                lErrorMessage.FontSize = 15;
                 return;
             }
 
             if (cbTerms.IsChecked == false) 
             {
-                MessageBox.Show("Please agree to the terms and conditions.");
+                lErrorMessage.FontSize = 18;
+                lErrorMessage.Visibility = Visibility.Visible;
+                lErrorMessage.Content = "Please agree to the terms and conditions.";
                 return;
             }
 
             if (!tbEmail.Text.Contains("@"))
             {
-                MessageBox.Show("Please enter a valid email");
+                lErrorMessage.FontSize = 18;
+                lErrorMessage.Visibility = Visibility.Visible;
+                lErrorMessage.Content = "Please enter a valid email.";
                 return;
             }
 

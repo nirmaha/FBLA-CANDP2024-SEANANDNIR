@@ -155,6 +155,13 @@ namespace EduPartners.MVVM.View
 
         private void btnCreateSchool_Clicked(object sender, RoutedEventArgs e)
         {
+            if (tbSchoolName.Text == "" || tbAddress.Text == "" || tbCity.Text == "" || tbState.Text == "" || tbZip.Text == "")
+            { 
+                lErrorMessage.Visibility = Visibility.Visible;
+                lErrorMessage.Content = "Please fill out all require felids.";
+                return;
+            }
+
             School school = new School
             {
                 Name = tbSchoolName.Text,

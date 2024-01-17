@@ -19,7 +19,6 @@ using System.Windows.Shapes;
 /**
  * TODO:
  * Change ini file to JSON
- * Add label error messages inssted of MessageBoxes
  * **/
 
 namespace EduPartners.MVVM.View

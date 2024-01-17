@@ -94,13 +94,15 @@ namespace EduPartners.MVVM.View
         {
             if (cbSchool.SelectedItem == null)
             {
-                MessageBox.Show("Please select a school.");
+                lErrorMessage.Visibility = Visibility.Visible;
+                lErrorMessage.Content = "Please select a school.";
                 return;
             }
 
             if (tbSchoolId.Text == "")
             {
-                MessageBox.Show("Please enter a school code.");
+                lErrorMessage.Visibility = Visibility.Visible;
+                lErrorMessage.Content = "Please enter a school code.";
                 return;
             }
 
@@ -108,7 +110,8 @@ namespace EduPartners.MVVM.View
 
             if (tbSchoolId.Text != school[0].Code)
             {
-                MessageBox.Show("Please enter a valid code.");
+                lErrorMessage.Visibility = Visibility.Visible;
+                lErrorMessage.Content = "Please enter a school code.";
                 return;
             }
             
