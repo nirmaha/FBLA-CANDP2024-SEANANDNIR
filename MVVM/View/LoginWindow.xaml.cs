@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -10,7 +11,6 @@ using BCrypts = BCrypt.Net.BCrypt;
 
 using EduPartners.Core;
 using EduPartners.MVVM.Model;
-using System.IO;
 
 namespace EduPartners.MVVM.View
 {
@@ -144,7 +144,7 @@ namespace EduPartners.MVVM.View
                 lErrorMessage.Content = "Please enter a username and a password.";
                 return;
             }
-
+            
             List<User> users = await db.GetUserByEmail(tbEmail.Text);
             User user = null;
 
