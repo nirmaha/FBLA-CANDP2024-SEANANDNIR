@@ -72,6 +72,13 @@ namespace EduPartners.Core
 
             return results.ToList();
         }
+        public async Task<List<User>> GetUserByEmail(string UserEmail)
+        {
+            IMongoCollection<User> users = GetDBCollection<User>(UserCollection);
+            IAsyncCursor<User> results = await users.FindAsync(user => user.Email == UserEmail);
+
+            return results.ToList();
+        }
 
         public Task CreateUser(User CreateUser) 
         {

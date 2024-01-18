@@ -60,7 +60,7 @@
                         <CheckBox x:Name="cbRememberMe" VerticalAlignment="Center" FontSize="15" Foreground="DarkSlateGray" Margin="28,0,0,0" Content="Remember me" />
                     </StackPanel>
 
-                    <Button x:Name="btnLogin" IsDefault="True" Grid.Row="5" Content="Login" FontSize="25" Foreground="White" Width="300" Click="btnLogin_Clicked" >
+                    <Button x:Name="btnLogin" IsDefault="True" Grid.Row="5" Content="Login" FontSize="25" Foreground="White" Height="40" Width="300" Click="btnLogin_Clicked" >
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="Blue"/>

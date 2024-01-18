@@ -68,7 +68,7 @@
                     <Label Content="&#x1f4cb;" Grid.Row="6" Cursor="Arrow" FontSize="20" Margin="320,5,0,45" MouseDown="lCopyCliboard_MouseDown" Grid.RowSpan="2"/>
                     <Label Content="&#x27f3;" Grid.Row="5" Cursor="Arrow"  FontSize="25" Margin="345,50,0,46" MouseDown="lCodeRefresh_MouseDown" Grid.RowSpan="3"/>
 
-                    <Button x:Name="btnCreateSchool" IsDefault="True" Grid.Row="7" Content="Create School" Background="Blue" FontSize="25" Foreground="White" Click="btnCreateSchool_Clicked" Margin="56,0,56,5" >
+                    <Button x:Name="btnCreateSchool" IsDefault="True" Grid.Row="7" Content="Create School" Background="Blue" FontSize="25" Foreground="White" Click="btnCreateSchool_Clicked" Height="50" Width="300" >
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="15"/>

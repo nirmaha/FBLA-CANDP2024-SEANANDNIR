@@ -69,7 +69,7 @@
 
                     <CheckBox x:Name="cbTerms" Grid.Row="7" VerticalAlignment="Center" FontSize="15" Foreground="DarkSlateGray" HorizontalAlignment="Center" Content="I have read and agreed to the terms and conditions" />
 
-                    <Button x:Name="btnLogin" IsDefault="True" Grid.Row="8" Content="Next" FontSize="25" Foreground="White" Click="btnNext_Clicked" Margin="55,44,55,0" Grid.RowSpan="2" >
+                    <Button x:Name="btnLogin" IsDefault="True" Grid.Row="9" Content="Next" FontSize="25" Foreground="White" Click="btnNext_Clicked" Height="40" Width="300" Grid.RowSpan="2" >
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="Blue"/>

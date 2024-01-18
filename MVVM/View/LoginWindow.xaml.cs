@@ -145,21 +145,18 @@ namespace EduPartners.MVVM.View
                 return;
             }
 
-            List<User> users = await db.GetUsers();
+            List<User> users = await db.GetUserByEmail(tbEmail.Text);
             User user = null;
 
             IniFile iniFile = new IniFile(filePath, localDataPath);
 
-            foreach (User tempUser in users)
-            {
-                if (tbEmail.Text == tempUser.Email && BCrypts.Verify(pbPassword.Password, tempUser.Password))
-                { 
-                    user = tempUser;
-                    App.Current.Properties["User"] = user.Id;
-                    break;
-                }
+           
+            if (tbEmail.Text == users[0].Email && BCrypts.Verify(pbPassword.Password, users[0].Password))
+            { 
+                user = users[0];
+                App.Current.Properties["User"] = user.Id;
             }
-
+            
             if (user == null)
             {
                 lErrorMessage.Visibility = Visibility.Visible;
