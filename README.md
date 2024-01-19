@@ -48,6 +48,10 @@ individual. The program should enable users to search and filter the information
   - https://www.freepik.com/free-photo/empty-classroom-due-coronavirus-pandemic_26606670.htm#query=classroom&position=4&from_view=keyword&track=sph&uuid=144bac40-d037-45bc-8c53-b22bce6b562a  
 - App Icon:
   - https://www.flaticon.com/free-icon/customer-engagement_13339260?term=handshake&page=1&position=14&origin=search&related_id=13339260
+- Delete Icon:
+  - https://www.flaticon.com/free-icon/set_13487001?term=trashcan&page=1&position=23&origin=search&related_id=13487001
+- Logout Icon:
+  - https://www.flaticon.com/free-icon/log-out_8944313?term=logout&page=1&position=21&origin=search&related_id=8944313 
  - Main Page Images
    - https://www.freepik.com/free-photo/businesspeople-working-office_899406.htm#query=business%20meetings&position=5&from_view=search&track=ais&uuid=1e31ccdf-5daf-4c70-8ab7-285ea460a0df
    - https://www.freepik.com/free-photo/room-interior-design_13195263.htm#query=empty%20class%20room&position=44&from_view=search&track=ais&uuid=284763e4-6bdc-4d6f-9025-7e2ac57dfaa8
