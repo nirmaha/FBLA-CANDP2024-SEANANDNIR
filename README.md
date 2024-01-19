@@ -53,7 +53,9 @@ individual. The program should enable users to search and filter the information
 - Logout Icon:
   - https://www.flaticon.com/free-icon/log-out_8944313?term=logout&page=1&position=21&origin=search&related_id=8944313
 - Edit Icon:
-  - https://www.flaticon.com/free-icon/pencil_1828911?related_id=1828911  
+  - https://www.flaticon.com/free-icon/pencil_1828911?related_id=1828911
+- Notification Icon:
+  - https://www.flaticon.com/free-icon/bell_1827347?term=bell&page=1&position=4&origin=search&related_id=1827347  
  - Main Page Images
    - https://www.freepik.com/free-photo/businesspeople-working-office_899406.htm#query=business%20meetings&position=5&from_view=search&track=ais&uuid=1e31ccdf-5daf-4c70-8ab7-285ea460a0df
    - https://www.freepik.com/free-photo/room-interior-design_13195263.htm#query=empty%20class%20room&position=44&from_view=search&track=ais&uuid=284763e4-6bdc-4d6f-9025-7e2ac57dfaa8
