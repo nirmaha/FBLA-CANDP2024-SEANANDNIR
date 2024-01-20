@@ -25,10 +25,17 @@
                     <Setter Property="Visibility" Value="Visible"/>
                     <Setter Property="Background" Value="{DynamicResource PrimaryBlueColor}"/>
                 </DataTrigger>
-            </Style.Triggers> 
+            </Style.Triggers>
         </Style>
         <!-- End: Indicator Style -->
-        
+
+
+        <!-- Start: Image Style -->
+        <Style x:Key="ImageStyle" TargetType="{x:Type Image}">
+            <!-- Additional styling for Image can be added here -->
+        </Style>
+        <!-- End: Image Style -->
+
         <!-- Start: Menu Icon Style -->
         <Style x:Key="MenuIconStyle" TargetType="{x:Type Path}">
             <Setter Property="Fill" Value="{DynamicResource SecundaryIconColor}"/>
@@ -85,6 +92,8 @@
                                 <Path Data="{Binding Icon, ElementName=this, FallbackValue={StaticResource DefaultIcon}, TargetNullValue={StaticResource DefaultIcon}}" Margin="{Binding IconMargin, FallbackValue='0,0,0,0', TargetNullValue='20,0,0,0'}"
                                       Stretch="Uniform" Width="{Binding IconWidth, ElementName=this, FallbackValue=20,TargetNullValue=20}" Style="{StaticResource MenuIconStyle}"/>
 
+                                <Path Data="{Binding Image, ElementName=this}"/>
+
                                 <!-- Menu Text -->
                                 <TextBlock Style="{StaticResource MenuTextStyle}" FontWeight="Regular" FontSize="14" Grid.Column="1" Text="{Binding Text, ElementName=this, FallbackValue=MenuText, TargetNullValue=MenuText}" Margin="0,0,0,0"/>
 
@@ -105,7 +114,20 @@
     </UserControl.Resources>
     
     <Grid>
-        <RadioButton Style="{StaticResource MenuButtonStyle}" GroupName="{Binding GroupName, ElementName=this}"/>
+        <RadioButton Style="{StaticResource MenuButtonStyle}" GroupName="{Binding GroupName, ElementName=this}">
+            <RadioButton.Content>
+                <Grid>
+                    <!-- Indicator -->
+                    <Border Style="{StaticResource IndicatorStyle}"/>
+
+                    <!-- Image -->
+                    <Image Source="{Binding Image, ElementName=this}" Style="{StaticResource ImageStyle}" Margin="20,0,0,0"/>
+
+                    <!-- Menu Text -->
+                    <TextBlock Style="{StaticResource MenuTextStyle}" FontWeight="Regular" FontSize="14" Grid.Column="1" Text="{Binding Text, ElementName=this, FallbackValue=MenuText, TargetNullValue=MenuText}" Margin="0,0,0,0"/>
+                </Grid>
+            </RadioButton.Content>
+        </RadioButton>
     </Grid>
     
 </UserControl>
