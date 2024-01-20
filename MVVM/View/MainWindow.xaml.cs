@@ -39,23 +39,6 @@ namespace EduPartners.MVVM.View
         }
 
         // Start: MenuLeft PopupButton //
-        private void btnHome_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (Tg_Btn.IsChecked == false)
-            {
-                Popup.PlacementTarget = btnHome;
-                Popup.Placement = PlacementMode.Right;
-                Popup.IsOpen = true;
-                Header.PopupText.Text = "Home";
-            }
-        }
-
-        private void btnHome_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Popup.Visibility = Visibility.Collapsed;
-            Popup.IsOpen = false;
-        }
-
         private void btnDashboard_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Tg_Btn.IsChecked == false)
@@ -73,119 +56,84 @@ namespace EduPartners.MVVM.View
             Popup.IsOpen = false;
         }
 
-        private void btnProducts_MouseEnter(object sender, MouseEventArgs e)
+        private void btnView_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Tg_Btn.IsChecked == false)
             {
-                Popup.PlacementTarget = btnProducts;
+                Popup.PlacementTarget = btnView;
                 Popup.Placement = PlacementMode.Right;
                 Popup.IsOpen = true;
-                Header.PopupText.Text = "Products";
+                Header.PopupText.Text = "View Partners";
             }
         }
 
-        private void btnProducts_MouseLeave(object sender, MouseEventArgs e)
+        private void btnView_MouseLeave(object sender, MouseEventArgs e)
         {
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
         }
 
-        private void btnProductStock_MouseEnter(object sender, MouseEventArgs e)
+        private void btnView_Clicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAdd_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Tg_Btn.IsChecked == false)
             {
-                Popup.PlacementTarget = btnProductStock;
+                Popup.PlacementTarget = btnAdd;
                 Popup.Placement = PlacementMode.Right;
                 Popup.IsOpen = true;
-                Header.PopupText.Text = "Product Stock";
+                Header.PopupText.Text = "Add Partner";
             }
         }
 
-        private void btnProductStock_MouseLeave(object sender, MouseEventArgs e)
+        private void btnAdd_MouseLeave(object sender, MouseEventArgs e)
         {
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
         }
 
-        private void btnOrderList_MouseEnter(object sender, MouseEventArgs e)
+        private void btnAdd_Clicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnNotifications_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Tg_Btn.IsChecked == false)
             {
-                Popup.PlacementTarget = btnOrderList;
+                Popup.PlacementTarget = btnNotifications;
                 Popup.Placement = PlacementMode.Right;
                 Popup.IsOpen = true;
-                Header.PopupText.Text = "Order List";
+                Header.PopupText.Text = "Notifications";
             }
         }
 
-        private void btnOrderList_MouseLeave(object sender, MouseEventArgs e)
+        private void btnNotifications_MouseLeave(object sender, MouseEventArgs e)
         {
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
         }
 
-        private void btnBilling_MouseEnter(object sender, MouseEventArgs e)
+        private void btnNotifications_Clicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnLogOut_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Tg_Btn.IsChecked == false)
             {
-                Popup.PlacementTarget = btnBilling;
+                Popup.PlacementTarget = btnLogOut;
                 Popup.Placement = PlacementMode.Right;
                 Popup.IsOpen = true;
-                Header.PopupText.Text = "Billing";
+                Header.PopupText.Text = "Logout";
             }
         }
 
-        private void btnBilling_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Popup.Visibility = Visibility.Collapsed;
-            Popup.IsOpen = false;
-        }
-
-        private void btnPointOfSale_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (Tg_Btn.IsChecked == false)
-            {
-                Popup.PlacementTarget = btnPointOfSale;
-                Popup.Placement = PlacementMode.Right;
-                Popup.IsOpen = true;
-                Header.PopupText.Text = "Point Of Sale";
-            }
-        }
-
-        private void btnPointOfSale_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Popup.Visibility = Visibility.Collapsed;
-            Popup.IsOpen = false;
-        }
-
-        private void btnSecurity_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (Tg_Btn.IsChecked == false)
-            {
-                Popup.PlacementTarget = btnSecurity;
-                Popup.Placement = PlacementMode.Right;
-                Popup.IsOpen = true;
-                Header.PopupText.Text = "Security";
-            }
-        }
-
-        private void btnSecurity_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Popup.Visibility = Visibility.Collapsed;
-            Popup.IsOpen = false;
-        }
-        private void btnSetting_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (Tg_Btn.IsChecked == false)
-            {
-                Popup.PlacementTarget = btnSetting;
-                Popup.Placement = PlacementMode.Right;
-                Popup.IsOpen = true;
-                Header.PopupText.Text = "Setting";
-            }
-        }
-
-        private void btnSetting_MouseLeave(object sender, MouseEventArgs e)
+        private void btnLogOut_MouseLeave(object sender, MouseEventArgs e)
         {
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
@@ -225,6 +173,15 @@ namespace EduPartners.MVVM.View
         private void Top_Clicked(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed) DragMove();
+        }
+
+        private void btnLogOut_Clicked(object sender, RoutedEventArgs e)
+        {
+            App.Current.Properties["User"] = "";
+            HomePage homePage = new HomePage();
+            homePage.Owner = null;
+            this.Close();
+            homePage.Show();
         }
     }
 }
