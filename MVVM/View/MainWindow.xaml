@@ -12,10 +12,8 @@
         <BitmapImage UriSource="../../Resources/icon.png" />
     </Window.Icon>
 
-    <Grid>
-        <DockPanel Name="Main">
+    <DockPanel Name="Main">
 
-        </DockPanel>
-    </Grid>
+    </DockPanel>
 
 </Window>

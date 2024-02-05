@@ -6,6 +6,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Timers;
 using System.Threading;
+using MongoDB.Bson;
 
 
 namespace EduPartners.MVVM.View.Controls
@@ -25,6 +26,7 @@ namespace EduPartners.MVVM.View.Controls
             "../../Resources/second_panel_background.jpg",
             "../../Resources/third_panel_background.png"
         };
+
         string[] backgroundTexts = new string[]
         {
             "Manage your Partnerships",
@@ -38,6 +40,8 @@ namespace EduPartners.MVVM.View.Controls
 
             this.Loaded += HomePage_Loaded;
         }
+
+   
 
         private void HomePage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -53,7 +57,7 @@ namespace EduPartners.MVVM.View.Controls
                 animationTimer.Interval = animTimeSpan;
                 animationTimer.Elapsed += delegate
                 {
-                    Dispatcher.Invoke(new Action(() =>
+                    Dispatcher.Invoke(() =>
                     {
                         if (isFadingIn)
                         {
@@ -111,7 +115,7 @@ namespace EduPartners.MVVM.View.Controls
                                 }
                             }
                         }
-                    }));
+                    });
                 };
 
                 switchTimer.Elapsed += delegate
@@ -133,9 +137,9 @@ namespace EduPartners.MVVM.View.Controls
         }
 
         private void CreateSchool_Clicked(object sender, RoutedEventArgs e)
-        { 
-            switchTimer.Dispose();
-            animationTimer.Dispose();
+        {
+            animationTimer.Stop();
+            switchTimer.Stop();
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
             mainWindow.SetUserControl(new CreateSchool());
@@ -143,8 +147,8 @@ namespace EduPartners.MVVM.View.Controls
 
         private void Login_Clicked(object sender, RoutedEventArgs e)
         {
-            switchTimer.Dispose();
-            animationTimer.Dispose();
+            animationTimer.Stop();
+            switchTimer.Stop();
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
             mainWindow.SetUserControl(new LoginControl());

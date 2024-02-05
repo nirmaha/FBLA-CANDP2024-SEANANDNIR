@@ -50,8 +50,8 @@ namespace EduPartners.MVVM.View
             Main.Children.Clear();
             Main.Children.Add(userControl);
 
-            this.Title = userControl.Name;
-            if (this.Title == "Dashboard")
+            this.Title = "EduPartners - " + userControl.Name;
+            if (userControl.Name == "Dashboard")
             {
                 this.WindowStyle = WindowStyle.None;
                 this.Height = userControl.Height;
