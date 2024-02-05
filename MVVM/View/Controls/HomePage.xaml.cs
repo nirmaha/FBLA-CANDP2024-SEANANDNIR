@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Threading;
+using System.Timers;
+using System.Threading;
 
 
 namespace EduPartners.MVVM.View.Controls
@@ -16,8 +15,8 @@ namespace EduPartners.MVVM.View.Controls
     /// </summary>
     public partial class HomePage : UserControl
     {
-        DispatcherTimer switchTimer;
-        DispatcherTimer animationTimer;
+        System.Timers.Timer switchTimer;
+        System.Timers.Timer animationTimer;
 
         int panelNum = 0;
 
@@ -45,93 +44,98 @@ namespace EduPartners.MVVM.View.Controls
             const double animTimeSpan = 20; // Adjust this value as needed
             bool isFadingIn = false;
 
-            switchTimer = new DispatcherTimer();
-            animationTimer = new DispatcherTimer();
+            switchTimer = new System.Timers.Timer();
+            animationTimer = new System.Timers.Timer();
 
-          
-            animationTimer.Interval = TimeSpan.FromMilliseconds(animTimeSpan);
-            animationTimer.Tick += delegate
-            {
-                Dispatcher.Invoke(delegate
+            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+
+            ParameterizedThreadStart thread = new ParameterizedThreadStart((object parm) => {
+                animationTimer.Interval = animTimeSpan;
+                animationTimer.Elapsed += delegate
                 {
-                    if (isFadingIn)
+                    Dispatcher.Invoke(new Action(() =>
                     {
-                        ibBackground.Opacity += 0.05; // Adjust the increment as needed
-                        lBackgroundText.Opacity += 0.05;
-
-                        if (ibBackground.Opacity >= 1)
+                        if (isFadingIn)
                         {
-                            isFadingIn = false;
-                            animationTimer.Stop();
-                            switchTimer.Start();
-                        }
-                    }
-                    else
-                    {
-                        ibBackground.Opacity -= 0.05; // Adjust the decrement as needed
-                        lBackgroundText.Opacity -= 0.05;
+                            ibBackground.Opacity += 0.05; // Adjust the increment as needed
+                            lBackgroundText.Opacity += 0.05;
 
-                        if (ibBackground.Opacity <= 0)
-                        {
-                            isFadingIn = true;
-                            panelNum++;
-                            if (panelNum == images.Length)
+                            if (ibBackground.Opacity >= 1)
                             {
-                                panelNum = 0;
-                            }
-                            ibBackground.ImageSource = new BitmapImage(new Uri(images[panelNum], UriKind.RelativeOrAbsolute));
-                            lBackgroundText.Content = backgroundTexts[panelNum];
-                            switch (panelNum)
-                            {
-                                case 0:
-                                    firstPanelCircle.Opacity = 0.7;
-                                    firstPanelCircle.Background = new SolidColorBrush(Colors.White);
-                                    secondPanelCircle.Opacity = 0.5;
-                                    secondPanelCircle.Background = new SolidColorBrush(Colors.Gray);
-                                    thirdPanelCircle.Opacity = 0.5;
-                                    thirdPanelCircle.Background = new SolidColorBrush(Colors.Gray);
-                                    break;
-                                case 1:
-                                    firstPanelCircle.Opacity = 0.5;
-                                    firstPanelCircle.Background = new SolidColorBrush(Colors.Gray);
-                                    secondPanelCircle.Opacity = 0.7;
-                                    secondPanelCircle.Background = new SolidColorBrush(Colors.White);
-                                    thirdPanelCircle.Opacity = 0.5;
-                                    thirdPanelCircle.Background = new SolidColorBrush(Colors.Gray);
-                                    break;
-                                case 2:
-                                    firstPanelCircle.Opacity = 0.5;
-                                    firstPanelCircle.Background = new SolidColorBrush(Colors.Gray);
-                                    secondPanelCircle.Opacity = 0.5;
-                                    secondPanelCircle.Background = new SolidColorBrush(Colors.Gray);
-                                    thirdPanelCircle.Opacity = 0.7;
-                                    thirdPanelCircle.Background = new SolidColorBrush(Colors.White);
-                                    break;
+                                isFadingIn = false;
+                                animationTimer.Stop();
+                                switchTimer.Start();
                             }
                         }
-                    }
-                });
-            };
+                        else
+                        {
+                            ibBackground.Opacity -= 0.05; // Adjust the decrement as needed
+                            lBackgroundText.Opacity -= 0.05;
 
-            switchTimer.Tick += delegate
-            {
-                Dispatcher.Invoke(delegate
+                            if (ibBackground.Opacity <= 0)
+                            {
+                                isFadingIn = true;
+                                panelNum++;
+                                if (panelNum == images.Length)
+                                {
+                                    panelNum = 0;
+                                }
+                                ibBackground.ImageSource = new BitmapImage(new Uri(images[panelNum], UriKind.RelativeOrAbsolute));
+                                lBackgroundText.Content = backgroundTexts[panelNum];
+                                switch (panelNum)
+                                {
+                                    case 0:
+                                        firstPanelCircle.Opacity = 0.7;
+                                        firstPanelCircle.Background = new SolidColorBrush(Colors.White);
+                                        secondPanelCircle.Opacity = 0.5;
+                                        secondPanelCircle.Background = new SolidColorBrush(Colors.Gray);
+                                        thirdPanelCircle.Opacity = 0.5;
+                                        thirdPanelCircle.Background = new SolidColorBrush(Colors.Gray);
+                                        break;
+                                    case 1:
+                                        firstPanelCircle.Opacity = 0.5;
+                                        firstPanelCircle.Background = new SolidColorBrush(Colors.Gray);
+                                        secondPanelCircle.Opacity = 0.7;
+                                        secondPanelCircle.Background = new SolidColorBrush(Colors.White);
+                                        thirdPanelCircle.Opacity = 0.5;
+                                        thirdPanelCircle.Background = new SolidColorBrush(Colors.Gray);
+                                        break;
+                                    case 2:
+                                        firstPanelCircle.Opacity = 0.5;
+                                        firstPanelCircle.Background = new SolidColorBrush(Colors.Gray);
+                                        secondPanelCircle.Opacity = 0.5;
+                                        secondPanelCircle.Background = new SolidColorBrush(Colors.Gray);
+                                        thirdPanelCircle.Opacity = 0.7;
+                                        thirdPanelCircle.Background = new SolidColorBrush(Colors.White);
+                                        break;
+                                }
+                            }
+                        }
+                    }));
+                };
+
+                switchTimer.Elapsed += delegate
                 {
-                    animationTimer.Start();
-                    switchTimer.Stop();
-                });
-            };
+                    Dispatcher.Invoke(() => { 
+                        animationTimer.Start();
+                        switchTimer.Stop();
+                    });
+                    
+                };
 
-            switchTimer.Interval = TimeSpan.FromMilliseconds(5000);
-            switchTimer.Start();
-            
-            
+                switchTimer.Interval = 5000;
+                switchTimer.Start();
+            });
+
+            Thread thread1 = new Thread(thread);
+            thread1.SetApartmentState(ApartmentState.STA);
+            thread1.Start("[STA]");
         }
 
         private void CreateSchool_Clicked(object sender, RoutedEventArgs e)
-        {
-            switchTimer.Stop();
-            animationTimer.Stop();
+        { 
+            switchTimer.Dispose();
+            animationTimer.Dispose();
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
             mainWindow.SetUserControl(new CreateSchool());
@@ -139,17 +143,17 @@ namespace EduPartners.MVVM.View.Controls
 
         private void Login_Clicked(object sender, RoutedEventArgs e)
         {
-            switchTimer.Stop();
-            animationTimer.Stop();
+            switchTimer.Dispose();
+            animationTimer.Dispose();
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
             mainWindow.SetUserControl(new LoginControl());
         }
-
+         
         private void SignUp_Clicked(object sender, RoutedEventArgs e)
         {
-            switchTimer.Stop();
-            animationTimer.Stop();
+            switchTimer.Dispose();
+            animationTimer.Dispose();
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
             mainWindow.SetUserControl(new SignUpControl());
