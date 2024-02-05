@@ -23,8 +23,12 @@ namespace EduPartners.MVVM.View.Controls
         public SchoolSelection()
         {
             InitializeComponent();
-            db = new Database();
+            this.Loaded += SchoolSelection_Loaded;
+        }
 
+        private void SchoolSelection_Loaded(object sender, RoutedEventArgs e)
+        {
+            db = App.Current.Properties["Database"] as Database;
             PopulateComboBox();
         }
 

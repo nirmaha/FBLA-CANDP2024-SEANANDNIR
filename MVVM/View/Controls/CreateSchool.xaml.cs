@@ -21,8 +21,13 @@ namespace EduPartners.MVVM.View.Controls
         public CreateSchool()
         {
             InitializeComponent();
+            this.Loaded += CreateSchool_Loaded;
+        }
+
+        private void CreateSchool_Loaded(object sender, RoutedEventArgs e)
+        {
             tbSchoolCode.Text = Guid.NewGuid().ToString();
-            db = new Database();
+            db = App.Current.Properties["Database"] as Database;
         }
 
         private void btnBack_Clicked(object sender, RoutedEventArgs e)

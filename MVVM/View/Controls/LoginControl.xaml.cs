@@ -28,8 +28,12 @@ namespace EduPartners.MVVM.View.Controls
         public LoginControl()
         {
             InitializeComponent();
+            this.Loaded += LoginControl_Loaded;
+        }
 
-            db = new Database();
+        private void LoginControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            db = App.Current.Properties["Database"] as Database;
 
             App.Current.Properties["FirstName"] = "";
             App.Current.Properties["LastName"] = "";

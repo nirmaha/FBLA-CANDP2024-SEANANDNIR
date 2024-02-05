@@ -37,7 +37,6 @@ namespace EduPartners.MVVM.View.Controls
         public HomePage()
         {
             InitializeComponent();
-
             this.Loaded += HomePage_Loaded;
         }
 
@@ -57,7 +56,7 @@ namespace EduPartners.MVVM.View.Controls
                 animationTimer.Interval = animTimeSpan;
                 animationTimer.Elapsed += delegate
                 {
-                    Dispatcher.Invoke(() =>
+                    Dispatcher.InvokeAsync(() =>
                     {
                         if (isFadingIn)
                         {
@@ -120,7 +119,7 @@ namespace EduPartners.MVVM.View.Controls
 
                 switchTimer.Elapsed += delegate
                 {
-                    Dispatcher.Invoke(() => { 
+                    Dispatcher.InvokeAsync(() => { 
                         animationTimer.Start();
                         switchTimer.Stop();
                     });

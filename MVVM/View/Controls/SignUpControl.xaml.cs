@@ -21,7 +21,12 @@ namespace EduPartners.MVVM.View.Controls
         public SignUpControl()
         {
             InitializeComponent();
-            db = new Database();
+            this.Loaded += SignUpControl_Loaded;
+        }
+
+        private void SignUpControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            db = App.Current.Properties["Database"] as Database;
 
             if (!(string.IsNullOrEmpty(App.Current.Properties["FirstName"]?.ToString())))
             {

@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EduPartners.Core;
 
 using EduPartners.MVVM.View.Controls;
 
@@ -41,6 +42,7 @@ namespace EduPartners.MVVM.View
             {
                 userControl = new HomePage();
             }
+            App.Current.Properties["Database"] = new Database();
 
             UpdateUIForCurrentUserControl();
         }
