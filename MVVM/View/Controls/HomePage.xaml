@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="EduPartners.MVVM.View.Controls.HomePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EduPartners.MVVM.View.Controls"
+             mc:Ignorable="d" Name="Home"
+             Height="450" Width="800">
+    
+    <UserControl.Background>
+        <ImageBrush ImageSource="../../../Resources/first_panel_background.png" Opacity="1.0" x:Name="ibBackground" />
+    </UserControl.Background>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+
+        <Grid Background="#152238">
+            <StackPanel Margin="20,0,0,0" Orientation="Horizontal">
+                <Image Source="../../../Resources/icon.png" Height="45"/>
+                <Label Content="EduPartners" Margin="10,0,0,0" Foreground="White" FontSize="28" FontFamily="Poppins" VerticalContentAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Opacity="1.0" HorizontalAlignment="Right">
+                <Button x:Name="btCreateSchool" BorderThickness="0" Content="Create School" Background="Blue" Margin="5,0,15,0" Height="35" Width="85" Click="CreateSchool_Clicked">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="btLogin" Content="Login" BorderThickness="0" Background="Green" Margin="0,0,15,0" Height="35" Width="85" Click="Login_Clicked">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="btSignUp" Content="Sign Up" BorderThickness="0" Background="DarkOrange" Margin="0,0,20,0" Height="35" Width="85" Click="SignUp_Clicked">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" PreviewMouseDown="Background_Clicked">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="60" />
+            </Grid.RowDefinitions>
+            <Rectangle Grid.RowSpan="2" Fill="Transparent" />
+            <Label x:Name="lBackgroundText" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="32" Content="Manage your Partnerships" Foreground="WhiteSmoke" />
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="12">
+                <Border CornerRadius="5" x:Name="firstPanelCircle" Background="White" Width="43" Height="12" Opacity="0.7" />
+                <Border CornerRadius="5" x:Name="secondPanelCircle" Background="Gray" Width="43" Height="12" Margin="20,0,0,0" Opacity="0.5" />
+                <Border CornerRadius="5" x:Name="thirdPanelCircle" Background="Gray" Width="43" Height="12" Margin="20,0,0,0" Opacity="0.5" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

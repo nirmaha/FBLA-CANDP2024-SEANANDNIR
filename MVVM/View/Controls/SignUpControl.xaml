@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="EduPartners.MVVM.View.Controls.SignUpControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EduPartners.MVVM.View.Controls"
+             mc:Ignorable="d" Name="SignUp"
+             Height="450" Width="800" FontFamily="Poppins">
+
+    <UserControl.Background>
+        <ImageBrush ImageSource="../../../Resources/signup_background.jpg" Opacity="0.6" />
+    </UserControl.Background>
+
+    <Grid x:Name="SignUpMainGrid" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+
+        <Button Content="&#x2B05;" FontSize="48" Background="#1d3b7a" Foreground="White" Height="60" Width="60" Click="btnBack_Clicked" Margin="10,13,130,340" />
+
+        <Grid x:Name="SecondColumnGrid" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition />
+                <RowDefinition Height="20" />
+            </Grid.RowDefinitions>
+
+
+            <Border x:Name="bSignUpBorder" Grid.Row="1" Background="WhiteSmoke" CornerRadius="25" Opacity=".80" PreviewMouseDown="SignUpBorder_MouseDown">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Label Content="Sign up to EduPartners" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                    <Label x:Name="lErrorMessage" Grid.Row="1" Content="" Visibility="Collapsed" Foreground="Red" FontSize="18" HorizontalAlignment="Center"/>
+
+                    <TextBox x:Name="tbFirstName" Grid.Row="2" Background="#ededed" HorizontalAlignment="Center" Width="300" Height="30" FontSize="20" GotFocus="tbFirstName_GotFocus" LostFocus="tbFirstName_LostFocus" TextChanged="tbFirstName_TextChanged" />
+                    <Label x:Name="lFirstName" Grid.Row="2" Foreground="Gray" Content="First Name" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="IBeam" Margin="0,0,221,0" MouseDown="lFirstName_Clicked" />
+
+                    <TextBox x:Name="tbLastName" Grid.Row="3" Background="#ededed" HorizontalAlignment="Center" Width="300" Height="30" FontSize="20" GotFocus="tbLastName_GotFocus" LostFocus="tbLastName_LostFocus" TextChanged="tbLastName_TextChanged" />
+                    <Label x:Name="lLastName" Grid.Row="3" Foreground="Gray" Content="Last Name" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="IBeam" Margin="0,0,223,0" MouseDown="lLastName_Clicked" />
+
+                    <TextBox x:Name="tbEmail" Grid.Row="4" Background="#ededed" HorizontalAlignment="Center"  Width="300" Height="30" FontSize="20" GotFocus="tbEmail_GotFocus" LostFocus="tbEmail_LostFocus" TextChanged="tbEmail_TextChanged" />
+                    <Label x:Name="lEmail" Content="Email" Foreground="Gray" Grid.Row="4" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="IBeam" Margin="0,0,258,0" MouseDown="lEmail_Clicked" />
+
+                    <PasswordBox x:Name="pbPassword" Grid.Row="5" Background="#ededed" HorizontalAlignment="Center" Width="300" Height="30" FontSize="20" GotFocus="pbPassword_GotFocus" LostFocus="pbPassword_LostFocus" PasswordChanged="pbPassword_PasswordChanged" />
+                    <Label x:Name="lPassword" Content="Password" Foreground="Gray" Grid.Row="5" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="IBeam" Margin="0,0,230,0" MouseDown="lPassword_Clicked"/>
+
+                    <PasswordBox x:Name="pbConfirmPassword" Grid.Row="6" Background="#ededed" HorizontalAlignment="Center" Width="300" Height="30" FontSize="20" GotFocus="pbConfirmPassword_GotFocus" LostFocus="pbConfirmPassword_LostFocus" PasswordChanged="pbConfirmPassword_PasswordChanged" />
+                    <Label x:Name="lConfirmPassword" Content="Confirm Password" Foreground="Gray" Grid.Row="6" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="IBeam" Margin="0,0,173,0" MouseDown="lConfirmPassword_Clicked"/>
+
+                    <CheckBox x:Name="cbTerms" Grid.Row="7" VerticalAlignment="Center" FontSize="15" Foreground="DarkSlateGray" HorizontalAlignment="Center" Content="I have read and agreed to the terms and conditions" />
+
+                    <Button x:Name="btnLogin" IsDefault="True" Grid.Row="9" Content="Next" FontSize="25" Foreground="White" Click="btnNext_Clicked" Height="40" Width="300" Grid.RowSpan="2" >
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Blue"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Red"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="15"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                    <StackPanel Grid.Row="8" Orientation="Horizontal">
+                        <Label VerticalAlignment="Center" Content="Already have an account?" FontSize="18" Margin="50,0,0,0"/>
+                        <TextBlock VerticalAlignment="Center" Text="Log In" Foreground="#8da4b4" FontSize="18" TextDecorations="Underline" MouseDown="LoginRedirect_MouseDown" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

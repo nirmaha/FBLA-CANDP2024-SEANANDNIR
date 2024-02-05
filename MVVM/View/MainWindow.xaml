@@ -5,141 +5,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EduPartners.MVVM.View"
-        mc:Ignorable="d" Name="home"
-        Title="MainWindow" Height="650" Width="1000"
-        WindowStartupLocation="CenterScreen" WindowStyle="None"
-        Background="Transparent" AllowsTransparency="True"
-        ResizeMode="NoResize" FontFamily="Poppins" MouseDown="Top_Clicked">
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Background="Transparent" ResizeMode="CanMinimize">
 
     <Window.Icon>
         <BitmapImage UriSource="../../Resources/icon.png" />
     </Window.Icon>
 
-    <!-- By Jeyderht 
-        Subscribe: https://www.youtube.com/channel/UC9di50E_9m9pQcZPxzFqYUA/about
-        -->
-    <Border Background="{DynamicResource PrimaryBackgroundColor}"
-            CornerRadius="8">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+    <Grid>
+        <DockPanel Name="Main">
 
-            <Border Grid.Column="0"
-                    Background="{DynamicResource SecundaryBackgroundColor}"
-                    CornerRadius="8 0 0 8">
-                <Grid x:Name="GridNav" Width="60">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="60"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+        </DockPanel>
+    </Grid>
 
-                    <Grid Grid.Row="0">
-                        <Border 
-                              Margin="14 0 0 0"
-                              Width="32" Height="24"
-                              HorizontalAlignment="Left">
-                            <Border.Background>
-                                <ImageBrush ImageSource="../../Resources/icon.png" Stretch="Uniform"/>
-                            </Border.Background>
-                        </Border>
-
-                        <Label Content="EduPartners"
-                               Foreground="{DynamicResource PrimaryTextColor}"
-                               FontWeight="Bold"
-                               FontSize="16"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Left"
-                               Margin="60 0 0 0"/>
-                    </Grid>
-
-                    <!-- Start: MenuItem -->
-                    <StackPanel Grid.Row="1" Margin="-1 40 0 20">
-                        <Button x:Name="btnDashboard" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnDashboard_MouseEnter" MouseLeave="btnDashboard_MouseLeave" Click="btnDashboard_Click">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource dashboard}" IconWidth="16" Text="Dashboard" VerticalAlignment="Center"/>
-                        </Button>
-                        <Button x:Name="btnView" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnView_MouseEnter" MouseLeave="btnView_MouseLeave" Click="btnView_Clicked">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource eye}" IconWidth="16" Text="View Partners" VerticalAlignment="Center"/>
-                        </Button>
-                        <Button x:Name="btnAdd" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnAdd_MouseEnter" MouseLeave="btnAdd_MouseLeave" Click="btnAdd_Clicked">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource plus}" IconWidth="16" Text="Add Partner" VerticalAlignment="Center"/>
-                        </Button>
-                        <Button x:Name="btnNotifications" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnNotifications_MouseEnter" MouseLeave="btnNotifications_MouseLeave" Click="btnNotifications_Clicked">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource bell}" IconWidth="16" Text="Notifications" VerticalAlignment="Center"/>
-                        </Button>
-                        <Button x:Name="btnLogOut" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnLogOut_MouseEnter" MouseLeave="btnLogOut_MouseLeave" Click="btnLogOut_Clicked">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource logout}" IconWidth="16" Text="Logout" VerticalAlignment="Center"/>
-                        </Button>
-                        <Button x:Name="btnProfile" Style="{DynamicResource PopupButtonStyle}">
-                            <ctls:MenuItem GroupName="MenuItem" Icon="../../Resources/icon.png"  IconWidth="16" Text="Name" Foreground="White"/>
-                        </Button>
-                    </StackPanel>
-                    <!-- End: MenuItem -->
-
-                    <!-- Start: Popup User Control -->
-                    <Popup x:Name="Popup"  AllowsTransparency="True"  HorizontalOffset="0" VerticalOffset="10">
-                        <ctls:UserPopup x:Name="Header" Foreground="{DynamicResource PrimaryTextColor}"/>
-                    </Popup>
-                    <!-- End: Popup User Control -->
-
-                </Grid>
-            </Border>
-
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <ToggleButton x:Name="Tg_Btn" Grid.Column="1" VerticalAlignment="Center" Style="{DynamicResource iToggleButtonStyle}" HorizontalAlignment="Left" BorderThickness="0" Background="Transparent" Margin="10,15,0,15" Height="30" Width="30">
-                    <ToggleButton.Triggers>
-                        <EventTrigger RoutedEvent="ToggleButton.Unchecked">
-                            <BeginStoryboard>
-                                <Storyboard x:Name="HideStackPanel">
-                                    <DoubleAnimation Storyboard.TargetName="GridNav" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="210" To="60" Duration="0:0:0.5">
-                                    </DoubleAnimation>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="ToggleButton.Checked">
-                            <BeginStoryboard>
-                                <Storyboard x:Name="ShowStackPanel">
-                                    <DoubleAnimation Storyboard.TargetName="GridNav" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="60" To="210" Duration="0:0:0.5">
-                                    </DoubleAnimation>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </ToggleButton.Triggers>
-                </ToggleButton>
-
-                <!-- Start: Button Close | Restore | Minimize -->
-                <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0" Height="30" Orientation="Horizontal" FlowDirection="RightToLeft" Grid.RowSpan="2" >
-                    <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>
-                    <Button x:Name="btnRestore" Margin="5,0" Click="btnRestore_Click">
-                        <Button.Style>
-                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonsStyle}">
-                                <Setter Property="Content" Value="{DynamicResource maximize}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding ElementName=home, Path=WindowState}" Value="Maximized">
-                                        <Setter Property="Content" Value="{DynamicResource restore}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                    <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="btnMinimize_Click"/>
-                </StackPanel>
-                <!-- End: Button Close | Restore | Minimize -->
-
-                <Frame Grid.Row="1"
-                       Name="fContainer"
-                       Margin="20"
-                       NavigationUIVisibility="Hidden">
-
-                </Frame>
-
-            </Grid>
-        </Grid>
-    </Border>
 </Window>

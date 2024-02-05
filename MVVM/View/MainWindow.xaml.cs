@@ -16,6 +16,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using EduPartners.MVVM.View.Controls;
+
 /**
  * TODO:
  * Change ini file to JSON
@@ -28,160 +30,47 @@ namespace EduPartners.MVVM.View
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static UserControl userControl;
+
         public MainWindow()
         {
             InitializeComponent();
-        }
 
-        private void BG_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Tg_Btn.IsChecked = false;
-        }
-
-        // Start: MenuLeft PopupButton //
-        private void btnDashboard_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (Tg_Btn.IsChecked == false)
+            // Default to HomePage if userControl is not set
+            if (userControl == null)
             {
-                Popup.PlacementTarget = btnDashboard;
-                Popup.Placement = PlacementMode.Right;
-                Popup.IsOpen = true;
-                Header.PopupText.Text = "Dashboard";
+                userControl = new HomePage();
             }
+
+            UpdateUIForCurrentUserControl();
         }
 
-        private void btnDashboard_MouseLeave(object sender, MouseEventArgs e)
+        private void UpdateUIForCurrentUserControl()
         {
-            Popup.Visibility = Visibility.Collapsed;
-            Popup.IsOpen = false;
-        }
+            Main.Children.Clear();
+            Main.Children.Add(userControl);
 
-        private void btnView_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (Tg_Btn.IsChecked == false)
+            this.Title = userControl.Name;
+            if (this.Title == "Dashboard")
             {
-                Popup.PlacementTarget = btnView;
-                Popup.Placement = PlacementMode.Right;
-                Popup.IsOpen = true;
-                Header.PopupText.Text = "View Partners";
+                this.WindowStyle = WindowStyle.None;
+                this.Height = userControl.Height;
+                this.Width = userControl.Width;
             }
-        }
-
-        private void btnView_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Popup.Visibility = Visibility.Collapsed;
-            Popup.IsOpen = false;
-        }
-
-        private void btnView_Clicked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnAdd_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (Tg_Btn.IsChecked == false)
-            {
-                Popup.PlacementTarget = btnAdd;
-                Popup.Placement = PlacementMode.Right;
-                Popup.IsOpen = true;
-                Header.PopupText.Text = "Add Partner";
-            }
-        }
-
-        private void btnAdd_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Popup.Visibility = Visibility.Collapsed;
-            Popup.IsOpen = false;
-        }
-
-        private void btnAdd_Clicked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnNotifications_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (Tg_Btn.IsChecked == false)
-            {
-                Popup.PlacementTarget = btnNotifications;
-                Popup.Placement = PlacementMode.Right;
-                Popup.IsOpen = true;
-                Header.PopupText.Text = "Notifications";
-            }
-        }
-
-        private void btnNotifications_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Popup.Visibility = Visibility.Collapsed;
-            Popup.IsOpen = false;
-        }
-
-        private void btnNotifications_Clicked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnLogOut_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (Tg_Btn.IsChecked == false)
-            {
-                Popup.PlacementTarget = btnLogOut;
-                Popup.Placement = PlacementMode.Right;
-                Popup.IsOpen = true;
-                Header.PopupText.Text = "Logout";
-            }
-        }
-
-        private void btnLogOut_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Popup.Visibility = Visibility.Collapsed;
-            Popup.IsOpen = false;
-        }
-        // End: MenuLeft PopupButton //
-
-        // Start: Button Close | Restore | Minimize 
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
-        private void btnRestore_Click(object sender, RoutedEventArgs e)
-        {
-            if (WindowState == WindowState.Normal)
-                WindowState = WindowState.Maximized;
             else
-                WindowState = WindowState.Normal;
+            { 
+                this.WindowStyle = WindowStyle.SingleBorderWindow;
+                this.Height = userControl.Height + 38;
+                this.Width = userControl.Width;
+            }
+            
         }
 
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        public void SetUserControl(UserControl newControl)
         {
-            WindowState = WindowState.Minimized;
-        }
-        // End: Button Close | Restore | Minimize
-
-        private void btnHome_Click(object sender, RoutedEventArgs e)
-        {
-            fContainer.Navigate(new System.Uri("MVVM/View/Pages/Home.xaml", UriKind.RelativeOrAbsolute));
-        }
-
-        private void btnDashboard_Click(object sender, RoutedEventArgs e)
-        {
-            fContainer.Navigate(new System.Uri("MVVM/View/Pages/Dashboard.xaml", UriKind.RelativeOrAbsolute));
-        }
-
-        private void Top_Clicked(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed) DragMove();
-        }
-
-        private void btnLogOut_Clicked(object sender, RoutedEventArgs e)
-        {
-            App.Current.Properties["User"] = "";
-            HomePage homePage = new HomePage();
-            homePage.Owner = null;
-            this.Close();
-            homePage.Show();
+            userControl = newControl;
+            UpdateUIForCurrentUserControl();
         }
     }
+
 }

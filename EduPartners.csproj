@@ -129,25 +129,37 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="MVVM\View\Controls\CreateSchool.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\Controls\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\Controls\LoginControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\Controls\MainControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\Controls\MenuItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="MVVM\View\Controls\SchoolSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\Controls\SignUpControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\Controls\UserPopup.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MVVM\View\CreateSchoolWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MVVM\View\HomePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MVVM\View\LoginWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -165,34 +177,47 @@
     <Compile Include="MVVM\ViewModel\PartnerViewModel.cs" />
     <Compile Include="MVVM\ViewModel\SchoolViewModel.cs" />
     <Compile Include="MVVM\ViewModel\UserViewModel.cs" />
+    <Compile Include="MVVM\View\Controls\CreateSchool.xaml.cs">
+      <DependentUpon>CreateSchool.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\Controls\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\Controls\LoginControl.xaml.cs">
+      <DependentUpon>LoginControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\Controls\MainControl.xaml.cs">
+      <DependentUpon>MainControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\View\Controls\MenuItem.xaml.cs">
       <DependentUpon>MenuItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\View\Controls\SchoolSelection.xaml.cs">
+      <DependentUpon>SchoolSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\Controls\SignUpControl.xaml.cs">
+      <DependentUpon>SignUpControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\View\Controls\UserPopup.xaml.cs">
       <DependentUpon>UserPopup.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MVVM\View\CreateSchoolWindow.xaml.cs">
-      <DependentUpon>CreateSchoolWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MVVM\View\HomePage.xaml.cs">
-      <DependentUpon>HomePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MVVM\View\LoginWindow.xaml.cs">
-      <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MVVM\View\Pages\AddPartners.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\Pages\Dashboard.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MVVM\View\SchoolSelection.xaml">
+    <Page Include="MVVM\View\Pages\Notifications.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\SignUpWindow.xaml">
+    <Page Include="MVVM\View\Pages\ViewPartners.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -206,14 +231,17 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MVVM\View\Pages\AddPartners.xaml.cs">
+      <DependentUpon>AddPartners.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\View\Pages\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\SchoolSelection.xaml.cs">
-      <DependentUpon>SchoolSelection.xaml</DependentUpon>
+    <Compile Include="MVVM\View\Pages\Notifications.xaml.cs">
+      <DependentUpon>Notifications.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\SignUpWindow.xaml.cs">
-      <DependentUpon>SignUpWindow.xaml</DependentUpon>
+    <Compile Include="MVVM\View\Pages\ViewPartners.xaml.cs">
+      <DependentUpon>ViewPartners.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
