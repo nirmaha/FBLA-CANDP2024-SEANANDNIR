@@ -8,12 +8,6 @@
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Background="Transparent" ResizeMode="CanMinimize">
 
-    <Window.Icon>
-        <BitmapImage UriSource="../../Resources/icon.png" />
-    </Window.Icon>
-
-    <DockPanel Name="Main">
-
-    </DockPanel>
+    <DockPanel Name="Main"/>
 
 </Window>

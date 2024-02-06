@@ -134,12 +134,20 @@ namespace EduPartners.MVVM.View.Controls
 
         private void btnRestore_Click(object sender, RoutedEventArgs e)
         {
-            //MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
 
-        //    if (mainWindow.WindowState == WindowState.Normal)
-        //        mainWindow.WindowState = WindowState.Maximized;
-        //    else
-        //        mainWindow.WindowState = WindowState.Normal;
+            if (mainWindow.WindowState == WindowState.Normal)
+            {
+                mainWindow.WindowState = WindowState.Maximized;
+                this.Height = mainWindow.Height;
+                this.Width = mainWindow.Width;
+            }
+            else
+            {
+                mainWindow.WindowState = WindowState.Normal;
+                this.Height = 650;
+                this.Width = 1000;
+            }
         }
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
