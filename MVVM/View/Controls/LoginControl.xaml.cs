@@ -28,12 +28,14 @@ namespace EduPartners.MVVM.View.Controls
         public LoginControl()
         {
             InitializeComponent();
+            
+            db = App.Current.Properties["Database"] as Database;
+            
             this.Loaded += LoginControl_Loaded;
         }
 
         private void LoginControl_Loaded(object sender, RoutedEventArgs e)
         {
-            db = App.Current.Properties["Database"] as Database;
 
             App.Current.Properties["FirstName"] = "";
             App.Current.Properties["LastName"] = "";
@@ -184,19 +186,19 @@ namespace EduPartners.MVVM.View.Controls
             }
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow.SetUserControl(new MainControl());
+            mainWindow.SetUserControl("MainControl");
         }
 
         private void SignUpRedirect_MouseDown(object sender, MouseButtonEventArgs e)
         {
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow.SetUserControl(new SignUpControl());
+            mainWindow.SetUserControl("SignUpControl");
         }
 
         private void btnBack_Clicked(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow.SetUserControl(new HomePage());
+            mainWindow.SetUserControl("HomePage");
         }
     }
 }

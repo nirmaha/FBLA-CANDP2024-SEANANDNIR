@@ -23,12 +23,14 @@ namespace EduPartners.MVVM.View.Controls
         public SchoolSelection()
         {
             InitializeComponent();
+            
+            db = App.Current.Properties["Database"] as Database;
+
             this.Loaded += SchoolSelection_Loaded;
         }
 
         private void SchoolSelection_Loaded(object sender, RoutedEventArgs e)
         {
-            db = App.Current.Properties["Database"] as Database;
             PopulateComboBox();
         }
 
@@ -82,13 +84,13 @@ namespace EduPartners.MVVM.View.Controls
         private void SignUpRedirect_MouseDown(object sender, MouseButtonEventArgs e)
         {
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow.SetUserControl(new SignUpControl());
+            mainWindow.SetUserControl("SignUpControl");
         }
 
         private void btnBack_Clicked(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow.SetUserControl(new HomePage());
+            mainWindow.SetUserControl("HomePage");
         }
         private async void btnCreateAccount_Clicked(object sender, RoutedEventArgs e)
         {
@@ -126,7 +128,7 @@ namespace EduPartners.MVVM.View.Controls
             await db.CreateUser(user);
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow.SetUserControl(new LoginControl());
+            mainWindow.SetUserControl("LoginControl");
 
         }
     }

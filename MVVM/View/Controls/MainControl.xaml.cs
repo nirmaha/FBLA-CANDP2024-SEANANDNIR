@@ -177,7 +177,7 @@ namespace EduPartners.MVVM.View.Controls
         {
             App.Current.Properties["User"] = "";
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow.SetUserControl(new HomePage());
+            mainWindow.SetUserControl("HomePage");
         }
 
     }

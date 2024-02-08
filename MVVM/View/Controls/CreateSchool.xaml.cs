@@ -21,19 +21,16 @@ namespace EduPartners.MVVM.View.Controls
         public CreateSchool()
         {
             InitializeComponent();
-            this.Loaded += CreateSchool_Loaded;
-        }
-
-        private void CreateSchool_Loaded(object sender, RoutedEventArgs e)
-        {
+           
             tbSchoolCode.Text = Guid.NewGuid().ToString();
             db = App.Current.Properties["Database"] as Database;
+            
         }
 
         private void btnBack_Clicked(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow.SetUserControl(new HomePage());
+            mainWindow.SetUserControl("HomePage");
         }
 
         private void tbSchoolName_GotFocus(object sender, RoutedEventArgs e)
@@ -178,7 +175,7 @@ namespace EduPartners.MVVM.View.Controls
             db.CreateSchool(school);
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow.SetUserControl(new HomePage());
+            mainWindow.SetUserControl("HomePage");
         }
 
         private void tbZip_GotFocus(object sender, RoutedEventArgs e)

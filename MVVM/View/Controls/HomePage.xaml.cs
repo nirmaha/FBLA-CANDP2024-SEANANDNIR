@@ -141,7 +141,7 @@ namespace EduPartners.MVVM.View.Controls
             switchTimer.Stop();
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow.SetUserControl(new CreateSchool());
+            mainWindow.SetUserControl("CreateSchool");
         }
 
         private void Login_Clicked(object sender, RoutedEventArgs e)
@@ -150,7 +150,7 @@ namespace EduPartners.MVVM.View.Controls
             switchTimer.Stop();
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow.SetUserControl(new LoginControl());
+            mainWindow.SetUserControl("LoginControl");
         }
          
         private void SignUp_Clicked(object sender, RoutedEventArgs e)
@@ -159,7 +159,7 @@ namespace EduPartners.MVVM.View.Controls
             animationTimer.Dispose();
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow.SetUserControl(new SignUpControl());
+            mainWindow.SetUserControl("SignUpControl");
         }
 
         private void Background_Clicked(object sender, MouseButtonEventArgs e)

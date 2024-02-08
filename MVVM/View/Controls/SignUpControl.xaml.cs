@@ -21,12 +21,15 @@ namespace EduPartners.MVVM.View.Controls
         public SignUpControl()
         {
             InitializeComponent();
+
+            db = App.Current.Properties["Database"] as Database;
+
             this.Loaded += SignUpControl_Loaded;
+
         }
 
         private void SignUpControl_Loaded(object sender, RoutedEventArgs e)
         {
-            db = App.Current.Properties["Database"] as Database;
 
             if (!(string.IsNullOrEmpty(App.Current.Properties["FirstName"]?.ToString())))
             {
@@ -194,13 +197,13 @@ namespace EduPartners.MVVM.View.Controls
         private void LoginRedirect_MouseDown(object sender, MouseButtonEventArgs e)
         {
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow.SetUserControl(new LoginControl());
+            mainWindow.SetUserControl("LoginControl");
         }
 
         private void btnBack_Clicked(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow.SetUserControl(new HomePage());
+            mainWindow.SetUserControl("HomePage");
         }
 
         private async void btnNext_Clicked(object sender, RoutedEventArgs e)
@@ -256,7 +259,7 @@ namespace EduPartners.MVVM.View.Controls
             App.Current.Properties["Password"] = pbPassword.Password;
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow.SetUserControl(new SchoolSelection());
+            mainWindow.SetUserControl("SchoolSelection");
         }
     }
 }

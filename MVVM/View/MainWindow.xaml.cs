@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -19,47 +20,55 @@ namespace EduPartners.MVVM.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static UserControl userControl { get; set; }
-
+        private static Dictionary<string, UserControl> userControls;
+        
         public MainWindow()
         {
             InitializeComponent();
 
+            InitializeUserControls();
+
             // Default to HomePage if userControl is not set
-            if (userControl == null)
+            if (!userControls.ContainsKey("HomePage"))
             {
-                userControl = new HomePage();
+                userControls["HomePage"] = new HomePage();
             }
             App.Current.Properties["Database"] = new Database();
 
-            UpdateUIForCurrentUserControl();
+            SetUserControl("HomePage");
         }
 
-        private void UpdateUIForCurrentUserControl()
+        private void InitializeUserControls()
+        {
+            userControls = new Dictionary<string, UserControl>
+            {
+                {"HomePage",        new HomePage()},
+                {"MainControl",     new MainControl()},
+                {"LoginControl",    new LoginControl()},
+                {"SignUpControl",   new SignUpControl()},
+                {"CreateSchool",    new CreateSchool()},
+                {"SchoolSelection", new SchoolSelection()},
+            };
+        }
+
+        public void SetUserControl(string userControl)
         {
             Main.Children.Clear();
-            Main.Children.Add(userControl);
+            Main.Children.Add(userControls[userControl]);
 
-            this.Title = "EduPartners - " + userControl.Name;
-            if (userControl.Name == "Dashboard")
+            this.Title = "EduPartners - " + userControls[userControl].Name;
+            if (userControls[userControl].Name == "Dashboard")
             {
                 this.WindowStyle = WindowStyle.None;
-                this.Height = userControl.Height;
-                this.Width = userControl.Width;
+                this.Height = userControls[userControl].Height;
+                this.Width = userControls[userControl].Width;
             }
             else
-            { 
+            {
                 this.WindowStyle = WindowStyle.SingleBorderWindow;
-                this.Height = userControl.Height + 38;
-                this.Width = userControl.Width;
+                this.Height = userControls[userControl].Height + 38;
+                this.Width = userControls[userControl].Width;
             }
-            
-        }
-
-        public void SetUserControl(UserControl newControl)
-        {
-            userControl = newControl;
-            UpdateUIForCurrentUserControl();
         }
     }
 
