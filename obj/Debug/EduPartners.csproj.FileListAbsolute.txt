@@ -178,3 +178,5 @@ C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Controls\SignUpContr
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\AddPartners.baml
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\Notifications.baml
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\ViewPartners.baml
+D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\Profile.g.cs
+D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\Profile.baml

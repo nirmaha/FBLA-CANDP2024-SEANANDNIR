@@ -220,6 +220,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\View\Pages\Profile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\Pages\ViewPartners.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -242,6 +246,9 @@
     </Compile>
     <Compile Include="MVVM\View\Pages\Notifications.xaml.cs">
       <DependentUpon>Notifications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\Pages\Profile.xaml.cs">
+      <DependentUpon>Profile.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\Pages\ViewPartners.xaml.cs">
       <DependentUpon>ViewPartners.xaml</DependentUpon>
@@ -282,6 +289,7 @@
     <Analyzer Include="packages\AWSSDK.SecurityToken.3.7.100.14\analyzers\dotnet\cs\AWSSDK.SecurityToken.CodeAnalysis.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\defaultProfile.png" />
     <Resource Include="Resources\icon.png" />
     <Resource Include="icon.ico" />
     <Content Include="mongocrypt.dll" />

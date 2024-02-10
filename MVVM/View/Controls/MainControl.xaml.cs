@@ -107,6 +107,28 @@ namespace EduPartners.MVVM.View.Controls
             fContainer.Navigate(new Uri("MVVM/View/Pages/Notifications.xaml", UriKind.RelativeOrAbsolute));
         }
 
+        private void btnProfile_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (Tg_Btn.IsChecked == false)
+            { 
+                Popup.PlacementTarget = btnProfile;
+                Popup.Placement = PlacementMode.Right;
+                Popup.IsOpen = true;
+                Header.PopupText.Text = "Profile";
+            }
+        }
+
+        private void btnProfile_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Popup.Visibility = Visibility.Collapsed;
+            Popup.IsOpen = false;
+        }
+
+        private void btnProfile_Clicked(object sender, RoutedEventArgs e)
+        {
+            fContainer.Navigate(new Uri("MVVM/View/Pages/Profile.xaml", UriKind.RelativeOrAbsolute));
+        }
+
         private void btnLogOut_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Tg_Btn.IsChecked == false)
@@ -180,5 +202,22 @@ namespace EduPartners.MVVM.View.Controls
             mainWindow.SetUserControl("HomePage");
         }
 
+        private void Top_DoubleClicked(object sender, MouseButtonEventArgs e)
+        {
+            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+
+            if (mainWindow.WindowState == WindowState.Normal)
+            {
+                mainWindow.WindowState = WindowState.Maximized;
+                this.Height = mainWindow.Height;
+                this.Width = mainWindow.Width;
+            }
+            else
+            {
+                mainWindow.WindowState = WindowState.Normal;
+                this.Height = 650;
+                this.Width = 1000;
+            }
+        }
     }
 }

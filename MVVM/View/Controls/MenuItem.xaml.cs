@@ -118,5 +118,15 @@ namespace EduPartners.MVVM.View.Controls
         // Using a DependencyProperty as the backing store for GroupName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty GroupNameProperty =
             DependencyProperty.Register("GroupName", typeof(string), typeof(MenuItem));
+
+        public BitmapImage ImageSource
+        {
+            get { return (BitmapImage)GetValue(ImageSourceProptery); }
+            set { SetValue(ImageSourceProptery, value); }
+        }
+
+        public static readonly DependencyProperty ImageSourceProptery =
+            DependencyProperty.Register("ImageSource", typeof(BitmapImage), typeof(MenuItem));
+
     }
 }

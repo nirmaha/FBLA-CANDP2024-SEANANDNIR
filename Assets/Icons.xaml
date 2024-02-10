@@ -40,6 +40,7 @@
             <RotateTransform Angle="180"/>
         </PathGeometry.Transform>
     </PathGeometry>
+    <PathGeometry x:Key="EmptyGeometry"/>
 
 
 

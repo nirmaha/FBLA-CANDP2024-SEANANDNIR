@@ -7,7 +7,7 @@
              xmlns:ctls="clr-namespace:EduPartners.MVVM.View.Controls" 
              mc:Ignorable="d" Name="Dashboard"
              Height="650" Width="1000"
-             Background="Transparent" FontFamily="Poppins" MouseDown="Top_Clicked">
+             Background="Transparent" FontFamily="Poppins" MouseDown="Top_Clicked" MouseDoubleClick="Top_DoubleClicked">
 
     <!-- By Jeyderht 
         Subscribe: https://www.youtube.com/channel/UC9di50E_9m9pQcZPxzFqYUA/about
@@ -49,28 +49,57 @@
                     <!-- Start: MenuItem -->
                     <StackPanel Grid.Row="1" Margin="-1 40 0 20">
                         <Button x:Name="btnDashboard" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnDashboard_MouseEnter" MouseLeave="btnDashboard_MouseLeave" Click="btnDashboard_Click">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource dashboard}" IconWidth="16" Text="Dashboard" VerticalAlignment="Center"/>
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource dashboard}" IconWidth="16" Text="Dashboard" VerticalAlignment="Center">
+                                <ctls:MenuItem.ImageSource>
+                                    <BitmapImage UriSource=""/>
+                                </ctls:MenuItem.ImageSource>
+                            </ctls:MenuItem>
                         </Button>
                         <Button x:Name="btnView" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnView_MouseEnter" MouseLeave="btnView_MouseLeave" Click="btnView_Clicked">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource eye}" IconWidth="16" Text="View Partners" VerticalAlignment="Center"/>
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource eye}" IconWidth="16" Text="View Partners" VerticalAlignment="Center">
+                                <ctls:MenuItem.ImageSource>
+                                    <BitmapImage UriSource=""/>
+                                </ctls:MenuItem.ImageSource>
+                            </ctls:MenuItem>
                         </Button>
                         <Button x:Name="btnAdd" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnAdd_MouseEnter" MouseLeave="btnAdd_MouseLeave" Click="btnAdd_Clicked">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource plus}" IconWidth="16" Text="Add Partner" VerticalAlignment="Center"/>
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource plus}" IconWidth="16" Text="Add Partner" VerticalAlignment="Center">
+                                <ctls:MenuItem.ImageSource>
+                                    <BitmapImage UriSource=""/>
+                                </ctls:MenuItem.ImageSource>
+                            </ctls:MenuItem>
                         </Button>
                         <Button x:Name="btnNotifications" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnNotifications_MouseEnter" MouseLeave="btnNotifications_MouseLeave" Click="btnNotifications_Clicked">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource bell}" IconWidth="16" Text="Notifications" VerticalAlignment="Center"/>
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource bell}" IconWidth="16" Text="Notifications" VerticalAlignment="Center">
+                                <ctls:MenuItem.ImageSource>
+                                    <BitmapImage UriSource=""/>
+                                </ctls:MenuItem.ImageSource>
+                            </ctls:MenuItem>
                         </Button>
                         <Button x:Name="btnLogOut" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnLogOut_MouseEnter" MouseLeave="btnLogOut_MouseLeave" Click="btnLogOut_Clicked">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource logout}" IconWidth="16" Text="Logout" VerticalAlignment="Center"/>
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource logout}" IconWidth="16" Text="Logout" VerticalAlignment="Center">
+                                <ctls:MenuItem.ImageSource>
+                                    <BitmapImage UriSource=""/>
+                                </ctls:MenuItem.ImageSource>
+                            </ctls:MenuItem>
                         </Button>
-                        
+
+                        <Button x:Name="btnProfile" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnProfile_MouseEnter" MouseLeave="btnProfile_MouseLeave" Click="btnProfile_Clicked">
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource EmptyGeometry}" IconWidth="16" Text="Profile" VerticalAlignment="Center">
+                                <!--<ctls:MenuItem.ImageSource>
+                                    <BitmapImage UriSource="/EduPartners;component/Resources/icon.png" />
+                                </ctls:MenuItem.ImageSource>-->
+                            </ctls:MenuItem>
+                        </Button>
                     </StackPanel>
-                    <!-- End: MenuItem -->
+                    <!-- End: MenuItem -->  
 
                     <!-- Start: Popup User Control -->
                     <Popup x:Name="Popup"  AllowsTransparency="True"  HorizontalOffset="0" VerticalOffset="10">
                         <ctls:UserPopup x:Name="Header" Foreground="{DynamicResource PrimaryTextColor}"/>
                     </Popup>
+
+                
                     <!-- End: Popup User Control -->
 
                 </Grid>
