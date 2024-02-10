@@ -26,6 +26,8 @@ namespace EduPartners.MVVM.View
         {
             InitializeComponent();
 
+            App.Current.Properties["Database"] = new Database();
+
             InitializeUserControls();
 
             // Default to HomePage if userControl is not set
@@ -33,7 +35,6 @@ namespace EduPartners.MVVM.View
             {
                 userControls["HomePage"] = new HomePage();
             }
-            App.Current.Properties["Database"] = new Database();
 
             SetUserControl("HomePage");
         }

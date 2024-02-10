@@ -29,6 +29,7 @@ namespace EduPartners.MVVM.View.Controls
         {
             InitializeComponent();
             
+            db = App.Current.Properties["Database"] as Database;
             
             this.Loaded += LoginControl_Loaded;
         }
@@ -36,7 +37,6 @@ namespace EduPartners.MVVM.View.Controls
         private void LoginControl_Loaded(object sender, RoutedEventArgs e)
         {
 
-            db = App.Current.Properties["Database"] as Database;
             App.Current.Properties["FirstName"] = "";
             App.Current.Properties["LastName"] = "";
             App.Current.Properties["Email"] = "";

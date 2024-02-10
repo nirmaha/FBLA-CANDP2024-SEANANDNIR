@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,6 +9,7 @@ using System.Windows.Media;
 
 using EduPartners.Core;
 using EduPartners.MVVM.Model;
+using Microsoft.Win32;
 
 namespace EduPartners.MVVM.View.Controls
 {
@@ -160,6 +162,23 @@ namespace EduPartners.MVVM.View.Controls
             {
                 lErrorMessage.Visibility = Visibility.Visible;
                 lErrorMessage.Content = "Please fill out all require felids.";
+                return;
+            }
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog() 
+            {
+                Title = "Save School Code",
+                InitialDirectory = @"C:\Downloads",
+                Filter = "Text File (*.txt) | *.txt",
+                RestoreDirectory = true
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                File.WriteAllText(saveFileDialog.FileName, tbSchoolCode.Text);
+            }
+            else
+            {
                 return;
             }
 
