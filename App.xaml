@@ -13,6 +13,8 @@
 
                 <ResourceDictionary Source="Styles/MainStyle.xaml"/>
 
+                <ResourceDictionary Source="Styles/FilterButtonTheme.xaml"/>
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

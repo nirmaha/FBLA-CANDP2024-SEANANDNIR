@@ -9,18 +9,46 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ViewPartners">
 
-    <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
+    <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}" VerticalAlignment="Center">
         <Viewbox>
-                <DockPanel Width="800" Height="450">
-                    <Grid DockPanel.Dock="Top" Background="Transparent">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="55"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
+            <DockPanel Width="1000" Height="550" Margin="3">
+                <Grid DockPanel.Dock="Top" Background="Transparent" MouseDown="MainBorder_MouseDown">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="55"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
 
-                        <Border BorderThickness="0,0,0,3" BorderBrush="DarkGray">
-                            
-                        </Border>
+                    <Border BorderThickness="0,0,0,1.5" BorderBrush="DarkGray">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="220"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Button BorderThickness="0" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45" Click="FilterButton_Clicked"/>
+                                <Button BorderThickness="0" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45"/>
+                                <Button BorderThickness="0" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45"/>
+                                <Button BorderThickness="0" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45"/>
+                            </StackPanel>
+
+                            <Border Grid.Column="1" Background="{StaticResource PrimaryBackgroundColor}" VerticalAlignment="Center" CornerRadius="15" Height="36" Margin="0,0,8,0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="50"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBox x:Name="tbSerachBox" Foreground="White" CaretBrush="White" Background="Transparent" FontSize="15" VerticalContentAlignment="Center" BorderThickness="0" Margin="10,5,0,5" TextWrapping="NoWrap" TextChanged="tbSerachBox_TextChanged"/>
+                                    <Label x:Name="lSearchLabel" Content="Search" Cursor="Hand" Foreground="DarkGray" FontSize="14" Grid.ColumnSpan="2" Margin="10,0,40,0" VerticalContentAlignment="Center" MouseDown="lSearchLabel_MouseDown"/>
+
+                                    <Border Grid.Column="2" Cursor="Hand" MouseDown="Serach_MouseDown">
+                                        <Image Source="../../../Resources/search.png" Width="25"/>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </Border>
 
                     <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
                         <ItemsControl x:Name="icViewParnter" ItemsSource="{Binding Items}" Grid.Row="1">
@@ -57,7 +85,7 @@
                                                 <Run Text="-"/>
                                                 <Run Text="{Binding Savings, StringFormat=${0}}"/>
                                             </TextBlock>
-                                            
+
                                             <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Margin="13,0,13,0" Padding="0,0,0,8" Foreground="White" FontSize="13" VerticalAlignment="Center" HorizontalAlignment="Right">
                                                 <Run Text="Since"/>
                                                 <Run Text="{Binding StartDate}"/>

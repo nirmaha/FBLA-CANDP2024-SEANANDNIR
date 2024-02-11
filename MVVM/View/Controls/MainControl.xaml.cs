@@ -216,23 +216,5 @@ namespace EduPartners.MVVM.View.Controls
             DashboardMenuItem.InternalMenu.IsChecked = true;
             btnDashboard.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
-
-        private void Top_DoubleClicked(object sender, MouseButtonEventArgs e)
-        {
-            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-
-            if (mainWindow.WindowState == WindowState.Normal)
-            {
-                mainWindow.WindowState = WindowState.Maximized;
-                this.Height = mainWindow.Height;
-                this.Width = mainWindow.Width;
-            }
-            else
-            {
-                mainWindow.WindowState = WindowState.Normal;
-                this.Height = 650;
-                this.Width = 1000;
-            }
-        }
     }
 }

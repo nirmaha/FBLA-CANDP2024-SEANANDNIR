@@ -68,5 +68,40 @@ namespace EduPartners.MVVM.View.Pages
         {
             e.Handled = true;
         }
+
+        private void lSearchLabel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            tbSerachBox.Focus();
+            e.Handled = true;
+        }
+
+        private void tbSerachBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (tbSerachBox.Text != "")
+            {
+                lSearchLabel.Visibility = Visibility.Collapsed;
+            }
+            else
+            { 
+                lSearchLabel.Visibility = Visibility.Visible;
+            }
+            e.Handled = true;
+        }
+
+        private void MainBorder_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Keyboard.ClearFocus();
+            e.Handled = true;
+        }
+
+        private void Serach_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void FilterButton_Clicked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
