@@ -15,7 +15,7 @@ namespace EduPartners.MVVM.Model
         public string Name { get; set; }
         public string Description { get; set; }
         public string ResourcesAvailable { get; set; }
-        public string Type { get; set; }
+        public string Industry { get; set; }
         public DateTime StartDate { get; set; }
         public string RepresentativeName { get; set; }
         public string RepresentativeEmail { get; set; }

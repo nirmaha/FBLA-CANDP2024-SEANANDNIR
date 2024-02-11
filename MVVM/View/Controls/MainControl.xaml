@@ -154,9 +154,7 @@
                 <Frame Grid.Row="1"
                        Name="fContainer"
                        Margin="20"
-                       NavigationUIVisibility="Hidden">
-
-                </Frame>
+                       NavigationUIVisibility="Hidden"/>
 
             </Grid>
         </Grid>
