@@ -49,7 +49,7 @@
                     <!-- Start: MenuItem -->
                     <StackPanel Grid.Row="1" Margin="-1 40 0 20">
                         <Button x:Name="btnDashboard" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnDashboard_MouseEnter" MouseLeave="btnDashboard_MouseLeave" Click="btnDashboard_Click">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource dashboard}" IconWidth="16" Text="Dashboard" VerticalAlignment="Center">
+                            <ctls:MenuItem x:Name="DashboardMenuItem" GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource dashboard}" IconWidth="16" Text="Dashboard" VerticalAlignment="Center">
                                 <ctls:MenuItem.ImageSource>
                                     <BitmapImage UriSource=""/>
                                 </ctls:MenuItem.ImageSource>
@@ -70,14 +70,14 @@
                             </ctls:MenuItem>
                         </Button>
                         <Button x:Name="btnNotifications" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnNotifications_MouseEnter" MouseLeave="btnNotifications_MouseLeave" Click="btnNotifications_Clicked">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource bell}" IconWidth="16" Text="Notifications" VerticalAlignment="Center">
+                            <ctls:MenuItem x:Name="NotificationsMenuItem" GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource bell}" IconWidth="16" Text="Notifications" VerticalAlignment="Center">
                                 <ctls:MenuItem.ImageSource>
                                     <BitmapImage UriSource=""/>
                                 </ctls:MenuItem.ImageSource>
                             </ctls:MenuItem>
                         </Button>
                         <Button x:Name="btnLogOut" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnLogOut_MouseEnter" MouseLeave="btnLogOut_MouseLeave" Click="btnLogOut_Clicked">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource logout}" IconWidth="16" Text="Logout" VerticalAlignment="Center">
+                            <ctls:MenuItem x:Name="LogOutMenuItem" GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource logout}" IconWidth="16" Text="Logout" VerticalAlignment="Center">
                                 <ctls:MenuItem.ImageSource>
                                     <BitmapImage UriSource=""/>
                                 </ctls:MenuItem.ImageSource>
