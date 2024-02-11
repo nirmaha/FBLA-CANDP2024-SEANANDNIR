@@ -290,6 +290,8 @@
     <Analyzer Include="packages\AWSSDK.SecurityToken.3.7.100.14\analyzers\dotnet\cs\AWSSDK.SecurityToken.CodeAnalysis.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\delete.png" />
+    <Resource Include="Resources\edit.png" />
     <Resource Include="Resources\defaultProfile.png" />
     <Resource Include="Resources\icon.png" />
     <Resource Include="icon.ico" />

@@ -24,5 +24,20 @@ namespace EduPartners.MVVM.View.Pages
         {
             InitializeComponent();
         }
+
+        private void btnEdit_MouseEnter(object sender, MouseEventArgs e)
+        {
+            //miEdit.IndicatorBrush = Brushes.White;
+        }
+
+        private void btnEdit_MouseLeave(object sender, MouseEventArgs e)
+        {
+            //miEdit.IndicatorBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#3772FF"));
+        }
+
+        private void btnEdit_Clicked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
