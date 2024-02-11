@@ -125,7 +125,7 @@
     </UserControl.Resources>
 
     <Grid>
-        <RadioButton Style="{StaticResource MenuButtonStyle}" GroupName="{Binding GroupName, ElementName=this}"/>
+        <RadioButton x:Name="InternalMenu" Style="{StaticResource MenuButtonStyle}" GroupName="{Binding GroupName, ElementName=this}"/>
     </Grid>
 
 </UserControl>

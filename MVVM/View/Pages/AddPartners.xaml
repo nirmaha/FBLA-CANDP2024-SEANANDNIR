@@ -9,7 +9,14 @@
       Title="AddPartners">
     
     <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
-        <TextBlock Text="Add Partners" FontSize="30" Foreground="{DynamicResource PrimaryTextColor}" FontWeight="Bold"
-                VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <!-- <TextBlock Text="Add Partners" FontSize="30" Foreground="{DynamicResource PrimaryTextColor}" FontWeight="Bold"
+                VerticalAlignment="Center" HorizontalAlignment="Center"/> -->
+        <Viewbox >
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <DockPanel Width="800" Height="450">
+                    
+                </DockPanel>
+            </ScrollViewer>
+        </Viewbox>
     </Border>
 </Page>

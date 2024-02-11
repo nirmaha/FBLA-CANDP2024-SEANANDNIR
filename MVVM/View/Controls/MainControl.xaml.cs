@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-
+using System.Windows.Media;
 
 namespace EduPartners.MVVM.View.Controls
 {
@@ -17,7 +17,16 @@ namespace EduPartners.MVVM.View.Controls
         public MainControl()
         {
             InitializeComponent();
+            this.Loaded += MainControl_Loaded;
         }
+
+        private void MainControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            DashboardMenuItem.InternalMenu.IsChecked = true;
+            btnDashboard.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+        }
+
+
         private void BG_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Tg_Btn.IsChecked = false;
@@ -197,9 +206,15 @@ namespace EduPartners.MVVM.View.Controls
 
         private void btnLogOut_Clicked(object sender, RoutedEventArgs e)
         {
-            App.Current.Properties["User"] = "";
-            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow.SetUserControl("HomePage");
+            MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure you want to log out?", "Log Out", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                App.Current.Properties["User"] = "";
+                MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+                mainWindow.SetUserControl("HomePage");
+            }
+            DashboardMenuItem.InternalMenu.IsChecked = true;
+            btnDashboard.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
 
         private void Top_DoubleClicked(object sender, MouseButtonEventArgs e)
