@@ -40,7 +40,7 @@ namespace EduPartners.MVVM.View.Pages
                 Description = tbDescription.Text,
                 ResourcesAvailable = tbResources.Text,
                 Industry = cbType.Text,
-                StartDate = Convert.ToDateTime(dpStartDate.Text),
+                StartDate = dpStartDate.DisplayDate.Date,
                 RepresentativeName = tbRepresentativeName.Text,
                 RepresentativeEmail = tbRepresentativeEmail.Text,
                 RepresentativePhoneNumber = tbRepresentativePhoneNumber.Text,
