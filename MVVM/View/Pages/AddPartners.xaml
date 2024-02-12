@@ -7,16 +7,38 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddPartners">
-    
+
     <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
-        <!-- <TextBlock Text="Add Partners" FontSize="30" Foreground="{DynamicResource PrimaryTextColor}" FontWeight="Bold"
-                VerticalAlignment="Center" HorizontalAlignment="Center"/> -->
         <Viewbox >
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <DockPanel Width="800" Height="450">
-                    
-                </DockPanel>
-            </ScrollViewer>
+            <DockPanel Width="800" Height="450">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical" DockPanel.Dock="Top" HorizontalAlignment="Left">
+                        <Label Content="Name" FontSize="23" Foreground="White" Margin="40,0,0,0" />
+                        <TextBox x:Name="tbName" FontSize="23" Width="350" Height="30" Background="#C0C0C0" Margin="45,0,0,0" />
+                        <Label Content="Description" FontSize="23" Foreground="White" Margin="40,0,0,0" />
+                        <TextBox x:Name="tbDescription" FontSize="23" Width="350" MinHeight="30" Margin="45,0,0,0" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" Background="#C0C0C0" />
+                        <Label Content="Resources Available From Partner" FontSize="23" Foreground="White" Margin="40,0,0,0" />
+                        <TextBox x:Name="tbResources" FontSize="23" Width="350" Height="30" Background="#C0C0C0" Margin="45,0,0,0" />
+                        <Label Content="Type of Organization" FontSize="25" Foreground="White" Margin="40,0,0,0" />
+                        <ComboBox x:Name="cbType" FontSize="23" Width="350" Height="30" Margin="45,0,0,0" Background="#C0C0C0" />
+                        <Label Content="Date that partnership began" FontSize="25" Foreground="White" Margin="40,0,0,0" />
+                        <DatePicker x:Name="dpStartDate" FontSize="23" Width="350" Height="40" Background="#C0C0C0" Margin="45,0,0,0" />
+                        <Label Content="Name of Representitve" FontSize="25" Foreground="White" Margin="40,0,0,0" />
+                        <TextBox x:Name="tbRepresentativeName" FontSize="23" Width="350" Height="30" Background="#C0C0C0" Margin="45,0,0,0" />
+                        <Label Content="Email of Representitve" FontSize="25" Foreground="White"  Margin="40,0,0,0" />
+                        <TextBox x:Name="tbRepresentativeEmail" FontSize="23" Width="350" Height="30" Background="#C0C0C0" Margin="45,0,0,0" />
+                        <Label Content="Phone # of Representitve" FontSize="25" Foreground="White" Margin="40,0,0,0" />
+                        <TextBox x:Name="tbRepresentativePhoneNumber" FontSize="23" Width="350" Height="30" Background="#C0C0C0" Margin="45,0,0,0" />
+                        <Label Content="Website" FontSize="25" Foreground="White" Margin="40,0,0,0" />
+                        <TextBox x:Name="tbWebsite" FontSize="23" Width="350" Height="30" Background="#C0C0C0" Margin="45,0,0,0" />
+                        <Label Content="Business Address" FontSize="25" Foreground="White" Margin="40,0,0,0" />
+                        <TextBox x:Name="tbAddress" FontSize="23" Width="350" Height="30" Background="#C0C0C0" Margin="45,0,0,0" />
+                        <Label Content="Savings Due to Business (Per Year)" FontSize="25" Foreground="White" Margin="40,0,0,0" />
+                        <TextBox x:Name="tbSavings" FontSize="23" Width="350" Height="30" Background="#C0C0C0" Margin="45,0,0,0" />
+                        <Button Content="Add Partner" FontSize="25" Width="160" Height="40" IsDefault="True" Background="Blue" Click="AddPartner_Cliked"  Margin="45,20,0,0" />
+                    </StackPanel>
+                </ScrollViewer>
+            </DockPanel>
         </Viewbox>
     </Border>
 </Page>
