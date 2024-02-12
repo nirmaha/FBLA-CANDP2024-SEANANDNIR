@@ -1,4 +1,7 @@
-﻿using System;
+﻿using EduPartners.Core;
+using EduPartners.MVVM.Model;
+using EduPartners.MVVM.View.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +23,34 @@ namespace EduPartners.MVVM.View.Pages
     /// </summary>
     public partial class AddPartners : Page
     {
+        private Database db;
         public AddPartners()
         {
             InitializeComponent();
+            db = App.Current.Properties["Database"] as Database;
+            cbType.Items.Add("IT");
+            cbType.Items.Add("Architecture");
+        }
+
+        private void AddPartner_Cliked(object sender, RoutedEventArgs e)
+        {
+            Partner partner = new Partner()
+            { 
+                Name = tbName.Text,
+                Description = tbDescription.Text,
+                ResourcesAvailable = tbResources.Text,
+                Industry = cbType.Text,
+                StartDate = Convert.ToDateTime(dpStartDate.Text),
+                RepresentativeName = tbRepresentativeName.Text,
+                RepresentativeEmail = tbRepresentativeEmail.Text,
+                RepresentativePhoneNumber = tbRepresentativePhoneNumber.Text,
+                Website = tbWebsite.Text,
+                Address = tbAddress.Text,
+                Savings = tbSavings.Text,
+            };
+            db.CreatePartner(partner);
+            MainControl mainControl = App.Current.Properties["MainControl"] as MainControl;
+            mainControl.Load_Page("MVVM/View/Pages/ViewPartners.xaml");
         }
     }
 }

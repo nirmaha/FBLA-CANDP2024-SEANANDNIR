@@ -18,6 +18,7 @@ namespace EduPartners.MVVM.View.Controls
         {
             InitializeComponent();
             this.Loaded += MainControl_Loaded;
+            App.Current.Properties["MainControl"] = this;
         }
 
         private void MainControl_Loaded(object sender, RoutedEventArgs e)
@@ -26,6 +27,10 @@ namespace EduPartners.MVVM.View.Controls
             btnDashboard.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
 
+        public void Load_Page(string PageUri)
+        {
+            fContainer.Navigate(new Uri(PageUri, UriKind.RelativeOrAbsolute));
+        }
 
         private void BG_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
