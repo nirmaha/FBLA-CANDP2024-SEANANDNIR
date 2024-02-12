@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using EduPartners.Core;
+using EduPartners.MVVM.Model;
 using EduPartners.MVVM.ViewModel;
 
 namespace EduPartners.MVVM.View.Pages
@@ -24,12 +26,17 @@ namespace EduPartners.MVVM.View.Pages
     public partial class ViewPartners : Page
     {
         private PartnerViewModel viewModel;
+        private Database db; 
 
         public ViewPartners()
         {
             InitializeComponent();
 
+            db = App.Current.Properties["Database"] as Database;
+
             viewModel = new PartnerViewModel();
+
+            PopulateView();
 
             DataContext = viewModel;
         }
@@ -38,6 +45,12 @@ namespace EduPartners.MVVM.View.Pages
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;
+        }
+
+        private async void PopulateView()
+        {
+            List<Partner> parnters = await db.GetPartners();
+            parnters.ForEach(p => viewModel.Items.Add(p));
         }
 
         private void Card_MouseDown(object sender, MouseButtonEventArgs e)
