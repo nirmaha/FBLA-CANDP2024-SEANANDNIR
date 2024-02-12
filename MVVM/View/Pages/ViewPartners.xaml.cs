@@ -55,22 +55,49 @@ namespace EduPartners.MVVM.View.Pages
 
         private void Card_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            foreach (object item in icViewParnter.Items)
-            {
-                FrameworkElement container = icViewParnter.ItemContainerGenerator.ContainerFromItem(item) as FrameworkElement;
-                Grid grid = container.FindName("gMoreInfo") as Grid;
+            // Assuming sender is the Border clicked
+            Border border = (Border)sender;
 
-                if (grid.Visibility == Visibility.Collapsed)
+            // Find the named Grid within the Border
+            Grid gMoreInfo = FindChild<Grid>(border, "gMoreInfo");
+
+            // Now you have access to the gMoreInfo Grid
+            if (gMoreInfo != null)
+            {
+                // Do something with gMoreInfo
+                if (gMoreInfo.Visibility == Visibility.Collapsed)
                 {
-                    grid.Visibility = Visibility.Visible;
+                    gMoreInfo.Visibility = Visibility.Visible;
                 }
-                else 
+                else
                 {
-                    grid.Visibility = Visibility.Collapsed;
+                    gMoreInfo.Visibility = Visibility.Collapsed;
                 }
             }
-            e.Handled = true;
         }
+
+        private T FindChild<T>(DependencyObject parent, string childName) where T : DependencyObject
+        {
+            if (parent == null) return null;
+
+            int childrenCount = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < childrenCount; i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+                if (child is T typedChild && ((FrameworkElement)child).Name == childName)
+                {
+                    return typedChild;
+                }
+                else
+                {
+                    T result = FindChild<T>(child, childName);
+                    if (result != null)
+                        return result;
+                }
+            }
+            return null;
+        }
+
 
         private void Edit_MouseDown(object sender, MouseButtonEventArgs e)
         {

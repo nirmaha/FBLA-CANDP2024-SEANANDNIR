@@ -56,6 +56,11 @@
 
                     <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
                         <ItemsControl x:Name="icViewParnter" ItemsSource="{Binding Items}" Grid.Row="1">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel x:Name="spItemPanel"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Border Grid.Row="1" Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="15" Width="750" Height="auto" VerticalAlignment="Top" Margin="0,15,0,0" MouseDown="Card_MouseDown">
