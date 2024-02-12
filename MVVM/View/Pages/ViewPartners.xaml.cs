@@ -101,7 +101,16 @@ namespace EduPartners.MVVM.View.Pages
 
         private void FilterButton_Clicked(object sender, RoutedEventArgs e)
         {
+            RadioButton button = e.Source as RadioButton;
+            Debug.WriteLine(button.Tag);
 
+            foreach (object stackButton in spFilterButtons.Children)
+            {
+                if (stackButton is RadioButton checkButton && stackButton != button)
+                {
+                    checkButton.IsChecked = false;
+                }
+            }
         }
     }
 }

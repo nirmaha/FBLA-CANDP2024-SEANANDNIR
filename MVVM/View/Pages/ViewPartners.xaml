@@ -25,11 +25,15 @@
                                 <ColumnDefinition Width="220"/>
                             </Grid.ColumnDefinitions>
 
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <Button BorderThickness="0" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45" Click="FilterButton_Clicked"/>
-                                <Button BorderThickness="0" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45"/>
-                                <Button BorderThickness="0" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45"/>
-                                <Button BorderThickness="0" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45"/>
+                            <StackPanel x:Name="spFilterButtons" Orientation="Horizontal" Margin="0,0,0,2" VerticalAlignment="Center">
+                                <RadioButton BorderThickness="0" Tag="AZ" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45" Click="FilterButton_Clicked">
+                                    <Image Source="../../../Resources/azFilter.png" Width="40" Height="40"/>
+                                </RadioButton>
+                                <RadioButton BorderThickness="0" Tag="ZA" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45" Click="FilterButton_Clicked">
+                                    <Image Source="../../../Resources/zaFilter.png" Width="40" Height="40"/>
+                                </RadioButton>
+                                <RadioButton BorderThickness="0" Tag="" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45" Click="FilterButton_Clicked"/>
+                                <RadioButton BorderThickness="0" Tag="" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45" Click="FilterButton_Clicked"/>
                             </StackPanel>
 
                             <Border Grid.Column="1" Background="{StaticResource PrimaryBackgroundColor}" VerticalAlignment="Center" CornerRadius="15" Height="36" Margin="0,0,8,0">
