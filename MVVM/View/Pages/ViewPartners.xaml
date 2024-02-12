@@ -9,6 +9,11 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ViewPartners">
 
+    <Page.Resources>
+        <local:EmailToUriConverter x:Key="EmailToUriConverter" />
+        <local:WebsiteToUriConverter x:Key="WebsiteToUriConverter" />
+    </Page.Resources>
+
     <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}" VerticalAlignment="Center">
         <Viewbox>
             <DockPanel Width="1000" Height="550" Margin="3">
@@ -97,7 +102,7 @@
 
                                             <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Margin="13,0,13,0" Padding="0,0,0,8" Foreground="White" FontSize="13" VerticalAlignment="Center" HorizontalAlignment="Right">
                                                 <Run Text="Since"/>
-                                                <Run Text="{Binding StartDate}"/>
+                                                <Run Text="{Binding StartDate.Date}"/>
                                             </TextBlock>
 
                                             <TextBlock Margin="13,0,13,0" Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding Description}" FontSize="12" Foreground="Gray" TextWrapping="Wrap"/>
@@ -115,7 +120,7 @@
                                                         <Label Content="{Binding RepresentativeName}" Margin="18,0,0,0" Foreground="DarkGray" Width="auto" FontSize="12"/>
                                                         <!-- Or "No Email" -->
                                                         <Label Margin="18,0,0,0"  Width="auto" FontSize="12">
-                                                            <Hyperlink NavigateUri="{Binding RepresentativeEmail, StringFormat=mailto:{0}}" Foreground="DarkGray" RequestNavigate="Hyperlink_RequestNavigate">
+                                                            <Hyperlink Foreground="DarkGray" NavigateUri="{Binding RepresentativeEmail, Converter={StaticResource EmailToUriConverter}}" RequestNavigate="Hyperlink_RequestNavigate">
                                                                 <Run Text="{Binding RepresentativeEmail}"/>
                                                             </Hyperlink>
                                                         </Label>
@@ -137,7 +142,7 @@
 
                                                 <Label Grid.Row="2" Content="Website:" Foreground="White" FontWeight="SemiBold" FontSize="14" Margin="519,65,67,-2"/>
                                                 <Label Grid.Row="2" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="589,0,-22,1" VerticalAlignment="Bottom">
-                                                    <Hyperlink NavigateUri="{Binding Website}" RequestNavigate="Hyperlink_RequestNavigate">
+                                                    <Hyperlink NavigateUri="{Binding Website, Converter={StaticResource WebsiteToUriConverter}}" RequestNavigate="Hyperlink_RequestNavigate">
                                                         <Run Text="{Binding Website}"/>
                                                     </Hyperlink>
                                                 </Label>

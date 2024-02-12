@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,42 @@ namespace EduPartners.MVVM.View.Pages
     /// <summary>
     /// Interaction logic for ViewPartners.xaml
     /// </summary>
+    /// 
+
+    public class EmailToUriConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is string emailAddress)
+            {
+                return new Uri("mailto:" + emailAddress);
+            }
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class WebsiteToUriConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is string websiteAddress)
+            {
+                return new Uri(@"https://www." + websiteAddress);
+            }
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public partial class ViewPartners : Page
     {
         private PartnerViewModel viewModel;
@@ -45,8 +82,8 @@ namespace EduPartners.MVVM.View.Pages
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;
-        }
-
+        } 
+        
         private async void PopulateView()
         {
             List<Partner> parnters = await db.GetPartners();
