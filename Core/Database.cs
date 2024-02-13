@@ -49,6 +49,7 @@ namespace EduPartners.Core
             return MongoDatabase.GetCollection<T>(Collection);
         }
 
+       
         public async Task<List<User>> GetUsers()
         {
             IMongoCollection<User> users = GetDBCollection<User>(UserCollection);

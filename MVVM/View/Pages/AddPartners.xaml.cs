@@ -3,6 +3,7 @@ using EduPartners.MVVM.Model;
 using EduPartners.MVVM.View.Controls;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,7 @@ namespace EduPartners.MVVM.View.Pages
             cbType.Items.Add("Architecture");
         }
 
-        private void AddPartner_Cliked(object sender, RoutedEventArgs e)
+        private async void AddPartner_Cliked(object sender, RoutedEventArgs e)
         {
             Partner partner = new Partner()
             { 
@@ -48,7 +49,16 @@ namespace EduPartners.MVVM.View.Pages
                 Address = tbAddress.Text,
                 Savings = tbSavings.Text,
             };
-            db.CreatePartner(partner);
+            await db.CreatePartner(partner);
+
+
+            List<School> schools = await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString());
+            School school = schools.FirstOrDefault();
+            
+            school.Partners.Value.Add(partner);
+
+            await db.UpdateSchool(school);
+            
             MainControl mainControl = App.Current.Properties["MainControl"] as MainControl;
             mainControl.Load_Page("MVVM/View/Pages/ViewPartners.xaml");
         }

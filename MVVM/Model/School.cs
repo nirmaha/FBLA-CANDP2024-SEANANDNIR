@@ -19,6 +19,7 @@ namespace EduPartners.MVVM.Model
         public string City { get; set; }
         public string State { get; set; }
         public string Zip { get; set; }
-        public Optional<List<Partner>> Partners { get; set; } = new List<Partner>();
+        public Optional<List<Partner>> Partners { get; set; } = new Optional<List<Partner>>();
+       
     }
 }

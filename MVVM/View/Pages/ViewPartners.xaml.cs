@@ -73,22 +73,52 @@ namespace EduPartners.MVVM.View.Pages
 
             viewModel = new PartnerViewModel();
 
+            SyncList();
+
             PopulateView();
 
             DataContext = viewModel;
+        }
+
+        private async void SyncList()
+        {
+            // Retrieve the current school
+            List<School> schools = await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString());
+            School homeSchool = schools.FirstOrDefault();
+
+            // Retrieve all partners from the database
+            List<Partner> allPartners = await db.GetPartners();
+
+            // Clear the existing partners from the Partners collection of the School
+            homeSchool.Partners.Value.Clear();
+
+            // Add partners from the database to the Partners collection of the School
+            foreach (Partner partner in allPartners)
+            {
+                if (homeSchool.Partners.Value.All(p => p.Id != partner.Id))
+                {
+                    homeSchool.Partners.Value.Add(partner);
+                }
+            }
+
+            await db.UpdateSchool(homeSchool);
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;
-        } 
-        
+        }
+
         private async void PopulateView()
         {
-            List<Partner> parnters = await db.GetPartners();
-            parnters.ForEach(p => viewModel.Items.Add(p));
+            List<School> schools = await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString());
+            School homeSchool = schools.FirstOrDefault();
+
+            viewModel.Items.Clear();
+            homeSchool.Partners.Value.ForEach(p => viewModel.Items.Add(p));
         }
+
 
         private void Card_MouseDown(object sender, MouseButtonEventArgs e)
         {

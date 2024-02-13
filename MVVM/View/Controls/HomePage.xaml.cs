@@ -47,8 +47,24 @@ namespace EduPartners.MVVM.View.Controls
             const double animTimeSpan = 20; // Adjust this value as needed
             bool isFadingIn = false;
 
+            panelNum = 0;
+            ibBackground.ImageSource = new BitmapImage(new Uri(images[panelNum], UriKind.RelativeOrAbsolute));
+            lBackgroundText.Content = backgroundTexts[panelNum];
+
+            ibBackground.Opacity = 1; // Adjust the decrement as needed
+            lBackgroundText.Opacity = 1;
+
+            firstPanelCircle.Opacity = 0.7;
+            firstPanelCircle.Background = new SolidColorBrush(Colors.White);
+            secondPanelCircle.Opacity = 0.5;
+            secondPanelCircle.Background = new SolidColorBrush(Colors.Gray);
+            thirdPanelCircle.Opacity = 0.5;
+            thirdPanelCircle.Background = new SolidColorBrush(Colors.Gray);
+
             switchTimer = new System.Timers.Timer();
             animationTimer = new System.Timers.Timer();
+
+           
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
 

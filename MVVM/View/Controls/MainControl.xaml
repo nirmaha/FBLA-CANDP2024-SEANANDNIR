@@ -56,14 +56,14 @@
                             </ctls:MenuItem>
                         </Button>
                         <Button x:Name="btnView" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnView_MouseEnter" MouseLeave="btnView_MouseLeave" Click="btnView_Clicked">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource eye}" IconWidth="16" Text="View Partners" VerticalAlignment="Center">
+                            <ctls:MenuItem x:Name="ViewMenuItem" GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource eye}" IconWidth="16" Text="View Partners" VerticalAlignment="Center">
                                 <ctls:MenuItem.ImageSource>
                                     <BitmapImage UriSource=""/>
                                 </ctls:MenuItem.ImageSource>
                             </ctls:MenuItem>
                         </Button>
                         <Button x:Name="btnAdd" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnAdd_MouseEnter" MouseLeave="btnAdd_MouseLeave" Click="btnAdd_Clicked">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource plus}" IconWidth="16" Text="Add Partner" VerticalAlignment="Center">
+                            <ctls:MenuItem x:Name="AddMenuItem" GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource plus}" IconWidth="16" Text="Add Partner" VerticalAlignment="Center">
                                 <ctls:MenuItem.ImageSource>
                                     <BitmapImage UriSource=""/>
                                 </ctls:MenuItem.ImageSource>
@@ -85,7 +85,7 @@
                         </Button>
 
                         <Button x:Name="btnProfile" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnProfile_MouseEnter" MouseLeave="btnProfile_MouseLeave" Click="btnProfile_Clicked">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource EmptyGeometry}" IconWidth="16" Text="Profile" VerticalAlignment="Center">
+                            <ctls:MenuItem x:Name="ProfileMenuItem" GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource EmptyGeometry}" IconWidth="16" Text="Profile" VerticalAlignment="Center">
                                 <!--<ctls:MenuItem.ImageSource>
                                     <BitmapImage UriSource="/EduPartners;component/Resources/icon.png" />
                                 </ctls:MenuItem.ImageSource>-->

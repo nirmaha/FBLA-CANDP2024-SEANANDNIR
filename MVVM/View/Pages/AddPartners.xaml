@@ -9,11 +9,11 @@
       Title="AddPartners">
 
     <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
-        <Viewbox >
+        <Viewbox>
             <DockPanel Width="800" Height="450">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                     <StackPanel Orientation="Vertical" DockPanel.Dock="Top" HorizontalAlignment="Left">
-                        <Label Content="Name" FontSize="23" Foreground="White" Margin="40,0,0,0" />
+                        <Label Content="Company Name" FontSize="23" Foreground="White" Margin="40,0,0,0" />
                         <TextBox x:Name="tbName" FontSize="23" Width="350" Height="30" Background="#C0C0C0" Margin="45,0,0,0" />
                         <Label Content="Description" FontSize="23" Foreground="White" Margin="40,0,0,0" />
                         <TextBox x:Name="tbDescription" FontSize="23" Width="350" MinHeight="30" Margin="45,0,0,0" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" Background="#C0C0C0" />

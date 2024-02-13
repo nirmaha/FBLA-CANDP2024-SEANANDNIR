@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Amazon.Runtime.Internal.Transform;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
@@ -29,7 +30,29 @@ namespace EduPartners.MVVM.View.Controls
 
         public void Load_Page(string PageUri)
         {
+            Dictionary<string, Button> buttons = new Dictionary<string, Button>()
+            {
+                {"MVVM/View/Pages/ViewPartners.xaml",btnView },
+                {"MVVM/View/Pages/AddPartners.xaml",btnAdd },
+                {"MVVM/View/Pages/Notifications.xaml",btnNotifications },
+                {"MVVM/View/Pages/Dashboard.xaml",btnDashboard },
+                {"MVVM/View/Pages/Profile.xaml",btnProfile },
+
+            };            
+            
+            Dictionary<string, MenuItem> pages = new Dictionary<string, MenuItem>()
+            {
+                {"MVVM/View/Pages/ViewPartners.xaml",ViewMenuItem },
+                {"MVVM/View/Pages/AddPartners.xaml",AddMenuItem },
+                {"MVVM/View/Pages/Notifications.xaml",NotificationsMenuItem },
+                {"MVVM/View/Pages/Dashboard.xaml",DashboardMenuItem },
+                {"MVVM/View/Pages/Profile.xaml",ProfileMenuItem },
+
+            };
+
             fContainer.Navigate(new Uri(PageUri, UriKind.RelativeOrAbsolute));
+            pages[PageUri].InternalMenu.IsChecked = true;
+            buttons[PageUri].RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
 
         private void BG_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

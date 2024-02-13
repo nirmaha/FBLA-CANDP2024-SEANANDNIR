@@ -185,6 +185,8 @@ namespace EduPartners.MVVM.View.Controls
                 iniFile.Save();
             }
 
+            App.Current.Properties["CurrentSchoolId"] = user.HomeSchool.Id;
+
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
             mainWindow.SetUserControl("MainControl");
         }
