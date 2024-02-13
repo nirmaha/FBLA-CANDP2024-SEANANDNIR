@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\CSDSTUDENT12\Source\Repos\nirmaha\FBLA-CANDP2024-SEANANDNIR\obj\Debug\
+D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\
 EduPartners
 none
 false
 DEBUG;TRACE
-C:\Users\CSDSTUDENT12\Source\Repos\nirmaha\FBLA-CANDP2024-SEANANDNIR\App.xaml
+D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\App.xaml
 18609112155
-2-916371386
-26-1773922400
-39-1378932455
+21418462116
+27438956278
+39972357777
 Assets\Icons.xaml;MVVM\View\Controls\CreateSchool.xaml;MVVM\View\Controls\HomePage.xaml;MVVM\View\Controls\LoginControl.xaml;MVVM\View\Controls\MainControl.xaml;MVVM\View\Controls\MenuItem.xaml;MVVM\View\Controls\SchoolSelection.xaml;MVVM\View\Controls\SignUpControl.xaml;MVVM\View\Controls\UserPopup.xaml;MVVM\View\MainWindow.xaml;MVVM\View\Pages\AddPartners.xaml;MVVM\View\Pages\Dashboard.xaml;MVVM\View\Pages\Notifications.xaml;MVVM\View\Pages\Profile.xaml;MVVM\View\Pages\ViewPartners.xaml;Styles\MainStyle.xaml;Themes\DarkTheme.xaml;Styles\FilterButtonTheme.xaml;
 
-False
+True
 
