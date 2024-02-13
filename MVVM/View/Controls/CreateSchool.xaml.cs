@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -189,7 +190,8 @@ namespace EduPartners.MVVM.View.Controls
                 City = tbCity.Text,
                 State = tbState.Text,
                 Zip = tbZip.Text,
-                Code = tbSchoolCode.Text
+                Code = tbSchoolCode.Text,
+                Partners = new List<Partner>()
             };
             db.CreateSchool(school);
 

@@ -77,7 +77,15 @@ namespace EduPartners.MVVM.View.Pages
 
             PopulateView();
 
+            this.Loaded += ViewPartners_Loaded;
+
             DataContext = viewModel;
+        }
+
+        private void ViewPartners_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+
         }
 
         private async void SyncList()
