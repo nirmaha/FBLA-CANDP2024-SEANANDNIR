@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,6 +36,12 @@ namespace EduPartners.MVVM.View.Pages
 
         private async void AddPartner_Cliked(object sender, RoutedEventArgs e)
         {
+            bool emailMatch = Regex.IsMatch(tbRepresentativeEmail.Text, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+            bool phoneNumberMatch = tbRepresentativePhoneNumber.Text.Length == 14;
+            if (!emailMatch && !phoneNumberMatch)
+            {
+                return;
+            }
             Partner partner = new Partner()
             { 
                 Name = tbName.Text,
@@ -67,6 +74,18 @@ namespace EduPartners.MVVM.View.Pages
             
             MainControl mainControl = App.Current.Properties["MainControl"] as MainControl;
             mainControl.Load_Page("MVVM/View/Pages/ViewPartners.xaml");
+        }
+
+        private void PhoneNumber_Changed(object sender, TextChangedEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                // Use a regular expression to format the phone number
+                if (Regex.IsMatch(textBox.Text, @"^\d{10}$"))
+                {
+                    textBox.Text = Regex.Replace(textBox.Text, @"(\d{3})(\d{3})(\d{4})", "($1) $2-$3");
+                }
+            }
         }
     }
 }

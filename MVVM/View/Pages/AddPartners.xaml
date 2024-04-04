@@ -28,7 +28,7 @@
                         <Label Content="Email of Representitve" FontSize="25" Foreground="White"  Margin="40,0,0,0" />
                         <TextBox x:Name="tbRepresentativeEmail" FontSize="23" Width="350" Height="30" Background="#C0C0C0" Margin="45,0,0,0" />
                         <Label Content="Phone # of Representitve" FontSize="25" Foreground="White" Margin="40,0,0,0" />
-                        <TextBox x:Name="tbRepresentativePhoneNumber" FontSize="23" Width="350" Height="30" Background="#C0C0C0" Margin="45,0,0,0" />
+                        <TextBox x:Name="tbRepresentativePhoneNumber" FontSize="23" Width="350" Height="30" Background="#C0C0C0" Margin="45,0,0,0" TextChanged="PhoneNumber_Changed" MaxLength="14" />
                         <Label Content="Website" FontSize="25" Foreground="White" Margin="40,0,0,0" />
                         <TextBox x:Name="tbWebsite" FontSize="23" Width="350" Height="30" Background="#C0C0C0" Margin="45,0,0,0" />
                         <Label Content="Business Address" FontSize="25" Foreground="White" Margin="40,0,0,0" />
