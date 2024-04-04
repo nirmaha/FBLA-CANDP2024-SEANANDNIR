@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using Caliburn.Micro;
 using EduPartners.MVVM.Model;
 
@@ -16,6 +17,18 @@ namespace EduPartners.MVVM.ViewModel
             { 
                 _items = value;
                 OnPropertyChanged(nameof(Items));
+            }
+        }
+
+        public void RemovePartner(Partner partner)
+        {
+            for (int i = 0; i < _items.Count; i++)
+            {
+                if (_items[i].Id == partner.Id)
+                {
+                    _items.RemoveAt(i);
+                    i--;
+                }
             }
         }
 

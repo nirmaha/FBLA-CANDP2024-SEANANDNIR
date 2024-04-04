@@ -186,9 +186,6 @@ namespace EduPartners.MVVM.View.Pages
             Label partnerName = FindChild<Label>(borderParent.Parent, "lPartnerName");
             
             Partner partner = (await db.GetPartnerByName(partnerName.Content.ToString())).FirstOrDefault();
-
-   
-             viewModel.Items.Remove(partner);
            
 
             await db.DeletePartner(partner);
@@ -203,6 +200,8 @@ namespace EduPartners.MVVM.View.Pages
 
             user.HomeSchool = school;
             await db.UpdateUser(user);
+
+            viewModel.RemovePartner(partner);
 
             SyncList();
 
