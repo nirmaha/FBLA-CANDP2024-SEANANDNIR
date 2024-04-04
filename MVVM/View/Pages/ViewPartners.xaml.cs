@@ -183,11 +183,17 @@ namespace EduPartners.MVVM.View.Pages
         {
             StackPanel borderParent = (StackPanel)((Border)((Image)sender).Parent).Parent;
 
+            MessageBoxResult deleteMsgBox = MessageBox.Show("Are you sure you want to delete this parnter?", "Delete Partner", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+
+            if (deleteMsgBox == MessageBoxResult.No)
+            {
+                return;
+            }
+
             Label partnerName = FindChild<Label>(borderParent.Parent, "lPartnerName");
             
             Partner partner = (await db.GetPartnerByName(partnerName.Content.ToString())).FirstOrDefault();
-           
-
+          
             await db.DeletePartner(partner);
 
             School school = (await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString())).FirstOrDefault();

@@ -10,6 +10,7 @@ using BCrypts = BCrypt.Net.BCrypt;
 
 using EduPartners.Core;
 using EduPartners.MVVM.Model;
+using System.Linq;
 
 namespace EduPartners.MVVM.View.Controls
 {
@@ -108,9 +109,9 @@ namespace EduPartners.MVVM.View.Controls
                 return;
             }
 
-            List<School> school = await db.GetSchoolByName(cbSchool.SelectedItem.ToString());
+            School school = (await db.GetSchoolByName(cbSchool.SelectedItem.ToString())).FirstOrDefault();
 
-            if (tbSchoolId.Text != school[0].Code)
+            if (tbSchoolId.Text != school.Code)
             {
                 lErrorMessage.Visibility = Visibility.Visible;
                 lErrorMessage.Content = "Please enter a school code.";
@@ -122,7 +123,7 @@ namespace EduPartners.MVVM.View.Controls
                 Name = App.Current.Properties["FirstName"].ToString() + " " + App.Current.Properties["LastName"].ToString(),
                 Email = App.Current.Properties["Email"].ToString(),
                 Password = BCrypts.HashPassword(App.Current.Properties["Password"].ToString()),
-                HomeSchool = school[0]
+                HomeSchool = school
             };
 
             await db.CreateUser(user);

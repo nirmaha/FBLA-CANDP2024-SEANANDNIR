@@ -27,7 +27,7 @@ namespace EduPartners.MVVM.ViewModel
                 if (_items[i].Id == partner.Id)
                 {
                     _items.RemoveAt(i);
-                    i--;
+                    break;
                 }
             }
         }

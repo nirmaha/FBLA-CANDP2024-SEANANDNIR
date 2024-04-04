@@ -66,16 +66,13 @@ namespace EduPartners.MVVM.View.Pages
             };
             await db.CreatePartner(partner);
 
-
-            List<School> schools = await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString());
-            School school = schools.FirstOrDefault();
+            School school = (await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString())).FirstOrDefault();
             
             school.Partners.Value.Add(partner);
 
             await db.UpdateSchool(school);
 
-            List<User> users = await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString());
-            User user = users.FirstOrDefault();
+            User user = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
 
             user.HomeSchool = school;
             await db.UpdateUser(user);

@@ -153,18 +153,18 @@ namespace EduPartners.MVVM.View.Controls
                 return;
             }
 
-            List<User> users = await db.GetUserByEmail(tbEmail.Text);
-            User user = null;
+            User user = (await db.GetUserByEmail(tbEmail.Text)).FirstOrDefault();
+            User logingInUser = null;
             IniFile iniFile = new IniFile(filePath, localDataPath);
 
 
-            if (tbEmail.Text == users[0].Email && BCrypts.Verify(pbPassword.Password, users[0].Password))
+            if (tbEmail.Text == user.Email && BCrypts.Verify(pbPassword.Password, user.Password))
             {
-                user = users[0];
-                App.Current.Properties["User"] = user.Id;
+                logingInUser = user;
+                App.Current.Properties["User"] = logingInUser.Id;
             }
 
-            if (user == null)
+            if (logingInUser == null)
             {
                 lErrorMessage.Visibility = Visibility.Visible;
                 lErrorMessage.Content = "Username / Password is incorrect.";
@@ -186,13 +186,12 @@ namespace EduPartners.MVVM.View.Controls
                 iniFile.Save();
             }
 
-            App.Current.Properties["CurrentSchoolId"] = user.HomeSchool.Id;
-            App.Current.Properties["CurrentUserId"] = user.Id;
+            App.Current.Properties["CurrentSchoolId"] = logingInUser.HomeSchool.Id;
+            App.Current.Properties["CurrentUserId"] = logingInUser.Id;
 
-            List<School> schools = await db.GetSchoolById(user.HomeSchool.Id);
-            School school = schools.FirstOrDefault();
+            School school = (await db.GetSchoolById(logingInUser.HomeSchool.Id)).FirstOrDefault();
 
-            user.HomeSchool = school;
+            logingInUser.HomeSchool = school;
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
             mainWindow.SetUserControl("MainControl");
