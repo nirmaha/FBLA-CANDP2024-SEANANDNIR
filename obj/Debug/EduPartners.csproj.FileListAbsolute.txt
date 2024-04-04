@@ -93,7 +93,6 @@ C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\System.Security.AccessControl.
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\System.Security.Principal.Windows.xml
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\System.Text.Encoding.CodePages.xml
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\System.Threading.Tasks.Extensions.xml
-C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.csproj.CopyComplete
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\bin\Debug\mongocrypt.dll
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\bin\Debug\AWSSDK.Core.dll
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\bin\Debug\AWSSDK.SecurityToken.dll
@@ -277,3 +276,7 @@ C:\Users\CSDSTUDENT12\Source\Repos\nirmaha\FBLA-CANDP2024-SEANANDNIR\obj\Debug\E
 C:\Users\CSDSTUDENT12\Source\Repos\nirmaha\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.exe
 C:\Users\CSDSTUDENT12\Source\Repos\nirmaha\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.pdb
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartn.9BA38DCF.Up2Date
+C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\Caliburn.Micro.Core.dll
+C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\Caliburn.Micro.Core.pdb
+C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\Caliburn.Micro.Core.xml
+C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartn.9BA38DCF.Up2Date

@@ -38,8 +38,16 @@ namespace EduPartners.MVVM.View.Pages
         {
             bool emailMatch = Regex.IsMatch(tbRepresentativeEmail.Text, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
             bool phoneNumberMatch = tbRepresentativePhoneNumber.Text.Length == 14;
-            if (!emailMatch && !phoneNumberMatch)
+            if (!emailMatch)
             {
+                tbRepresentativeEmail.BorderBrush = Brushes.Red;
+                tbRepresentativeEmail.BorderThickness = new Thickness(2);
+                return;
+            }
+            if (!phoneNumberMatch)
+            {
+                tbRepresentativePhoneNumber.BorderBrush = Brushes.Red;
+                tbRepresentativePhoneNumber.BorderThickness = new Thickness(2);
                 return;
             }
             Partner partner = new Partner()
