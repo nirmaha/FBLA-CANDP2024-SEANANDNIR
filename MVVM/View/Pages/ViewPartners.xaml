@@ -31,10 +31,10 @@
                             </Grid.ColumnDefinitions>
 
                             <StackPanel x:Name="spFilterButtons" Orientation="Horizontal" Margin="0,0,0,2" VerticalAlignment="Center">
-                                <RadioButton BorderThickness="0" Tag="AZ" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45" Click="FilterButton_Clicked">
+                                <RadioButton BorderThickness="0" Tag="AZ" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45" ToolTip="Filter A-Z" Click="FilterButton_Clicked">
                                     <Image Source="../../../Resources/azFilter.png" Width="40" Height="40"/>
                                 </RadioButton>
-                                <RadioButton BorderThickness="0" Tag="ZA" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45" Click="FilterButton_Clicked">
+                                <RadioButton BorderThickness="0" Tag="ZA" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45" ToolTip="Filter Z-A" Click="FilterButton_Clicked">
                                     <Image Source="../../../Resources/zaFilter.png" Width="40" Height="40"/>
                                 </RadioButton>
                                 <RadioButton BorderThickness="0" Tag="" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45" Click="FilterButton_Clicked"/>
@@ -60,7 +60,7 @@
                     </Border>
 
                     <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
-                        <ItemsControl x:Name="icViewParnter" ItemsSource="{Binding Items}" Grid.Row="1">
+                        <ItemsControl x:Name="icViewParnter" ItemsSource="{Binding }" Grid.Row="1">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel x:Name="spItemPanel"/>
@@ -84,7 +84,7 @@
                                             </Grid.ColumnDefinitions>
 
 
-                                            <Label Margin="11,0,0,0" Foreground="White" Content="{Binding Name}" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="23" Height="41"/>
+                                            <Label Name="lPartnerName" Margin="11,0,0,0" Foreground="White" Content="{Binding Name}" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="23" Height="41"/>
                                             <StackPanel VerticalAlignment="Center" Grid.Column="1" Orientation="Horizontal" Panel.ZIndex="2">
                                                 <Border Margin="18,0,0,0" Cursor="Hand" BorderThickness="0" Background="Transparent" MouseDown="Edit_MouseDown">
                                                     <Image Source="../../../Resources/edit.png" Width="30"/>

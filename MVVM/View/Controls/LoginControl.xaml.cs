@@ -11,6 +11,7 @@ using BCrypts = BCrypt.Net.BCrypt;
 
 using EduPartners.Core;
 using EduPartners.MVVM.Model;
+using System.Linq;
 
 
 namespace EduPartners.MVVM.View.Controls
@@ -186,6 +187,12 @@ namespace EduPartners.MVVM.View.Controls
             }
 
             App.Current.Properties["CurrentSchoolId"] = user.HomeSchool.Id;
+            App.Current.Properties["CurrentUserId"] = user.Id;
+
+            List<School> schools = await db.GetSchoolById(user.HomeSchool.Id);
+            School school = schools.FirstOrDefault();
+
+            user.HomeSchool = school;
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
             mainWindow.SetUserControl("MainControl");

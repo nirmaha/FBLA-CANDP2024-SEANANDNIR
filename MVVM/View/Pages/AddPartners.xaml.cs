@@ -58,6 +58,12 @@ namespace EduPartners.MVVM.View.Pages
             school.Partners.Value.Add(partner);
 
             await db.UpdateSchool(school);
+
+            List<User> users = await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString());
+            User user = users.FirstOrDefault();
+
+            user.HomeSchool = school;
+            await db.UpdateUser(user);
             
             MainControl mainControl = App.Current.Properties["MainControl"] as MainControl;
             mainControl.Load_Page("MVVM/View/Pages/ViewPartners.xaml");

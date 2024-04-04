@@ -79,6 +79,7 @@ namespace EduPartners.MVVM.View.Pages
 
             this.Loaded += ViewPartners_Loaded;
 
+            icViewParnter.ItemsSource = viewModel.Items;
             DataContext = viewModel;
         }
 
@@ -91,25 +92,24 @@ namespace EduPartners.MVVM.View.Pages
         private async void SyncList()
         {
             // Retrieve the current school
-            List<School> schools = await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString());
-            School homeSchool = schools.FirstOrDefault();
+            School school = (await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString())).FirstOrDefault();
 
             // Retrieve all partners from the database
             List<Partner> allPartners = await db.GetPartners();
 
             // Clear the existing partners from the Partners collection of the School
-            homeSchool.Partners.Value.Clear();
+            school.Partners.Value.Clear();
 
             // Add partners from the database to the Partners collection of the School
             foreach (Partner partner in allPartners)
             {
-                if (homeSchool.Partners.Value.All(p => p.Id != partner.Id))
+                if (school.Partners.Value.All(p => p.Id != partner.Id))
                 {
-                    homeSchool.Partners.Value.Add(partner);
+                    school.Partners.Value.Add(partner);
                 }
             }
 
-            await db.UpdateSchool(homeSchool);
+            await db.UpdateSchool(school);
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -179,8 +179,33 @@ namespace EduPartners.MVVM.View.Pages
             e.Handled = true;
         }
 
-        private void Delete_MouseDown(object sender, MouseButtonEventArgs e)
+        private async void Delete_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            StackPanel borderParent = (StackPanel)((Border)((Image)sender).Parent).Parent;
+
+            Label partnerName = FindChild<Label>(borderParent.Parent, "lPartnerName");
+            
+            Partner partner = (await db.GetPartnerByName(partnerName.Content.ToString())).FirstOrDefault();
+
+   
+             viewModel.Items.Remove(partner);
+           
+
+            await db.DeletePartner(partner);
+
+            School school = (await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString())).FirstOrDefault();
+
+            school.Partners.Value.Remove(partner);
+
+            await db.UpdateSchool(school);
+
+            User user = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
+
+            user.HomeSchool = school;
+            await db.UpdateUser(user);
+
+            SyncList();
+
             e.Handled = true;
         }
 

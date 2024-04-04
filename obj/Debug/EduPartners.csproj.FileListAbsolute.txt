@@ -137,7 +137,6 @@ D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\bin\Debug\System.Security.Principal.Windows.
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\bin\Debug\System.Text.Encoding.CodePages.xml
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\bin\Debug\System.Threading.Tasks.Extensions.xml
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners_Content.g.cs
-D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.csproj.CopyComplete
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\bin\Debug\BCrypt.Net-Next.dll
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\bin\Debug\BCrypt.Net-Next.xml
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Controls\CreateSchool.g.cs
@@ -277,3 +276,4 @@ C:\Users\CSDSTUDENT12\Source\Repos\nirmaha\FBLA-CANDP2024-SEANANDNIR\obj\Debug\E
 C:\Users\CSDSTUDENT12\Source\Repos\nirmaha\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.csproj.CopyComplete
 C:\Users\CSDSTUDENT12\Source\Repos\nirmaha\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.exe
 C:\Users\CSDSTUDENT12\Source\Repos\nirmaha\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.pdb
+D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartn.9BA38DCF.Up2Date
