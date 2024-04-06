@@ -4,7 +4,35 @@
         <name>Snappier</name>
     </assembly>
     <members>
-        <member name="F:Snappier.Internal.Constants.CharTable">
+        <member name="T:Snappier.Internal.ByteArrayPoolMemoryOwner">
+            <summary>
+            Wraps an inner byte array from <see cref="P:System.Buffers.ArrayPool`1.Shared"/>"/> with a limited length.
+            </summary>
+            <remarks>
+            We use this instead of the built-in <see cref="T:System.Buffers.MemoryPool`1"/> because we want to slice the array without
+            allocating another wrapping class on the heap.
+            </remarks>
+        </member>
+        <member name="P:Snappier.Internal.ByteArrayPoolMemoryOwner.Memory">
+            <inheritdoc />
+        </member>
+        <member name="M:Snappier.Internal.ByteArrayPoolMemoryOwner.#ctor">
+            <summary>
+            Create an empty ByteArrayPoolMemoryOwner.
+            </summary>
+        </member>
+        <member name="M:Snappier.Internal.ByteArrayPoolMemoryOwner.#ctor(System.Byte[],System.Int32)">
+            <summary>
+            Given a byte array from <see cref="P:System.Buffers.ArrayPool`1.Shared"/>, create a ByteArrayPoolMemoryOwner
+            which wraps it until disposed and slices it to <paramref name="length"/>.
+            </summary>
+            <param name="innerArray">An array from the <see cref="P:System.Buffers.ArrayPool`1.Shared"/>.</param>
+            <param name="length">The length of the array to return from <see cref="P:Snappier.Internal.ByteArrayPoolMemoryOwner.Memory"/>.</param>
+        </member>
+        <member name="M:Snappier.Internal.ByteArrayPoolMemoryOwner.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="P:Snappier.Internal.Constants.CharTable">
              <summary>
              Data stored per entry in lookup table:
                   Range   Bits-used       Description
@@ -19,19 +47,7 @@
                   (2) It properly aligns copy offset so we do not need a &lt;&lt;8
              </summary>
         </member>
-        <member name="F:Snappier.Internal.CopyHelpers.PshufbFillPatterns">
-            <summary>
-            This is a table of shuffle control masks that can be used as the source
-            operand for PSHUFB to permute the contents of the destination XMM register
-            into a repeating byte pattern.
-            </summary>
-        </member>
-        <member name="F:Snappier.Internal.CopyHelpers.PatternSizeTable">
-            <summary>
-            j * (16 / j) for all j from 0 to 7. 0 is not actually used.
-            </summary>
-        </member>
-        <member name="M:Snappier.Internal.CopyHelpers.IncrementalCopy(System.Byte*,System.Byte*,System.Byte*,System.Byte*,System.SByte*)">
+        <member name="M:Snappier.Internal.CopyHelpers.IncrementalCopy(System.Byte@,System.Byte@,System.Byte@,System.Byte@)">
             <summary>
             Copy [src, src+(opEnd-op)) to [op, (opEnd-op)) but faster than
             IncrementalCopySlow. buf_limit is the address past the end of the writable
@@ -41,27 +57,28 @@
             <param name="op">Pointer to the destination point in the buffer.</param>
             <param name="opEnd">Pointer to the end of the area to write in the buffer.</param>
             <param name="bufferEnd">Pointer past the end of the buffer.</param>
-            <param name="pshufbFillPatterns">Fixed pointer to <see cref="F:Snappier.Internal.CopyHelpers.PshufbFillPatterns"/>.</param>
-            <remarks>
-            Fixing the PshufbFillPatterns array for use in the SSSE3 optimized route is expensive, so we
-            do that in the outer loop in <see cref="M:Snappier.Internal.SnappyDecompressor.DecompressAllTags(System.ReadOnlySpan{System.Byte})"/> and pass the pointer
-            to this method. This makes the logic a bit more confusing, but is a significant performance boost.
-            </remarks>
         </member>
-        <member name="T:Snappier.Internal.EmptyMemoryOwner">
+        <member name="M:Snappier.Internal.HashTable.TableEntry(System.UInt16@,System.UInt32,System.UInt32)">
+             <summary>
+             Given a table of uint16_t whose size is mask / 2 + 1, return a pointer to the
+             relevant entry, if any, for the given bytes.  Any hash function will do,
+             but a good hash function reduces the number of collisions and thus yields
+             better compression for compressible input.
+            
+             REQUIRES: mask is 2 * (table_size - 1), and table_size is a power of two.
+             </summary>
+        </member>
+        <member name="M:Snappier.Internal.Helpers.Log2SoftwareFallback(System.UInt32)">
             <summary>
-            A fake owner wrapping an empty <see cref="T:System.Memory`1"/>.
+            Returns the integer (floor) log of the specified value, base 2.
+            Note that by convention, input value 0 returns 0 since Log(0) is undefined.
+            Does not directly use any hardware intrinsics, nor does it incur branching.
             </summary>
-        </member>
-        <member name="M:Snappier.Internal.EmptyMemoryOwner.Dispose">
-            <inheritdoc />
-        </member>
-        <member name="P:Snappier.Internal.EmptyMemoryOwner.Memory">
-            <inheritdoc />
+            <param name="value">The value.</param>
         </member>
         <member name="M:Snappier.Internal.Helpers.Log2Floor(System.UInt32)">
             <summary>
-            Return floor(log2(n)) for positive integer n.  Returns -1 iff n == 0.
+            Return floor(log2(n)) for positive integer n.  Returns -1 if n == 0.
             </summary>
         </member>
         <member name="M:Snappier.Internal.Helpers.Log2FloorNonZero(System.UInt32)">
@@ -74,18 +91,12 @@
             Finds the index of the least significant non-zero bit.
             </summary>
         </member>
-        <member name="T:Snappier.Internal.SlicedMemoryOwner">
+        <member name="M:Snappier.Internal.Helpers.FindLsbSetNonZero(System.UInt64)">
             <summary>
-            Wraps an inner <see cref="T:System.Buffers.IMemoryOwner`1"/> to have a shorter length.
+            Finds the index of the least significant non-zero bit.
             </summary>
         </member>
-        <member name="P:Snappier.Internal.SlicedMemoryOwner.Memory">
-            <inheritdoc />
-        </member>
-        <member name="M:Snappier.Internal.SlicedMemoryOwner.Dispose">
-            <inheritdoc />
-        </member>
-        <member name="M:Snappier.Internal.SnappyCompressor.FindMatchLength(System.Byte*,System.Byte*,System.Byte*,System.UInt64@)">
+        <member name="M:Snappier.Internal.SnappyCompressor.FindMatchLength(System.Byte@,System.Byte@,System.Byte@,System.UInt64@)">
              <summary>
              Find the largest n such that
             
@@ -93,7 +104,7 @@
                and n &lt;= (s2_limit - s2).
             
              Return (n, n &lt; 8).
-             Does not read *s2_limit or beyond.
+             Reads up to and including *s2_limit but not beyond.
              Does not read *(s1 + (s2_limit - s2)) or beyond.
              Requires that s2_limit &gt;= s2.
             
@@ -134,13 +145,6 @@
             <param name="input">Input data, which should begin with the varint encoded uncompressed length.</param>
             <returns>The length of the uncompressed data.</returns>
             <exception cref="T:System.IO.InvalidDataException">Invalid stream length</exception>
-        </member>
-        <member name="M:Snappier.Internal.SnappyDecompressor.ThrowInvalidDataException(System.String)">
-            <summary>
-            Throws an <see cref="M:Snappier.Internal.SnappyDecompressor.ThrowInvalidDataException(System.String)"/>. This is in a separate subroutine to allow the
-            calling subroutine to be inlined.
-            </summary>
-            <param name="message">Exception message.</param>
         </member>
         <member name="M:Snappier.Internal.SnappyDecompressor.ExtractData">
             <summary>
@@ -207,10 +211,10 @@
             Parses the stream format used for Snappy streams.
             </summary>
         </member>
-        <member name="M:Snappier.Internal.SnappyStreamDecompressor.ReadChunkCrc(System.Byte*@,System.Byte*,System.Int32@)">
+        <member name="M:Snappier.Internal.SnappyStreamDecompressor.ReadChunkCrc(System.ReadOnlySpan{System.Byte}@)">
             <summary>
             Assuming that we're at the beginning of a chunk, reads the CRC. If partially read, stores the value in
-            _scratch for subsequent reads. Should not be called if chunkByteProcessed >= 4.
+            Scratch for subsequent reads. Should not be called if chunkByteProcessed >= 4.
             </summary>
         </member>
         <member name="T:Snappier.Snappy">
@@ -329,7 +333,7 @@
             </summary>
             <param name="stream">Source or destination stream.</param>
             <param name="mode">Compression or decompression mode.</param>
-            <param name="leaveOpen">If true, close the stream when the SnappyStream is closed.</param>
+            <param name="leaveOpen">If true, leave the inner stream open when the SnappyStream is closed.</param>
             <exception cref="T:System.ArgumentNullException"><paramref name="stream"/> is null.</exception>
             <exception cref="T:System.ArgumentException">Stream read/write capability doesn't match with <paramref name="mode"/>.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid <paramref name="mode"/>.</exception>
@@ -380,6 +384,115 @@
         </member>
         <member name="M:Snappier.SnappyStream.Dispose(System.Boolean)">
             <inheritdoc />
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.AllowNullAttribute">
+            <summary>Specifies that null is allowed as an input even if the corresponding type disallows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute">
+            <summary>Specifies that null is disallowed as an input even if the corresponding type allows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute">
+            <summary>Specifies that an output may be null even if the corresponding type disallows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullAttribute">
+            <summary>Specifies that an output will not be null even if the corresponding type allows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute">
+            <summary>Specifies that when a method returns <see cref="P:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.ReturnValue"/>, the parameter may be null even if the corresponding type disallows it.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.#ctor(System.Boolean)">
+            <summary>Initializes the attribute with the specified return value condition.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated parameter may be null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.ReturnValue">
+            <summary>Gets the return value condition.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute">
+            <summary>Specifies that when a method returns <see cref="P:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue"/>, the parameter will not be null even if the corresponding type allows it.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.#ctor(System.Boolean)">
+            <summary>Initializes the attribute with the specified return value condition.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated parameter will not be null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue">
+            <summary>Gets the return value condition.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute">
+            <summary>Specifies that the output will be non-null if the named parameter is non-null.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.#ctor(System.String)">
+            <summary>Initializes the attribute with the associated parameter name.</summary>
+            <param name="parameterName">
+            The associated parameter name.  The output will be non-null if the argument to the parameter specified is non-null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.ParameterName">
+            <summary>Gets the associated parameter name.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute">
+            <summary>Applied to a method that will never return under any circumstance.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute">
+            <summary>Specifies that the method will not return if the associated Boolean parameter is passed the specified value.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.#ctor(System.Boolean)">
+            <summary>Initializes the attribute with the specified parameter value.</summary>
+            <param name="parameterValue">
+            The condition parameter value. Code after the method will be considered unreachable by diagnostics if the argument to
+            the associated parameter matches this value.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.ParameterValue">
+            <summary>Gets the condition parameter value.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute">
+            <summary>Specifies that the method or property will ensure that the listed field and property members have not-null values.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.#ctor(System.String)">
+            <summary>Initializes the attribute with a field or property member.</summary>
+            <param name="member">
+            The field or property member that is promised to be not-null.
+            </param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.#ctor(System.String[])">
+            <summary>Initializes the attribute with the list of field and property members.</summary>
+            <param name="members">
+            The list of field and property members that are promised to be not-null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.Members">
+            <summary>Gets field or property member names.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute">
+            <summary>Specifies that the method or property will ensure that the listed field and property members have not-null values when returning with the specified return value condition.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.#ctor(System.Boolean,System.String)">
+            <summary>Initializes the attribute with the specified return value condition and a field or property member.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated parameter will not be null.
+            </param>
+            <param name="member">
+            The field or property member that is promised to be not-null.
+            </param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.#ctor(System.Boolean,System.String[])">
+            <summary>Initializes the attribute with the specified return value condition and list of field and property members.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated parameter will not be null.
+            </param>
+            <param name="members">
+            The list of field and property members that are promised to be not-null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.ReturnValue">
+            <summary>Gets the return value condition.</summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.Members">
+            <summary>Gets field or property member names.</summary>
         </member>
     </members>
 </doc>

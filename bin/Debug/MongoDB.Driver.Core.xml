@@ -4535,6 +4535,15 @@
             <param name="serverApi">The server API.</param>
             <returns>A reconfigured cluster builder.</returns>
         </member>
+        <member name="M:MongoDB.Driver.Core.Configuration.ClusterBuilderExtensions.UsePerformanceCounters(MongoDB.Driver.Core.Configuration.ClusterBuilder,System.String,System.Boolean)">
+            <summary>
+            Configures the cluster to write performance counters.
+            </summary>
+            <param name="builder">The cluster builder.</param>
+            <param name="applicationName">The name of the application.</param>
+            <param name="install">if set to <c>true</c> install the performance counters first.</param>
+            <returns>A reconfigured cluster builder.</returns>
+        </member>
         <member name="M:MongoDB.Driver.Core.Configuration.ClusterBuilderExtensions.TraceWith(MongoDB.Driver.Core.Configuration.ClusterBuilder,System.Diagnostics.TraceSource)">
             <summary>
             Configures the cluster to trace events to the specified <paramref name="traceSource"/>.
@@ -4813,12 +4822,13 @@
             Represents settings for a connection.
             </summary>
         </member>
-        <member name="M:MongoDB.Driver.Core.Configuration.ConnectionSettings.#ctor(MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{MongoDB.Driver.Core.Authentication.IAuthenticatorFactory}},MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{MongoDB.Driver.Core.Configuration.CompressorConfiguration}},MongoDB.Driver.Optional{System.Boolean},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.String})">
+        <member name="M:MongoDB.Driver.Core.Configuration.ConnectionSettings.#ctor(MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{MongoDB.Driver.Core.Authentication.IAuthenticatorFactory}},MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{MongoDB.Driver.Core.Configuration.CompressorConfiguration}},MongoDB.Driver.Optional{MongoDB.Driver.Core.Configuration.LibraryInfo},MongoDB.Driver.Optional{System.Boolean},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.String})">
             <summary>
             Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Configuration.ConnectionSettings" /> class.
             </summary>
             <param name="authenticatorFactories">The authenticator factories.</param>
             <param name="compressors">The compressors.</param>
+            <param name="libraryInfo">The library information.</param>
             <param name="loadBalanced">Whether the load balanced mode is enabled.</param>
             <param name="maxIdleTime">The maximum idle time.</param>
             <param name="maxLifeTime">The maximum life time.</param>
@@ -4848,6 +4858,11 @@
             The compressors.
             </value>
         </member>
+        <member name="P:MongoDB.Driver.Core.Configuration.ConnectionSettings.LibraryInfo">
+            <summary>
+            Information about a library using the .NET driver.
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.Core.Configuration.ConnectionSettings.LoadBalanced">
             <summary>
             Whether the load balanced mode is enabled.
@@ -4869,12 +4884,13 @@
             The maximum life time.
             </value>
         </member>
-        <member name="M:MongoDB.Driver.Core.Configuration.ConnectionSettings.With(MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{MongoDB.Driver.Core.Authentication.IAuthenticatorFactory}},MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{MongoDB.Driver.Core.Configuration.CompressorConfiguration}},MongoDB.Driver.Optional{System.Boolean},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.String})">
+        <member name="M:MongoDB.Driver.Core.Configuration.ConnectionSettings.With(MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{MongoDB.Driver.Core.Authentication.IAuthenticatorFactory}},MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{MongoDB.Driver.Core.Configuration.CompressorConfiguration}},MongoDB.Driver.Optional{MongoDB.Driver.Core.Configuration.LibraryInfo},MongoDB.Driver.Optional{System.Boolean},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.String})">
             <summary>
             Returns a new ConnectionSettings instance with some settings changed.
             </summary>
             <param name="authenticatorFactories">The authenticator factories.</param>
             <param name="compressors">The compressors.</param>
+            <param name="libraryInfo">The library information.</param>
             <param name="loadBalanced">Whether the load balanced mode is enabled.</param>
             <param name="maxIdleTime">The maximum idle time.</param>
             <param name="maxLifeTime">The maximum life time.</param>
@@ -5092,6 +5108,11 @@
             Gets the connection string scheme.
             </summary>
         </member>
+        <member name="P:MongoDB.Driver.Core.Configuration.ConnectionString.ServerMonitoringMode">
+            <summary>
+            Gets the server monitoring mode.
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.Core.Configuration.ConnectionString.ServerSelectionTimeout">
             <summary>
             Gets the server selection timeout.
@@ -5271,6 +5292,66 @@
         <member name="M:MongoDB.Driver.Core.Configuration.CryptClientSettings.Equals(System.Object)">
             <inheritdoc/>
         </member>
+        <member name="T:MongoDB.Driver.Core.Configuration.LibraryInfo">
+            <summary>
+            Represents information about a library using the .NET driver.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Configuration.LibraryInfo.Name">
+            <summary>
+            Gets the library name.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Configuration.LibraryInfo.Version">
+            <summary>
+            Gets the library version.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Configuration.LibraryInfo.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Configuration.LibraryInfo"/> class.
+            </summary>
+            <param name="name">The library name.</param>
+            <param name="version">The library version.</param>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Configuration.LibraryInfo.op_Equality(MongoDB.Driver.Core.Configuration.LibraryInfo,MongoDB.Driver.Core.Configuration.LibraryInfo)">
+            <summary>
+            Determines whether two <see cref="T:MongoDB.Driver.Core.Configuration.LibraryInfo"/> instances are equal.
+            </summary>
+            <param name="lhs">The LHS.</param>
+            <param name="rhs">The RHS.</param>
+            <returns>
+              <c>true</c> if the left hand side is equal to the right hand side; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Configuration.LibraryInfo.op_Inequality(MongoDB.Driver.Core.Configuration.LibraryInfo,MongoDB.Driver.Core.Configuration.LibraryInfo)">
+            <summary>
+            Determines whether two <see cref="T:MongoDB.Driver.Core.Configuration.LibraryInfo"/> instances are not equal.
+            </summary>
+            <param name="lhs">The LHS.</param>
+            <param name="rhs">The RHS.</param>
+            <returns>
+              <c>true</c> if the left hand side is not equal to the right hand side; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Configuration.LibraryInfo.Equals(MongoDB.Driver.Core.Configuration.LibraryInfo)">
+            <summary>
+            Determines whether the specified <see cref="T:MongoDB.Driver.Core.Configuration.LibraryInfo" /> is equal to this instance.
+            </summary>
+            <param name="rhs">The <see cref="T:MongoDB.Driver.Core.Configuration.LibraryInfo" /> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:MongoDB.Driver.Core.Configuration.LibraryInfo" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Configuration.LibraryInfo.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Configuration.LibraryInfo.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Configuration.LibraryInfo.ToString">
+            <inheritdoc/>
+        </member>
         <member name="T:MongoDB.Driver.Core.Configuration.LoggingSettings">
             <summary>
             Represents the settings for logging.
@@ -5283,7 +5364,7 @@
         </member>
         <member name="P:MongoDB.Driver.Core.Configuration.LoggingSettings.MaxDocumentSize">
             <summary>
-            Gets the maximum document size in chars
+            Gets the maximum document size in chars.
             </summary>
         </member>
         <member name="M:MongoDB.Driver.Core.Configuration.LoggingSettings.#ctor(Microsoft.Extensions.Logging.ILoggerFactory,MongoDB.Driver.Optional{System.Int32})">
@@ -5377,12 +5458,18 @@
             Gets the default heartbeat timeout.
             </summary>
         </member>
-        <member name="M:MongoDB.Driver.Core.Configuration.ServerSettings.#ctor(MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.TimeSpan})">
+        <member name="P:MongoDB.Driver.Core.Configuration.ServerSettings.DefaultServerMonitoringMode">
+            <summary>
+            Gets the default server monitoring mode.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Configuration.ServerSettings.#ctor(MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{MongoDB.Driver.Core.Servers.ServerMonitoringMode})">
             <summary>
             Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Configuration.ServerSettings"/> class.
             </summary>
             <param name="heartbeatInterval">The heartbeat interval.</param>
             <param name="heartbeatTimeout">The heartbeat timeout.</param>
+            <param name="serverMonitoringMode">The server monitoring mode.</param>
         </member>
         <member name="P:MongoDB.Driver.Core.Configuration.ServerSettings.HeartbeatInterval">
             <summary>
@@ -5400,12 +5487,21 @@
             The heartbeat timeout.
             </value>
         </member>
-        <member name="M:MongoDB.Driver.Core.Configuration.ServerSettings.With(MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.TimeSpan})">
+        <member name="P:MongoDB.Driver.Core.Configuration.ServerSettings.ServerMonitoringMode">
+            <summary>
+            Gets the server monitoring mode.
+            </summary>
+            <value>
+            The server monitoring mode.
+            </value>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Configuration.ServerSettings.With(MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{MongoDB.Driver.Core.Servers.ServerMonitoringMode})">
             <summary>
             Returns a new ServerSettings instance with some settings changed.
             </summary>
             <param name="heartbeatInterval">The heartbeat interval.</param>
             <param name="heartbeatTimeout">The heartbeat timeout.</param>
+            <param name="serverMonitoringMode">The server monitoring mode.</param>
             <returns>A new ServerSettings instance.</returns>
         </member>
         <member name="T:MongoDB.Driver.Core.Configuration.SslStreamSettings">
@@ -8201,6 +8297,25 @@
             Gets the timestamp.
             </summary>
         </member>
+        <member name="T:MongoDB.Driver.Core.Events.Diagnostics.PerformanceCounterEventSubscriber">
+            <summary>
+            Represents an event subscriber that records certain events to Windows performance counters.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Events.Diagnostics.PerformanceCounterEventSubscriber.InstallPerformanceCounters">
+            <summary>
+            Installs the performance counters.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Events.Diagnostics.PerformanceCounterEventSubscriber.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Events.Diagnostics.PerformanceCounterEventSubscriber"/> class.
+            </summary>
+            <param name="applicationName">The name of the application.</param>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Events.Diagnostics.PerformanceCounterEventSubscriber.TryGetEventHandler``1(System.Action{``0}@)">
+            <inheritdoc />
+        </member>
         <member name="T:MongoDB.Driver.Core.Events.Diagnostics.TraceSourceCommandEventSubscriber">
             <summary>
             An event subscriber that writes command events to a trace source.
@@ -9389,6 +9504,11 @@
             Gets the current op command feature.
             </summary>
         </member>
+        <member name="P:MongoDB.Driver.Core.Misc.Feature.DateFromStringFormatArgument">
+            <summary>
+            Gets the $dateFromString format argument feature.
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.Core.Misc.Feature.DateOperatorsNewIn50">
             <summary>
             Gets the date operators added in 5.0 feature.
@@ -10407,6 +10527,16 @@
         <member name="F:MongoDB.Driver.Core.Misc.WireVersion.Server70">
             <summary>
             Wire version 21.
+            </summary>
+        </member>
+        <member name="F:MongoDB.Driver.Core.Misc.WireVersion.Server71">
+            <summary>
+            Wire version 22.
+            </summary>
+        </member>
+        <member name="F:MongoDB.Driver.Core.Misc.WireVersion.Server72">
+            <summary>
+            Wire version 23.
             </summary>
         </member>
         <member name="T:MongoDB.Driver.Core.Operations.AggregateExplainOperation">
@@ -16787,6 +16917,26 @@
         </member>
         <member name="M:MongoDB.Driver.Core.Servers.ServerMonitorFactory.Create(MongoDB.Driver.Core.Servers.ServerId,System.Net.EndPoint)">
             <inheritdoc/>
+        </member>
+        <member name="T:MongoDB.Driver.Core.Servers.ServerMonitoringMode">
+            <summary>
+             Represents the server monitoring mode.
+            </summary>
+        </member>
+        <member name="F:MongoDB.Driver.Core.Servers.ServerMonitoringMode.Auto">
+            <summary>
+            Use polling protocol on FaaS platforms or streaming protocol otherwise. (Default)
+            </summary>
+        </member>
+        <member name="F:MongoDB.Driver.Core.Servers.ServerMonitoringMode.Poll">
+            <summary>
+            Use polling protocol.
+            </summary>
+        </member>
+        <member name="F:MongoDB.Driver.Core.Servers.ServerMonitoringMode.Stream">
+            <summary>
+            Use streaming protocol.
+            </summary>
         </member>
         <member name="T:MongoDB.Driver.Core.Servers.ServerState">
             <summary>

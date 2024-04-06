@@ -9602,6 +9602,52 @@
             A Task whose result is a cursor.
             </returns>
         </member>
+        <member name="M:MongoDB.Driver.IMongoCollection`1.DistinctMany``1(MongoDB.Driver.FieldDefinition{`0,System.Collections.Generic.IEnumerable{``0}},MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.DistinctOptions,System.Threading.CancellationToken)">
+            <summary>
+            Gets the distinct values for a specified array field.
+            </summary>
+            <typeparam name="TItem">The type of the array items.</typeparam>
+            <param name="field">The field.</param>
+            <param name="filter">The filter.</param>
+            <param name="options">The options.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>A cursor.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.IMongoCollection`1.DistinctMany``1(MongoDB.Driver.IClientSessionHandle,MongoDB.Driver.FieldDefinition{`0,System.Collections.Generic.IEnumerable{``0}},MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.DistinctOptions,System.Threading.CancellationToken)">
+            <summary>
+            Gets the distinct values for a specified array field.
+            </summary>
+            <typeparam name="TItem">The type of the array items.</typeparam>
+            <param name="session">The session.</param>
+            <param name="field">The field.</param>
+            <param name="filter">The filter.</param>
+            <param name="options">The options.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>A cursor.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.IMongoCollection`1.DistinctManyAsync``1(MongoDB.Driver.FieldDefinition{`0,System.Collections.Generic.IEnumerable{``0}},MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.DistinctOptions,System.Threading.CancellationToken)">
+            <summary>
+            Gets the distinct values for a specified array field.
+            </summary>
+            <typeparam name="TItem">The type of the array items.</typeparam>
+            <param name="field">The field.</param>
+            <param name="filter">The filter.</param>
+            <param name="options">The options.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>A cursor.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.IMongoCollection`1.DistinctManyAsync``1(MongoDB.Driver.IClientSessionHandle,MongoDB.Driver.FieldDefinition{`0,System.Collections.Generic.IEnumerable{``0}},MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.DistinctOptions,System.Threading.CancellationToken)">
+            <summary>
+            Gets the distinct values for a specified array field.
+            </summary>
+            <typeparam name="TItem">The type of the array items.</typeparam>
+            <param name="session">The session.</param>
+            <param name="field">The field.</param>
+            <param name="filter">The filter.</param>
+            <param name="options">The options.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>A cursor.</returns>
+        </member>
         <member name="M:MongoDB.Driver.IMongoCollection`1.EstimatedDocumentCount(MongoDB.Driver.EstimatedDocumentCountOptions,System.Threading.CancellationToken)">
             <summary>
             Returns an estimate of the number of documents in the collection.
@@ -10742,6 +10788,192 @@
             </summary>
             <typeparam name="TDocument">The type of the document.</typeparam>
             <typeparam name="TField">The type of the result.</typeparam>
+            <param name="collection">The collection.</param>
+            <param name="session">The session.</param>
+            <param name="field">The field.</param>
+            <param name="filter">The filter.</param>
+            <param name="options">The options.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+            The distinct values for the specified field.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.IMongoCollectionExtensions.DistinctMany``2(MongoDB.Driver.IMongoCollection{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.IEnumerable{``1}}},MongoDB.Driver.FilterDefinition{``0},MongoDB.Driver.DistinctOptions,System.Threading.CancellationToken)">
+            <summary>
+            Gets the distinct values for a specified array field.
+            </summary>
+            <typeparam name="TDocument">The type of the document.</typeparam>
+            <typeparam name="TItem">The type of the array items.</typeparam>
+            <param name="collection">The collection.</param>
+            <param name="field">The field.</param>
+            <param name="filter">The filter.</param>
+            <param name="options">The options.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+            The distinct values for the specified field.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.IMongoCollectionExtensions.DistinctMany``2(MongoDB.Driver.IMongoCollection{``0},MongoDB.Driver.FieldDefinition{``0,System.Collections.Generic.IEnumerable{``1}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},MongoDB.Driver.DistinctOptions,System.Threading.CancellationToken)">
+            <summary>
+            Gets the distinct values for a specified array field.
+            </summary>
+            <typeparam name="TDocument">The type of the document.</typeparam>
+            <typeparam name="TItem">The type of the array items.</typeparam>
+            <param name="collection">The collection.</param>
+            <param name="field">The field.</param>
+            <param name="filter">The filter.</param>
+            <param name="options">The options.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+            The distinct values for the specified field.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.IMongoCollectionExtensions.DistinctMany``2(MongoDB.Driver.IMongoCollection{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.IEnumerable{``1}}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},MongoDB.Driver.DistinctOptions,System.Threading.CancellationToken)">
+            <summary>
+            Gets the distinct values for a specified array field.
+            </summary>
+            <typeparam name="TDocument">The type of the document.</typeparam>
+            <typeparam name="TItem">The type of the array items.</typeparam>
+            <param name="collection">The collection.</param>
+            <param name="field">The field.</param>
+            <param name="filter">The filter.</param>
+            <param name="options">The options.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+            The distinct values for the specified field.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.IMongoCollectionExtensions.DistinctMany``2(MongoDB.Driver.IMongoCollection{``0},MongoDB.Driver.IClientSessionHandle,System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.IEnumerable{``1}}},MongoDB.Driver.FilterDefinition{``0},MongoDB.Driver.DistinctOptions,System.Threading.CancellationToken)">
+            <summary>
+            Gets the distinct values for a specified array field.
+            </summary>
+            <typeparam name="TDocument">The type of the document.</typeparam>
+            <typeparam name="TItem">The type of the array items.</typeparam>
+            <param name="collection">The collection.</param>
+            <param name="session">The session.</param>
+            <param name="field">The field.</param>
+            <param name="filter">The filter.</param>
+            <param name="options">The options.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+            The distinct values for the specified field.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.IMongoCollectionExtensions.DistinctMany``2(MongoDB.Driver.IMongoCollection{``0},MongoDB.Driver.IClientSessionHandle,MongoDB.Driver.FieldDefinition{``0,System.Collections.Generic.IEnumerable{``1}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},MongoDB.Driver.DistinctOptions,System.Threading.CancellationToken)">
+            <summary>
+            Gets the distinct values for a specified array field.
+            </summary>
+            <typeparam name="TDocument">The type of the document.</typeparam>
+            <typeparam name="TItem">The type of the array items.</typeparam>
+            <param name="collection">The collection.</param>
+            <param name="session">The session.</param>
+            <param name="field">The field.</param>
+            <param name="filter">The filter.</param>
+            <param name="options">The options.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+            The distinct values for the specified field.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.IMongoCollectionExtensions.DistinctMany``2(MongoDB.Driver.IMongoCollection{``0},MongoDB.Driver.IClientSessionHandle,System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.IEnumerable{``1}}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},MongoDB.Driver.DistinctOptions,System.Threading.CancellationToken)">
+            <summary>
+            Gets the distinct values for a specified array field.
+            </summary>
+            <typeparam name="TDocument">The type of the document.</typeparam>
+            <typeparam name="TItem">The type of the array items.</typeparam>
+            <param name="collection">The collection.</param>
+            <param name="session">The session.</param>
+            <param name="field">The field.</param>
+            <param name="filter">The filter.</param>
+            <param name="options">The options.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+            The distinct values for the specified field.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.IMongoCollectionExtensions.DistinctManyAsync``2(MongoDB.Driver.IMongoCollection{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.IEnumerable{``1}}},MongoDB.Driver.FilterDefinition{``0},MongoDB.Driver.DistinctOptions,System.Threading.CancellationToken)">
+            <summary>
+            Gets the distinct values for a specified array field.
+            </summary>
+            <typeparam name="TDocument">The type of the document.</typeparam>
+            <typeparam name="TItem">The type of the array items.</typeparam>
+            <param name="collection">The collection.</param>
+            <param name="field">The field.</param>
+            <param name="filter">The filter.</param>
+            <param name="options">The options.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+            The distinct values for the specified field.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.IMongoCollectionExtensions.DistinctManyAsync``2(MongoDB.Driver.IMongoCollection{``0},MongoDB.Driver.FieldDefinition{``0,System.Collections.Generic.IEnumerable{``1}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},MongoDB.Driver.DistinctOptions,System.Threading.CancellationToken)">
+            <summary>
+            Gets the distinct values for a specified array field.
+            </summary>
+            <typeparam name="TDocument">The type of the document.</typeparam>
+            <typeparam name="TItem">The type of the array items.</typeparam>
+            <param name="collection">The collection.</param>
+            <param name="field">The field.</param>
+            <param name="filter">The filter.</param>
+            <param name="options">The options.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+            The distinct values for the specified field.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.IMongoCollectionExtensions.DistinctManyAsync``2(MongoDB.Driver.IMongoCollection{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.IEnumerable{``1}}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},MongoDB.Driver.DistinctOptions,System.Threading.CancellationToken)">
+            <summary>
+            Gets the distinct values for a specified array field.
+            </summary>
+            <typeparam name="TDocument">The type of the document.</typeparam>
+            <typeparam name="TItem">The type of the array items.</typeparam>
+            <param name="collection">The collection.</param>
+            <param name="field">The field.</param>
+            <param name="filter">The filter.</param>
+            <param name="options">The options.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+            The distinct values for the specified field.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.IMongoCollectionExtensions.DistinctManyAsync``2(MongoDB.Driver.IMongoCollection{``0},MongoDB.Driver.IClientSessionHandle,System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.IEnumerable{``1}}},MongoDB.Driver.FilterDefinition{``0},MongoDB.Driver.DistinctOptions,System.Threading.CancellationToken)">
+            <summary>
+            Gets the distinct values for a specified array field.
+            </summary>
+            <typeparam name="TDocument">The type of the document.</typeparam>
+            <typeparam name="TItem">The type of the array items.</typeparam>
+            <param name="collection">The collection.</param>
+            <param name="session">The session.</param>
+            <param name="field">The field.</param>
+            <param name="filter">The filter.</param>
+            <param name="options">The options.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+            The distinct values for the specified field.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.IMongoCollectionExtensions.DistinctManyAsync``2(MongoDB.Driver.IMongoCollection{``0},MongoDB.Driver.IClientSessionHandle,MongoDB.Driver.FieldDefinition{``0,System.Collections.Generic.IEnumerable{``1}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},MongoDB.Driver.DistinctOptions,System.Threading.CancellationToken)">
+            <summary>
+            Gets the distinct values for a specified array field.
+            </summary>
+            <typeparam name="TDocument">The type of the document.</typeparam>
+            <typeparam name="TItem">The type of the array items.</typeparam>
+            <param name="collection">The collection.</param>
+            <param name="session">The session.</param>
+            <param name="field">The field.</param>
+            <param name="filter">The filter.</param>
+            <param name="options">The options.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+            The distinct values for the specified field.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.IMongoCollectionExtensions.DistinctManyAsync``2(MongoDB.Driver.IMongoCollection{``0},MongoDB.Driver.IClientSessionHandle,System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.IEnumerable{``1}}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},MongoDB.Driver.DistinctOptions,System.Threading.CancellationToken)">
+            <summary>
+            Gets the distinct values for a specified array field.
+            </summary>
+            <typeparam name="TDocument">The type of the document.</typeparam>
+            <typeparam name="TItem">The type of the array items.</typeparam>
             <param name="collection">The collection.</param>
             <param name="session">The session.</param>
             <param name="field">The field.</param>
@@ -18300,6 +18532,11 @@
             Gets or sets a value indicating whether to use IPv6.
             </summary>
         </member>
+        <member name="P:MongoDB.Driver.MongoClientSettings.LibraryInfo">
+            <summary>
+            Gets or sets information about a library using the .NET Driver.
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.MongoClientSettings.LinqProvider">
             <summary>
             Gets or sets the LINQ provider.
@@ -18401,6 +18638,11 @@
         <member name="P:MongoDB.Driver.MongoClientSettings.Servers">
             <summary>
             Gets or sets the list of server addresses (see also Server if using only one address).
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.MongoClientSettings.ServerMonitoringMode">
+            <summary>
+            Gets or sets the server monitoring mode to use.
             </summary>
         </member>
         <member name="P:MongoDB.Driver.MongoClientSettings.ServerSelectionTimeout">
@@ -18672,6 +18914,18 @@
             <inheritdoc />
         </member>
         <member name="M:MongoDB.Driver.MongoCollectionBase`1.DistinctAsync``1(MongoDB.Driver.IClientSessionHandle,MongoDB.Driver.FieldDefinition{`0,``0},MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.DistinctOptions,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MongoDB.Driver.MongoCollectionBase`1.DistinctMany``1(MongoDB.Driver.FieldDefinition{`0,System.Collections.Generic.IEnumerable{``0}},MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.DistinctOptions,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MongoDB.Driver.MongoCollectionBase`1.DistinctMany``1(MongoDB.Driver.IClientSessionHandle,MongoDB.Driver.FieldDefinition{`0,System.Collections.Generic.IEnumerable{``0}},MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.DistinctOptions,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MongoDB.Driver.MongoCollectionBase`1.DistinctManyAsync``1(MongoDB.Driver.FieldDefinition{`0,System.Collections.Generic.IEnumerable{``0}},MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.DistinctOptions,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MongoDB.Driver.MongoCollectionBase`1.DistinctManyAsync``1(MongoDB.Driver.IClientSessionHandle,MongoDB.Driver.FieldDefinition{`0,System.Collections.Generic.IEnumerable{``0}},MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.DistinctOptions,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:MongoDB.Driver.MongoCollectionBase`1.EstimatedDocumentCount(MongoDB.Driver.EstimatedDocumentCountOptions,System.Threading.CancellationToken)">
@@ -20237,6 +20491,11 @@
             Gets the list of server addresses (see also Server if using only one address).
             </summary>
         </member>
+        <member name="P:MongoDB.Driver.MongoUrl.ServerMonitoringMode">
+            <summary>
+            Gets the server monitoring mode to use.
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.MongoUrl.ServerSelectionTimeout">
             <summary>
             Gets the server selection timeout.
@@ -20597,6 +20856,11 @@
             Gets or sets the list of server addresses (see also Server if using only one address).
             </summary>
         </member>
+        <member name="P:MongoDB.Driver.MongoUrlBuilder.ServerMonitoringMode">
+            <summary>
+            Gets or sets the server monitoring mode to use.
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.MongoUrlBuilder.ServerSelectionTimeout">
             <summary>
             Gets or sets the server selection timeout.
@@ -20772,6 +21036,70 @@
             Initializes a new instance of the <see cref="T:MongoDB.Driver.MongoExternalIdentity" /> class.
             </summary>
             <param name="username">The username.</param>
+        </member>
+        <member name="T:MongoDB.Driver.Mql">
+            <summary>
+            Contains methods that can be used to access MongoDB specific functionality in LINQ queries.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.Mql.DateFromString(System.String)">
+            <summary>
+            Converts a string to a DateTime using the $dateFromString aggregation operator.
+            </summary>
+            <param name="dateString">The string.</param>
+            <returns>A DateTime.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.Mql.DateFromString(System.String,System.String)">
+            <summary>
+            Converts a string to a DateTime using the $dateFromString aggregation operator.
+            </summary>
+            <param name="dateString">The string.</param>
+            <param name="format">The format string.</param>
+            <returns>A DateTime.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.Mql.DateFromString(System.String,System.String,System.String)">
+            <summary>
+            Converts a string to a DateTime using the $dateFromString aggregation operator.
+            </summary>
+            <param name="dateString">The string.</param>
+            <param name="format">The format string.</param>
+            <param name="timezone">The time zone.</param>
+            <returns>A DateTime.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.Mql.DateFromString(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Converts a string to a DateTime using the $dateFromString aggregation operator.
+            </summary>
+            <param name="dateString">The string.</param>
+            <param name="format">The format string.</param>
+            <param name="timezone">The time zone.</param>
+            <param name="onError">The onError value.</param>
+            <param name="onNull">The onNull value.</param>
+            <returns>A DateTime.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.Mql.Exists``1(``0)">
+            <summary>
+            Tests whether a field exists.
+            </summary>
+            <typeparam name="TField">The type of the field.</typeparam>
+            <param name="field">The field.</param>
+            <returns><c>true</c> if the field exists.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.Mql.IsMissing``1(``0)">
+            <summary>
+            Tests whether a field is missing.
+            </summary>
+            <typeparam name="TField">The type of the field.</typeparam>
+            <param name="field">The field.</param>
+            <returns><c>true</c> if the field is missing.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.Mql.IsNullOrMissing``1(``0)">
+            <summary>
+            Tests whether a field is null or missing.
+            </summary>
+            <typeparam name="TField">The type of the field.</typeparam>
+            <param name="field">The field.</param>
+            <returns><c>true</c> if the field is null or missing.</returns>
         </member>
         <member name="T:MongoDB.Driver.NoPipelineInput">
             <summary>
@@ -23540,7 +23868,7 @@
             A combined projection.
             </returns>
         </member>
-        <member name="M:MongoDB.Driver.ProjectionDefinitionExtensions.MetaSearchHighlights``1(MongoDB.Driver.ProjectionDefinition{``0},System.String)">
+        <member name="M:MongoDB.Driver.ProjectionDefinitionExtensions.MetaSearchHighlights``1(MongoDB.Driver.ProjectionDefinition{``0},MongoDB.Driver.FieldDefinition{``0})">
             <summary>
             Combines an existing projection with a search highlights projection.
             </summary>
@@ -23551,7 +23879,18 @@
             A combined projection.
             </returns>
         </member>
-        <member name="M:MongoDB.Driver.ProjectionDefinitionExtensions.MetaSearchScore``1(MongoDB.Driver.ProjectionDefinition{``0},System.String)">
+        <member name="M:MongoDB.Driver.ProjectionDefinitionExtensions.MetaSearchHighlights``1(MongoDB.Driver.ProjectionDefinition{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Combines an existing projection with a search highlights projection.
+            </summary>
+            <typeparam name="TDocument">The type of the document.</typeparam>
+            <param name="projection">The projection.</param>
+            <param name="field">The field.</param>
+            <returns>
+            A combined projection.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.ProjectionDefinitionExtensions.MetaSearchScore``1(MongoDB.Driver.ProjectionDefinition{``0},MongoDB.Driver.FieldDefinition{``0})">
             <summary>
             Combines an existing projection with a search score projection.
             </summary>
@@ -23562,7 +23901,18 @@
             A combined projection.
             </returns>
         </member>
-        <member name="M:MongoDB.Driver.ProjectionDefinitionExtensions.MetaSearchScoreDetails``1(MongoDB.Driver.ProjectionDefinition{``0},System.String)">
+        <member name="M:MongoDB.Driver.ProjectionDefinitionExtensions.MetaSearchScore``1(MongoDB.Driver.ProjectionDefinition{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Combines an existing projection with a search score projection.
+            </summary>
+            <typeparam name="TDocument">The type of the document.</typeparam>
+            <param name="projection">The projection.</param>
+            <param name="field">The field.</param>
+            <returns>
+            A combined projection.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.ProjectionDefinitionExtensions.MetaSearchScoreDetails``1(MongoDB.Driver.ProjectionDefinition{``0},MongoDB.Driver.FieldDefinition{``0})">
             <summary>
             Combines an existing projection with a search score details projection.
             </summary>
@@ -23573,9 +23923,53 @@
             A combined projection.
             </returns>
         </member>
-        <member name="M:MongoDB.Driver.ProjectionDefinitionExtensions.MetaTextScore``1(MongoDB.Driver.ProjectionDefinition{``0},System.String)">
+        <member name="M:MongoDB.Driver.ProjectionDefinitionExtensions.MetaSearchScoreDetails``1(MongoDB.Driver.ProjectionDefinition{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Combines an existing projection with a search score details projection.
+            </summary>
+            <typeparam name="TDocument">The type of the document.</typeparam>
+            <param name="projection">The projection.</param>
+            <param name="field">The field.</param>
+            <returns>
+            A combined projection.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.ProjectionDefinitionExtensions.MetaTextScore``1(MongoDB.Driver.ProjectionDefinition{``0},MongoDB.Driver.FieldDefinition{``0})">
             <summary>
             Combines an existing projection with a text score projection.
+            </summary>
+            <typeparam name="TDocument">The type of the document.</typeparam>
+            <param name="projection">The projection.</param>
+            <param name="field">The field.</param>
+            <returns>
+            A combined projection.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.ProjectionDefinitionExtensions.MetaTextScore``1(MongoDB.Driver.ProjectionDefinition{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Combines an existing projection with a text score projection.
+            </summary>
+            <typeparam name="TDocument">The type of the document.</typeparam>
+            <param name="projection">The projection.</param>
+            <param name="field">The field.</param>
+            <returns>
+            A combined projection.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.ProjectionDefinitionExtensions.MetaVectorSearchScore``1(MongoDB.Driver.ProjectionDefinition{``0},MongoDB.Driver.FieldDefinition{``0})">
+            <summary>
+            Combines an existing projection with a VectorSearch score projection.
+            </summary>
+            <typeparam name="TDocument">The type of the document.</typeparam>
+            <param name="projection">The projection.</param>
+            <param name="field">The field.</param>
+            <returns>
+            A combined projection.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.ProjectionDefinitionExtensions.MetaVectorSearchScore``1(MongoDB.Driver.ProjectionDefinition{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Combines an existing projection with a VectorSearch score projection.
             </summary>
             <typeparam name="TDocument">The type of the document.</typeparam>
             <param name="projection">The projection.</param>
@@ -23767,7 +24161,7 @@
             An inclusion projection.
             </returns>
         </member>
-        <member name="M:MongoDB.Driver.ProjectionDefinitionBuilder`1.Meta(System.String,System.String)">
+        <member name="M:MongoDB.Driver.ProjectionDefinitionBuilder`1.Meta(MongoDB.Driver.FieldDefinition{`0},System.String)">
             <summary>
             Creates a meta projection.
             </summary>
@@ -23777,7 +24171,7 @@
             A text score projection.
             </returns>
         </member>
-        <member name="M:MongoDB.Driver.ProjectionDefinitionBuilder`1.MetaSearchHighlights(System.String)">
+        <member name="M:MongoDB.Driver.ProjectionDefinitionBuilder`1.MetaSearchHighlights(MongoDB.Driver.FieldDefinition{`0})">
             <summary>
             Creates a search highlights projection.
             </summary>
@@ -23786,7 +24180,16 @@
             A search highlights projection.
             </returns>
         </member>
-        <member name="M:MongoDB.Driver.ProjectionDefinitionBuilder`1.MetaSearchScore(System.String)">
+        <member name="M:MongoDB.Driver.ProjectionDefinitionBuilder`1.MetaSearchHighlights``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Creates a search highlights projection.
+            </summary>
+            <param name="field">The field.</param>
+            <returns>
+            A search highlights projection.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.ProjectionDefinitionBuilder`1.MetaSearchScore(MongoDB.Driver.FieldDefinition{`0})">
             <summary>
             Creates a search score projection.
             </summary>
@@ -23795,7 +24198,16 @@
             A search score projection.
             </returns>
         </member>
-        <member name="M:MongoDB.Driver.ProjectionDefinitionBuilder`1.MetaSearchScoreDetails(System.String)">
+        <member name="M:MongoDB.Driver.ProjectionDefinitionBuilder`1.MetaSearchScore``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Creates a search score projection.
+            </summary>
+            <param name="field">The field.</param>
+            <returns>
+            A search score projection.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.ProjectionDefinitionBuilder`1.MetaSearchScoreDetails(MongoDB.Driver.FieldDefinition{`0})">
             <summary>
             Creates a search score details projection.
             </summary>
@@ -23804,13 +24216,49 @@
             A search score details projection.
             </returns>
         </member>
-        <member name="M:MongoDB.Driver.ProjectionDefinitionBuilder`1.MetaTextScore(System.String)">
+        <member name="M:MongoDB.Driver.ProjectionDefinitionBuilder`1.MetaSearchScoreDetails``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Creates a search score details projection.
+            </summary>
+            <param name="field">The field.</param>
+            <returns>
+            A search score details projection.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.ProjectionDefinitionBuilder`1.MetaTextScore(MongoDB.Driver.FieldDefinition{`0})">
             <summary>
             Creates a text score projection.
             </summary>
             <param name="field">The field.</param>
             <returns>
             A text score projection.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.ProjectionDefinitionBuilder`1.MetaTextScore``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Creates a text score projection.
+            </summary>
+            <param name="field">The field.</param>
+            <returns>
+            A text score projection.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.ProjectionDefinitionBuilder`1.MetaVectorSearchScore(MongoDB.Driver.FieldDefinition{`0})">
+            <summary>
+            Creates a VectorSearch score projection.
+            </summary>
+            <param name="field">The field.</param>
+            <returns>
+            A VectorSearch score projection.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.ProjectionDefinitionBuilder`1.MetaVectorSearchScore``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Creates a VectorSearch score projection.
+            </summary>
+            <param name="field">The field.</param>
+            <returns>
+            A VectorSearch score projection.
             </returns>
         </member>
         <member name="M:MongoDB.Driver.ProjectionDefinitionBuilder`1.SearchMeta(MongoDB.Driver.FieldDefinition{`0})">
@@ -25001,6 +25449,26 @@
             <param name="area">Object that specifies the area to search within.</param>
             <param name="score">The score modifier.</param>
             <returns>A geo within search definition.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.Search.SearchDefinitionBuilder`1.In``1(MongoDB.Driver.Search.SearchPathDefinition{`0},System.Collections.Generic.IEnumerable{``0},MongoDB.Driver.Search.SearchScoreDefinition{`0})">
+            <summary>
+            Creates a search definition that queries for documents where the value of the field equals to any of specified values.
+            </summary>
+            <typeparam name="TField">The type of the field. Valid types are: boolean, ObjectId, number, date, string.</typeparam>
+            <param name="path">The indexed field or fields to search.</param>
+            <param name="values">Values to compare the field with.</param>
+            <param name="score">The score modifier.</param>
+            <returns>An In search definition.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.Search.SearchDefinitionBuilder`1.In``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Collections.Generic.IEnumerable{``0},MongoDB.Driver.Search.SearchScoreDefinition{`0})">
+            <summary>
+            Creates a search definition that queries for documents where the value of the field equals to any of specified values.
+            </summary>
+            <typeparam name="TField">The type of the field. Valid types are: boolean, ObjectId, number, date, string.</typeparam>
+            <param name="path">The indexed field or fields to search.</param>
+            <param name="values">Values to compare the field with.</param>
+            <param name="score">The score modifier.</param>
+            <returns>An In search definition.</returns>
         </member>
         <member name="M:MongoDB.Driver.Search.SearchDefinitionBuilder`1.MoreLikeThis``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
@@ -26769,6 +27237,18 @@
             A combined sort.
             </returns>
         </member>
+        <member name="M:MongoDB.Driver.SortDefinitionExtensions.MetaSearchScoreDescending``1(MongoDB.Driver.SortDefinition{``0})">
+            <summary>
+            Creates a descending sort on the computed relevance score of atlas search.
+            </summary>
+            <returns>A meta search score sort.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.SortDefinitionExtensions.MetaSearchScoreAscending``1(MongoDB.Driver.SortDefinition{``0})">
+            <summary>
+            Creates a ascending sort on the computed relevance score of atlas search.
+            </summary>
+            <returns>A meta search score sort.</returns>
+        </member>
         <member name="M:MongoDB.Driver.SortDefinitionExtensions.MetaTextScore``1(MongoDB.Driver.SortDefinition{``0},System.String)">
             <summary>
             Combines an existing sort with a descending sort on the computed relevance score of a text search.
@@ -26828,6 +27308,18 @@
             </summary>
             <param name="field">The field.</param>
             <returns>A descending sort.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.SortDefinitionBuilder`1.MetaSearchScoreDescending">
+            <summary>
+            Creates a descending sort on the computed relevance score of atlas search.
+            </summary>
+            <returns>A meta search score sort.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.SortDefinitionBuilder`1.MetaSearchScoreAscending">
+            <summary>
+            Creates a ascending sort on the computed relevance score of atlas search.
+            </summary>
+            <returns>A meta search score sort.</returns>
         </member>
         <member name="M:MongoDB.Driver.SortDefinitionBuilder`1.MetaTextScore(System.String)">
             <summary>
@@ -26922,7 +27414,7 @@
             Returns a hash code for this instance.
             </summary>
             <returns>
-            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
             </returns>
         </member>
         <member name="M:MongoDB.Driver.SslSettings.ToString">

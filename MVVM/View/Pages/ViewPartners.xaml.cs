@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.Xaml;
 using EduPartners.Core;
 using EduPartners.MVVM.Model;
 using EduPartners.MVVM.ViewModel;
@@ -237,6 +237,9 @@ namespace EduPartners.MVVM.View.Pages
             {
                 lSearchLabel.Visibility = Visibility.Visible;
             }
+
+            FilterPartners();
+
             e.Handled = true;
         }
 
@@ -246,24 +249,9 @@ namespace EduPartners.MVVM.View.Pages
             e.Handled = true;
         }
 
-        private async void Serach_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            List<Partner> partners = (await db.GetPartners());
-
-            if (!string.IsNullOrEmpty(tbSerachBox.Text))
-            {
-                partners = viewModel.Items.Where(partner => partner.Name.StartsWith(tbSerachBox.Text, StringComparison.OrdinalIgnoreCase)).ToList();
-            }
-
-            viewModel.Items.Clear();
-            partners.ForEach(filter => viewModel.Items.Add(filter));
-            e.Handled = true;
-        }
-
         private void FilterButton_Clicked(object sender, RoutedEventArgs e)
         {
             RadioButton button = e.Source as RadioButton;
-            Debug.WriteLine(button.Tag);
 
             foreach (object stackButton in spFilterButtons.Children)
             {
@@ -272,6 +260,79 @@ namespace EduPartners.MVVM.View.Pages
                     checkButton.IsChecked = false;
                 }
             }
+
+            FilterPartners(button);
         }
+
+        private async void Serach_MouseDown(object sender, RoutedEventArgs e)
+        {
+            FilterPartners();
+            e.Handled = true;
+        }
+
+        private List<string> filters = new List<string>();
+
+        private async void FilterPartners(RadioButton radioButton = null)
+        {
+            User user = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
+            List<Partner> partners = user.HomeSchool.Partners.Value;
+            
+
+            if (radioButton != null)
+            { 
+                switch (radioButton.Tag.ToString()) 
+                {
+                    case "AZ":
+                        filters.Clear();
+                        filters.Add(radioButton.Tag.ToString());
+                        break;
+                    case "ZA":
+                        filters.Clear();
+                        filters.Add(radioButton.Tag.ToString());
+                        break;
+                    case "clear":
+                        filters.Clear();
+                        filters.Add(radioButton.Tag.ToString());
+                        break;
+                    default:
+                        break;
+
+                }
+            }
+
+            if (!string.IsNullOrEmpty(tbSerachBox.Text))
+            {
+                partners = partners.Where(partner => partner.Name.StartsWith(tbSerachBox.Text, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+
+            for (int i = 0; i < filters.Count; i++)
+            {
+                switch (filters[i])
+                {
+                    case "AZ":
+                        partners = partners.OrderBy(partner => partner.Name).ToList();
+                        break;
+                    case "ZA":
+                        partners = partners.OrderByDescending(partner => partner.Name).ToList();
+                        break;
+                    case "clear":
+                        filters.Clear();
+                        radioButton.IsChecked = false;
+                        i = filters.Count;
+                        break;
+                    default:
+                        break;
+
+                }
+            }
+
+
+
+            viewModel.Items.Clear();
+            partners.ForEach(filter => viewModel.Items.Add(filter));
+        }
+
+
     }
 }

@@ -37,8 +37,12 @@
                                 <RadioButton BorderThickness="0" Tag="ZA" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45" ToolTip="Filter Z-A" Click="FilterButton_Clicked">
                                     <Image Source="../../../Resources/zaFilter.png" Width="40" Height="40"/>
                                 </RadioButton>
-                                <RadioButton BorderThickness="0" Tag="" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45" Click="FilterButton_Clicked"/>
-                                <RadioButton BorderThickness="0" Tag="" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45" Click="FilterButton_Clicked"/>
+                                <RadioButton BorderThickness="0" Tag="" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45" Click="FilterButton_Clicked">
+                                    
+                                </RadioButton>
+                                <RadioButton BorderThickness="0" Tag="clear" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45" Click="FilterButton_Clicked">
+                                    <Image Source="../../../Resources/clear-filter.png" Width="35" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </RadioButton>
                             </StackPanel>
 
                             <Border Grid.Column="1" Background="{StaticResource PrimaryBackgroundColor}" VerticalAlignment="Center" CornerRadius="15" Height="36" Margin="0,0,8,0">
@@ -51,7 +55,7 @@
                                     <TextBox x:Name="tbSerachBox" Foreground="White" CaretBrush="White" Background="Transparent" FontSize="15" VerticalContentAlignment="Center" BorderThickness="0" Margin="10,5,0,5" TextWrapping="NoWrap" TextChanged="tbSerachBox_TextChanged"/>
                                     <Label x:Name="lSearchLabel" Content="Search" Cursor="Hand" Foreground="DarkGray" FontSize="14" Grid.ColumnSpan="2" Margin="10,0,40,0" VerticalContentAlignment="Center" ToolTip="Search" MouseDown="lSearchLabel_MouseDown"/>
 
-                                    <Button BorderThickness="0" Grid.Column="2" Cursor="Hand" MouseDown="Serach_MouseDown" IsDefault="True" ToolTip="Search">
+                                    <Button BorderThickness="0" Grid.Column="2" Cursor="Hand" Click="Serach_MouseDown" IsDefault="True" ToolTip="Search">
                                         <Image Source="../../../Resources/search.png" Width="25"/>
                                         <Button.Style>
                                             <Style TargetType="{x:Type Button}">

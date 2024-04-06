@@ -4,12 +4,17 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:EduPartners.MVVM.View.Pages"
+      xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=DotNetProjects.DataVisualization.Toolkit"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Dashboard">
 
-    <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
+    <Grid Background="{DynamicResource SecundaryBackgroundColor}">
         <TextBlock Text="Dashboard" FontSize="30" Foreground="{DynamicResource PrimaryTextColor}" FontWeight="Bold"
                    VerticalAlignment="Center" HorizontalAlignment="Center"/>
-    </Border>
+        <DVC:Chart Width="Auto" Height="Auto" InkCanvas.Top="80" InkCanvas.Left="10" Name="mcChart" Background="Beige">
+            <DVC:BarSeries Title="Customer Sales"/>
+            <DVC:BarSeries Title="Group Sales"/>
+        </DVC:Chart>
+    </Grid>
 </Page>
