@@ -26,18 +26,38 @@ namespace EduPartners.MVVM.View.Pages
     public partial class AddPartners : Page
     {
         private Database db;
+        private List<string> industries = new List<string>() { "IT", "Architecture", "Educational Services", "Emergency Services", "Food Services", "Arts, Entertainment and Recreation", "Administration Service", "Business Support", "Construction", "Finance and Insurance", "Healthcare", "Information", "Real Estate and Rental and Leasing", "Transportation", "Utilities", "Technology", "Other" };
         public AddPartners()
         {
             InitializeComponent();
             db = App.Current.Properties["Database"] as Database;
-            cbType.Items.Add("IT");
-            cbType.Items.Add("Architecture");
+            foreach (string industry in industries)
+            {
+                cbType.Items.Add(industry);
+            }
         }
 
         private async void AddPartner_Cliked(object sender, RoutedEventArgs e)
         {
+            if (tbSavings.Text.StartsWith("$"))
+            {
+                tbSavings.Text = tbSavings.Text.Substring(1);
+            }
+            if (tbWebsite.Text.StartsWith(@"https://"))
+            {
+                tbWebsite.Text = tbWebsite.Text.Substring(8);
+            }
+            else if (tbWebsite.Text.StartsWith(@"http://"))
+            {
+                tbWebsite.Text = tbWebsite.Text.Substring(7);
+            }
+            if (tbWebsite.Text.StartsWith("www."))
+            {
+                tbWebsite.Text = tbWebsite.Text.Substring(4);
+            }
             bool emailMatch = Regex.IsMatch(tbRepresentativeEmail.Text, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
             bool phoneNumberMatch = tbRepresentativePhoneNumber.Text.Length == 14;
+            bool savingsMatch = Regex.IsMatch(tbSavings.Text, @"^[0-9,.]+$");
             if (!emailMatch)
             {
                 tbRepresentativeEmail.BorderBrush = Brushes.Red;
@@ -48,6 +68,12 @@ namespace EduPartners.MVVM.View.Pages
             {
                 tbRepresentativePhoneNumber.BorderBrush = Brushes.Red;
                 tbRepresentativePhoneNumber.BorderThickness = new Thickness(2);
+                return;
+            }
+            if (!savingsMatch)
+            {
+                tbSavings.BorderBrush = Brushes.Red;
+                tbSavings.BorderThickness = new Thickness(2);
                 return;
             }
             Partner partner = new Partner()

@@ -12,16 +12,16 @@ namespace EduPartners.MVVM.Model
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string ResourcesAvailable { get; set; }
-        public string Industry { get; set; }
-        public DateTime StartDate { get; set; }
-        public string RepresentativeName { get; set; }
-        public string RepresentativeEmail { get; set; }
-        public string RepresentativePhoneNumber { get; set; }
-        public string Website { get; set; }
-        public string Address { get; set; }
-        public string Savings { get; set; }
+        public string Name { get; set; } // Required
+        public string Description { get; set; } // Required
+        public string ResourcesAvailable { get; set; } // Required
+        public string Industry { get; set; } // Required
+        public DateTime StartDate { get; set; } // Required
+        public string RepresentativeName { get; set; } // Required
+        public string RepresentativeEmail { get; set; } // Required
+        public string RepresentativePhoneNumber { get; set; } // Optional
+        public string Website { get; set; } // Optional
+        public string Address { get; set; } // Optional
+        public string Savings { get; set; } // Required
     }
 }

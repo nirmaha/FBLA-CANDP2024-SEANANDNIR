@@ -183,9 +183,6 @@ C:\Users\CSDSTUDENT12\Source\Repos\nirmaha\FBLA-CANDP2024-SEANANDNIR\obj\Debug\E
 C:\Users\CSDSTUDENT12\Source\Repos\nirmaha\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.csproj.CopyComplete
 C:\Users\CSDSTUDENT12\Source\Repos\nirmaha\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.exe
 C:\Users\CSDSTUDENT12\Source\Repos\nirmaha\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.pdb
-C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\Caliburn.Micro.Core.dll
-C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\Caliburn.Micro.Core.pdb
-C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\Caliburn.Micro.Core.xml
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartn.9BA38DCF.Up2Date
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.csproj.AssemblyReference.cache
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\Assets\Icons.baml
@@ -283,3 +280,6 @@ D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.csproj.CoreCompileInpu
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartn.9BA38DCF.Up2Date
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.exe
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.pdb
+C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\DotNetProjects.DataVisualization.Toolkit.dll
+C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
