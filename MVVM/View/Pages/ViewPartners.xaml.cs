@@ -63,7 +63,7 @@ namespace EduPartners.MVVM.View.Pages
     public partial class ViewPartners : Page
     {
         private PartnerViewModel viewModel;
-        private Database db; 
+        private Database db;
 
         public ViewPartners()
         {
@@ -85,7 +85,7 @@ namespace EduPartners.MVVM.View.Pages
 
         private void ViewPartners_Loaded(object sender, RoutedEventArgs e)
         {
-            
+
 
         }
 
@@ -97,15 +97,23 @@ namespace EduPartners.MVVM.View.Pages
             // Retrieve all partners from the database
             List<Partner> allPartners = await db.GetPartners();
 
-            // Clear the existing partners from the Partners collection of the School
-            school.Partners.Value.Clear();
-
-            // Add partners from the database to the Partners collection of the School
-            foreach (Partner partner in allPartners)
+            for (int i = 0; i < school.Partners.Value.Count; i++)
             {
-                if (school.Partners.Value.All(p => p.Id != partner.Id))
+                bool foundParnter = false;
+
+                for (int j = 0; j < allPartners.Count; j++)
                 {
-                    school.Partners.Value.Add(partner);
+                    if (school.Partners.Value[i].Id == allPartners[j].Id)
+                    { 
+                        foundParnter = true;
+                        break;
+                    }
+                }
+
+                if (!foundParnter)
+                {
+                    school.Partners.Value.RemoveAt(i);
+                    i--;
                 }
             }
 
@@ -120,8 +128,7 @@ namespace EduPartners.MVVM.View.Pages
 
         private async void PopulateView()
         {
-            List<School> schools = await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString());
-            School homeSchool = schools.FirstOrDefault();
+            School homeSchool = (await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString())).FirstOrDefault();
 
             viewModel.Items.Clear();
             homeSchool.Partners.Value.ForEach(p => viewModel.Items.Add(p));
@@ -191,9 +198,9 @@ namespace EduPartners.MVVM.View.Pages
             }
 
             Label partnerName = FindChild<Label>(borderParent.Parent, "lPartnerName");
-            
+
             Partner partner = (await db.GetPartnerByName(partnerName.Content.ToString())).FirstOrDefault();
-          
+
             await db.DeletePartner(partner);
 
             School school = (await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString())).FirstOrDefault();
@@ -227,7 +234,7 @@ namespace EduPartners.MVVM.View.Pages
                 lSearchLabel.Visibility = Visibility.Collapsed;
             }
             else
-            { 
+            {
                 lSearchLabel.Visibility = Visibility.Visible;
             }
             e.Handled = true;
@@ -239,8 +246,17 @@ namespace EduPartners.MVVM.View.Pages
             e.Handled = true;
         }
 
-        private void Serach_MouseDown(object sender, MouseButtonEventArgs e)
+        private async void Serach_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            List<Partner> partners = (await db.GetPartners());
+
+            if (!string.IsNullOrEmpty(tbSerachBox.Text))
+            {
+                partners = viewModel.Items.Where(partner => partner.Name.StartsWith(tbSerachBox.Text, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            viewModel.Items.Clear();
+            partners.ForEach(filter => viewModel.Items.Add(filter));
             e.Handled = true;
         }
 

@@ -1,7 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using Caliburn.Micro;
+using System.Linq;
+
 using EduPartners.MVVM.Model;
 
 namespace EduPartners.MVVM.ViewModel
