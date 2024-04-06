@@ -47,7 +47,7 @@ namespace EduPartners.MVVM.View.Pages
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is string websiteAddress)
+            if (value is string websiteAddress && websiteAddress != "No Website")
             {
                 return new Uri(@"https://www." + websiteAddress);
             }

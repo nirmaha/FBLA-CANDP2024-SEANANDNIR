@@ -26,11 +26,15 @@ namespace EduPartners.MVVM.View.Pages
     public partial class AddPartners : Page
     {
         private Database db;
-        private List<string> industries = new List<string>() { "IT", "Architecture", "Educational Services", "Emergency Services", "Food Services", "Arts, Entertainment and Recreation", "Administration Service", "Business Support", "Construction", "Finance and Insurance", "Healthcare", "Information", "Real Estate and Rental and Leasing", "Transportation", "Utilities", "Technology", "Other" };
+        private List<string> industries = new List<string>() { "IT", "Architecture", "Educational Services", "Emergency Services", "Food Services", "Arts, Entertainment and Recreation", "Administration Service", "Business Support", "Construction", "Finance and Insurance", "Healthcare", "Information", "Real Estate and Rental and Leasing", "Transportation", "Utilities", "Technology" };
         public AddPartners()
         {
             InitializeComponent();
             db = App.Current.Properties["Database"] as Database;
+
+            industries.Sort();
+            industries.Add("Other");
+
             foreach (string industry in industries)
             {
                 cbType.Items.Add(industry);
@@ -39,10 +43,47 @@ namespace EduPartners.MVVM.View.Pages
 
         private async void AddPartner_Cliked(object sender, RoutedEventArgs e)
         {
+            bool isEmpty = false;
+
+            foreach (UIElement uIElement in spMain.Children)
+            {
+                if (uIElement is TextBox textbox && ((textbox.Tag != null && textbox.Tag.ToString() == "required") && string.IsNullOrEmpty(textbox.Text)))
+                {
+                    textbox.BorderBrush = Brushes.Red;
+                    textbox.BorderThickness = new Thickness(2);
+                    lErrorMsg.Visibility = Visibility.Visible;
+                    isEmpty = true;
+                }
+                else if (uIElement is DatePicker datePicker && ((datePicker.Tag != null && datePicker.Tag.ToString() == "required") && datePicker.SelectedDate == null))
+                {
+                    // Customize the appearance or behavior for the DatePicker control
+                    datePicker.BorderBrush = Brushes.Red;
+                    datePicker.BorderThickness = new Thickness(2);
+                    lErrorMsg.Visibility = Visibility.Visible;
+                    isEmpty = true;
+                }
+                else if (uIElement is Border comboBox && ((comboBox.Tag != null && comboBox.Tag.ToString() == "required") && cbType.SelectedItem == null))
+                {
+                    // Customize the appearance or behavior for the ComboBox control
+                    comboBox.BorderBrush = Brushes.Red;
+                    comboBox.BorderThickness = new Thickness(2);
+                    lErrorMsg.Visibility = Visibility.Visible;
+                    isEmpty = true;
+                }
+            }
+
+
+            if (isEmpty)
+            {
+                isEmpty = false;
+                return;
+            }
+
             if (tbSavings.Text.StartsWith("$"))
             {
                 tbSavings.Text = tbSavings.Text.Substring(1);
             }
+
             if (tbWebsite.Text.StartsWith(@"https://"))
             {
                 tbWebsite.Text = tbWebsite.Text.Substring(8);
@@ -55,29 +96,36 @@ namespace EduPartners.MVVM.View.Pages
             {
                 tbWebsite.Text = tbWebsite.Text.Substring(4);
             }
+
             bool emailMatch = Regex.IsMatch(tbRepresentativeEmail.Text, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
             bool phoneNumberMatch = tbRepresentativePhoneNumber.Text.Length == 14;
             bool savingsMatch = Regex.IsMatch(tbSavings.Text, @"^[0-9,.]+$");
+
             if (!emailMatch)
             {
                 tbRepresentativeEmail.BorderBrush = Brushes.Red;
                 tbRepresentativeEmail.BorderThickness = new Thickness(2);
+                lErrorMsg.Visibility = Visibility.Visible;
                 return;
             }
-            if (!phoneNumberMatch)
+            if (!string.IsNullOrEmpty(tbRepresentativePhoneNumber.Text) && !phoneNumberMatch)
             {
                 tbRepresentativePhoneNumber.BorderBrush = Brushes.Red;
                 tbRepresentativePhoneNumber.BorderThickness = new Thickness(2);
+                lErrorMsg.Visibility = Visibility.Visible;
                 return;
             }
             if (!savingsMatch)
             {
                 tbSavings.BorderBrush = Brushes.Red;
                 tbSavings.BorderThickness = new Thickness(2);
+                lErrorMsg.Visibility = Visibility.Visible;
                 return;
             }
+
+
             Partner partner = new Partner()
-            { 
+            {
                 Name = tbName.Text,
                 Description = tbDescription.Text,
                 ResourcesAvailable = tbResources.Text,
@@ -85,15 +133,15 @@ namespace EduPartners.MVVM.View.Pages
                 StartDate = dpStartDate.DisplayDate.Date,
                 RepresentativeName = tbRepresentativeName.Text,
                 RepresentativeEmail = tbRepresentativeEmail.Text,
-                RepresentativePhoneNumber = tbRepresentativePhoneNumber.Text,
-                Website = tbWebsite.Text,
-                Address = tbAddress.Text,
+                RepresentativePhoneNumber = string.IsNullOrEmpty(tbRepresentativePhoneNumber.Text) ? "No Phone Number" : tbRepresentativePhoneNumber.Text,
+                Website = string.IsNullOrEmpty(tbWebsite.Text) ? "No Website" : tbWebsite.Text,
+                Address = string.IsNullOrEmpty(tbAddress.Text) ? "No Address" : tbAddress.Text,
                 Savings = tbSavings.Text,
             };
             await db.CreatePartner(partner);
 
             School school = (await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString())).FirstOrDefault();
-            
+
             school.Partners.Value.Add(partner);
 
             await db.UpdateSchool(school);
@@ -102,7 +150,9 @@ namespace EduPartners.MVVM.View.Pages
 
             user.HomeSchool = school;
             await db.UpdateUser(user);
-            
+
+            lErrorMsg.Visibility = Visibility.Collapsed;
+
             MainControl mainControl = App.Current.Properties["MainControl"] as MainControl;
             mainControl.Load_Page("MVVM/View/Pages/ViewPartners.xaml");
         }
