@@ -54,8 +54,8 @@ Create a program for your school’s Career and Technical Education Department t
   - https://www.flaticon.com/free-icon/log-out_8944313?term=logout&page=1&position=21&origin=search&related_id=8944313
 - **Edit Icon:**
   - https://www.flaticon.com/free-icon/pencil_1828911?related_id=1828911
-- **Notification Icon:**
-  - https://www.flaticon.com/free-icon/bell_1827347?term=bell&page=1&position=4&origin=search&related_id=1827347
+- **Help Icon:**
+  - https://www.flaticon.com/free-icon/help_657093?term=help&page=1&position=59&origin=search&related_id=657093
 - **Search Icon:**
   - https://www.flaticon.com/free-icon/find_9177086?term=search&page=1&position=28&origin=search&related_id=9177086
 - **Clear Filter Icon:**
