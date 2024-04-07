@@ -197,7 +197,6 @@ D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Controls\SignUpControl.g
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Controls\UserPopup.g.cs
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\MainWindow.g.cs
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\AddPartners.g.cs
-D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\Notifications.g.cs
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\Profile.g.cs
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\ViewPartners.g.cs
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\App.g.cs
@@ -268,7 +267,6 @@ D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Controls\UserPopup.baml
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\MainWindow.baml
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\AddPartners.baml
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\Dashboard.baml
-D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\Notifications.baml
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\Profile.baml
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\ViewPartners.baml
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\Styles\MainStyle.baml
@@ -285,3 +283,5 @@ C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\Microsoft.Extensions.Dependenc
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\EditPartners.g.cs
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\EditPartners.baml
+D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\Help.g.cs
+D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\Help.baml

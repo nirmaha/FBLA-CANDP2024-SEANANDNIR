@@ -22,6 +22,6 @@ namespace EduPartners.MVVM.Model
         public string RepresentativePhoneNumber { get; set; } // Optional
         public string Website { get; set; } // Optional
         public string Address { get; set; } // Optional
-        public string Savings { get; set; } // Required
+        public double Savings { get; set; } // Required
     }
 }

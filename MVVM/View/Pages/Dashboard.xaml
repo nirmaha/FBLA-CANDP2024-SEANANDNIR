@@ -9,13 +9,65 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Dashboard">
 
-    <Grid Background="{DynamicResource SecundaryBackgroundColor}">
-        <TextBlock Text="Dashboard" FontSize="30" Foreground="{DynamicResource PrimaryTextColor}" FontWeight="Bold"
-                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        
-        <DVC:Chart Width="Auto" Height="Auto" InkCanvas.Top="80" InkCanvas.Left="10" Name="mcChart" Background="Beige">
-            <DVC:BarSeries Title="Customer Sales"/>
-            <DVC:BarSeries Title="Group Sales"/>
-        </DVC:Chart>
-    </Grid>
+    <Viewbox>
+        <DockPanel Dock="Top" Width="800" Height="450">
+            <Grid Background="{DynamicResource SecundaryBackgroundColor}">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical" Background="#ACC2DC">
+                    <Label Content="Industries" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="Black"/>
+                    <DVC:Chart Name="pieIndustry" Height="240" Margin="0,-40,0,0" BorderThickness="0">
+                        <DVC:Chart.Series>
+                            <DVC:PieSeries
+                            IndependentValueBinding="{Binding Path=Key}"  
+                            DependentValueBinding="{Binding Path=Value}"/>
+                        </DVC:Chart.Series>
+                    </DVC:Chart>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical" Background="#ACC2DC" Width="auto">
+                    <Label Content="Savings per Partner" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="Black"/>
+                    <DVC:Chart Name="barSavings" Height="240" Width="auto" Margin="0,-40,0,0" BorderThickness="0">
+                        <DVC:Chart.Series>
+                            <DVC:ColumnSeries Title="Savings in Dollars"
+                            IndependentValueBinding="{Binding Path=Key}"  
+                            DependentValueBinding="{Binding Path=Value}"/>
+                        </DVC:Chart.Series>
+                    </DVC:Chart>
+                </StackPanel>
+
+                <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical" Background="#ACC2DC">
+                    <Label Content="Partnerships Started per Year" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="Black"/>
+                    <DVC:Chart Name="lineNumofPartners" Height="240" Margin="0,-40,0,0" BorderThickness="0">
+                        <DVC:Chart.Series>
+                            <DVC:LineSeries Title="Number of Parnterships"
+                            IndependentValueBinding="{Binding Path=Key}"  
+                            DependentValueBinding="{Binding Path=Value}"/>
+                        </DVC:Chart.Series>
+                    </DVC:Chart>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical" Background="#ACC2DC">
+                    <Label Content="Industry Savings" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="Black"/>
+                    <DVC:Chart Name="barIndustry" Height="240" Margin="0,-40,0,0" BorderThickness="0">
+                        <DVC:Chart.Series>
+                            <DVC:BarSeries Title="Savings in Dollars"
+                            IndependentValueBinding="{Binding Path=Key}"  
+                            DependentValueBinding="{Binding Path=Value}"/>
+                        </DVC:Chart.Series>
+                    </DVC:Chart>
+                </StackPanel>
+            </Grid> 
+        </DockPanel>
+    </Viewbox>
+    
 </Page>

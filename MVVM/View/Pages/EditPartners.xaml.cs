@@ -145,7 +145,7 @@ namespace EduPartners.MVVM.View.Pages
                 RepresentativePhoneNumber = string.IsNullOrEmpty(tbRepresentativePhoneNumber.Text) ? "No Phone Number" : tbRepresentativePhoneNumber.Text,
                 Website = string.IsNullOrEmpty(tbWebsite.Text) ? "No Website" : tbWebsite.Text,
                 Address = string.IsNullOrEmpty(tbAddress.Text) ? "No Address" : tbAddress.Text,
-                Savings = tbSavings.Text,
+                Savings = double.Parse(tbSavings.Text),
             };
             await db.UpdatePartner(partner);
 

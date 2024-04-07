@@ -16,6 +16,8 @@ namespace EduPartners.MVVM.View.Controls
     /// </summary>
     public partial class MainControl : UserControl
     {
+        private Button curentMenuItem;
+
         public MainControl()
         {
             InitializeComponent();
@@ -41,7 +43,7 @@ namespace EduPartners.MVVM.View.Controls
             {
                 {"MVVM/View/Pages/ViewPartners.xaml",btnView },
                 {"MVVM/View/Pages/AddPartners.xaml",btnAdd },
-                {"MVVM/View/Pages/Notifications.xaml",btnNotifications },
+                {"MVVM/View/Pages/Help.xaml",btnHelp },
                 {"MVVM/View/Pages/Dashboard.xaml",btnDashboard },
                 {"MVVM/View/Pages/Profile.xaml",btnProfile },
 
@@ -51,7 +53,7 @@ namespace EduPartners.MVVM.View.Controls
             {
                 {"MVVM/View/Pages/ViewPartners.xaml",ViewMenuItem },
                 {"MVVM/View/Pages/AddPartners.xaml",AddMenuItem },
-                {"MVVM/View/Pages/Notifications.xaml",NotificationsMenuItem },
+                {"MVVM/View/Pages/Help.xaml", HelpItem },
                 {"MVVM/View/Pages/Dashboard.xaml",DashboardMenuItem },
                 {"MVVM/View/Pages/Profile.xaml",ProfileMenuItem },
             };
@@ -104,6 +106,7 @@ namespace EduPartners.MVVM.View.Controls
         private void btnView_Clicked(object sender, RoutedEventArgs e)
         {
             fContainer.Navigate(new Uri("MVVM/View/Pages/ViewPartners.xaml", UriKind.RelativeOrAbsolute));
+            curentMenuItem = (Button)sender;
         }
 
         private void btnAdd_MouseEnter(object sender, MouseEventArgs e)
@@ -126,28 +129,30 @@ namespace EduPartners.MVVM.View.Controls
         private void btnAdd_Clicked(object sender, RoutedEventArgs e)
         {
             fContainer.Navigate(new Uri("MVVM/View/Pages/AddPartners.xaml", UriKind.RelativeOrAbsolute));
+            curentMenuItem = (Button)sender;
         }
 
-        private void btnNotifications_MouseEnter(object sender, MouseEventArgs e)
+        private void btnHelp_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Tg_Btn.IsChecked == false)
             {
-                Popup.PlacementTarget = btnNotifications;
+                Popup.PlacementTarget = btnHelp;
                 Popup.Placement = PlacementMode.Right;
                 Popup.IsOpen = true;
-                Header.PopupText.Text = "Notifications";
+                Header.PopupText.Text = "Help";
             }
         }
 
-        private void btnNotifications_MouseLeave(object sender, MouseEventArgs e)
+        private void btnHelp_MouseLeave(object sender, MouseEventArgs e)
         {
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
         }
 
-        private void btnNotifications_Clicked(object sender, RoutedEventArgs e)
+        private void btnHelp_Clicked(object sender, RoutedEventArgs e)
         {
-            fContainer.Navigate(new Uri("MVVM/View/Pages/Notifications.xaml", UriKind.RelativeOrAbsolute));
+            fContainer.Navigate(new Uri("MVVM/View/Pages/Help.xaml", UriKind.RelativeOrAbsolute));
+            curentMenuItem = (Button)sender;
         }
 
         private void btnProfile_MouseEnter(object sender, MouseEventArgs e)
@@ -170,6 +175,7 @@ namespace EduPartners.MVVM.View.Controls
         private void btnProfile_Clicked(object sender, RoutedEventArgs e)
         {
             fContainer.Navigate(new Uri("MVVM/View/Pages/Profile.xaml", UriKind.RelativeOrAbsolute));
+            curentMenuItem = (Button)sender;
         }
 
         private void btnLogOut_MouseEnter(object sender, MouseEventArgs e)
@@ -247,8 +253,9 @@ namespace EduPartners.MVVM.View.Controls
                 MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
                 mainWindow.SetUserControl("HomePage");
             }
-            DashboardMenuItem.InternalMenu.IsChecked = true;
-            btnDashboard.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+
+            ((MenuItem)curentMenuItem.Content).InternalMenu.IsChecked = true;
+            curentMenuItem.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
     }
 }

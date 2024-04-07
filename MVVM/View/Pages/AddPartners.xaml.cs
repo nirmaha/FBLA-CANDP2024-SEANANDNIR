@@ -92,7 +92,7 @@ namespace EduPartners.MVVM.View.Pages
 
             bool emailMatch = Regex.IsMatch(tbRepresentativeEmail.Text, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
             bool phoneNumberMatch = tbRepresentativePhoneNumber.Text.Length == 14;
-            bool savingsMatch = Regex.IsMatch(tbSavings.Text, @"^[0-9,.]+$");
+            bool savingsMatch = Regex.IsMatch(tbSavings.Text, @"^[0-9.]+$");
 
             if (!emailMatch)
             {
@@ -129,7 +129,7 @@ namespace EduPartners.MVVM.View.Pages
                 RepresentativePhoneNumber = string.IsNullOrEmpty(tbRepresentativePhoneNumber.Text) ? "No Phone Number" : tbRepresentativePhoneNumber.Text,
                 Website = string.IsNullOrEmpty(tbWebsite.Text) ? "No Website" : tbWebsite.Text,
                 Address = string.IsNullOrEmpty(tbAddress.Text) ? "No Address" : tbAddress.Text,
-                Savings = tbSavings.Text,
+                Savings = double.Parse(tbSavings.Text),
             };
             await db.CreatePartner(partner);
 
