@@ -12,7 +12,6 @@ using System.Windows.Media;
 using EduPartners.Core;
 using EduPartners.MVVM.Model;
 using EduPartners.MVVM.View.Controls;
-using EduPartners.MVVM.ViewModel;
 
 namespace EduPartners.MVVM.View.Pages
 {
@@ -40,7 +39,7 @@ namespace EduPartners.MVVM.View.Pages
 
             this.Loaded += async (sender, e) =>
             {
-                partner = (await db.GetPartnerByName(App.Current.Properties["SelectedPartnerName"].ToString())).FirstOrDefault();
+                partner = (await db.GetPartnerById(((Partner)App.Current.Properties["SelectedPartner"]).Id.ToString())).FirstOrDefault();
 
                 DataContext = partner;
                 tbRepresentativePhoneNumber.Text = partner.RepresentativePhoneNumber == "No Phone Number" ? "" : partner.RepresentativePhoneNumber;

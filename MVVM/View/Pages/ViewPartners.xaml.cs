@@ -180,11 +180,11 @@ namespace EduPartners.MVVM.View.Pages
         private async void Edit_MouseDown(object sender, MouseButtonEventArgs e)
         {
             StackPanel borderParent = (StackPanel)((Border)sender).Parent;
-            Label partnerName = FindChild<Label>(borderParent.Parent, "lPartnerName");
+            Label partnerId = FindChild<Label>(borderParent.Parent, "lParnterId");
 
-            Partner partner = (await db.GetPartnerByName(partnerName.Content.ToString())).FirstOrDefault();
+            Partner partner = (await db.GetPartnerById(partnerId.Content.ToString())).FirstOrDefault();
 
-            App.Current.Properties["SelectedPartnerName"] = partner.Name;
+            App.Current.Properties["SelectedPartner"] = partner;
 
             MainControl mainControl = App.Current.Properties["MainControl"] as MainControl;
             mainControl.Load_Page("MVVM/View/Pages/EditPartners.xaml");
@@ -193,7 +193,7 @@ namespace EduPartners.MVVM.View.Pages
 
         private async void Delete_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            StackPanel borderParent = (StackPanel)((Border)((Image)sender).Parent).Parent;
+            StackPanel borderParent = (StackPanel)((Border)sender).Parent;
 
             MessageBoxResult deleteMsgBox = MessageBox.Show("Are you sure you want to delete this parnter?", "Delete Partner", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
 
@@ -202,9 +202,9 @@ namespace EduPartners.MVVM.View.Pages
                 return;
             }
 
-            Label partnerName = FindChild<Label>(borderParent.Parent, "lPartnerName");
+            Label partnerId = FindChild<Label>(borderParent.Parent, "lParnterId");
 
-            Partner partner = (await db.GetPartnerByName(partnerName.Content.ToString())).FirstOrDefault();
+            Partner partner = (await db.GetPartnerById(partnerId.Content.ToString())).FirstOrDefault();
 
             await db.DeletePartner(partner);
 

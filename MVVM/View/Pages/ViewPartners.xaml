@@ -37,9 +37,6 @@
                                 <RadioButton BorderThickness="0" Tag="ZA" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45" ToolTip="Filter Z-A" Click="FilterButton_Clicked">
                                     <Image Source="../../../Resources/zaFilter.png" Width="40" Height="40"/>
                                 </RadioButton>
-                                <RadioButton BorderThickness="0" Tag="" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45" ToolTip="" Click="FilterButton_Clicked">
-                                    
-                                </RadioButton>
                                 <RadioButton BorderThickness="0" Tag="clear" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45" ToolTip="Clear Filter" Click="FilterButton_Clicked">
                                     <Image Source="../../../Resources/clear-filter.png" Width="35" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </RadioButton>
@@ -106,14 +103,14 @@
                                                 <ColumnDefinition Width="47*"/>
                                             </Grid.ColumnDefinitions>
 
-
+                                            <Label Name="lParnterId" Content="{Binding Id}" Visibility="Collapsed"/>
                                             <Label Name="lPartnerName" Margin="11,0,0,0" Foreground="White" Content="{Binding Name}" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="23" Height="41"/>
                                             <StackPanel VerticalAlignment="Center" Grid.Column="1" Orientation="Horizontal" Panel.ZIndex="2">
                                                 <Border Margin="18,0,0,0" Cursor="Hand" BorderThickness="0" Background="Transparent" MouseDown="Edit_MouseDown">
                                                     <Image Source="../../../Resources/edit.png" Width="30" ToolTip="Edit"/>
                                                 </Border>
-                                                <Border Margin="5,0,0,0" Cursor="Hand" BorderThickness="0" Background="Transparent">
-                                                    <Image Source="../../../Resources/delete.png" Width="30" ToolTip="Delete" MouseDown="Delete_MouseDown"/>
+                                                <Border Margin="5,0,0,0" Cursor="Hand" BorderThickness="0" Background="Transparent" MouseDown="Delete_MouseDown">
+                                                    <Image Source="../../../Resources/delete.png" Width="30" ToolTip="Delete"/>
                                                 </Border>
                                             </StackPanel>
 
