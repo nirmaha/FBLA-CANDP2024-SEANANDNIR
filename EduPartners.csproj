@@ -276,6 +276,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="MVVM\View\Pages\EditPartners.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\Pages\Notifications.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -307,6 +311,9 @@
     </Compile>
     <Compile Include="MVVM\View\Pages\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\Pages\EditPartners.xaml.cs">
+      <DependentUpon>EditPartners.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\Pages\Notifications.xaml.cs">
       <DependentUpon>Notifications.xaml</DependentUpon>

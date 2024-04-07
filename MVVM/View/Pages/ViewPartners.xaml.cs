@@ -12,6 +12,7 @@ using System.Windows.Navigation;
 
 using EduPartners.Core;
 using EduPartners.MVVM.Model;
+using EduPartners.MVVM.View.Controls;
 using EduPartners.MVVM.ViewModel;
 
 namespace EduPartners.MVVM.View.Pages
@@ -176,8 +177,17 @@ namespace EduPartners.MVVM.View.Pages
         }
 
 
-        private void Edit_MouseDown(object sender, MouseButtonEventArgs e)
+        private async void Edit_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            StackPanel borderParent = (StackPanel)((Border)sender).Parent;
+            Label partnerName = FindChild<Label>(borderParent.Parent, "lPartnerName");
+
+            Partner partner = (await db.GetPartnerByName(partnerName.Content.ToString())).FirstOrDefault();
+
+            App.Current.Properties["SelectedPartnerName"] = partner.Name;
+
+            MainControl mainControl = App.Current.Properties["MainControl"] as MainControl;
+            mainControl.Load_Page("MVVM/View/Pages/EditPartners.xaml");
             e.Handled = true;
         }
 
@@ -322,12 +332,8 @@ namespace EduPartners.MVVM.View.Pages
                 }
             }
 
-
-
             viewModel.Items.Clear();
             partners.ForEach(filter => viewModel.Items.Add(filter));
         }
-
-
     }
 }

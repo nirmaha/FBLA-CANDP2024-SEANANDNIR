@@ -283,3 +283,5 @@ D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.pdb
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\DotNetProjects.DataVisualization.Toolkit.dll
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\EditPartners.g.cs
+D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\EditPartners.baml

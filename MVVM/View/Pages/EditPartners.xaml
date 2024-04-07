@@ -1,0 +1,92 @@
+﻿<Page x:Class="EduPartners.MVVM.View.Pages.EditPartners"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EduPartners.MVVM.View.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="EditPartners">
+
+    <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
+        <Viewbox>
+            <DockPanel Width="800" Height="450">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical">
+                         <Button Content="⬅" FontSize="48" Background="#1d3b7a" Foreground="White" Height="60" Width="60" Click="btnBack_Clicked" Margin="-680,20,0,0" Padding="0,-5,0,0" ToolTip="View Partners" />
+                        
+                        <StackPanel x:Name="spMain" Orientation="Vertical" Margin="55,-60,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <Label x:Name="lErrorMsg" Content="Please fix all marked fields" Visibility="Collapsed" FontSize="16" Foreground="Red" Margin="40,0,0,0" />
+                                <Label Content="* Indicates required field" FontSize="15" Foreground="#FFCC5241" Margin="40,0,0,0" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Company Name" FontSize="23" Foreground="White" Margin="40,0,0,0" />
+                                <Label Content="*" FontSize="23" Foreground="#FFCC5241" Margin="-7,0,0,0" />
+                            </StackPanel>
+                            <TextBox x:Name="tbName" Tag="required" Text="{Binding Name}" FontSize="23" Width="350" Height="36" BorderBrush="Gray" BorderThickness="2" Foreground="White" Background="{StaticResource PrimaryBackgroundColor}" Margin="45,0,0,0"/>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Description" FontSize="23" Foreground="White" Margin="40,0,0,0" />
+                                <Label Content="*" FontSize="23" Foreground="#FFCC5241" Margin="-7,0,0,0" />
+                            </StackPanel>
+                            <TextBox x:Name="tbDescription" Tag="required" Text="{Binding Description}" FontSize="23" Width="350" MinHeight="36" Margin="45,0,0,0" AcceptsReturn="True" TextWrapping="Wrap" 
+                                 VerticalScrollBarVisibility="Visible"  BorderBrush="Gray" BorderThickness="2" Foreground="White" Background="{StaticResource PrimaryBackgroundColor}" />
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Resources Available" FontSize="23" Foreground="White" Margin="40,0,0,0" />
+                                <Label Content="*" FontSize="23" Foreground="#FFCC5241" Margin="-7,0,0,0" />
+                            </StackPanel>
+                            <TextBox x:Name="tbResources" Tag="required" Text="{Binding ResourcesAvailable}" FontSize="23" Width="350" Height="36" BorderBrush="Gray" BorderThickness="2" Foreground="White" Background="{StaticResource PrimaryBackgroundColor}" Margin="45,0,0,0" />
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Industry" FontSize="25" Foreground="White" Margin="40,0,0,0" />
+                                <Label Content="*" FontSize="23" Foreground="#FFCC5241" Margin="-7,0,0,0" />
+                            </StackPanel>
+
+                            <Border Tag="required" Width="350" Height="38" Margin="45,0,0,0" BorderBrush="Gray" BorderThickness="2" Background="{StaticResource PrimaryBackgroundColor}">
+                                <ComboBox x:Name="cbType" FontSize="23" SelectedItem="{Binding Industry}"/>
+                            </Border>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Date that partnership began" FontSize="25" Foreground="White" Margin="40,0,0,0" />
+                                <Label Content="*" FontSize="23" Foreground="#FFCC5241" Margin="-7,0,0,0" />
+                            </StackPanel>
+                            <DatePicker x:Name="dpStartDate" Tag="required" SelectedDate="{Binding StartDate}" FontSize="23" Width="350" Height="40" BorderBrush="Gray" BorderThickness="2" Background="{StaticResource PrimaryBackgroundColor}" Margin="45,0,0,0" />
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Name of Representitve" FontSize="25" Foreground="White" Margin="40,0,0,0" />
+                                <Label Content="*" FontSize="23" Foreground="#FFCC5241" Margin="-7,0,0,0" />
+                            </StackPanel>
+                            <TextBox x:Name="tbRepresentativeName" Tag="required" Text="{Binding RepresentativeName}" FontSize="23" Width="350" Height="36" BorderBrush="Gray" BorderThickness="2" Foreground="White" Background="{StaticResource PrimaryBackgroundColor}" Margin="45,0,0,0" />
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Email of Representitve" FontSize="25" Foreground="White"  Margin="40,0,0,0" />
+                                <Label Content="*" FontSize="23" Foreground="#FFCC5241" Margin="-7,0,0,0" />
+                            </StackPanel>
+                            <TextBox x:Name="tbRepresentativeEmail" Tag="required" Text="{Binding RepresentativeEmail}" FontSize="23" Width="350" Height="36" BorderBrush="Gray" BorderThickness="2" Foreground="White" Background="{StaticResource PrimaryBackgroundColor}" Margin="45,0,0,0" />
+
+                            <Label Content="Phone # of Representitve" FontSize="25" Foreground="White" Margin="40,0,0,0" />
+                            <TextBox x:Name="tbRepresentativePhoneNumber" Tag="optional" FontSize="23" Width="350" Height="36" BorderBrush="Gray" BorderThickness="2" Foreground="White" Background="{StaticResource PrimaryBackgroundColor}" Margin="45,0,0,0" TextChanged="PhoneNumber_Changed" MaxLength="14" />
+
+                            <Label Content="Website" FontSize="25" Foreground="White" Margin="40,0,0,0" />
+                            <TextBox x:Name="tbWebsite" Tag="optional" FontSize="23" Width="350" Height="36" BorderBrush="Gray" BorderThickness="2" Foreground="White" Background="{StaticResource PrimaryBackgroundColor}" Margin="45,0,0,0" />
+
+                            <Label Content="Business Address" FontSize="25" Foreground="White" Margin="40,0,0,0" />
+                            <TextBox x:Name="tbAddress" Tag="optional" FontSize="23" Width="350" Height="36" BorderBrush="Gray" BorderThickness="2" Foreground="White" Background="{StaticResource PrimaryBackgroundColor}" Margin="45,0,0,0" />
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Savings Due to Business (Per Year)" FontSize="25" Foreground="White" Margin="40,0,0,0" />
+                                <Label Content="*" FontSize="23" Foreground="#FFCC5241" Margin="-7,0,0,0" />
+                            </StackPanel>
+                            <TextBox x:Name="tbSavings" Tag="required" Text="{Binding Savings}" FontSize="23" Width="350" Height="36" BorderBrush="Gray" BorderThickness="2" Foreground="White" Background="{StaticResource PrimaryBackgroundColor}" Margin="45,0,0,0" />
+
+                            <Button Content="Update Partner" FontSize="25" Width="178" Height="40" IsDefault="True" Background="Blue" Click="UpdatePartner_Clicked"  Margin="45,20,0,0" />
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </DockPanel>
+        </Viewbox>
+    </Border>
+</Page>
