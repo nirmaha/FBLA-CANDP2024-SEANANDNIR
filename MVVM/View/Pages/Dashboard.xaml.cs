@@ -72,12 +72,11 @@ namespace EduPartners.MVVM.View.Pages
                     }
 
                 }
-
                 ((PieSeries)pieIndustry.Series[0]).ItemsSource = IndustryPopulation;
                 ((ColumnSeries)barSavings.Series[0]).ItemsSource = PartnerToSavings;
                 ((LineSeries)lineNumofPartners.Series[0]).ItemsSource = YearToParnters;
                 ((BarSeries)barIndustry.Series[0]).ItemsSource = IndustryToSavings;
-                 
+                
             };
         }
     }
