@@ -66,8 +66,7 @@
                         </DVC:Chart.Series>
                     </DVC:Chart>
                 </StackPanel>
-            </Grid> 
+            </Grid>
         </DockPanel>
     </Viewbox>
-    
 </Page>

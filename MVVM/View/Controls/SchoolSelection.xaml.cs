@@ -27,12 +27,15 @@ namespace EduPartners.MVVM.View.Controls
             
             db = App.Current.Properties["Database"] as Database;
 
+            lErrorMessage.Visibility = Visibility.Collapsed;
+
             this.Loaded += SchoolSelection_Loaded;
         }
 
         private void SchoolSelection_Loaded(object sender, RoutedEventArgs e)
         {
             PopulateComboBox();
+            lErrorMessage.Visibility = Visibility.Collapsed;
         }
 
         private async void PopulateComboBox()

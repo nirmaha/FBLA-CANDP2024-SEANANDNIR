@@ -10,9 +10,23 @@ namespace EduPartners.MVVM.Model
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
+
+        [BsonRequired]
         public string Name { get; set; }
+
+        [BsonRequired]
         public string Email { get; set; }
+
+        public string About { get; set; }
+
+        public string PhoneNumber { get; set; }
+
+        [BsonRequired]
         public string Password { get; set; }
+
+        public string ProfileImage { get; set; }
+
+        [BsonRequired]
         public School HomeSchool { get; set; }
     }
 }

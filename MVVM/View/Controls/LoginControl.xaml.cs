@@ -37,6 +37,7 @@ namespace EduPartners.MVVM.View.Controls
 
         private void LoginControl_Loaded(object sender, RoutedEventArgs e)
         {
+            lErrorMessage.Visibility = Visibility.Collapsed;
 
             App.Current.Properties["FirstName"] = "";
             App.Current.Properties["LastName"] = "";
@@ -55,6 +56,7 @@ namespace EduPartners.MVVM.View.Controls
                 tbEmail.Focus();
             }
 
+          
             if (iniFile.GetValue("SECURITY", "PASSWORDLOGIN") != "" && iniFile.GetValue("SECURITY", "DATELOGINSAVED") != "" && !HasPassedDays(Convert.ToDateTime(iniFile.GetValue("SECURITY", "DATELOGINSAVED")), 30))
             {
                 cbRememberMe.IsChecked = true;
@@ -65,6 +67,12 @@ namespace EduPartners.MVVM.View.Controls
                 pbPassword.Password = "";
                 iniFile.SetValue("SECURITY", "PASSWORDLOGIN", "");
                 iniFile.Save();
+            }
+
+            if (iniFile.GetValue("SECURITY", "PASSWORDLOGIN") == "null")
+            {
+                cbRememberMe.IsChecked = true;
+                pbPassword.Password = "";
             }
         }
 
@@ -157,6 +165,12 @@ namespace EduPartners.MVVM.View.Controls
             User logingInUser = null;
             IniFile iniFile = new IniFile(filePath, localDataPath);
 
+            if (user == null)
+            {
+                lErrorMessage.Visibility = Visibility.Visible;
+                lErrorMessage.Content = "Username / Password is incorrect.";
+                return;
+            }
 
             if (tbEmail.Text == user.Email && BCrypts.Verify(pbPassword.Password, user.Password))
             {

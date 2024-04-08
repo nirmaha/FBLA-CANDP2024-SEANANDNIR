@@ -42,6 +42,12 @@ namespace EduPartners.Core
                 Debug.WriteLine("Could not connect to Database");
                 Debug.WriteLine(ex); 
             }
+
+            IMongoCollection<User> users = GetDBCollection<User>(UserCollection);
+            IndexKeysDefinition<User> UnquieIndex = Builders<User>.IndexKeys.Ascending(user => user.Email);
+            CreateIndexOptions Options = new CreateIndexOptions() { Unique = true };
+            CreateIndexModel<User> model = new CreateIndexModel<User>(UnquieIndex, Options);
+            users.Indexes.CreateOne(model);
         }
 
         private IMongoCollection<T> GetDBCollection<T>(string Collection)

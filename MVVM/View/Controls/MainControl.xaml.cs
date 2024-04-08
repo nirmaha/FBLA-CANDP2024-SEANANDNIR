@@ -1,6 +1,4 @@
-﻿using Amazon.Runtime.Internal.Transform;
-using EduPartners.MVVM.View.Pages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
@@ -252,6 +250,7 @@ namespace EduPartners.MVVM.View.Controls
                 App.Current.Properties["User"] = "";
                 MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
                 mainWindow.SetUserControl("HomePage");
+                return;
             }
 
             ((MenuItem)curentMenuItem.Content).InternalMenu.IsChecked = true;

@@ -24,12 +24,15 @@ namespace EduPartners.MVVM.View.Controls
 
             db = App.Current.Properties["Database"] as Database;
 
+            lErrorMessage.Visibility = Visibility.Collapsed;
+
             this.Loaded += SignUpControl_Loaded;
 
         }
 
         private void SignUpControl_Loaded(object sender, RoutedEventArgs e)
         {
+            lErrorMessage.Visibility = Visibility.Collapsed;
 
             if (!(string.IsNullOrEmpty(App.Current.Properties["FirstName"]?.ToString())))
             {

@@ -5,13 +5,198 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:EduPartners.MVVM.View.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="800" FontFamily="Poppins"
       Title="Profile">
 
-    <Grid>
-        <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
-            <TextBlock Text="Profile" FontSize="30" Foreground="{DynamicResource PrimaryTextColor}" FontWeight="Bold"
-                 VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        </Border>
-    </Grid>
+    
+    <Viewbox>
+        <DockPanel Background="{StaticResource SecundaryBackgroundColor}" Height="450" Width="800">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+
+                <Grid Grid.Column="0" Background="{StaticResource PrimaryBackgroundColor}">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="150"/>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Ellipse Grid.Row="0" Width="120" Height="120" Stroke="{StaticResource TextTertiaryColor}" StrokeThickness="6" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0" MouseDown="ProfileCircle_MouseDown">
+                        <!-- Use a VisualBrush with the Image as its Visual to fill the Ellipse -->
+                        <Ellipse.Fill>
+                            <VisualBrush>
+                                <VisualBrush.Visual>
+                                    <!-- Define the Image control -->
+                                    <Image x:Name="imgProfile" Source="../../../Resources/defaultProfile.png" Stretch="UniformToFill"/>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+
+                        </Ellipse.Fill>
+                    </Ellipse>
+                     <Ellipse x:Name="overlayEllipse" Grid.Row="0" Width="120" Height="120" Fill="Gray" Opacity="0" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+                    <Image x:Name="imgEdit" Source="../../../Resources/edit.png" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" MouseDown="ProfileCircle_MouseDown"/>
+
+
+                    <Label Grid.Row="1" Content="{Binding Name}" Foreground="{StaticResource PrimaryTextColor}" FontSize="23" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                    <Label Grid.Row="2" Content="{Binding Email}" Foreground="{StaticResource TextSecundaryColor}" FontSize="15" HorizontalAlignment="Center"/>
+                    <Label Grid.Row="4" Content="About" Foreground="{StaticResource PrimaryBlueColor}" FontSize="23" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                    <TextBox x:Name="tbAbout" Grid.Row="5" Text="{Binding About}" HorizontalContentAlignment="Center" Background="Transparent" BorderThickness="0" IsReadOnly="True" CaretBrush="White" Foreground="{StaticResource PrimaryTextColor}" FontSize="13" HorizontalAlignment="Center" TextWrapping="Wrap" Width="230" Margin="0,5,0,10"/>
+                </Grid>
+
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="45"/> 
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Bottom">
+                        <Label x:Name="lErrorMsg" Content="Please fix all marked fields" Visibility="Collapsed" FontSize="16" Foreground="Red" Margin="-4,0,0,0" />
+                        <Label Content="* Indicates required field" FontSize="14" Foreground="#FFCC5241" Margin="-4,0,0,0" />
+                    </StackPanel>
+
+                    <Label Grid.Row="1" Content="Personal Details" Foreground="{StaticResource PrimaryBlueColor}" FontWeight="SemiBold" FontSize="18" Margin="-4,10,0,0"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+
+                        <StackPanel Orientation="Vertical">
+
+                            <StackPanel Height="25" Orientation="Horizontal">
+                                <Label Content="Full Name" Foreground="White" FontSize="15" Margin="-4,0,0,0"/>
+                                <Label Content="*" FontSize="23" Foreground="#FFCC5241" Margin="-8,-3,0,0" />
+                            </StackPanel>
+                            
+                            <TextBox x:Name="tbName" Text="{Binding Name}" Background="{StaticResource PrimaryBackgroundColor}" CaretBrush="White" Foreground="White" BorderBrush="{StaticResource FourthIconColor}" BorderThickness="2" Height="23" Width="245" IsReadOnly="True"/>
+                        </StackPanel>  
+                                
+                        <StackPanel Margin="15,0,0,0" Orientation="Vertical">
+                            
+                            <StackPanel Height="25" Orientation="Horizontal">
+                                <Label Content="Email" Foreground="White" FontSize="15" Margin="-4,0,0,0"/>
+                                <Label Content="*" FontSize="23" Foreground="#FFCC5241" Margin="-8,-3,0,0" />
+                            </StackPanel>
+                            
+                            <TextBox x:Name="tbEmail" Text="{Binding Email}" Background="{StaticResource PrimaryBackgroundColor}" CaretBrush="White" Foreground="White" BorderBrush="{StaticResource FourthIconColor}" BorderThickness="2" Height="23" Width="245" IsReadOnly="True"/>
+                        </StackPanel>
+                                
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal">
+
+                        <StackPanel Grid.Row="2" Orientation="Vertical">
+                            <Label Content="Phone Number" Foreground="White" FontSize="15" Margin="-4,0,0,0"/>
+                            <TextBox x:Name="tbPhoneNumber" Text="{Binding PhoneNumber}" Background="{StaticResource PrimaryBackgroundColor}" CaretBrush="White" Foreground="White" BorderBrush="{StaticResource FourthIconColor}" HorizontalAlignment="Left" BorderThickness="2" Height="23" Width="245" TextChanged="PhoneNumber_Changed" IsReadOnly="True"/>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <StackPanel x:Name="spChangePwrd" Grid.Row="4" Visibility="Collapsed">
+                        <Label Content="Change Password" Foreground="{StaticResource PrimaryBlueColor}" FontWeight="SemiBold" FontSize="18" Margin="-4,0,0,0"/>
+
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Vertical">
+                                <Label Content="Current Password" Foreground="White" FontSize="15" Margin="-4,0,0,0"/>
+                                <TextBox x:Name="tbCurrentPwrd" Text="" Background="{StaticResource PrimaryBackgroundColor}" CaretBrush="White" Foreground="White" BorderBrush="{StaticResource FourthIconColor}" HorizontalAlignment="Left" BorderThickness="2" Height="23" Width="245"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Margin="15,0,0,0">
+                                <Label Content="New Password" Foreground="White" FontSize="15" Margin="-4,0,0,0"/>
+                                <TextBox x:Name="tbChangedPwrd" Background="{StaticResource PrimaryBackgroundColor}" CaretBrush="White" Foreground="White" BorderBrush="{StaticResource FourthIconColor}" HorizontalAlignment="Left" BorderThickness="2" Height="23" Width="245"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Margin="0,8,0,0">
+                            <Label Content="Confirm New Password" Foreground="White" FontSize="15" Margin="-4,0,0,0"/>
+                            <TextBox x:Name="tbConfirmPwrd" Background="{StaticResource PrimaryBackgroundColor}" CaretBrush="White" Foreground="White" BorderBrush="{StaticResource FourthIconColor}" HorizontalAlignment="Left" BorderThickness="2" Height="23" Width="245"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Margin="0,5,0,0">
+                        <Label Content="Homeschool" Foreground="{StaticResource PrimaryBlueColor}" FontWeight="SemiBold" FontSize="18" Margin="-4,0,0,0"/>
+                        <Label Content="{Binding HomeSchool.Name}" Foreground="{StaticResource TextSecundaryColor}" FontWeight="Medium" HorizontalAlignment="Left" BorderThickness="2" Margin="-4,-6,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="6" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,8,8">
+                        <Button x:Name="btCancel" Content="Cancel" Height="30" Width="70" Foreground="{StaticResource PrimaryTextColor}" BorderThickness="0" Visibility="Collapsed" Click="btCancel_Click">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="SlateGray"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="Gray"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+
+                        <Button x:Name="btUpdate" Content="Update" Height="30" Width="70" Foreground="{StaticResource PrimaryTextColor}" BorderThickness="0" Margin="5,0,0,0" Click="btUpdate_Click">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="{StaticResource PrimaryBlueColor}"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="CornflowerBlue"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+
+                        <Button x:Name="btSave" Content="Save" Height="30" Width="70" Foreground="{StaticResource PrimaryTextColor}" BorderThickness="0" Margin="5,0,0,0" Visibility="Collapsed" Click="btSave_Click">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="Green"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="LightGreen"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </DockPanel>
+    </Viewbox>
 </Page>
