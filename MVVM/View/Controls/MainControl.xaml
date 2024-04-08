@@ -71,9 +71,7 @@
                         </Button>
                         <Button x:Name="btnProfile" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnProfile_MouseEnter" MouseLeave="btnProfile_MouseLeave" Click="btnProfile_Clicked">
                             <ctls:MenuItem x:Name="ProfileMenuItem" GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource EmptyGeometry}" IconWidth="16" Text="Profile" VerticalAlignment="Center">
-                                <!--<ctls:MenuItem.ImageSource>
-                                    <BitmapImage UriSource=""/>
-                                </ctls:MenuItem.ImageSource>-->
+                                
                             </ctls:MenuItem>
                         </Button>
                         <Button x:Name="btnHelp" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnHelp_MouseEnter" MouseLeave="btnHelp_MouseLeave" Click="btnHelp_Clicked">

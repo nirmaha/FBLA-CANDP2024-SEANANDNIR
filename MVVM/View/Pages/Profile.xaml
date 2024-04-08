@@ -42,8 +42,8 @@
 
                         </Ellipse.Fill>
                     </Ellipse>
-                     <Ellipse x:Name="overlayEllipse" Grid.Row="0" Width="120" Height="120" Fill="Gray" Opacity="0" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0"/>
-                    <Image x:Name="imgEdit" Source="../../../Resources/edit.png" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" MouseDown="ProfileCircle_MouseDown"/>
+                    <Ellipse x:Name="overlayEllipse" Grid.Row="0" Width="120" Height="120" Fill="Gray" Opacity="0" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+                    <Image x:Name="imgEdit" Source="../../../Resources/profileEdit.png" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" Margin="-1,13,0,0" MouseDown="ProfileCircle_MouseDown"/>
 
 
                     <Label Grid.Row="1" Content="{Binding Name}" Foreground="{StaticResource PrimaryTextColor}" FontSize="23" FontWeight="SemiBold" HorizontalAlignment="Center"/>

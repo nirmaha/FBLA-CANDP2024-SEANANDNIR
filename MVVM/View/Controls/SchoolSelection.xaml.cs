@@ -42,6 +42,8 @@ namespace EduPartners.MVVM.View.Controls
         {
             List<School> schools = await db.GetSchools();
 
+            schools.Sort();
+
             foreach (School school in schools)
             {
                 cbSchool.Items.Add(school.Name);

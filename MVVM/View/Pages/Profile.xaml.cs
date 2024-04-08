@@ -45,7 +45,14 @@ namespace EduPartners.MVVM.View.Pages
             this.Loaded += async (sender, e) => 
             {
                 currentUser = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
-                imgProfile.Source = new BitmapImage(new Uri($"{currentUser.ProfileImage}", UriKind.RelativeOrAbsolute));
+                if (!File.Exists(Path.Combine(localDataPath, currentUser.ProfileImage)))
+                {
+                    imgProfile.Source = new BitmapImage(new Uri("/EduPartners;component/Resources/defaultProfile.png"));
+                }
+                else
+                { 
+                    imgProfile.Source = new BitmapImage(new Uri($"{Path.Combine(localDataPath, currentUser.ProfileImage)}", UriKind.RelativeOrAbsolute));
+                }
 
                 DataContext = currentUser;
             };
@@ -207,6 +214,7 @@ namespace EduPartners.MVVM.View.Pages
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog()
                 {
+                    Title = "Selete a Profile Image",
                     Filter = "Images (*.png, *.jpg, *gif, *.bmp) | *.png;*.jpg;*.gif;*.bmp",
                     InitialDirectory = "C:\\",
                     CheckFileExists = true,
@@ -220,7 +228,7 @@ namespace EduPartners.MVVM.View.Pages
                         File.Copy(openFileDialog.FileName, Path.Combine(localDataPath, Path.GetFileName(openFileDialog.FileName)));
                     }
 
-                    currentUser.ProfileImage = Path.Combine(localDataPath, Path.GetFileName(openFileDialog.FileName));
+                    currentUser.ProfileImage = Path.GetFileName(openFileDialog.FileName);
                     imgProfile.Source = new BitmapImage(new Uri($"{Path.Combine(localDataPath, Path.GetFileName(openFileDialog.FileName))}", UriKind.RelativeOrAbsolute));
 
                     await db.UpdateUser(currentUser);

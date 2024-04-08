@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+
+using EduPartners.Core;
+using EduPartners.MVVM.Model;
 
 namespace EduPartners.MVVM.View.Controls
 {
@@ -15,16 +21,33 @@ namespace EduPartners.MVVM.View.Controls
     public partial class MainControl : UserControl
     {
         private Button curentMenuItem;
+        private Database db;
+
+        private static string localDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "EduPartners");
 
         public MainControl()
         {
             InitializeComponent();
+
+            db = App.Current.Properties["Database"] as Database;
+
             this.Loaded += MainControl_Loaded;
             App.Current.Properties["MainControl"] = this;
         }
 
-        private void MainControl_Loaded(object sender, RoutedEventArgs e)
+        private async void MainControl_Loaded(object sender, RoutedEventArgs e)
         {
+            User user = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
+
+         /*   if (!File.Exists(Path.Combine(localDataPath, user.ProfileImage)))
+            {
+                ProfileMenuItem.ImageSource = null;
+            }
+            else
+            {
+                ProfileMenuItem.ImageSource = new BitmapImage(new Uri(Path.Combine(localDataPath, user.ProfileImage), UriKind.RelativeOrAbsolute)) ?? new BitmapImage(new Uri(null, UriKind.RelativeOrAbsolute));
+            }*/
+
             DashboardMenuItem.InternalMenu.IsChecked = true;
             btnDashboard.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
