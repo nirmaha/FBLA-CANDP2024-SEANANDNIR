@@ -98,7 +98,7 @@
 
                         <StackPanel Grid.Row="2" Orientation="Vertical">
                             <Label Content="Phone Number" Foreground="White" FontSize="15" Margin="-4,0,0,0"/>
-                            <TextBox x:Name="tbPhoneNumber" Text="{Binding PhoneNumber}" Background="{StaticResource PrimaryBackgroundColor}" CaretBrush="White" Foreground="White" BorderBrush="{StaticResource FourthIconColor}" HorizontalAlignment="Left" BorderThickness="2" Height="23" Width="245" TextChanged="PhoneNumber_Changed" IsReadOnly="True"/>
+                            <TextBox x:Name="tbPhoneNumber" Text="{Binding PhoneNumber}" Background="{StaticResource PrimaryBackgroundColor}" CaretBrush="White" Foreground="White" BorderBrush="{StaticResource FourthIconColor}" HorizontalAlignment="Left" BorderThickness="2" Height="23" Width="245" TextChanged="PhoneNumber_Changed" MaxLength="14" IsReadOnly="True"/>
                         </StackPanel>
 
                     </StackPanel>

@@ -45,8 +45,9 @@ namespace EduPartners.MVVM.View.Pages
             this.Loaded += async (sender, e) => 
             {
                 currentUser = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
+                imgProfile.Source = new BitmapImage(new Uri($"{currentUser.ProfileImage}", UriKind.RelativeOrAbsolute));
 
-                DataContext = currentUser;    
+                DataContext = currentUser;
             };
         }
 
@@ -61,7 +62,7 @@ namespace EduPartners.MVVM.View.Pages
 
             tbAbout.IsReadOnly = false;
             tbAbout.BorderThickness = new Thickness(1);
-            tbAbout.HorizontalContentAlignment = HorizontalAlignment.Left;
+            tbAbout.HorizontalContentAlignment = HorizontalAlignment.Center;
 
             tbEmail.IsReadOnly = false;
             tbName.IsReadOnly = false;

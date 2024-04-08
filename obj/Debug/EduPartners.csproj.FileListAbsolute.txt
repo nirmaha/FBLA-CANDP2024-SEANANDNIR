@@ -76,7 +76,6 @@ C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Controls\MainControl
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Controls\SchoolSelection.g.cs
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Controls\SignUpControl.g.cs
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\AddPartners.g.cs
-C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\Notifications.g.cs
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\ViewPartners.g.cs
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Controls\CreateSchool.baml
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Controls\HomePage.baml
@@ -85,7 +84,6 @@ C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Controls\MainControl
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Controls\SchoolSelection.baml
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Controls\SignUpControl.baml
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\AddPartners.baml
-C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\Notifications.baml
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\ViewPartners.baml
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\Profile.g.cs
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\Profile.baml
@@ -285,3 +283,7 @@ D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\EditPartners.g.cs
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\EditPartners.baml
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\Help.g.cs
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\Help.baml
+C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\EditPartners.g.cs
+C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\Help.g.cs
+C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\EditPartners.baml
+C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\Help.baml
