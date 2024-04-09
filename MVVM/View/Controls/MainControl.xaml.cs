@@ -41,11 +41,11 @@ namespace EduPartners.MVVM.View.Controls
 
             if (!File.Exists(Path.Combine(localDataPath, user.ProfileImage)))
             {
-                imgProfile.ImageSource = new BitmapImage(new Uri("../../../Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
+                imgProfile.ImageSource = new BitmapImage(new Uri("pack://application:,,,/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
             }
             else
             {
-                imgProfile.ImageSource = new BitmapImage(new Uri(Path.Combine(localDataPath, user.ProfileImage), UriKind.RelativeOrAbsolute)) ?? new BitmapImage(new Uri("../../../Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
+                imgProfile.ImageSource = new BitmapImage(new Uri(Path.Combine(localDataPath, user.ProfileImage), UriKind.RelativeOrAbsolute)) ?? new BitmapImage(new Uri("pack://application:,,,/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
             }
 
             DashboardMenuItem.InternalMenu.IsChecked = true;
@@ -298,11 +298,11 @@ namespace EduPartners.MVVM.View.Controls
             User user = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
             if (!File.Exists(Path.Combine(localDataPath, user.ProfileImage)))
             {
-                imgProfile.ImageSource = new BitmapImage(new Uri("../../../Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
+                imgProfile.ImageSource = new BitmapImage(new Uri("pack://application:,,,/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
             }
             else
             {
-                imgProfile.ImageSource = new BitmapImage(new Uri(Path.Combine(localDataPath, user.ProfileImage), UriKind.RelativeOrAbsolute)) ?? new BitmapImage(new Uri("../../../Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
+                imgProfile.ImageSource = new BitmapImage(new Uri(Path.Combine(localDataPath, user.ProfileImage), UriKind.RelativeOrAbsolute)) ?? new BitmapImage(new Uri("pack://application:,,,/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
             }
         }
     }
