@@ -292,5 +292,18 @@ namespace EduPartners.MVVM.View.Controls
             ((MenuItem)curentMenuItem.Content).InternalMenu.IsChecked = true;
             curentMenuItem.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
+
+        public async void UpdateProfileImage()
+        {
+            User user = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
+            if (!File.Exists(Path.Combine(localDataPath, user.ProfileImage)))
+            {
+                imgProfile.ImageSource = new BitmapImage(new Uri("../../../Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
+            }
+            else
+            {
+                imgProfile.ImageSource = new BitmapImage(new Uri(Path.Combine(localDataPath, user.ProfileImage), UriKind.RelativeOrAbsolute)) ?? new BitmapImage(new Uri("../../../Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
+            }
+        }
     }
 }

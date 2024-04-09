@@ -387,3 +387,5 @@ C:\AM\Projects\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.exe
 C:\AM\Projects\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.pdb
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Controls\HomeHelpControl.g.cs
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Controls\HomeHelpControl.baml
+C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Controls\HomeHelpControl.g.cs
+C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Controls\HomeHelpControl.baml

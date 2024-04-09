@@ -116,7 +116,7 @@
                  <Run Text="If additional help is required to manage your partners from our application please visit the help center in our Dashboard." Foreground="{StaticResource PrimaryTextColor}" FontSize="13"/>
             </TextBlock>
 
-            <Label Grid.Row="14" Content="Click this entire process look out for red text as they indicate incorrect input." FontWeight="SemiBold" Foreground="{StaticResource PrimaryTextColor}" FontSize="15"/>
+            <Label Grid.Row="14" Content="Throughout this entire process look out for red text as they indicate incorrect input." FontWeight="SemiBold" Foreground="{StaticResource PrimaryTextColor}" FontSize="15"/>
 
         </Grid>
 </UserControl>

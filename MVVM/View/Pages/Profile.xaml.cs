@@ -19,6 +19,7 @@ using BCrypts = BCrypt.Net.BCrypt;
 using EduPartners.Core;
 using EduPartners.MVVM.Model;
 using Microsoft.Win32;
+using EduPartners.MVVM.View.Controls;
 
 namespace EduPartners.MVVM.View.Pages
 {
@@ -232,6 +233,8 @@ namespace EduPartners.MVVM.View.Pages
                     imgProfile.Source = new BitmapImage(new Uri($"{Path.Combine(localDataPath, Path.GetFileName(openFileDialog.FileName))}", UriKind.RelativeOrAbsolute));
 
                     await db.UpdateUser(currentUser);
+                    MainControl mainControl = App.Current.Properties["MainControl"] as MainControl;
+                    mainControl.UpdateProfileImage();
                 }
             }
         }
