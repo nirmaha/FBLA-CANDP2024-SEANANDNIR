@@ -72,7 +72,7 @@ namespace EduPartners.MVVM.View.Pages
 
             tbAbout.IsReadOnly = false;
             tbAbout.BorderThickness = new Thickness(1);
-            tbAbout.HorizontalContentAlignment = HorizontalAlignment.Center;
+            tbAbout.HorizontalContentAlignment = HorizontalAlignment.Left;
 
             tbEmail.IsReadOnly = false;
             tbName.IsReadOnly = false;
