@@ -39,14 +39,14 @@ namespace EduPartners.MVVM.View.Controls
         {
             User user = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
 
-         /*   if (!File.Exists(Path.Combine(localDataPath, user.ProfileImage)))
+            if (!File.Exists(Path.Combine(localDataPath, user.ProfileImage)))
             {
-                ProfileMenuItem.ImageSource = null;
+                imgProfile.ImageSource = new BitmapImage(new Uri("../../../Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
             }
             else
             {
-                ProfileMenuItem.ImageSource = new BitmapImage(new Uri(Path.Combine(localDataPath, user.ProfileImage), UriKind.RelativeOrAbsolute)) ?? new BitmapImage(new Uri(null, UriKind.RelativeOrAbsolute));
-            }*/
+                imgProfile.ImageSource = new BitmapImage(new Uri(Path.Combine(localDataPath, user.ProfileImage), UriKind.RelativeOrAbsolute)) ?? new BitmapImage(new Uri("../../../Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
+            }
 
             DashboardMenuItem.InternalMenu.IsChecked = true;
             btnDashboard.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
@@ -274,6 +274,19 @@ namespace EduPartners.MVVM.View.Controls
                 MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
                 mainWindow.SetUserControl("HomePage");
                 return;
+            }
+
+            if (curentMenuItem.Name == "btnProfile")
+            {
+                foreach (object child in ((Grid)curentMenuItem.Content).Children)
+                {
+                    if (child is MenuItem menuItem)
+                    { 
+                        menuItem.InternalMenu.IsChecked = true;
+                        menuItem.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                        return;
+                    }
+                }
             }
 
             ((MenuItem)curentMenuItem.Content).InternalMenu.IsChecked = true;

@@ -49,6 +49,7 @@ namespace EduPartners.MVVM.View
                 {"SignUpControl",   new SignUpControl()},
                 {"CreateSchool",    new CreateSchool()},
                 {"SchoolSelection", new SchoolSelection()},
+                {"HomeHelpControl", new HomeHelpControl()},
             };
         }
 

@@ -47,7 +47,7 @@ namespace EduPartners.MVVM.View.Pages
                 currentUser = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
                 if (!File.Exists(Path.Combine(localDataPath, currentUser.ProfileImage)))
                 {
-                    imgProfile.Source = new BitmapImage(new Uri("/EduPartners;component/Resources/defaultProfile.png"));
+                    imgProfile.Source = new BitmapImage(new Uri("/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
                 }
                 else
                 { 

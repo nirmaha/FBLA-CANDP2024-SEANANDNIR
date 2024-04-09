@@ -1,0 +1,122 @@
+﻿<UserControl x:Class="EduPartners.MVVM.View.Controls.HomeHelpControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EduPartners.MVVM.View.Controls"
+             mc:Ignorable="d" Name="Help"
+             d:DesignHeight="450" d:DesignWidth="800" FontFamily="Poppins">
+    
+        <Grid Background="{StaticResource SecundaryBackgroundColor}">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="28" />
+                <RowDefinition Height="28"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="45"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="12"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+            <Button Content="&lt;" Margin="4,0,0,0" Padding="-2,-3,0,0" BorderThickness="0" Width="30" Height="30" Foreground="LightGray" FontSize="30" ToolTip="Back" Click="btBack_Click">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-2,-3,0,0"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Gray"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+                <TextBlock Grid.Row="0" FontSize="20" FontWeight="SemiBold" Margin="10,10,0,0">
+                    <Run Text="Welcome to" Foreground="{StaticResource PrimaryTextColor}"/>
+                    <Run Text="EduPartners" Foreground="{StaticResource PrimaryBlueColor}"/>
+                </TextBlock>
+            </StackPanel>
+
+            <Label Grid.Row="1" Content="To get started please follow these steps:" Foreground="{StaticResource PrimaryTextColor}" FontSize="15"/>
+            <Label Grid.Row="2" Content="If another administrator from your school has already created the school in this application then proceed to step 2." Foreground="DarkGray" FontSize="12"/>
+            
+            <TextBlock Grid.Row="3" Margin="10,0,0,0">
+                <Run Text="1. " Foreground="{StaticResource PrimaryBlueColor}" FontWeight="SemiBold" FontSize="16"/>
+                <Run Text="Create the school you would like to track partnership data for." Foreground="{StaticResource PrimaryTextColor}" FontSize="13"/>
+            </TextBlock>            
+            
+            <TextBlock Grid.Row="4" Margin="10,0,0,0">
+                <Run Text="2. " Foreground="{StaticResource PrimaryBlueColor}" FontWeight="SemiBold" FontSize="16"/>
+                <Run Text="Click the sign-up button to begin the sign-up process." Foreground="{StaticResource PrimaryTextColor}" FontSize="13"/>
+            </TextBlock>
+
+            <TextBlock Grid.Row="5" Margin="10,0,0,0">
+                <Run Text="3. " Foreground="{StaticResource PrimaryBlueColor}" FontWeight="SemiBold" FontSize="16"/>
+                <Run Text="Provide all the information in the sign-up form to continue." Foreground="{StaticResource PrimaryTextColor}" FontSize="13"/>
+            </TextBlock>
+
+            <TextBlock Grid.Row="6" Margin="10,0,0,0">
+                <Run Text="4. " Foreground="{StaticResource PrimaryBlueColor}" FontWeight="SemiBold" FontSize="16"/>
+                <Run Text="When you are finished filling out the form click the &quot;Next&quot; button." Foreground="{StaticResource PrimaryTextColor}" FontSize="13"/>
+            </TextBlock>
+
+            <TextBlock Grid.Row="7" Margin="10,0,0,0">
+                <Run Text="5. " Foreground="{StaticResource PrimaryBlueColor}" FontWeight="SemiBold" FontSize="16"/>
+                <Run Text="Select the school you are administrating." Foreground="{StaticResource PrimaryTextColor}" FontSize="13"/>
+            </TextBlock>
+
+            <TextBlock Grid.Row="8" Margin="10,0,0,0">
+                 <Run Text="6. " Foreground="{StaticResource PrimaryBlueColor}" FontWeight="SemiBold" FontSize="16"/>
+                 <Run Text="Provide the school code that was retrieved by the person who created the school in the application." Foreground="{StaticResource PrimaryTextColor}" FontSize="13"/>
+            </TextBlock>
+
+            <TextBlock Grid.Row="9" Margin="10,0,0,0">
+                 <Run Text="7. " Foreground="{StaticResource PrimaryBlueColor}" FontWeight="SemiBold" FontSize="16"/>
+                 <Run Text="Click &quot;Sign up&quot; to finish the sign-up process." Foreground="{StaticResource PrimaryTextColor}" FontSize="13"/>
+            </TextBlock>
+
+            <StackPanel Grid.Row="10" Orientation="Vertical">
+                <TextBlock Margin="10,0,0,0">
+                  <Run Text="9. " Foreground="{StaticResource PrimaryBlueColor}" FontWeight="SemiBold" FontSize="16"/>
+                  <Run Text="Check the remember me box if you wish for the application to save your login info into the application for next time." Foreground="{StaticResource PrimaryTextColor}" FontSize="13"/>
+                </TextBlock>
+
+                <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                    <Label Content="(" Foreground="{StaticResource PrimaryTextColor}" FontSize="13"/>
+                    <Label Content="Note" Foreground="#FF6289E6" FontSize="13" Margin="-9.5,0,0,0"/>
+                    <Label Content=") - If you decide to save the login then the password will be deleted from the application after 30 days of inactivity" Foreground="{StaticResource PrimaryTextColor}" FontSize="13" Margin="-9.5,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
+
+            <TextBlock Grid.Row="11" Margin="10,0,0,0">
+                 <Run Text="10. " Foreground="{StaticResource PrimaryBlueColor}" FontWeight="SemiBold" FontSize="16"/>
+                 <Run Text="You should now be logged in and ready to use our application." Foreground="{StaticResource PrimaryTextColor}" FontSize="13"/>
+            </TextBlock>
+
+            <TextBlock Grid.Row="12" Margin="10,0,0,0">
+                 <Run Text="11. " Foreground="{StaticResource PrimaryBlueColor}" FontWeight="SemiBold" FontSize="16"/>
+                 <Run Text="If additional help is required to manage your partners from our application please visit the help center in our Dashboard." Foreground="{StaticResource PrimaryTextColor}" FontSize="13"/>
+            </TextBlock>
+
+            <Label Grid.Row="14" Content="Click this entire process look out for red text as they indicate incorrect input." FontWeight="SemiBold" Foreground="{StaticResource PrimaryTextColor}" FontSize="15"/>
+
+        </Grid>
+</UserControl>

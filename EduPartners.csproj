@@ -196,6 +196,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\View\Controls\HomeHelpControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\Controls\HomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -242,6 +246,9 @@
     <Compile Include="MVVM\ViewModel\UserViewModel.cs" />
     <Compile Include="MVVM\View\Controls\CreateSchool.xaml.cs">
       <DependentUpon>CreateSchool.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\Controls\HomeHelpControl.xaml.cs">
+      <DependentUpon>HomeHelpControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\Controls\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
