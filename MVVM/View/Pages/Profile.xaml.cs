@@ -32,6 +32,8 @@ namespace EduPartners.MVVM.View.Pages
         private User currentUser;
         private IniFile iniFile;
 
+        private string newProfileName = "";
+
         private static string localDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "EduPartners");
         private string filePath = Path.Combine(localDataPath, "EduPartners.ini");
 
@@ -179,7 +181,7 @@ namespace EduPartners.MVVM.View.Pages
                     iniFile.Save();
                 }
             }
-      
+
             User user = new User()
             {
                 Id = currentUser.Id,
@@ -188,11 +190,14 @@ namespace EduPartners.MVVM.View.Pages
                 About = tbAbout.Text,
                 PhoneNumber = tbPhoneNumber.Text,
                 Password = string.IsNullOrEmpty(tbChangedPwrd.Text) ? currentUser.Password : BCrypts.HashPassword(tbChangedPwrd.Text),
-                ProfileImage = currentUser.ProfileImage,
+                ProfileImage = newProfileName,
                 HomeSchool = currentUser.HomeSchool
             };
 
             await db.UpdateUser(user);
+
+            MainControl mainControl = App.Current.Properties["MainControl"] as MainControl;
+            mainControl.UpdateProfileImage();
 
             CancelBase();
         }
@@ -209,7 +214,7 @@ namespace EduPartners.MVVM.View.Pages
             }
         }
 
-        private async void ProfileCircle_MouseDown(object sender, MouseButtonEventArgs e)
+        private void ProfileCircle_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (isUpdating)
             {
@@ -229,12 +234,10 @@ namespace EduPartners.MVVM.View.Pages
                         File.Copy(openFileDialog.FileName, Path.Combine(localDataPath, Path.GetFileName(openFileDialog.FileName)));
                     }
 
-                    currentUser.ProfileImage = Path.GetFileName(openFileDialog.FileName);
+                    newProfileName = Path.GetFileName(openFileDialog.FileName);
                     imgProfile.Source = new BitmapImage(new Uri($"{Path.Combine(localDataPath, Path.GetFileName(openFileDialog.FileName))}", UriKind.RelativeOrAbsolute));
 
-                    await db.UpdateUser(currentUser);
-                    MainControl mainControl = App.Current.Properties["MainControl"] as MainControl;
-                    mainControl.UpdateProfileImage();
+                  
                 }
             }
         }
