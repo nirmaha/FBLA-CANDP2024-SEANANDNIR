@@ -71,24 +71,21 @@
                         </Button>
 
                     
-                            <Button x:Name="btnProfile" Style="{DynamicResource PopupButtonStyle}" MouseEnter="btnProfile_MouseEnter" MouseLeave="btnProfile_MouseLeave" Click="btnProfile_Clicked">
-                                <Grid x:Name="gProfile">
-                                    <ctls:MenuItem x:Name="ProfileMenuItem" Panel.ZIndex="1" GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Profile">
-                                        <ctls:MenuItem.ImageSource>
-                                            <BitmapImage UriSource=""/>
-                                        </ctls:MenuItem.ImageSource>
-                                    </ctls:MenuItem>
+                        <Button x:Name="btnProfile" Style="{DynamicResource PopupButtonStyle}" MouseEnter="btnProfile_MouseEnter" MouseLeave="btnProfile_MouseLeave" Click="btnProfile_Clicked">
+                            <Grid x:Name="gProfile" HorizontalAlignment="Left">
+                                <ctls:MenuItem x:Name="ProfileMenuItem" Panel.ZIndex="1" GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Profile">
+                                    <ctls:MenuItem.ImageSource>
+                                        <BitmapImage UriSource=""/>
+                                    </ctls:MenuItem.ImageSource>
+                                </ctls:MenuItem>
 
-                                    <Ellipse Stretch="Uniform" Height="30" Width="30">
-                                        <Ellipse.Fill>
-                                            <ImageBrush x:Name="imgProfile" ImageSource="../../../Resources/defaultProfile.png"/>
-                                        </Ellipse.Fill>
-                                    </Ellipse>
-                                </Grid>
-                            </Button>
-
-
-
+                                <Ellipse Stretch="Uniform" Height="30" Width="30" HorizontalAlignment="Left" Margin="15,0,0,0">
+                                    <Ellipse.Fill>
+                                        <ImageBrush x:Name="imgProfile" ImageSource="../../../Resources/defaultProfile.png"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                            </Grid>
+                        </Button>
 
                         <Button x:Name="btnHelp" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnHelp_MouseEnter" MouseLeave="btnHelp_MouseLeave" Click="btnHelp_Clicked">
                             <ctls:MenuItem x:Name="HelpItem" GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource EmptyGeometry}" IconWidth="16" Text="Help" VerticalAlignment="Center">

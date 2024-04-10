@@ -9,7 +9,32 @@
       Title="Help">
 
     <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
-        <TextBlock Text="Help" FontSize="30" Foreground="{DynamicResource PrimaryTextColor}" FontWeight="Bold"
-                VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Viewbox>
+            <DockPanel Height="450" Width="800">
+                <ScrollViewer VerticalScrollBarVisibility="auto" HorizontalScrollBarVisibility="Disabled">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="45"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="150"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" FontSize="20" FontWeight="SemiBold" Margin="10,10,0,0">
+                                <Run Text="Welcome to the" Foreground="{StaticResource PrimaryTextColor}"/>
+                                <Run Text="Main Page" Foreground="{StaticResource PrimaryBlueColor}"/>
+                        </TextBlock>
+
+                        <Label Grid.Row="1" Content="Dashboard:" Foreground="{StaticResource PrimaryBlueColor}" FontWeight="Medium" FontSize="18" Margin="4,0,0,0"/>
+                        <TextBlock Grid.Row="2" Text="      You will start here, and you will see four different types of graphs. These graphs are based on data that is present about the school's current partners (if the school is new, then no data is present). The data from these graphs allows the administrators to monitor data about partners to make future decisions about partnerships." Foreground="{StaticResource PrimaryTextColor}" LineHeight="20" Margin="7,5,5,5" FontSize="13" TextWrapping="Wrap"/>
+                        <Label Grid.Row="1" Content="Dashboard:" Foreground="{StaticResource PrimaryBlueColor}" FontWeight="Medium" FontSize="18" Margin="4,0,0,0"/>
+
+                        <Label Grid.Row="3" Content="View Partners:" Foreground="{StaticResource PrimaryBlueColor}" FontWeight="Medium" FontSize="18" Margin="4,0,0,0"/>
+                        <TextBlock Grid.Row="4" Text="      This page allows you to view a list of all the partners that the school has added. Some details will show up in the individual panels that are present, but to view all the data related to the partnership, click on the panel. You can also click on the pen icon in an individual partner's panel to edit them. Alternatively, you can choose to delete a partnership using the delete icon if the school decides the partner is no longer a valuable asset. You can also filter the partnerships alphabetically and reverse alphabetically by name using the filter buttons located at the top left section of the page. You could also search for a specific partnership by using the search bar at the top right of the screen." Foreground="{StaticResource PrimaryTextColor}" LineHeight="20" Margin="7,5,5,5" FontSize="13" TextWrapping="Wrap"/>
+                    </Grid>
+                </ScrollViewer>
+            </DockPanel>
+        </Viewbox>
     </Border>
 </Page>
