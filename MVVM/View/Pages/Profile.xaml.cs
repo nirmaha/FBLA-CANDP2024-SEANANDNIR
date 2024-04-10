@@ -177,7 +177,7 @@ namespace EduPartners.MVVM.View.Pages
 
                 if (iniFile.GetValue("SECURITY", "PASSWORDLOGIN") != "")
                 {
-                    iniFile.SetValue("SECURITY", "PASSWORDLOGIN", "null");
+                    iniFile.SetValue("SECURITY", "PASSWORDLOGIN", "");
                     iniFile.Save();
                 }
             }
