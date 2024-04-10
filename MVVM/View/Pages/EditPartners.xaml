@@ -13,8 +13,29 @@
             <DockPanel Width="800" Height="450">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                     <StackPanel Orientation="Vertical">
-                         <Button Content="⬅" FontSize="48" Background="#1d3b7a" Foreground="White" Height="60" Width="60" Click="btnBack_Clicked" Margin="-680,20,0,0" Padding="0,-5,0,0" ToolTip="View Partners" />
-                        
+
+                        <Button Content="&lt;" Margin="-680,20,0,0" BorderThickness="0" Height="40" Width="40" Foreground="LightGray" FontSize="42" ToolTip="View Partners" Click="btnBack_Clicked">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-14,0,0"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="Gray"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+
                         <StackPanel x:Name="spMain" Orientation="Vertical" Margin="55,-60,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left">
                             <StackPanel Orientation="Horizontal">
                                 <Label x:Name="lErrorMsg" Content="Please fix all marked fields" Visibility="Collapsed" FontSize="16" Foreground="Red" Margin="40,0,0,0" />
@@ -82,7 +103,27 @@
                             </StackPanel>
                             <TextBox x:Name="tbSavings" Tag="required" Text="{Binding Savings}" FontSize="23" Width="350" Height="36" BorderBrush="Gray" BorderThickness="2" Foreground="White" Background="{StaticResource PrimaryBackgroundColor}" Margin="45,0,0,0" />
 
-                            <Button Content="Update Partner" FontSize="25" Width="178" Height="40" IsDefault="True" Background="Blue" Click="UpdatePartner_Clicked"  Margin="45,20,0,0" />
+                            <Button Content="Save" FontSize="25" Width="160" Height="40" IsDefault="True" Foreground="{StaticResource PrimaryTextColor}" BorderThickness="0"  Margin="45,20,0,0" Click="UpdatePartner_Clicked">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="Green"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="LightGreen"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>

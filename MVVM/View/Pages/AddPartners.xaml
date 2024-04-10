@@ -80,7 +80,27 @@
 						</StackPanel>
                         <TextBox x:Name="tbSavings" Tag="required" FontSize="23" Width="350" Height="36" BorderBrush="Gray" BorderThickness="2" Foreground="White" Background="{StaticResource PrimaryBackgroundColor}" Margin="45,0,0,0" />
 						
-                        <Button Content="Add Partner" FontSize="25" Width="160" Height="40" IsDefault="True" Background="Blue" Click="AddPartner_Cliked"  Margin="45,20,0,0" />
+                        <Button Content="Add" FontSize="25" Width="160" Height="40" IsDefault="True" Foreground="{StaticResource PrimaryTextColor}" BorderThickness="0"  Margin="45,20,0,0" Click="AddPartner_Cliked">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="Green"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="LightGreen"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
                     </StackPanel>
                 </ScrollViewer>
             </DockPanel>
