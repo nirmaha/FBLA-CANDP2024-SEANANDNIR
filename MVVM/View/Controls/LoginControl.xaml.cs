@@ -56,6 +56,11 @@ namespace EduPartners.MVVM.View.Controls
                 tbEmail.Focus();
             }
 
+            if (iniFile.GetValue("SECURITY", "PASSWORDLOGIN") == "")
+            {
+                cbRememberMe.IsChecked = true;
+                pbPassword.Password = "";
+            }
           
             if (iniFile.GetValue("SECURITY", "PASSWORDLOGIN") != "" && iniFile.GetValue("SECURITY", "DATELOGINSAVED") != "" && !HasPassedDays(Convert.ToDateTime(iniFile.GetValue("SECURITY", "DATELOGINSAVED")), 30))
             {
@@ -69,11 +74,6 @@ namespace EduPartners.MVVM.View.Controls
                 iniFile.Save();
             }
 
-            if (iniFile.GetValue("SECURITY", "PASSWORDLOGIN") == "null")
-            {
-                cbRememberMe.IsChecked = true;
-                pbPassword.Password = "";
-            }
         }
 
         private bool HasPassedDays(DateTime previousDate, int days)
