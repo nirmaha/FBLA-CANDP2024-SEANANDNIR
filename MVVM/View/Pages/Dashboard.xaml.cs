@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.DataVisualization.Charting;
-
+using System.Windows.Data;
 using EduPartners.Core;
 using EduPartners.MVVM.Model;
 
@@ -12,6 +14,8 @@ namespace EduPartners.MVVM.View.Pages
     /// <summary>
     /// Lógica de interacción para Dashboard.xaml
     /// </summary>
+    /// 
+
     public partial class Dashboard : Page
     {
         private Database db;
@@ -46,10 +50,10 @@ namespace EduPartners.MVVM.View.Pages
                     }
 
                     // Verical Bar Graph
-                    if (!PartnerToSavings.ContainsKey(partner.Name))
-                    { 
-                        PartnerToSavings.Add(partner.Name, partner.Savings);
-                    }
+                    //if (!PartnerToSavings.ContainsKey(partner.Name))
+                    //{ 
+                    //    PartnerToSavings.Add(partner.Name, partner.Savings);
+                    //}
 
                     // Line Graph
                     if (!YearToParnters.ContainsKey(partner.StartDate.Year))
@@ -62,20 +66,20 @@ namespace EduPartners.MVVM.View.Pages
                     }
 
                     // Horizontal Bar Graphs
-                    if (!IndustryToSavings.ContainsKey(partner.Industry))
-                    {
-                        IndustryToSavings.Add(partner.Industry, partner.Savings);
-                    }
-                    else
-                    {
-                        IndustryToSavings[partner.Industry] += partner.Savings;
-                    }
+                    //if (!IndustryToSavings.ContainsKey(partner.Industry))
+                    //{
+                    //    IndustryToSavings.Add(partner.Industry, partner.Savings);
+                    //}
+                    //else
+                    //{
+                    //    IndustryToSavings[partner.Industry] += partner.Savings;
+                    //}
 
                 }
                 ((PieSeries)pieIndustry.Series[0]).ItemsSource = IndustryPopulation;
-                ((ColumnSeries)barSavings.Series[0]).ItemsSource = PartnerToSavings;
+                // ((ColumnSeries)barSavings.Series[0]).ItemsSource = PartnerToSavings;
                 ((LineSeries)lineNumofPartners.Series[0]).ItemsSource = YearToParnters;
-                ((BarSeries)barIndustry.Series[0]).ItemsSource = IndustryToSavings;
+                // ((BarSeries)barIndustry.Series[0]).ItemsSource = IndustryToSavings;
                 
             };
         }

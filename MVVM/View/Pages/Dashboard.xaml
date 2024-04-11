@@ -15,7 +15,6 @@
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
-                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
@@ -23,7 +22,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical" Background="#ACC2DC">
+                <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical" Background="#ACC2DC">
                     <Label Content="Industries" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="Black"/>
                     <DVC:Chart Name="pieIndustry" Height="240" Margin="0,-40,0,0" BorderThickness="0">
                         <DVC:Chart.Series>
@@ -34,7 +33,7 @@
                     </DVC:Chart>
                 </StackPanel>
 
-                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical" Background="#ACC2DC" Width="auto">
+                <!--<StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical" Background="#ACC2DC" Width="auto">
                     <Label Content="Savings per Partner" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="Black"/>
                     <DVC:Chart Name="barSavings" Height="240" Width="auto" Margin="0,-40,0,0" BorderThickness="0">
                         <DVC:Chart.Series>
@@ -43,13 +42,13 @@
                             DependentValueBinding="{Binding Path=Value}"/>
                         </DVC:Chart.Series>
                     </DVC:Chart>
-                </StackPanel>
+                </StackPanel>-->
 
                 <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical" Background="#ACC2DC">
                     <Label Content="Partnerships Started per Year" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="Black"/>
                     <DVC:Chart Name="lineNumofPartners" Height="240" Margin="0,-40,0,0" BorderThickness="0">
                         <DVC:Chart.Axes>
-                            <DVC:LinearAxis Orientation="X" Interval="1" />
+                            <DVC:LinearAxis Orientation="X" Interval="2" />
                             <DVC:LinearAxis Orientation="Y" Interval="1" />
                         </DVC:Chart.Axes>
                         <DVC:Chart.Series>
@@ -60,7 +59,7 @@
                     </DVC:Chart>
                 </StackPanel>
 
-                <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical" Background="#ACC2DC">
+                <!--<StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical" Background="#ACC2DC">
                     <Label Content="Industry Savings" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="Black"/>
                     <DVC:Chart Name="barIndustry" Height="240" Margin="0,-40,0,0" BorderThickness="0">
                         <DVC:Chart.Series>
@@ -69,7 +68,7 @@
                             DependentValueBinding="{Binding Path=Value}"/>
                         </DVC:Chart.Series>
                     </DVC:Chart>
-                </StackPanel>
+                </StackPanel>-->
             </Grid>
         </DockPanel>
     </Viewbox>
