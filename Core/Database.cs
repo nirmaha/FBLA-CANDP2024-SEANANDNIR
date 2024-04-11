@@ -15,10 +15,16 @@ namespace EduPartners.Core
     public class Database
     {
         private static string ConnectionUri = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString + "?retryWrites=true&w=majority";
+        private static string BackupConnectionUri = "mongodb+srv://FBLANS2024:Zu9QiBwFOlWXC5SS@managementbackup.zsqbmhw.mongodb.net/";
+
         private MongoClientSettings Settings = MongoClientSettings.FromConnectionString(ConnectionUri);
+        private MongoClientSettings BackupSettings = MongoClientSettings.FromConnectionString(BackupConnectionUri);
 
         private MongoClient Client;
+        private MongoClient BackupClient;
+
         private IMongoDatabase MongoDatabase;
+        private IMongoDatabase MongoDatabaseBackup;
 
         private const string UserCollection = "Users";
         private const string SchoolCollection = "Schools";
@@ -27,19 +33,33 @@ namespace EduPartners.Core
         public Database()
         {
             Settings.ServerApi = new ServerApi(ServerApiVersion.V1);
+            BackupSettings.ServerApi = new ServerApi(ServerApiVersion.V1);
 
             Client = new MongoClient(Settings);
+            BackupClient = new MongoClient(BackupSettings);
 
             MongoDatabase = Client.GetDatabase("SchoolPartnersInfo");
+            MongoDatabaseBackup = BackupClient.GetDatabase("PartnersInfoBackup");
 
             try
             {
                 BsonDocument result = Client.GetDatabase("admin").RunCommand<BsonDocument>(new BsonDocument("ping", 1));
-                Debug.WriteLine("Pinged your deployment. You successfully connected to MongoDB!");
+                Debug.WriteLine("Pinged your deployment. You successfully connected to MongoDB MAIN Database!");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Could not connect to Database");
+                Debug.WriteLine("Could not connect to MAIN Database");
+                Debug.WriteLine(ex); 
+            }    
+            
+            try
+            {
+                BsonDocument result = BackupClient.GetDatabase("admin").RunCommand<BsonDocument>(new BsonDocument("ping", 1));
+                Debug.WriteLine("Pinged your deployment. You successfully connected to MongoDB BACKUP Database!");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Could not connect to BACKUP Database");
                 Debug.WriteLine(ex); 
             }
 
@@ -53,9 +73,13 @@ namespace EduPartners.Core
         private IMongoCollection<T> GetDBCollection<T>(string Collection)
         {
             return MongoDatabase.GetCollection<T>(Collection);
+        }    
+        
+        private IMongoCollection<T> GetDBCollectionBackup<T>(string Collection)
+        {
+            return MongoDatabaseBackup.GetCollection<T>(Collection);
         }
 
-       
         public async Task<List<User>> GetUsers()
         {
             IMongoCollection<User> users = GetDBCollection<User>(UserCollection);
@@ -91,6 +115,9 @@ namespace EduPartners.Core
         {
             IMongoCollection<User> users = GetDBCollection<User>(UserCollection);
 
+            IMongoCollection<User> usersBackup = GetDBCollectionBackup<User>(UserCollection);
+            usersBackup.InsertOneAsync(CreateUser);
+
             return users.InsertOneAsync(CreateUser);
         }
 
@@ -99,6 +126,9 @@ namespace EduPartners.Core
             IMongoCollection<User> users = GetDBCollection<User>(UserCollection);
             FilterDefinition<User> filter = Builders<User>.Filter.Eq(u => u.Id, UpdateUser.Id);
 
+            IMongoCollection<User> usersBackup = GetDBCollectionBackup<User>(UserCollection);
+            usersBackup.ReplaceOneAsync(filter, UpdateUser, new ReplaceOptions { IsUpsert = true });
+
             return users.ReplaceOneAsync(filter, UpdateUser, new ReplaceOptions {IsUpsert = true});
         }
 
@@ -106,6 +136,9 @@ namespace EduPartners.Core
         {
             IMongoCollection<User> users = GetDBCollection<User>(UserCollection);
             FilterDefinition<User> filter = Builders<User>.Filter.Eq(u => u.Id, DeleteUser.Id);
+
+            IMongoCollection<User> usersBackup = GetDBCollectionBackup<User>(UserCollection);
+            usersBackup.DeleteOneAsync(filter);
 
             return users.DeleteOneAsync(filter);
         }
@@ -138,6 +171,9 @@ namespace EduPartners.Core
         {
             IMongoCollection<School> schools = GetDBCollection<School>(SchoolCollection);
 
+            IMongoCollection<School> schoolsBackup = GetDBCollectionBackup<School>(SchoolCollection);
+            schoolsBackup.InsertOneAsync(CreateSchool);
+
             return schools.InsertOneAsync(CreateSchool);
         }
 
@@ -146,6 +182,9 @@ namespace EduPartners.Core
             IMongoCollection<School> schools = GetDBCollection<School>(SchoolCollection);
             FilterDefinition<School> filter = Builders<School>.Filter.Eq(s => s.Id, UpdateSchool.Id);
 
+            IMongoCollection<School> schoolsBackup = GetDBCollectionBackup<School>(SchoolCollection);
+            schoolsBackup.ReplaceOneAsync(filter, UpdateSchool, new ReplaceOptions { IsUpsert = true });
+
             return schools.ReplaceOneAsync(filter, UpdateSchool, new ReplaceOptions {IsUpsert = true});
         }
 
@@ -153,6 +192,9 @@ namespace EduPartners.Core
         {
             IMongoCollection<School> schools = GetDBCollection<School>(SchoolCollection);
             FilterDefinition<School> filter = Builders<School>.Filter.Eq(s => s.Id, DeleteSchool.Id);
+
+            IMongoCollection<School> schoolsBackup = GetDBCollectionBackup<School>(SchoolCollection);
+            schoolsBackup.DeleteOneAsync(filter);
 
             return schools.DeleteOneAsync(filter);
         }
@@ -185,6 +227,9 @@ namespace EduPartners.Core
         {
             IMongoCollection<Partner> partners = GetDBCollection<Partner>(PartnerCollection);
 
+            IMongoCollection<Partner> partnersBackup = GetDBCollectionBackup<Partner>(PartnerCollection);
+            partnersBackup.InsertOneAsync(CreatePartner);
+
             return partners.InsertOneAsync(CreatePartner);
         }
 
@@ -193,6 +238,9 @@ namespace EduPartners.Core
             IMongoCollection<Partner> partners = GetDBCollection<Partner>(PartnerCollection);
             FilterDefinition<Partner> filter = Builders<Partner>.Filter.Eq(p => p.Id, UpdatePartner.Id);
 
+            IMongoCollection<Partner> partnersBackup = GetDBCollectionBackup<Partner>(PartnerCollection);
+            partnersBackup.ReplaceOneAsync(filter, UpdatePartner, new ReplaceOptions { IsUpsert = true });
+
             return partners.ReplaceOneAsync(filter, UpdatePartner, new ReplaceOptions { IsUpsert = true });
         }
 
@@ -200,6 +248,9 @@ namespace EduPartners.Core
         {
             IMongoCollection<Partner> partners = GetDBCollection<Partner>(PartnerCollection);
             FilterDefinition<Partner> filter = Builders<Partner>.Filter.Eq(p => p.Id, DeletePartner.Id);
+
+            IMongoCollection<Partner> partnersBackup = GetDBCollectionBackup<Partner>(PartnerCollection);
+            partnersBackup.DeleteOneAsync(filter);
 
             return partners.DeleteOneAsync(filter);
         }

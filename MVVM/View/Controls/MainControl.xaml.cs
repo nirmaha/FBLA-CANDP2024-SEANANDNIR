@@ -39,7 +39,7 @@ namespace EduPartners.MVVM.View.Controls
         {
             User user = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
 
-            if (!File.Exists(Path.Combine(localDataPath, user.ProfileImage)))
+            if (user.ProfileImage == null || !File.Exists(Path.Combine(localDataPath, user.ProfileImage)))
             {
                 imgProfile.ImageSource = new BitmapImage(new Uri("pack://application:,,,/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
             }

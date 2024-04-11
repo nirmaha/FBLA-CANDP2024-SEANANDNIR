@@ -41,8 +41,7 @@ namespace EduPartners.MVVM.View.Controls
         private async void PopulateComboBox()
         {
             List<School> schools = await db.GetSchools();
-
-            schools.Sort();
+            schools = schools.OrderBy(s => s.Name).ToList();
 
             foreach (School school in schools)
             {
