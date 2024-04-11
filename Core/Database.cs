@@ -80,6 +80,12 @@ namespace EduPartners.Core
             return MongoDatabaseBackup.GetCollection<T>(Collection);
         }
 
+        /// <summary>
+        /// This function retrieves all users.
+        /// </summary>
+        /// <returns>
+        /// A `Task` that will return a `List<User>` containing all users.
+        /// </returns>
         public async Task<List<User>> GetUsers()
         {
             IMongoCollection<User> users = GetDBCollection<User>(UserCollection);
@@ -88,14 +94,28 @@ namespace EduPartners.Core
             return results.ToList();
         }
 
+        /// <summary>
+        /// This function retrieves a list of users by their ID.
+        /// </summary>
+        /// <param name="UserId">The ID of the user being retrieved.</param>
+        /// <returns>
+        /// Returns a `Task` that will contain a list of Users that match the specified <paramref name="UserId"/>.
+        /// </returns>
         public async Task<List<User>> GetUserById(string UserId) 
         {
             IMongoCollection<User> users = GetDBCollection<User>(UserCollection);
             IAsyncCursor<User> results = await users.FindAsync(user => user.Id == UserId);
 
             return results.ToList();
-        }  
-        
+        }
+
+        /// <summary>
+        /// This function retrieves a list of users based on the provided user name.
+        /// </summary>
+        /// <param name="UsersName">The name of the user being retrieved.</param>
+        /// <returns>
+        /// Returns a `Task` that will contain a list of Users that match the specified <paramref name="UsersName"/>.
+        /// </returns>
         public async Task<List<User>> GetUserByName(string UsersName) 
         {
             IMongoCollection<User> users = GetDBCollection<User>(UserCollection);
@@ -103,6 +123,14 @@ namespace EduPartners.Core
 
             return results.ToList();
         }
+
+        /// <summary>
+        /// This function retrieves a list of users based on their email address.
+        /// </summary>
+        /// <param name="UserEmail">The email of the user being retrieved retrieve.</param>
+        /// <returns>
+        /// Returns a `Task` that will contain a list of Users that match the specified <paramref name="UserEmail"/>.
+        /// </returns>
         public async Task<List<User>> GetUserByEmail(string UserEmail)
         {
             IMongoCollection<User> users = GetDBCollection<User>(UserCollection);
@@ -111,6 +139,15 @@ namespace EduPartners.Core
             return results.ToList();
         }
 
+        /// <summary>
+        /// This function creates a new user.
+        /// </summary>
+        /// <param name="CreateUser">
+        /// The method takes a parameter of type `User`, which represents the user information
+        /// needed to create a new user account.</param>
+        /// <returns>
+        /// Returns a `Task` object.
+        /// </returns>
         public Task CreateUser(User CreateUser) 
         {
             IMongoCollection<User> users = GetDBCollection<User>(UserCollection);
@@ -121,6 +158,15 @@ namespace EduPartners.Core
             return users.InsertOneAsync(CreateUser);
         }
 
+        /// <summary>
+        /// This function updates a user speficed in <paramref name="UpdateUser"/>
+        /// </summary>
+        /// <param name="UpdateUser">This parameter of type `User`, which
+        /// represents a user entity in your application. It contains the data that needs to be updated for a
+        /// specific user.</param>
+        /// <returns>
+        /// Returns a `Task` object.
+        /// </returns>
         public Task UpdateUser(User UpdateUser)
         {
             IMongoCollection<User> users = GetDBCollection<User>(UserCollection);
@@ -132,6 +178,15 @@ namespace EduPartners.Core
             return users.ReplaceOneAsync(filter, UpdateUser, new ReplaceOptions {IsUpsert = true});
         }
 
+        /// <summary>
+        /// This function deletes a user speficed in <paramref name="DeleteUser"/>
+        /// </summary>
+        /// <param name="DeleteUser">This parameter of type `User`, which
+        /// represents a user entity in your application. It contains the data to delete the
+        /// specific user.</param>
+        /// <returns>
+        /// Returns a `Task` object.
+        /// </returns>
         public Task DeleteUser(User DeleteUser)
         {
             IMongoCollection<User> users = GetDBCollection<User>(UserCollection);
@@ -143,6 +198,12 @@ namespace EduPartners.Core
             return users.DeleteOneAsync(filter);
         }
 
+        /// <summary>
+        /// This function retrieves all schools.
+        /// </summary>
+        /// <returns>
+        /// A `Task` that will return a `List<School>` containing all schools.
+        /// </returns>
         public async Task<List<School>> GetSchools()
         {
             IMongoCollection<School> schools = GetDBCollection<School>(SchoolCollection);
@@ -151,14 +212,28 @@ namespace EduPartners.Core
             return results.ToList();
         }
 
+        /// <summary>
+        /// This function retrieves a list of schools by their ID.
+        /// </summary>
+        /// <param name="SchoolId">The ID of the school being retrieved.</param>
+        /// <returns>
+        /// Returns a `Task` that will contain a list of Schools that match the specified <paramref name="SchoolId"/>.
+        /// </returns>
         public async Task<List<School>> GetSchoolById(string SchoolId) 
         {
             IMongoCollection<School> schools = GetDBCollection<School>(SchoolCollection);
             IAsyncCursor<School> results = await schools.FindAsync(school => school.Id == SchoolId);
 
             return results.ToList();
-        }    
-        
+        }
+
+        /// <summary>
+        /// This function retrieves a list of schools based on the provided school name.
+        /// </summary>
+        /// <param name="SchoolName">The name of the school being retrieved.</param>
+        /// <returns>
+        /// Returns a `Task` that will contain a list of Schools that match the specified <paramref name="SchoolName"/>.
+        /// </returns>
         public async Task<List<School>> GetSchoolByName(string SchoolName) 
         {
             IMongoCollection<School> schools = GetDBCollection<School>(SchoolCollection);
@@ -167,6 +242,15 @@ namespace EduPartners.Core
             return results.ToList();
         }
 
+        /// <summary>
+        /// This function creates a new school.
+        /// </summary>
+        /// <param name="CreateSchool">
+        /// The method takes a parameter of type `School`, which represents the school information
+        /// needed to create a new school.</param>
+        /// <returns>
+        /// Returns a `Task` object.
+        /// </returns>
         public Task CreateSchool(School CreateSchool) 
         {
             IMongoCollection<School> schools = GetDBCollection<School>(SchoolCollection);
@@ -177,6 +261,15 @@ namespace EduPartners.Core
             return schools.InsertOneAsync(CreateSchool);
         }
 
+        /// <summary>
+        /// This function updates a school speficed in <paramref name="UpdateSchool"/>
+        /// </summary>
+        /// <param name="UpdateSchool">This parameter of type `School`, which
+        /// represents a school entity in your application. It contains the data that needs to be updated for a
+        /// specific school.</param>
+        /// <returns>
+        /// Returns a `Task` object.
+        /// </returns>
         public Task UpdateSchool(School UpdateSchool)
         {
             IMongoCollection<School> schools = GetDBCollection<School>(SchoolCollection);
@@ -188,6 +281,15 @@ namespace EduPartners.Core
             return schools.ReplaceOneAsync(filter, UpdateSchool, new ReplaceOptions {IsUpsert = true});
         }
 
+        /// <summary>
+        /// This function deletes a school speficed in <paramref name="DeleteSchool"/>
+        /// </summary>
+        /// <param name="DeleteSchool">This parameter of type `School`, which
+        /// represents a school entity in your application. It contains the data to delete the
+        /// specific school.</param>
+        /// <returns>
+        /// Returns a `Task` object.
+        /// </returns>
         public Task DeleteSchool(School DeleteSchool)
         {
             IMongoCollection<School> schools = GetDBCollection<School>(SchoolCollection);
@@ -199,6 +301,12 @@ namespace EduPartners.Core
             return schools.DeleteOneAsync(filter);
         }
 
+        /// <summary>
+        /// This function retrieves all partners.
+        /// </summary>
+        /// <returns>
+        /// A `Task` that will return a `List<Partner>` containing all partners.
+        /// </returns>
         public async Task<List<Partner>> GetPartners()
         {
             IMongoCollection<Partner> partners = GetDBCollection<Partner>(PartnerCollection);
@@ -207,6 +315,13 @@ namespace EduPartners.Core
             return results.ToList();
         }
 
+        /// <summary>
+        /// This function retrieves a list of partners by their ID.
+        /// </summary>
+        /// <param name="PartnerId">The ID of the partner being retrieved.</param>
+        /// <returns>
+        /// Returns a `Task` that will contain a list of Partners that match the specified <paramref name="PartnerId"/>.
+        /// </returns>
         public async Task<List<Partner>> GetPartnerById(string PartnerId)
         {
             IMongoCollection<Partner> partners = GetDBCollection<Partner>(PartnerCollection);
@@ -215,6 +330,13 @@ namespace EduPartners.Core
             return results.ToList();
         }
 
+        /// <summary>
+        /// This function retrieves a list of partners based on the provided partner name.
+        /// </summary>
+        /// <param name="PartnerName">The name of the partner being retrieved.</param>
+        /// <returns>
+        /// Returns a `Task` that will contain a list of Partners that match the specified <paramref name="PartnerName"/>.
+        /// </returns>
         public async Task<List<Partner>> GetPartnerByName(string PartnerName)
         {
             IMongoCollection<Partner> partners = GetDBCollection<Partner>(PartnerCollection);
@@ -223,6 +345,15 @@ namespace EduPartners.Core
             return results.ToList();
         }
 
+        /// <summary>
+        /// This function creates a new partner.
+        /// </summary>
+        /// <param name="CreatePartner">
+        /// The method takes a parameter of type `Partner`, which represents the partner information
+        /// needed to create a new partner.</param>
+        /// <returns>
+        /// Returns a `Task` object.
+        /// </returns>
         public Task CreatePartner(Partner CreatePartner)
         {
             IMongoCollection<Partner> partners = GetDBCollection<Partner>(PartnerCollection);
@@ -232,6 +363,16 @@ namespace EduPartners.Core
 
             return partners.InsertOneAsync(CreatePartner);
         }
+
+        /// <summary>
+        /// This function updates a partner speficed in <paramref name="UpdatePartner"/>
+        /// </summary>
+        /// <param name="UpdatePartner">This parameter of type `Partner`, which
+        /// represents a partner entity in your application. It contains the data that needs to be updated for a
+        /// specific partner.</param>
+        /// <returns>
+        /// Returns a `Task` object.
+        /// </returns>
 
         public Task UpdatePartner(Partner UpdatePartner)
         {
@@ -244,6 +385,15 @@ namespace EduPartners.Core
             return partners.ReplaceOneAsync(filter, UpdatePartner, new ReplaceOptions { IsUpsert = true });
         }
 
+        /// <summary>
+        /// This function deletes a partner speficed in <paramref name="DeletePartner"/>
+        /// </summary>
+        /// <param name="DeletePartner">This parameter of type `Partner`, which
+        /// represents a partner entity in your application. It contains the data to delete the
+        /// specific partner.</param>
+        /// <returns>
+        /// Returns a `Task` object.
+        /// </returns>
         public Task DeletePartner(Partner DeletePartner)
         {
             IMongoCollection<Partner> partners = GetDBCollection<Partner>(PartnerCollection);
