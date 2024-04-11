@@ -24,14 +24,14 @@
                 <Label Content="EduPartners" Margin="10,0,0,0" Foreground="White" FontSize="28" FontFamily="Poppins" VerticalContentAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Opacity="1.0" HorizontalAlignment="Right">
-                <Button x:Name="btCreateSchool" BorderThickness="0" Content="Create School" Background="Blue" Margin="5,0,15,0" Height="35" Width="85" Click="CreateSchool_Clicked">
+                <Button x:Name="btCreateSchool" BorderThickness="0" Content="Create School" Background="#FF05E82C" Margin="5,0,15,0" Height="35" Width="85" Click="CreateSchool_Clicked">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="5"/>
                         </Style>
                     </Button.Resources>
                 </Button>
-                <Button x:Name="btLogin" Content="Login" BorderThickness="0" Background="Green" Margin="0,0,15,0" Height="35" Width="85" Click="Login_Clicked">
+                <Button x:Name="btLogin" Content="Login" BorderThickness="0" Background="#FF206BE3" Margin="0,0,15,0" Height="35" Width="85" Click="Login_Clicked">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="5"/>

@@ -37,6 +37,12 @@ namespace EduPartners.MVVM.View.Controls
 
         private async void MainControl_Loaded(object sender, RoutedEventArgs e)
         {
+            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+
+            mainWindow.WindowState = WindowState.Normal;
+            this.Height = 650;
+            this.Width = 1000;
+
             User user = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
 
             if (user.ProfileImage == null || !File.Exists(Path.Combine(localDataPath, user.ProfileImage)))

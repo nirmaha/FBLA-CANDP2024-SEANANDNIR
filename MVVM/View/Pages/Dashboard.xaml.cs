@@ -39,7 +39,7 @@ namespace EduPartners.MVVM.View.Pages
                 
                 foreach (Partner partner in partners) 
                 {
-                    // Pie Chart
+                    // Industy Pie Chart
                     if (!IndustryPopulation.ContainsKey(partner.Industry))
                     {
                         IndustryPopulation.Add(partner.Industry, 1);
@@ -48,12 +48,6 @@ namespace EduPartners.MVVM.View.Pages
                     { 
                         IndustryPopulation[partner.Industry]++;
                     }
-
-                    // Verical Bar Graph
-                    //if (!PartnerToSavings.ContainsKey(partner.Name))
-                    //{ 
-                    //    PartnerToSavings.Add(partner.Name, partner.Savings);
-                    //}
 
                     // Line Graph
                     if (!YearToParnters.ContainsKey(partner.StartDate.Year))
@@ -65,21 +59,21 @@ namespace EduPartners.MVVM.View.Pages
                         YearToParnters[partner.StartDate.Year]++;
                     }
 
-                    // Horizontal Bar Graphs
-                    //if (!IndustryToSavings.ContainsKey(partner.Industry))
-                    //{
-                    //    IndustryToSavings.Add(partner.Industry, partner.Savings);
-                    //}
-                    //else
-                    //{
-                    //    IndustryToSavings[partner.Industry] += partner.Savings;
-                    //}
+                    // Industry Savings Pie Chart
+                    if (!IndustryToSavings.ContainsKey(partner.Industry))
+                    {
+                        IndustryToSavings.Add(partner.Industry, partner.Savings);
+                    }
+                    else
+                    {
+                        IndustryToSavings[partner.Industry] += partner.Savings;
+                    }
 
                 }
                 ((PieSeries)pieIndustry.Series[0]).ItemsSource = IndustryPopulation;
                 // ((ColumnSeries)barSavings.Series[0]).ItemsSource = PartnerToSavings;
                 ((LineSeries)lineNumofPartners.Series[0]).ItemsSource = YearToParnters;
-                // ((BarSeries)barIndustry.Series[0]).ItemsSource = IndustryToSavings;
+                ((PieSeries)pieIndustrySavings.Series[0]).ItemsSource = IndustryToSavings;
                 
             };
         }

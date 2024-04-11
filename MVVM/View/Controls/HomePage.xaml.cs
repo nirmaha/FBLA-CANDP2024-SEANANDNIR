@@ -44,6 +44,7 @@ namespace EduPartners.MVVM.View.Controls
 
         private void HomePage_Loaded(object sender, RoutedEventArgs e)
         {
+            
             const double animTimeSpan = 20; // Adjust this value as needed
             bool isFadingIn = false;
 
@@ -67,6 +68,7 @@ namespace EduPartners.MVVM.View.Controls
            
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+            mainWindow.WindowState = WindowState.Normal;
 
             ParameterizedThreadStart thread = new ParameterizedThreadStart((object parm) => {
                 animationTimer.Interval = animTimeSpan;

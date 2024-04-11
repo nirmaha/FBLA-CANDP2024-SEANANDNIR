@@ -492,3 +492,4 @@ D:\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.pdb
 C:\AM\Projects\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Controls\HomeHelpControl.g.cs
 C:\AM\Projects\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Controls\HomeHelpControl.baml
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\Themes\ScrollBarTheme.baml
+C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\Themes\ScrollBarTheme.baml

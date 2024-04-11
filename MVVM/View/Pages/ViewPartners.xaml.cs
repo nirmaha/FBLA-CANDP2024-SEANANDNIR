@@ -295,6 +295,10 @@ namespace EduPartners.MVVM.View.Pages
                         filters.Clear();
                         filters.Add(radioButton.Tag.ToString());
                         break;
+                    case "$":
+                        filters.Clear();
+                        filters.Add(radioButton.Tag.ToString());
+                        break;
                     case "clear":
                         filters.Clear();
                         filters.Add(radioButton.Tag.ToString());
@@ -320,6 +324,9 @@ namespace EduPartners.MVVM.View.Pages
                         break;
                     case "ZA":
                         partners = partners.OrderByDescending(partner => partner.Name).ToList();
+                        break;
+                    case "$":
+                        partners = partners.OrderByDescending(partner => partner.Savings).ToList();
                         break;
                     case "clear":
                         filters.Clear();

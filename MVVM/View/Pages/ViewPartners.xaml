@@ -37,6 +37,9 @@
                                 <RadioButton BorderThickness="0" Tag="ZA" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45" ToolTip="Filter Z-A" Click="FilterButton_Clicked">
                                     <Image Source="../../../Resources/zaFilter.png" Width="40" Height="40"/>
                                 </RadioButton>
+                                <RadioButton BorderThickness="0" Tag="$" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45" ToolTip="Filter Savings" Click="FilterButton_Clicked">
+                                    <Label Content="$" Foreground="White" FontWeight="SemiBold" FontSize="38" Margin="0,-10,0,0"/>
+                                </RadioButton>
                                 <RadioButton BorderThickness="0" Tag="clear" Style="{StaticResource FilterButtonHover}" Margin="10,0,0,0" Width="45" Height="45" ToolTip="Clear Filter" Click="FilterButton_Clicked">
                                     <Image Source="../../../Resources/clear-filter.png" Width="35" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </RadioButton>
