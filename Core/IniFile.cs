@@ -12,6 +12,11 @@ namespace EduPartners.Core
         private string filePath = "";
         private string directoryPath = "";
 
+        /// <summary>
+        /// This class manipulates the Ini file in <paramref name="argPath"/>.
+        /// </summary>
+        /// <param name="argPath">The full path to the file.</param>
+        /// <param name="directoryPath">The path that contains the file.</param>
         public IniFile(string argPath, string directoryPath)
         {
             filePath = argPath;
@@ -22,6 +27,9 @@ namespace EduPartners.Core
             Load();
         }
 
+       /// <summary>
+       /// The Load function reads a configuration file, parses it into sections.
+       /// </summary>
         public void Load()
         {
             sections.Clear();
@@ -57,11 +65,12 @@ namespace EduPartners.Core
                     }
                 }
             }
-            
-          
-           
         }
 
+
+        /// <summary>
+        /// This function saves the writes to the current Ini File.
+        /// </summary>
         public void Save()
         {
             using (StreamWriter writer = new StreamWriter(filePath))
@@ -78,16 +87,28 @@ namespace EduPartners.Core
             }
         }
 
-        public string GetValue(string section, string key, string defaultValue = "")
+        /// <summary>
+        /// This funtion gets the value from the specified key in the specified section.
+        /// </summary>
+        /// <param name="section">The section that the <paramref name="key"/> is in.</param>
+        /// <param name="key">The name the value is assigned to.</param>
+        /// <returns>The value of the <paramref name="key"/> or nothing if getting the value fails.</returns>
+        public string GetValue(string section, string key)
         {
             if (sections.TryGetValue(section, out Dictionary<string, string> values) && values.TryGetValue(key, out string value))
             {
                 return value;
             }
 
-            return defaultValue;
+            return "";
         }
 
+        /// <summary>
+        /// This function sets value to a speficed <paramref name="key"/> in a <paramref name="section"/>.
+        /// </summary>
+        /// <param name="section">The section that the <paramref name="key"/> is in.</param>
+        /// <param name="key">The name the value is assigned to.</param>
+        /// <param name="value">The value to set to the <paramref name="key"/>.</param>
         public void SetValue(string section, string key, string value)
         {
             if (!sections.TryGetValue(section, out Dictionary<string, string> values))
@@ -99,6 +120,10 @@ namespace EduPartners.Core
             values[key] = value;
         }
 
+        /// <summary>
+        /// This funtion gets all of the sections in a file.
+        /// </summary>
+        /// <returns>A list of sections.</returns>
         public List<string> GetSectionNames()
         {
             return sections.Keys.ToList();

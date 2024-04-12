@@ -7,6 +7,9 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace EduPartners.MVVM.Model
 {
+   /* The Partner class defines properties for a partner entity with required fields such as Name,
+   Description, ResourcesAvailable, Industry, StartDate, RepresentativeName, RepresentativeEmail,
+   and Savings. Optional fields include RepresentativePhoneNumber, Website, and Address. */
     public class Partner
     {
         [BsonId]

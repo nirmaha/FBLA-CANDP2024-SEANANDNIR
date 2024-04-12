@@ -8,6 +8,8 @@ using MongoDB.Driver;
 
 namespace EduPartners.MVVM.Model
 {
+  /* The class `School` represents a school entity with properties such as Id, Name, Address, Code,
+  City, State, Zip, and optional Partners. */
     public class School
     {
         [BsonId]

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -10,7 +11,6 @@ using BCrypts = BCrypt.Net.BCrypt;
 
 using EduPartners.Core;
 using EduPartners.MVVM.Model;
-using System.Linq;
 
 namespace EduPartners.MVVM.View.Controls
 {
@@ -97,8 +97,9 @@ namespace EduPartners.MVVM.View.Controls
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
             mainWindow.SetUserControl("HomePage");
         }
-        private async void btnCreateAccount_Clicked(object sender, RoutedEventArgs e)
+        private async void btCreateAccount_Clicked(object sender, RoutedEventArgs e)
         {
+            // Checks if a school has been selected
             if (cbSchool.SelectedItem == null)
             {
                 lErrorMessage.Visibility = Visibility.Visible;
@@ -106,6 +107,7 @@ namespace EduPartners.MVVM.View.Controls
                 return;
             }
 
+            // Checks if a school code has been inputted
             if (tbSchoolId.Text == "")
             {
                 lErrorMessage.Visibility = Visibility.Visible;
@@ -115,6 +117,7 @@ namespace EduPartners.MVVM.View.Controls
 
             School school = (await db.GetSchoolByName(cbSchool.SelectedItem.ToString())).FirstOrDefault();
 
+            // Checks if the correct school code has been inputted
             if (tbSchoolId.Text != school.Code)
             {
                 lErrorMessage.Visibility = Visibility.Visible;
@@ -122,6 +125,7 @@ namespace EduPartners.MVVM.View.Controls
                 return;
             }
 
+            // Creates a new user
             User user = new User()
             {
                 Name = App.Current.Properties["FirstName"].ToString() + " " + App.Current.Properties["LastName"].ToString(),

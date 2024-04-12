@@ -48,21 +48,21 @@
 
                     <!-- Start: MenuItem -->
                     <StackPanel Grid.Row="1" Margin="-1 40 0 20">
-                        <Button x:Name="btnDashboard" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnDashboard_MouseEnter" MouseLeave="btnDashboard_MouseLeave" Click="btnDashboard_Click">
+                        <Button x:Name="btDashboard" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btDashboard_MouseEnter" MouseLeave="btDashboard_MouseLeave" Click="btDashboard_Click">
                             <ctls:MenuItem x:Name="DashboardMenuItem" GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource dashboard}" IconWidth="16" Text="Dashboard" VerticalAlignment="Center">
                                 <ctls:MenuItem.ImageSource>
                                     <BitmapImage UriSource=""/>
                                 </ctls:MenuItem.ImageSource>
                             </ctls:MenuItem>
                         </Button>
-                        <Button x:Name="btnView" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnView_MouseEnter" MouseLeave="btnView_MouseLeave" Click="btnView_Clicked">
+                        <Button x:Name="btView" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btView_MouseEnter" MouseLeave="btView_MouseLeave" Click="btView_Clicked">
                             <ctls:MenuItem x:Name="ViewMenuItem" GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource eye}" IconWidth="16" Text="View Partners" VerticalAlignment="Center">
                                 <ctls:MenuItem.ImageSource>
                                     <BitmapImage UriSource=""/>
                                 </ctls:MenuItem.ImageSource>
                             </ctls:MenuItem>
                         </Button>
-                        <Button x:Name="btnAdd" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnAdd_MouseEnter" MouseLeave="btnAdd_MouseLeave" Click="btnAdd_Clicked">
+                        <Button x:Name="btAdd" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btAdd_MouseEnter" MouseLeave="btAdd_MouseLeave" Click="btAdd_Clicked">
                             <ctls:MenuItem x:Name="AddMenuItem" GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource plus}" IconWidth="16" Text="Add Partner" VerticalAlignment="Center">
                                 <ctls:MenuItem.ImageSource>
                                     <BitmapImage UriSource=""/>
@@ -71,7 +71,7 @@
                         </Button>
 
                     
-                        <Button x:Name="btnProfile" Style="{DynamicResource PopupButtonStyle}" MouseEnter="btnProfile_MouseEnter" MouseLeave="btnProfile_MouseLeave" Click="btnProfile_Clicked">
+                        <Button x:Name="btProfile" Style="{DynamicResource PopupButtonStyle}" MouseEnter="btProfile_MouseEnter" MouseLeave="btProfile_MouseLeave" Click="btProfile_Clicked">
                             <Grid x:Name="gProfile" HorizontalAlignment="Left">
                                 <ctls:MenuItem x:Name="ProfileMenuItem" Panel.ZIndex="1" GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Profile">
                                     <ctls:MenuItem.ImageSource>
@@ -87,14 +87,14 @@
                             </Grid>
                         </Button>
 
-                        <Button x:Name="btnHelp" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnHelp_MouseEnter" MouseLeave="btnHelp_MouseLeave" Click="btnHelp_Clicked">
+                        <Button x:Name="btHelp" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btHelp_MouseEnter" MouseLeave="btHelp_MouseLeave" Click="btHelp_Clicked">
                             <ctls:MenuItem x:Name="HelpItem" GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource EmptyGeometry}" IconWidth="16" Text="Help" VerticalAlignment="Center">
                                 <ctls:MenuItem.ImageSource>
                                     <BitmapImage UriSource="/EduPartners;component/Resources/help.png"/>
                                 </ctls:MenuItem.ImageSource>
                             </ctls:MenuItem>
                         </Button>
-                        <Button x:Name="btnLogOut" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnLogOut_MouseEnter" MouseLeave="btnLogOut_MouseLeave" Click="btnLogOut_Clicked">
+                        <Button x:Name="btLogOut" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btLogOut_MouseEnter" MouseLeave="btLogOut_MouseLeave" Click="btLogOut_Clicked">
                             <ctls:MenuItem x:Name="LogOutMenuItem" GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource logout}" IconWidth="16" Text="Logout" VerticalAlignment="Center">
                                 <ctls:MenuItem.ImageSource>
                                     <BitmapImage UriSource=""/>
@@ -108,8 +108,6 @@
                     <Popup x:Name="Popup" AllowsTransparency="True"  HorizontalOffset="0" VerticalOffset="10">
                         <ctls:UserPopup x:Name="Header" Foreground="{DynamicResource PrimaryTextColor}"/>
                     </Popup>
-
-
                     <!-- End: Popup User Control -->
 
                 </Grid>
@@ -144,8 +142,8 @@
 
                 <!-- Start: Button Close | Restore | Minimize -->
                 <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0" Height="30" Orientation="Horizontal" FlowDirection="RightToLeft" Grid.RowSpan="2" >
-                    <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" ToolTip="Close" Tag="IsCloseButton"/>
-                    <Button x:Name="btnRestore" Margin="5,0" ToolTip="Maximize" Click="btnRestore_Click">
+                    <Button x:Name="btClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btClose_Click" ToolTip="Close" Tag="IsCloseButton"/>
+                    <Button x:Name="btRestore" Margin="5,0" ToolTip="Maximize" Click="btRestore_Click">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonsStyle}">
                                 <Setter Property="Content" Value="{DynamicResource maximize}"/>
@@ -157,7 +155,7 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" ToolTip="Minimize" Click="btnMinimize_Click"/>
+                    <Button x:Name="btMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" ToolTip="Minimize" Click="btMinimize_Click"/>
                 </StackPanel>
                 <!-- End: Button Close | Restore | Minimize -->
 

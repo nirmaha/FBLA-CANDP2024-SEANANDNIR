@@ -7,7 +7,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 using EduPartners.Core;
@@ -39,25 +38,35 @@ namespace EduPartners.MVVM.View.Controls
         {
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
 
+            // Resizes window to fit the user control
             mainWindow.WindowState = WindowState.Normal;
             this.Height = 650;
             this.Width = 1000;
 
             User user = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
 
+            // Sets the profile image on navgation bar
             if (user.ProfileImage == null || !File.Exists(Path.Combine(localDataPath, user.ProfileImage)))
             {
+                // Default image if can not find stored image
                 imgProfile.ImageSource = new BitmapImage(new Uri("pack://application:,,,/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
             }
             else
             {
-                imgProfile.ImageSource = new BitmapImage(new Uri(Path.Combine(localDataPath, user.ProfileImage), UriKind.RelativeOrAbsolute)) ?? new BitmapImage(new Uri("pack://application:,,,/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
+                imgProfile.ImageSource = new BitmapImage(new Uri(Path.Combine(localDataPath, user.ProfileImage), UriKind.RelativeOrAbsolute));
             }
 
+            // Selects Dashboard as the default menuitem
             DashboardMenuItem.InternalMenu.IsChecked = true;
-            btnDashboard.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            btDashboard.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
 
+        /// <summary>
+        /// This function navigates to a specified <paramref name="PageUri"/> and updates the corresponding
+        /// buttons and menu items accordingly.
+        /// </summary>
+        /// <param name="PageUri">The URI of the page that needs to be loaded in the application. It is used to
+        /// determine which page to navigate to within the application based on the provided URI.</param>
         public void Load_Page(string PageUri)
         {
             if (PageUri == @"MVVM/View/Pages/EditPartners.xaml")
@@ -68,11 +77,11 @@ namespace EduPartners.MVVM.View.Controls
 
             Dictionary<string, Button> buttons = new Dictionary<string, Button>()
             {
-                {"MVVM/View/Pages/ViewPartners.xaml",btnView },
-                {"MVVM/View/Pages/AddPartners.xaml",btnAdd },
-                {"MVVM/View/Pages/Help.xaml",btnHelp },
-                {"MVVM/View/Pages/Dashboard.xaml",btnDashboard },
-                {"MVVM/View/Pages/Profile.xaml",btnProfile },
+                {"MVVM/View/Pages/ViewPartners.xaml",btView },
+                {"MVVM/View/Pages/AddPartners.xaml",btAdd },
+                {"MVVM/View/Pages/Help.xaml",btHelp },
+                {"MVVM/View/Pages/Dashboard.xaml",btDashboard },
+                {"MVVM/View/Pages/Profile.xaml",btProfile },
 
             };            
             
@@ -85,152 +94,212 @@ namespace EduPartners.MVVM.View.Controls
                 {"MVVM/View/Pages/Profile.xaml",ProfileMenuItem },
             };
 
+            // Navigates to the page
             fContainer.Navigate(new Uri(PageUri, UriKind.RelativeOrAbsolute));
+
+            // Updates the buttons
             pages[PageUri].InternalMenu.IsChecked = true;
             buttons[PageUri].RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
 
-        private void BG_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// The UpdateProfileImage function retrieves the user's profile image and displays it, using a
+        /// default image if the user does not have one.
+        /// </summary>
+        public async void UpdateProfileImage()
         {
-            Tg_Btn.IsChecked = false;
+            User user = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
+            if (!File.Exists(Path.Combine(localDataPath, user.ProfileImage)))
+            {
+                imgProfile.ImageSource = new BitmapImage(new Uri("pack://application:,,,/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
+            }
+            else
+            {
+                imgProfile.ImageSource = new BitmapImage(new Uri(Path.Combine(localDataPath, user.ProfileImage), UriKind.RelativeOrAbsolute)) ?? new BitmapImage(new Uri("pack://application:,,,/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
+            }
         }
 
         // Start: MenuLeft PopupButton //
-        private void btnDashboard_MouseEnter(object sender, MouseEventArgs e)
+
+        // Dashboard Menu Button Events
+        private void btDashboard_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Tg_Btn.IsChecked == false)
             {
-                Popup.PlacementTarget = btnDashboard;
+                Popup.PlacementTarget = btDashboard;
                 Popup.Placement = PlacementMode.Right;
                 Popup.IsOpen = true;
                 Header.PopupText.Text = "Dashboard";
             }
         }
 
-        private void btnDashboard_MouseLeave(object sender, MouseEventArgs e)
+        private void btDashboard_MouseLeave(object sender, MouseEventArgs e)
         {
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
         }
 
-        private void btnView_MouseEnter(object sender, MouseEventArgs e)
+        private void btDashboard_Click(object sender, RoutedEventArgs e)
+        {
+            fContainer.Navigate(new Uri("MVVM/View/Pages/Dashboard.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        // View Menu Button Events
+        private void btView_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Tg_Btn.IsChecked == false)
             {
-                Popup.PlacementTarget = btnView;
+                Popup.PlacementTarget = btView;
                 Popup.Placement = PlacementMode.Right;
                 Popup.IsOpen = true;
                 Header.PopupText.Text = "View Partners";
             }
         }
 
-        private void btnView_MouseLeave(object sender, MouseEventArgs e)
+        private void btView_MouseLeave(object sender, MouseEventArgs e)
         {
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
         }
 
-        private void btnView_Clicked(object sender, RoutedEventArgs e)
+        private void btView_Clicked(object sender, RoutedEventArgs e)
         {
             fContainer.Navigate(new Uri("MVVM/View/Pages/ViewPartners.xaml", UriKind.RelativeOrAbsolute));
             curentMenuItem = (Button)sender;
         }
 
-        private void btnAdd_MouseEnter(object sender, MouseEventArgs e)
+        // Add Menu Button Events
+        private void btAdd_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Tg_Btn.IsChecked == false)
             {
-                Popup.PlacementTarget = btnAdd;
+                Popup.PlacementTarget = btAdd;
                 Popup.Placement = PlacementMode.Right;
                 Popup.IsOpen = true;
                 Header.PopupText.Text = "Add Partner";
             }
         }
 
-        private void btnAdd_MouseLeave(object sender, MouseEventArgs e)
+        private void btAdd_MouseLeave(object sender, MouseEventArgs e)
         {
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
         }
 
-        private void btnAdd_Clicked(object sender, RoutedEventArgs e)
+        private void btAdd_Clicked(object sender, RoutedEventArgs e)
         {
             fContainer.Navigate(new Uri("MVVM/View/Pages/AddPartners.xaml", UriKind.RelativeOrAbsolute));
             curentMenuItem = (Button)sender;
         }
 
-        private void btnHelp_MouseEnter(object sender, MouseEventArgs e)
+        // Help Menu Button Events
+        private void btHelp_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Tg_Btn.IsChecked == false)
             {
-                Popup.PlacementTarget = btnHelp;
+                Popup.PlacementTarget = btHelp;
                 Popup.Placement = PlacementMode.Right;
                 Popup.IsOpen = true;
                 Header.PopupText.Text = "Help";
             }
         }
 
-        private void btnHelp_MouseLeave(object sender, MouseEventArgs e)
+        private void btHelp_MouseLeave(object sender, MouseEventArgs e)
         {
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
         }
 
-        private void btnHelp_Clicked(object sender, RoutedEventArgs e)
+        private void btHelp_Clicked(object sender, RoutedEventArgs e)
         {
             fContainer.Navigate(new Uri("MVVM/View/Pages/Help.xaml", UriKind.RelativeOrAbsolute));
             curentMenuItem = (Button)sender;
         }
 
-        private void btnProfile_MouseEnter(object sender, MouseEventArgs e)
+        // Profile Menu Button Events
+        private void btProfile_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Tg_Btn.IsChecked == false)
             { 
-                Popup.PlacementTarget = btnProfile;
+                Popup.PlacementTarget = btProfile;
                 Popup.Placement = PlacementMode.Right;
                 Popup.IsOpen = true;
                 Header.PopupText.Text = "Profile";
             }
         }
 
-        private void btnProfile_MouseLeave(object sender, MouseEventArgs e)
+        private void btProfile_MouseLeave(object sender, MouseEventArgs e)
         {
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
         }
 
-        private void btnProfile_Clicked(object sender, RoutedEventArgs e)
+        private void btProfile_Clicked(object sender, RoutedEventArgs e)
         {
             fContainer.Navigate(new Uri("MVVM/View/Pages/Profile.xaml", UriKind.RelativeOrAbsolute));
             curentMenuItem = (Button)sender;
         }
 
-        private void btnLogOut_MouseEnter(object sender, MouseEventArgs e)
+        // Logout Menu Button Events
+        private void btLogOut_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Tg_Btn.IsChecked == false)
             {
-                Popup.PlacementTarget = btnLogOut;
+                Popup.PlacementTarget = btLogOut;
                 Popup.Placement = PlacementMode.Right;
                 Popup.IsOpen = true;
                 Header.PopupText.Text = "Logout";
             }
         }
 
-        private void btnLogOut_MouseLeave(object sender, MouseEventArgs e)
+        private void btLogOut_MouseLeave(object sender, MouseEventArgs e)
         {
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
         }
+
+        private void btLogOut_Clicked(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure you want to log out?", "Log Out", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            
+            // Retruns user to the home page
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                App.Current.Properties["User"] = "";
+
+                MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+                mainWindow.SetUserControl("HomePage");
+                return;
+            }
+
+            if (curentMenuItem.Name == "btProfile")
+            {
+                // Gets the MenuItem inside of the button
+                foreach (object child in ((Grid)curentMenuItem.Content).Children)
+                {
+                    if (child is MenuItem menuItem)
+                    { 
+                        menuItem.InternalMenu.IsChecked = true;
+                        menuItem.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                        return;
+                    }
+                }
+            }
+
+            // Sets user back to the page they were on
+            ((MenuItem)curentMenuItem.Content).InternalMenu.IsChecked = true;
+            curentMenuItem.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+        }
         // End: MenuLeft PopupButton //
 
         // Start: Button Close | Restore | Minimize 
-        private void btnClose_Click(object sender, RoutedEventArgs e)
+        private void btClose_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
             mainWindow.Close();
         }
 
-        private void btnRestore_Click(object sender, RoutedEventArgs e)
+        private void btRestore_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
 
@@ -248,68 +317,17 @@ namespace EduPartners.MVVM.View.Controls
             }
         }
 
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        private void btMinimize_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
             mainWindow.WindowState = WindowState.Minimized;
         }
         // End: Button Close | Restore | Minimize
 
-        private void btnHome_Click(object sender, RoutedEventArgs e)
-        {
-            fContainer.Navigate(new Uri("MVVM/View/Pages/Home.xaml", UriKind.RelativeOrAbsolute));
-        }
-
-        private void btnDashboard_Click(object sender, RoutedEventArgs e)
-        {
-            fContainer.Navigate(new Uri("MVVM/View/Pages/Dashboard.xaml", UriKind.RelativeOrAbsolute));
-        }
-
         private void Top_Clicked(object sender, MouseButtonEventArgs e)
         {
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
             if (e.LeftButton == MouseButtonState.Pressed) mainWindow.DragMove();
-        }
-
-        private void btnLogOut_Clicked(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure you want to log out?", "Log Out", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (messageBoxResult == MessageBoxResult.Yes)
-            {
-                App.Current.Properties["User"] = "";
-                MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-                mainWindow.SetUserControl("HomePage");
-                return;
-            }
-
-            if (curentMenuItem.Name == "btnProfile")
-            {
-                foreach (object child in ((Grid)curentMenuItem.Content).Children)
-                {
-                    if (child is MenuItem menuItem)
-                    { 
-                        menuItem.InternalMenu.IsChecked = true;
-                        menuItem.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-                        return;
-                    }
-                }
-            }
-
-            ((MenuItem)curentMenuItem.Content).InternalMenu.IsChecked = true;
-            curentMenuItem.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-        }
-
-        public async void UpdateProfileImage()
-        {
-            User user = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
-            if (!File.Exists(Path.Combine(localDataPath, user.ProfileImage)))
-            {
-                imgProfile.ImageSource = new BitmapImage(new Uri("pack://application:,,,/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
-            }
-            else
-            {
-                imgProfile.ImageSource = new BitmapImage(new Uri(Path.Combine(localDataPath, user.ProfileImage), UriKind.RelativeOrAbsolute)) ?? new BitmapImage(new Uri("pack://application:,,,/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
-            }
         }
     }
 }

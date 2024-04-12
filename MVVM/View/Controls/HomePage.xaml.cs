@@ -4,9 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Timers;
 using System.Threading;
-using MongoDB.Bson;
 
 
 namespace EduPartners.MVVM.View.Controls
@@ -40,19 +38,17 @@ namespace EduPartners.MVVM.View.Controls
             this.Loaded += HomePage_Loaded;
         }
 
-   
-
         private void HomePage_Loaded(object sender, RoutedEventArgs e)
         {
-            
-            const double animTimeSpan = 20; // Adjust this value as needed
+            const double animTimeSpan = 20;
             bool isFadingIn = false;
 
             panelNum = 0;
             ibBackground.ImageSource = new BitmapImage(new Uri(images[panelNum], UriKind.RelativeOrAbsolute));
             lBackgroundText.Content = backgroundTexts[panelNum];
 
-            ibBackground.Opacity = 1; // Adjust the decrement as needed
+            // Sets initial opacity
+            ibBackground.Opacity = 1;
             lBackgroundText.Opacity = 1;
 
             firstPanelCircle.Opacity = 0.7;
@@ -62,25 +58,27 @@ namespace EduPartners.MVVM.View.Controls
             thirdPanelCircle.Opacity = 0.5;
             thirdPanelCircle.Background = new SolidColorBrush(Colors.Gray);
 
+            // Creates new timers
             switchTimer = new System.Timers.Timer();
             animationTimer = new System.Timers.Timer();
-
-           
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
             mainWindow.WindowState = WindowState.Normal;
 
-            ParameterizedThreadStart thread = new ParameterizedThreadStart((object parm) => {
+            ParameterizedThreadStart thread = new ParameterizedThreadStart((object parm) => 
+            {
                 animationTimer.Interval = animTimeSpan;
+                
                 animationTimer.Elapsed += delegate
                 {
                     Dispatcher.InvokeAsync(() =>
                     {
                         if (isFadingIn)
                         {
-                            ibBackground.Opacity += 0.05; // Adjust the increment as needed
+                            ibBackground.Opacity += 0.05;
                             lBackgroundText.Opacity += 0.05;
 
+                            // Switch when image is fully faded in
                             if (ibBackground.Opacity >= 1)
                             {
                                 isFadingIn = false;
@@ -90,19 +88,23 @@ namespace EduPartners.MVVM.View.Controls
                         }
                         else
                         {
-                            ibBackground.Opacity -= 0.05; // Adjust the decrement as needed
+                            ibBackground.Opacity -= 0.05;
                             lBackgroundText.Opacity -= 0.05;
 
                             if (ibBackground.Opacity <= 0)
                             {
                                 isFadingIn = true;
                                 panelNum++;
+
                                 if (panelNum == images.Length)
                                 {
                                     panelNum = 0;
                                 }
+
                                 ibBackground.ImageSource = new BitmapImage(new Uri(images[panelNum], UriKind.RelativeOrAbsolute));
                                 lBackgroundText.Content = backgroundTexts[panelNum];
+
+                                // Switches circles as images cycle
                                 switch (panelNum)
                                 {
                                     case 0:
@@ -135,6 +137,7 @@ namespace EduPartners.MVVM.View.Controls
                     });
                 };
 
+                // Start the animation when switching to the next image
                 switchTimer.Elapsed += delegate
                 {
                     Dispatcher.InvokeAsync(() => { 
@@ -155,8 +158,8 @@ namespace EduPartners.MVVM.View.Controls
 
         private void CreateSchool_Clicked(object sender, RoutedEventArgs e)
         {
-            switchTimer.Dispose();
-            animationTimer.Dispose();
+            switchTimer.Stop();
+            animationTimer.Stop();
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
             mainWindow.SetUserControl("CreateSchool");
@@ -164,8 +167,8 @@ namespace EduPartners.MVVM.View.Controls
 
         private void Login_Clicked(object sender, RoutedEventArgs e)
         {
-            switchTimer.Dispose();
-            animationTimer.Dispose();
+            switchTimer.Stop();
+            animationTimer.Stop();
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
             mainWindow.SetUserControl("LoginControl");
@@ -173,8 +176,8 @@ namespace EduPartners.MVVM.View.Controls
          
         private void SignUp_Clicked(object sender, RoutedEventArgs e)
         {
-            switchTimer.Dispose();
-            animationTimer.Dispose();
+            switchTimer.Stop();
+            animationTimer.Stop();
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
             mainWindow.SetUserControl("SignUpControl");

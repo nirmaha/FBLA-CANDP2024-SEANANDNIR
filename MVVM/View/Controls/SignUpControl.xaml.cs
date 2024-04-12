@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -34,6 +35,7 @@ namespace EduPartners.MVVM.View.Controls
         {
             lErrorMessage.Visibility = Visibility.Collapsed;
 
+            // Fills in saved data if not empty
             if (!(string.IsNullOrEmpty(App.Current.Properties["FirstName"]?.ToString())))
             {
                 tbFirstName.Text = App.Current.Properties["FirstName"].ToString();
@@ -50,6 +52,7 @@ namespace EduPartners.MVVM.View.Controls
 
         private void SignUpBorder_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // Resets textboxes backgrounds if the border is clicked
             if (!(e.Source is TextBox || e.Source is PasswordBox))
             {
                 Keyboard.ClearFocus();
@@ -196,7 +199,6 @@ namespace EduPartners.MVVM.View.Controls
             pbConfirmPassword.Focus();
         }
 
-
         private void LoginRedirect_MouseDown(object sender, MouseButtonEventArgs e)
         {
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
@@ -211,6 +213,10 @@ namespace EduPartners.MVVM.View.Controls
 
         private async void btnNext_Clicked(object sender, RoutedEventArgs e)
         {
+            // Checks if the inputted email is valid
+            bool emailMatch = Regex.IsMatch(tbEmail.Text, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+
+            // Checks if any textbox is empty
             if (tbFirstName.Text == "" || tbLastName.Text == "" || tbEmail.Text == "" || pbPassword.Password == "" || pbConfirmPassword.Password == "")
             {
                 lErrorMessage.FontSize = 18;
@@ -223,6 +229,7 @@ namespace EduPartners.MVVM.View.Controls
 
             foreach (User user in users)
             {
+                // Checks if the email doesn't already exist
                 if (tbEmail.Text == user.Email)
                 {
                     lErrorMessage.FontSize = 18;
@@ -240,6 +247,7 @@ namespace EduPartners.MVVM.View.Controls
                 return;
             }
 
+            // Makes sure that the terms check box has been clicked
             if (cbTerms.IsChecked == false)
             {
                 lErrorMessage.FontSize = 18;
@@ -248,7 +256,8 @@ namespace EduPartners.MVVM.View.Controls
                 return;
             }
 
-            if (!tbEmail.Text.Contains("@"))
+            // Checks if a valid email has been inputted
+            if (!emailMatch)
             {
                 lErrorMessage.FontSize = 18;
                 lErrorMessage.Visibility = Visibility.Visible;
@@ -256,6 +265,7 @@ namespace EduPartners.MVVM.View.Controls
                 return;
             }
 
+            // Stores inputted data for user creation
             App.Current.Properties["FirstName"] = tbFirstName.Text;
             App.Current.Properties["LastName"] = tbLastName.Text;
             App.Current.Properties["Email"] = tbEmail.Text;

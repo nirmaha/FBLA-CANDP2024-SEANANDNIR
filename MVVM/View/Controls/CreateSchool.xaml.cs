@@ -28,7 +28,7 @@ namespace EduPartners.MVVM.View.Controls
             tbSchoolCode.Text = Guid.NewGuid().ToString();
             db = App.Current.Properties["Database"] as Database;
 
-            Loaded += CreateSchool_Loaded;
+            this.Loaded += CreateSchool_Loaded;
         }
 
         private void CreateSchool_Loaded(object sender, RoutedEventArgs e)
@@ -66,6 +66,7 @@ namespace EduPartners.MVVM.View.Controls
 
         private void CreateSchoolBorder_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // Returns every textbox to normal color when border is clicked
             if (!(e.Source is TextBox || e.Source is PasswordBox))
             {
                 Keyboard.ClearFocus();
@@ -163,8 +164,9 @@ namespace EduPartners.MVVM.View.Controls
             tbState.Focus();
         }
 
-        private void btnCreateSchool_Clicked(object sender, RoutedEventArgs e)
+        private async void btnCreateSchool_Clicked(object sender, RoutedEventArgs e)
         {
+            // Checks all fields for emptiness
             if (tbSchoolName.Text == "" || tbAddress.Text == "" || tbCity.Text == "" || tbState.Text == "" || tbZip.Text == "")
             {
                 lErrorMessage.Visibility = Visibility.Visible;
@@ -189,6 +191,7 @@ namespace EduPartners.MVVM.View.Controls
                 return;
             }
 
+            // Creates a new school
             School school = new School
             {
                 Name = tbSchoolName.Text,
@@ -199,7 +202,7 @@ namespace EduPartners.MVVM.View.Controls
                 Code = tbSchoolCode.Text,
                 Partners = new List<Partner>()
             };
-            db.CreateSchool(school);
+            await db.CreateSchool(school);
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
             mainWindow.SetUserControl("HomePage");

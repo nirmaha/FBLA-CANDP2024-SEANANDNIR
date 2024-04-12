@@ -5,6 +5,8 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace EduPartners.MVVM.Model
 {
+    /* Thie User class has properties such as Id, Name, Email, About, PhoneNumber,
+    Password, ProfileImage, and HomeSchool. */
     public class User
     {
         [BsonId]

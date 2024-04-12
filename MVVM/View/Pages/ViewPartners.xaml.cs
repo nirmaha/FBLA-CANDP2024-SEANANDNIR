@@ -269,7 +269,7 @@ namespace EduPartners.MVVM.View.Pages
             FilterPartners(button);
         }
 
-        private async void Serach_MouseDown(object sender, RoutedEventArgs e)
+        private void Serach_MouseDown(object sender, RoutedEventArgs e)
         {
             FilterPartners();
             e.Handled = true;
