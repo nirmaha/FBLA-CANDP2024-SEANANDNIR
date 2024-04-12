@@ -167,7 +167,7 @@ namespace EduPartners.MVVM.View.Controls
             }
         }
 
-        private async void btnLogin_Clicked(object sender, RoutedEventArgs e)
+        private async void btLogin_Clicked(object sender, RoutedEventArgs e)
         {
             // Checks for emptiness
             if (tbEmail.Text == "" || pbPassword.Password == "")

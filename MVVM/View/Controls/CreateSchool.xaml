@@ -27,6 +27,7 @@
                 <RowDefinition Height="25" />
             </Grid.RowDefinitions>
 
+            <!-- Main Border -->
             <Border x:Name="bCreateSchoolBorder" Background="WhiteSmoke" CornerRadius="25" Opacity=".80" PreviewMouseDown="CreateSchoolBorder_MouseDown" Grid.Row="1">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -44,6 +45,7 @@
 
                     <Label x:Name="lErrorMessage" Grid.Row="1" Content="" Visibility="Collapsed" Foreground="Red" FontSize="18" HorizontalAlignment="Center"/>
 
+                    <!-- Input Fields | Start -->
                     <TextBox x:Name="tbSchoolName" Grid.Row="2" Background="#ededed" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" FontSize="20" GotFocus="tbSchoolName_GotFocus" LostFocus="tbSchoolName_LostFocus" TextChanged="tbSchoolName_TextChanged" VerticalContentAlignment="Center" Height="38" />
                     <Label x:Name="lSchoolName" Content="School Name" Foreground="Gray" Grid.Row="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Cursor="IBeam" Margin="50,0,0,0" MouseDown="lSchoolName_Clicked" Height="30" Width="98"/>
 
@@ -63,7 +65,9 @@
                     <Label Content="&#x1f4cb;" Grid.Row="6" Cursor="Arrow" FontSize="20" Margin="320,10,0,39" MouseDown="lCopyCliboard_MouseDown" Grid.RowSpan="2"/>
                     <Label Content="&#x27f3;" Grid.Row="6" Cursor="Arrow"  FontSize="25" Margin="345,4,0,34" MouseDown="lCodeRefresh_MouseDown" Grid.RowSpan="2"/>
 
-                    <Button x:Name="btnCreateSchool" IsDefault="True" Grid.Row="7" Content="Create School" Background="Blue" FontSize="25" Foreground="White" Click="btnCreateSchool_Clicked" Height="50" Width="300" >
+                    <!-- Input Fields | End -->
+
+                   <Button x:Name="btCreateSchool" IsDefault="True" Grid.Row="7" Content="Create School" Background="Blue" FontSize="25" Foreground="White" Click="btCreateSchool_Clicked" Height="50" Width="300" >
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="15"/>

@@ -164,7 +164,7 @@ namespace EduPartners.MVVM.View.Controls
             tbState.Focus();
         }
 
-        private async void btnCreateSchool_Clicked(object sender, RoutedEventArgs e)
+        private async void btCreateSchool_Clicked(object sender, RoutedEventArgs e)
         {
             // Checks all fields for emptiness
             if (tbSchoolName.Text == "" || tbAddress.Text == "" || tbCity.Text == "" || tbState.Text == "" || tbZip.Text == "")

@@ -9,9 +9,8 @@
              Height="650" Width="1000"
              Background="Transparent" FontFamily="Poppins" MouseDown="Top_Clicked">
 
-    <!-- By Jeyderht 
-        Subscribe: https://www.youtube.com/channel/UC9di50E_9m9pQcZPxzFqYUA/about
-        -->
+    <!-- Orignal Template by Jeyderht -->
+ 
     <Border Background="{DynamicResource PrimaryBackgroundColor}">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -19,19 +18,17 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="0"
-                    Background="{DynamicResource SecundaryBackgroundColor}">
+            <Border Grid.Column="0" Background="{DynamicResource SecundaryBackgroundColor}">
+                
                 <Grid x:Name="GridNav" Width="60">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
+                    <!-- Top Logo -->
                     <Grid Grid.Row="0">
-                        <Border 
-                              Margin="14 0 0 0"
-                              Width="32" Height="24"
-                              HorizontalAlignment="Left">
+                        <Border Margin="14,0,0,0" Width="32" Height="24" HorizontalAlignment="Left">
                             <Border.Background>
                                 <ImageBrush ImageSource="../../../Resources/icon.png" Stretch="Uniform"/>
                             </Border.Background>
@@ -48,6 +45,8 @@
 
                     <!-- Start: MenuItem -->
                     <StackPanel Grid.Row="1" Margin="-1 40 0 20">
+                        
+                        <!-- Dashboard Button -->
                         <Button x:Name="btDashboard" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btDashboard_MouseEnter" MouseLeave="btDashboard_MouseLeave" Click="btDashboard_Click">
                             <ctls:MenuItem x:Name="DashboardMenuItem" GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource dashboard}" IconWidth="16" Text="Dashboard" VerticalAlignment="Center">
                                 <ctls:MenuItem.ImageSource>
@@ -55,6 +54,8 @@
                                 </ctls:MenuItem.ImageSource>
                             </ctls:MenuItem>
                         </Button>
+
+                        <!-- View Partner Button -->
                         <Button x:Name="btView" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btView_MouseEnter" MouseLeave="btView_MouseLeave" Click="btView_Clicked">
                             <ctls:MenuItem x:Name="ViewMenuItem" GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource eye}" IconWidth="16" Text="View Partners" VerticalAlignment="Center">
                                 <ctls:MenuItem.ImageSource>
@@ -62,6 +63,8 @@
                                 </ctls:MenuItem.ImageSource>
                             </ctls:MenuItem>
                         </Button>
+
+                        <!-- Add Partner Button -->
                         <Button x:Name="btAdd" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btAdd_MouseEnter" MouseLeave="btAdd_MouseLeave" Click="btAdd_Clicked">
                             <ctls:MenuItem x:Name="AddMenuItem" GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource plus}" IconWidth="16" Text="Add Partner" VerticalAlignment="Center">
                                 <ctls:MenuItem.ImageSource>
@@ -70,7 +73,7 @@
                             </ctls:MenuItem>
                         </Button>
 
-                    
+                        <!-- Profile Button -->
                         <Button x:Name="btProfile" Style="{DynamicResource PopupButtonStyle}" MouseEnter="btProfile_MouseEnter" MouseLeave="btProfile_MouseLeave" Click="btProfile_Clicked">
                             <Grid x:Name="gProfile" HorizontalAlignment="Left">
                                 <ctls:MenuItem x:Name="ProfileMenuItem" Panel.ZIndex="1" GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Profile">
@@ -87,6 +90,7 @@
                             </Grid>
                         </Button>
 
+                        <!-- Help Button -->
                         <Button x:Name="btHelp" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btHelp_MouseEnter" MouseLeave="btHelp_MouseLeave" Click="btHelp_Clicked">
                             <ctls:MenuItem x:Name="HelpItem" GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource EmptyGeometry}" IconWidth="16" Text="Help" VerticalAlignment="Center">
                                 <ctls:MenuItem.ImageSource>
@@ -94,6 +98,8 @@
                                 </ctls:MenuItem.ImageSource>
                             </ctls:MenuItem>
                         </Button>
+
+                        <!-- Log-out Button -->
                         <Button x:Name="btLogOut" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btLogOut_MouseEnter" MouseLeave="btLogOut_MouseLeave" Click="btLogOut_Clicked">
                             <ctls:MenuItem x:Name="LogOutMenuItem" GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource logout}" IconWidth="16" Text="Logout" VerticalAlignment="Center">
                                 <ctls:MenuItem.ImageSource>
@@ -101,6 +107,7 @@
                                 </ctls:MenuItem.ImageSource>
                             </ctls:MenuItem>
                         </Button>
+                        
                     </StackPanel>
                     <!-- End: MenuItem -->
 
@@ -119,7 +126,10 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
+                <!-- Navigation Toggle Button -->
                 <ToggleButton x:Name="Tg_Btn" Grid.Column="1" VerticalAlignment="Center" Style="{DynamicResource iToggleButtonStyle}" HorizontalAlignment="Left" BorderThickness="0" Background="Transparent" Margin="10,15,0,15" Height="30" Width="30" ToolTip="Sidebar">
+                    
+                    <!-- Contract Navigation Bar -->
                     <ToggleButton.Triggers>
                         <EventTrigger RoutedEvent="ToggleButton.Unchecked">
                             <BeginStoryboard>
@@ -129,6 +139,8 @@
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
+                        
+                        <!-- Expand Navigation Bar -->
                         <EventTrigger RoutedEvent="ToggleButton.Checked">
                             <BeginStoryboard>
                                 <Storyboard x:Name="ShowStackPanel">
@@ -138,6 +150,7 @@
                             </BeginStoryboard>
                         </EventTrigger>
                     </ToggleButton.Triggers>
+                    
                 </ToggleButton>
 
                 <!-- Start: Button Close | Restore | Minimize -->
@@ -159,6 +172,7 @@
                 </StackPanel>
                 <!-- End: Button Close | Restore | Minimize -->
 
+                <!-- Navigation Frame -->
                 <Frame Grid.Row="1"
                        Name="fContainer"
                        Margin="20"

@@ -17,13 +17,18 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-
+        <!-- Top Bar -->
         <Grid Background="#152238">
+            
+            <!-- EduPartners Logo -->
             <StackPanel Margin="20,0,0,0" Orientation="Horizontal">
                 <Image Source="../../../Resources/icon.png" Height="45"/>
                 <Label Content="EduPartners" Margin="10,0,0,0" Foreground="White" FontSize="28" FontFamily="Poppins" VerticalContentAlignment="Center"/>
             </StackPanel>
+            
             <StackPanel Orientation="Horizontal" Opacity="1.0" HorizontalAlignment="Right">
+                
+                <!-- Create School Button -->
                 <Button x:Name="btCreateSchool" BorderThickness="0" Content="Create School" Background="#FF05E82C" Margin="5,0,15,0" Height="35" Width="85" Click="CreateSchool_Clicked">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -31,6 +36,8 @@
                         </Style>
                     </Button.Resources>
                 </Button>
+                
+                <!-- Login Button -->
                 <Button x:Name="btLogin" Content="Login" BorderThickness="0" Background="#FF206BE3" Margin="0,0,15,0" Height="35" Width="85" Click="Login_Clicked">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -38,6 +45,8 @@
                         </Style>
                     </Button.Resources>
                 </Button>
+                
+                <!-- Sign-up Button -->
                 <Button x:Name="btSignUp" Content="Sign Up" BorderThickness="0" Background="DarkOrange" Margin="0,0,8,0" Height="35" Width="85" Click="SignUp_Clicked">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -45,18 +54,25 @@
                         </Style>
                     </Button.Resources>
                 </Button>
+                
+                <!-- Help Button -->
                 <Border Cursor="Hand" ToolTip="Help" Margin="0,0,20,0" MouseDown="bHelp_MouseDown">
                     <Image Height="35" Source="../../../Resources/help.png"/>
                 </Border>
+                
             </StackPanel>
         </Grid>
+        
         <Grid Grid.Row="1" PreviewMouseDown="Background_Clicked">
+            
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition Height="60" />
             </Grid.RowDefinitions>
-            <Rectangle Grid.RowSpan="2" Fill="Transparent" />
+                        
             <Label x:Name="lBackgroundText" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="32" Content="Manage your Partnerships" Foreground="WhiteSmoke" />
+            
+            <!-- Bottom Circles -->
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="12">
                 <Border CornerRadius="5" x:Name="firstPanelCircle" Background="White" Width="43" Height="12" Opacity="0.7" />
                 <Border CornerRadius="5" x:Name="secondPanelCircle" Background="Gray" Width="43" Height="12" Margin="20,0,0,0" Opacity="0.5" />

@@ -211,7 +211,7 @@ namespace EduPartners.MVVM.View.Controls
             mainWindow.SetUserControl("HomePage");
         }
 
-        private async void btnNext_Clicked(object sender, RoutedEventArgs e)
+        private async void btNext_Clicked(object sender, RoutedEventArgs e)
         {
             // Checks if the inputted email is valid
             bool emailMatch = Regex.IsMatch(tbEmail.Text, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");

@@ -49,15 +49,19 @@
                     </Style>
                 </Button.Style>
             </Button>
+            
+            <!-- Title -->
             <TextBlock Grid.Row="0" FontSize="20" FontWeight="SemiBold" Margin="10,10,0,0">
                     <Run Text="Welcome to" Foreground="{StaticResource PrimaryTextColor}"/>
                     <Run Text="EduPartners" Foreground="{StaticResource PrimaryBlueColor}"/>
             </TextBlock>
         </StackPanel>
 
+        <!-- Instructions -->
         <Label Grid.Row="1" Content="To get started please follow these steps:" Foreground="{StaticResource PrimaryTextColor}" FontSize="15"/>
         <Label Grid.Row="2" Content="If another administrator from your school has already created the school in this application then proceed to step 2." Foreground="DarkGray" FontSize="12"/>
 
+        <!-- Steps | Start -->
         <TextBlock Grid.Row="3" Margin="10,0,0,0">
                 <Run Text="1. " Foreground="{StaticResource PrimaryBlueColor}" FontWeight="SemiBold" FontSize="16"/>
                 <Run Text="Create the school you would like to track partnership data for." Foreground="{StaticResource PrimaryTextColor}" FontSize="13"/>
@@ -115,6 +119,7 @@
                  <Run Text="11. " Foreground="{StaticResource PrimaryBlueColor}" FontWeight="SemiBold" FontSize="16"/>
                  <Run Text="If additional help is required to manage your partners from our application please visit the help center in our Dashboard." Foreground="{StaticResource PrimaryTextColor}" FontSize="13"/>
         </TextBlock>
+        <!-- Steps | End -->
 
         <Label Grid.Row="14" Content="Throughout this entire process look out for red text as they indicate incorrect input." FontWeight="SemiBold" Foreground="{StaticResource PrimaryTextColor}" FontSize="15"/>
 

@@ -27,7 +27,7 @@
                 <RowDefinition Height="20" />
             </Grid.RowDefinitions>
 
-
+            <!-- Main Border -->
             <Border x:Name="bSignUpBorder" Grid.Row="1" Background="WhiteSmoke" CornerRadius="25" Opacity=".80" PreviewMouseDown="SignUpBorder_MouseDown">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -47,6 +47,7 @@
 
                     <Label x:Name="lErrorMessage" Grid.Row="1" Content="" Visibility="Collapsed" Foreground="Red" FontSize="18" HorizontalAlignment="Center"/>
 
+                    <!-- Input Fields | Start -->
                     <TextBox x:Name="tbFirstName" Grid.Row="2" Background="#ededed" HorizontalAlignment="Center" Width="300" Height="30" FontSize="20" GotFocus="tbFirstName_GotFocus" LostFocus="tbFirstName_LostFocus" TextChanged="tbFirstName_TextChanged" />
                     <Label x:Name="lFirstName" Grid.Row="2" Foreground="Gray" Content="First Name" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="IBeam" Margin="0,0,221,0" MouseDown="lFirstName_Clicked" />
 
@@ -63,8 +64,9 @@
                     <Label x:Name="lConfirmPassword" Content="Confirm Password" Foreground="Gray" Grid.Row="6" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="IBeam" Margin="0,0,173,0" MouseDown="lConfirmPassword_Clicked"/>
 
                     <CheckBox x:Name="cbTerms" Grid.Row="7" VerticalAlignment="Center" FontSize="15" Foreground="DarkSlateGray" HorizontalAlignment="Center" Content="I have read and agreed to the terms and conditions" />
-
-                    <Button x:Name="btnLogin" IsDefault="True" Grid.Row="9" Content="Next" FontSize="25" Foreground="White" Click="btnNext_Clicked" Height="40" Width="300" Grid.RowSpan="2" >
+                    <!-- Input Fields | End -->
+                    
+                    <Button x:Name="btLogin" IsDefault="True" Grid.Row="9" Content="Next" FontSize="25" Foreground="White" Click="btNext_Clicked" Height="40" Width="300" Grid.RowSpan="2" >
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="Blue"/>
@@ -75,6 +77,7 @@
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
+                        
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="15"/>
