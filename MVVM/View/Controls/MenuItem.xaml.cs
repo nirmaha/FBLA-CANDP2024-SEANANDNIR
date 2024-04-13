@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 namespace EduPartners.MVVM.View.Controls
 {
     /// <summary>
-    /// Lógica de interacción para MenuItem.xaml
+    /// Interaction logic for MenuItem.xaml
     /// </summary>
     public partial class MenuItem : UserControl
     {

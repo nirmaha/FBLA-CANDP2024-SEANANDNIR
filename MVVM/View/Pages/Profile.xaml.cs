@@ -51,6 +51,7 @@ namespace EduPartners.MVVM.View.Pages
                 currentUser = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
                 lSchoolAddress.Content = $"{currentUser.HomeSchool.Address}, {currentUser.HomeSchool.City}, {currentUser.HomeSchool.State} {currentUser.HomeSchool.Zip}";
 
+                // Checks if the profile image exists
                 if (currentUser.ProfileImage == null || !File.Exists(Path.Combine(localDataPath, currentUser.ProfileImage)))
                 {
                     imgProfile.Source = new BitmapImage(new Uri("/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
@@ -68,11 +69,13 @@ namespace EduPartners.MVVM.View.Pages
         {
             isUpdating = true;
             
+            // Changes which buttons are visible
             btUpdate.Visibility = Visibility.Collapsed;
             spChangePwrd.Visibility = Visibility.Visible;
             btCancel.Visibility = Visibility.Visible;
             btSave.Visibility = Visibility.Visible;
-
+            
+            // Make textboxes editable 
             tbAbout.IsReadOnly = false;
             tbAbout.BorderThickness = new Thickness(1);
             tbAbout.HorizontalContentAlignment = HorizontalAlignment.Left;
@@ -81,6 +84,7 @@ namespace EduPartners.MVVM.View.Pages
             tbName.IsReadOnly = false;
             tbPhoneNumber.IsReadOnly = false;
 
+            // Show Profile edit elements
             overlayEllipse.Opacity = 0.5;
             imgEdit.Visibility = Visibility.Visible;
         }
@@ -94,14 +98,19 @@ namespace EduPartners.MVVM.View.Pages
         {
             isUpdating = false;
 
+            // Resets data to before it was changed or sets new data if user was updated
             currentUser = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
             DataContext = currentUser;
 
+            // Changes the button back to onl show the Update button
             btUpdate.Visibility = Visibility.Visible;
-            spChangePwrd.Visibility = Visibility.Collapsed;
             btCancel.Visibility = Visibility.Collapsed;
             btSave.Visibility = Visibility.Collapsed;
 
+            // Hide change password fields
+            spChangePwrd.Visibility = Visibility.Collapsed;
+
+            // Turn the textboxes back to readonly
             tbAbout.IsReadOnly = true;
             tbAbout.BorderThickness = new Thickness(0);
             tbAbout.HorizontalContentAlignment = HorizontalAlignment.Center;
@@ -116,6 +125,7 @@ namespace EduPartners.MVVM.View.Pages
 
             tbPhoneNumber.IsReadOnly = true;
 
+            // Clear change password boxes
             tbCurrentPwrd.Clear();
             tbCurrentPwrd.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#323B4B"));
 
@@ -125,6 +135,7 @@ namespace EduPartners.MVVM.View.Pages
             tbChangedPwrd.Clear();
             tbChangedPwrd.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#323B4B"));
 
+            // Hide profile edit elements
             overlayEllipse.Opacity = 0;
             imgEdit.Visibility = Visibility.Hidden;
 
@@ -132,6 +143,7 @@ namespace EduPartners.MVVM.View.Pages
 
         private async void btSave_Click(object sender, RoutedEventArgs e)
         {
+            // Checks if required fields are empty
             if (string.IsNullOrEmpty(tbName.Text))
             {
                 tbEmail.BorderBrush = Brushes.Red;
@@ -149,12 +161,15 @@ namespace EduPartners.MVVM.View.Pages
             bool emailMatch = Regex.IsMatch(tbEmail.Text, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
             bool phoneNumberMatch = tbPhoneNumber.Text.Length == 14;
 
+            // Checks if email is valid
             if (!emailMatch)
             {
                 tbEmail.BorderBrush = Brushes.Red;
                 lErrorMsg.Visibility = Visibility.Visible;
                 return;
             }
+
+            // Checks if phonenumber is valid
             if (!string.IsNullOrEmpty(tbPhoneNumber.Text) && !phoneNumberMatch)
             {
                 tbPhoneNumber.BorderBrush = Brushes.Red;
@@ -162,8 +177,10 @@ namespace EduPartners.MVVM.View.Pages
                 return;
             }
 
+            // Checks if the password fields have been filled out
             if (!string.IsNullOrEmpty(tbCurrentPwrd.Text) || !string.IsNullOrEmpty(tbChangedPwrd.Text) || !string.IsNullOrEmpty(tbConfirmPwrd.Text))
             {
+                // Checks if current password was not the correct password
                 if (!BCrypts.Verify(tbCurrentPwrd.Text, currentUser.Password))
                 {
                     tbCurrentPwrd.BorderBrush = Brushes.Red; 
@@ -171,6 +188,7 @@ namespace EduPartners.MVVM.View.Pages
                     return;
                 }
 
+                // Checks in the changed and confirm password are not the same
                 if (tbChangedPwrd.Text != tbConfirmPwrd.Text)
                 {
                     tbConfirmPwrd.BorderBrush = Brushes.Red;
@@ -178,6 +196,7 @@ namespace EduPartners.MVVM.View.Pages
                     return;
                 }
 
+                // Clears the password cookie
                 if (iniFile.GetValue("SECURITY", "PASSWORDLOGIN") != "")
                 {
                     iniFile.SetValue("SECURITY", "PASSWORDLOGIN", "");
@@ -185,6 +204,7 @@ namespace EduPartners.MVVM.View.Pages
                 }
             }
 
+            // Updates user
             User user = new User()
             {
                 Id = currentUser.Id,
@@ -232,15 +252,15 @@ namespace EduPartners.MVVM.View.Pages
 
                 if (openFileDialog.ShowDialog() == true)
                 {
+                    // If file doesn't exist copy it to local AppData
                     if (!File.Exists(Path.Combine(localDataPath, Path.GetFileName(openFileDialog.FileName))))
                     {
                         File.Copy(openFileDialog.FileName, Path.Combine(localDataPath, Path.GetFileName(openFileDialog.FileName)));
                     }
 
+                    // Update the profile image visually
                     newProfileName = Path.GetFileName(openFileDialog.FileName);
                     imgProfile.Source = new BitmapImage(new Uri($"{Path.Combine(localDataPath, Path.GetFileName(openFileDialog.FileName))}", UriKind.RelativeOrAbsolute));
-
-                  
                 }
             }
         }

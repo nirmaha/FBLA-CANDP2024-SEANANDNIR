@@ -7,7 +7,7 @@ using System.Windows.Controls;
 namespace EduPartners.MVVM.View.Controls
 {
     /// <summary>
-    /// Lógica de interacción para UserPopup.xaml
+    /// Interaction logic for UserPopup.xaml
     /// </summary>
     public partial class UserPopup : UserControl
     {

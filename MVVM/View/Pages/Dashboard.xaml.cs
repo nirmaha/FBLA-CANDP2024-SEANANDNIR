@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.DataVisualization.Charting;
-using System.Windows.Data;
+
 using EduPartners.Core;
 using EduPartners.MVVM.Model;
 
@@ -19,8 +17,8 @@ namespace EduPartners.MVVM.View.Pages
     public partial class Dashboard : Page
     {
         private Database db;
+
         private Dictionary<string, int> IndustryPopulation = new Dictionary<string, int>();
-        private Dictionary<string, double> PartnerToSavings = new Dictionary<string, double>();
         private Dictionary<int, int> YearToParnters = new Dictionary<int, int>();
         private Dictionary<string, double> IndustryToSavings = new Dictionary<string, double>();
 
@@ -36,7 +34,7 @@ namespace EduPartners.MVVM.View.Pages
                 List<Partner> partners = school.Partners.Value;
                 partners = partners.OrderBy(p => p.StartDate.Year).ToList();
 
-                
+                // Populates Dashbord Graphs
                 foreach (Partner partner in partners) 
                 {
                     // Industy Pie Chart
@@ -70,8 +68,8 @@ namespace EduPartners.MVVM.View.Pages
                     }
 
                 }
+
                 ((PieSeries)pieIndustry.Series[0]).ItemsSource = IndustryPopulation;
-                // ((ColumnSeries)barSavings.Series[0]).ItemsSource = PartnerToSavings;
                 ((LineSeries)lineNumofPartners.Series[0]).ItemsSource = YearToParnters;
                 ((PieSeries)pieIndustrySavings.Series[0]).ItemsSource = IndustryToSavings;
                 

@@ -19,7 +19,11 @@ namespace EduPartners.MVVM.View.Pages
     public partial class AddPartners : Page
     {
         private Database db;
-        private List<string> industries = new List<string>() { "IT", "Architecture", "Educational Services", "Emergency Services", "Food Services", "Arts, Entertainment and Recreation", "Administration Service", "Business Support", "Construction", "Finance and Insurance", "Healthcare", "Information", "Real Estate and Rental and Leasing", "Transportation", "Utilities", "Technology" };
+
+        private List<string> industries = new List<string>() { "IT", "Architecture", "Educational Services", "Emergency Services", "Food Services",
+            "Arts, Entertainment and Recreation", "Administration Service", "Business Support", "Construction", "Finance and Insurance",
+            "Healthcare", "Information", "Real Estate and Rental and Leasing", "Transportation", "Utilities", "Technology" };
+
         public AddPartners()
         {
             InitializeComponent();
@@ -40,6 +44,7 @@ namespace EduPartners.MVVM.View.Pages
 
             foreach (UIElement uIElement in spMain.Children)
             {
+                // Checks if the field is required then marks it if empty
                 if (uIElement is TextBox textbox && ((textbox.Tag != null && textbox.Tag.ToString() == "required") && string.IsNullOrEmpty(textbox.Text)))
                 {
                     textbox.BorderBrush = Brushes.Red;
@@ -65,18 +70,19 @@ namespace EduPartners.MVVM.View.Pages
                 }
             }
 
-
             if (isEmpty)
             {
                 isEmpty = false;
                 return;
             }
 
+            // Strips the $ off the savings field
             if (tbSavings.Text.StartsWith("$"))
             {
                 tbSavings.Text = tbSavings.Text.Substring(1);
             }
 
+            // Strips website of its https and www from the website field
             if (tbWebsite.Text.StartsWith(@"https://"))
             {
                 tbWebsite.Text = tbWebsite.Text.Substring(8);
@@ -94,6 +100,7 @@ namespace EduPartners.MVVM.View.Pages
             bool phoneNumberMatch = tbRepresentativePhoneNumber.Text.Length == 14;
             bool savingsMatch = Regex.IsMatch(tbSavings.Text, @"^[0-9.]+$");
 
+            // Checks if the email if valid
             if (!emailMatch)
             {
                 tbRepresentativeEmail.BorderBrush = Brushes.Red;
@@ -101,6 +108,8 @@ namespace EduPartners.MVVM.View.Pages
                 lErrorMsg.Visibility = Visibility.Visible;
                 return;
             }
+
+            // Checks if there is a phone number and validates it
             if (!string.IsNullOrEmpty(tbRepresentativePhoneNumber.Text) && !phoneNumberMatch)
             {
                 tbRepresentativePhoneNumber.BorderBrush = Brushes.Red;
@@ -108,6 +117,8 @@ namespace EduPartners.MVVM.View.Pages
                 lErrorMsg.Visibility = Visibility.Visible;
                 return;
             }
+
+            // Checks if the savings is valid
             if (!savingsMatch)
             {
                 tbSavings.BorderBrush = Brushes.Red;
@@ -116,7 +127,7 @@ namespace EduPartners.MVVM.View.Pages
                 return;
             }
 
-
+            // Creates a new partner
             Partner partner = new Partner()
             {
                 Name = tbName.Text,
@@ -131,14 +142,16 @@ namespace EduPartners.MVVM.View.Pages
                 Address = string.IsNullOrEmpty(tbAddress.Text) ? "No Address" : tbAddress.Text,
                 Savings = double.Parse(tbSavings.Text),
             };
+
             await db.CreatePartner(partner);
 
+            // Updates school list in databse
             School school = (await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString())).FirstOrDefault();
-
             school.Partners.Value.Add(partner);
 
             await db.UpdateSchool(school);
 
+            // Syncs the schools list to the user schools list
             User user = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
 
             user.HomeSchool = school;

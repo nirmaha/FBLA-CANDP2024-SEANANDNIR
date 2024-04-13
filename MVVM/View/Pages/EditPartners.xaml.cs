@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -22,7 +20,10 @@ namespace EduPartners.MVVM.View.Pages
     {
         private Database db;
         private Partner partner;
-        private List<string> industries = new List<string>() { "IT", "Architecture", "Educational Services", "Emergency Services", "Food Services", "Arts, Entertainment and Recreation", "Administration Service", "Business Support", "Construction", "Finance and Insurance", "Healthcare", "Information", "Real Estate and Rental and Leasing", "Transportation", "Utilities", "Technology" };
+
+        private List<string> industries = new List<string>() { "IT", "Architecture", "Educational Services", "Emergency Services", "Food Services", 
+            "Arts, Entertainment and Recreation", "Administration Service", "Business Support", "Construction", "Finance and Insurance", 
+            "Healthcare", "Information", "Real Estate and Rental and Leasing", "Transportation", "Utilities", "Technology" };
 
         public EditPartners()
         {
@@ -42,6 +43,7 @@ namespace EduPartners.MVVM.View.Pages
                 partner = (await db.GetPartnerById(((Partner)App.Current.Properties["SelectedPartner"]).Id.ToString())).FirstOrDefault();
 
                 DataContext = partner;
+
                 tbRepresentativePhoneNumber.Text = partner.RepresentativePhoneNumber == "No Phone Number" ? "" : partner.RepresentativePhoneNumber;
                 tbWebsite.Text = partner.Website == "No Website" ? "" : partner.Website;
                 tbAddress.Text = partner.Address == "No Address" ? "" : partner.Address;
@@ -56,6 +58,7 @@ namespace EduPartners.MVVM.View.Pages
 
             foreach (UIElement uIElement in spMain.Children)
             {
+                // Checks if the field is required then marks it if empty
                 if (uIElement is TextBox textbox && ((textbox.Tag != null && textbox.Tag.ToString() == "required") && string.IsNullOrEmpty(textbox.Text)))
                 {
                     textbox.BorderBrush = Brushes.Red;
@@ -87,11 +90,14 @@ namespace EduPartners.MVVM.View.Pages
                 return;
             }
 
+            // Strips the $ off the savings field
+
             if (tbSavings.Text.StartsWith("$"))
             {
                 tbSavings.Text = tbSavings.Text.Substring(1);
             }
 
+            // Strips website of its https and www from the website field
             if (tbWebsite.Text.StartsWith(@"https://"))
             {
                 tbWebsite.Text = tbWebsite.Text.Substring(8);
@@ -109,6 +115,7 @@ namespace EduPartners.MVVM.View.Pages
             bool phoneNumberMatch = tbRepresentativePhoneNumber.Text.Length == 14;
             bool savingsMatch = Regex.IsMatch(tbSavings.Text, @"^[0-9,.]+$");
 
+            // Checks if the email if valid
             if (!emailMatch)
             {
                 tbRepresentativeEmail.BorderBrush = Brushes.Red;
@@ -116,6 +123,8 @@ namespace EduPartners.MVVM.View.Pages
                 lErrorMsg.Visibility = Visibility.Visible;
                 return;
             }
+
+            // Checks if there is a phone number and validates it
             if (!string.IsNullOrEmpty(tbRepresentativePhoneNumber.Text) && !phoneNumberMatch)
             {
                 tbRepresentativePhoneNumber.BorderBrush = Brushes.Red;
@@ -123,6 +132,8 @@ namespace EduPartners.MVVM.View.Pages
                 lErrorMsg.Visibility = Visibility.Visible;
                 return;
             }
+
+            // Checks if the savings is valid
             if (!savingsMatch)
             {
                 tbSavings.BorderBrush = Brushes.Red;
@@ -131,7 +142,7 @@ namespace EduPartners.MVVM.View.Pages
                 return;
             }
 
-
+            // Update the selected partner
             Partner updatePartner = new Partner()
             {
                 Id = partner.Id,
@@ -147,10 +158,12 @@ namespace EduPartners.MVVM.View.Pages
                 Address = string.IsNullOrEmpty(tbAddress.Text) ? "No Address" : tbAddress.Text,
                 Savings = double.Parse(tbSavings.Text),
             };
+
             await db.UpdatePartner(partner);
 
             School school = (await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString())).FirstOrDefault();
 
+            // Removes the old partner from the school list
             foreach (Partner searchPartner in school.Partners.Value)
             {
                 if (searchPartner.Id == updatePartner.Id)
@@ -160,10 +173,13 @@ namespace EduPartners.MVVM.View.Pages
                 }
             }
 
+            // Adds the new partner in the school list
             school.Partners.Value.Add(updatePartner);
 
             await db.UpdateSchool(school);
 
+
+            // Sync the school list with the user school list
             User user = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
 
             user.HomeSchool = school;
@@ -174,6 +190,7 @@ namespace EduPartners.MVVM.View.Pages
             MainControl mainControl = App.Current.Properties["MainControl"] as MainControl;
             mainControl.Load_Page("MVVM/View/Pages/ViewPartners.xaml");
         }
+
         private void PhoneNumber_Changed(object sender, TextChangedEventArgs e)
         {
             if (sender is TextBox textBox)

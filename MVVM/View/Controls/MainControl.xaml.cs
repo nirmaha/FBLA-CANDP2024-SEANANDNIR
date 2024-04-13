@@ -62,16 +62,16 @@ namespace EduPartners.MVVM.View.Controls
         }
 
         /// <summary>
-        /// This function navigates to a specified <paramref name="PageUri"/> and updates the corresponding
+        /// This function navigates to a specified <paramref name="PpgeUri"/> and updates the corresponding
         /// buttons and menu items accordingly.
         /// </summary>
-        /// <param name="PageUri">The URI of the page that needs to be loaded in the application. It is used to
+        /// <param name="pageUri">The URI of the page that needs to be loaded in the application. It is used to
         /// determine which page to navigate to within the application based on the provided URI.</param>
-        public void Load_Page(string PageUri)
+        public void Load_Page(string pageUri)
         {
-            if (PageUri == @"MVVM/View/Pages/EditPartners.xaml")
+            if (pageUri == @"MVVM/View/Pages/EditPartners.xaml")
             {
-                fContainer.Navigate(new Uri(PageUri, UriKind.RelativeOrAbsolute));
+                fContainer.Navigate(new Uri(pageUri, UriKind.RelativeOrAbsolute));
                 return;
             }
 
@@ -95,11 +95,11 @@ namespace EduPartners.MVVM.View.Controls
             };
 
             // Navigates to the page
-            fContainer.Navigate(new Uri(PageUri, UriKind.RelativeOrAbsolute));
+            fContainer.Navigate(new Uri(pageUri, UriKind.RelativeOrAbsolute));
 
             // Updates the buttons
-            pages[PageUri].InternalMenu.IsChecked = true;
-            buttons[PageUri].RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            pages[pageUri].InternalMenu.IsChecked = true;
+            buttons[pageUri].RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
 
         /// <summary>
