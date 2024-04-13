@@ -170,9 +170,9 @@ This is where the user can log into their account.
 ### Sign Up
 This is where a user can make an account that will need to connect to a school via a code.
 ### Create School
-This allows the user to make a new school and get a school code.
+This allows the user to create a new school and get a school code.
 ### Help
-This page guides the user through each step of the log in, sign up, and creating a school.
+This page guides the user through each step of logging in, signing up, and creating a school.
 
 ## Views Pages
 ### Dashboard
@@ -184,7 +184,7 @@ This is where users can add new partners.
 ### Edit Partner
 This is where users can edit existing partners.
 ### Profile
-This is where the user can edit their information, change their password, and their profile image.
+This is where the user can edit their information, change their password, and change their profile image.
 ### Help
 This is where the user can find detailed instructions about each page.
 ### Logout
