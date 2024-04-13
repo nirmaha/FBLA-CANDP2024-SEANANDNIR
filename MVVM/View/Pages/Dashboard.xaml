@@ -23,6 +23,23 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
+                <!-- Partnersships per Year Line Graph -->
+                <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Orientation="Vertical" Background="#ACC2DC">
+                    <Label Content="Partnerships Started per Year" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="Black"/>
+                    <DVC:Chart Name="lineNumofPartners" Height="240" Margin="0,-40,0,0" BorderThickness="0">
+                        <DVC:Chart.Axes>
+                            <DVC:LinearAxis Orientation="X" Interval="2" />
+                            <DVC:LinearAxis Orientation="Y" Interval="1" />
+                        </DVC:Chart.Axes>
+                        <DVC:Chart.Series>
+                            <DVC:LineSeries Title="Number of Parnterships"
+                               IndependentValueBinding="{Binding Path=Key}"  
+                               DependentValueBinding="{Binding Path=Value}"/>
+                        </DVC:Chart.Series>
+                    </DVC:Chart>
+                </StackPanel>
+
+                <!-- Industries Pie Chart -->
                 <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical" Background="#ACC2DC">
                     <Label Content="Industries" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="Black"/>
                     <DVC:Chart Name="pieIndustry" Height="240" Margin="0,-40,0,0" BorderThickness="0">
@@ -34,21 +51,7 @@
                     </DVC:Chart>
                 </StackPanel>
 
-                <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Orientation="Vertical" Background="#ACC2DC">
-                    <Label Content="Partnerships Started per Year" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="Black"/>
-                    <DVC:Chart Name="lineNumofPartners" Height="240" Margin="0,-40,0,0" BorderThickness="0">
-                        <DVC:Chart.Axes>
-                            <DVC:LinearAxis Orientation="X" Interval="2" />
-                            <DVC:LinearAxis Orientation="Y" Interval="1" />
-                        </DVC:Chart.Axes>
-                        <DVC:Chart.Series>
-                            <DVC:LineSeries Title="Number of Parnterships"
-                            IndependentValueBinding="{Binding Path=Key}"  
-                            DependentValueBinding="{Binding Path=Value}"/>
-                        </DVC:Chart.Series>
-                    </DVC:Chart>
-                </StackPanel>
-
+                <!-- Industries Svaings Pie Chart -->
                 <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical" Background="#ACC2DC">
                     <Label Content="Industry Savings" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="Black"/>
                     <DVC:Chart Name="pieIndustrySavings" Height="240" Margin="0,-40,0,0" BorderThickness="0">

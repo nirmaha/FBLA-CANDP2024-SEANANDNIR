@@ -8,10 +8,6 @@ using System.Windows.Controls;
 using EduPartners.Core;
 using EduPartners.MVVM.View.Controls;
 
-/**
- * TODO:
- * Change ini file to JSON
- * **/
 
 namespace EduPartners.MVVM.View
 {
@@ -39,6 +35,9 @@ namespace EduPartners.MVVM.View
             SetUserControl("HomePage");
         }
 
+        /// <summary>
+        /// This function pre-loads all usercontrols inside of a Dictionary.
+        /// </summary>
         private void InitializeUserControls()
         {
             userControls = new Dictionary<string, UserControl>
@@ -53,6 +52,10 @@ namespace EduPartners.MVVM.View
             };
         }
 
+        /// <summary>
+        /// This function sets dockpanel to the specified <paramref name="userControl"/>.
+        /// </summary>
+        /// <param name="userControl">The name of the usercontrol that is going to be switched to.</param>
         public void SetUserControl(string userControl)
         {
             Main.Children.Clear();
@@ -67,6 +70,7 @@ namespace EduPartners.MVVM.View
             }
             else
             {
+                // Sets the window dimensions to fir the user control
                 this.WindowStyle = WindowStyle.SingleBorderWindow;
                 this.Height = userControls[userControl].Height + 38;
                 this.Width = userControls[userControl].Width;

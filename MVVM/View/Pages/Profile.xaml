@@ -19,6 +19,7 @@
                 </Grid.ColumnDefinitions>
 
 
+                <!-- Side Bar -->
                 <Grid Grid.Column="0" Background="{StaticResource PrimaryBackgroundColor}">
 
                     <Grid.RowDefinitions>
@@ -30,28 +31,31 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
+                    <!-- Profile Image -->
                     <Ellipse Grid.Row="0" Width="120" Height="120" Stroke="{StaticResource TextTertiaryColor}" StrokeThickness="6" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0" MouseDown="ProfileCircle_MouseDown">
-                        <!-- Use a VisualBrush with the Image as its Visual to fill the Ellipse -->
                         <Ellipse.Fill>
                             <VisualBrush>
                                 <VisualBrush.Visual>
-                                    <!-- Define the Image control -->
                                     <Image x:Name="imgProfile" Source="../../../Resources/defaultProfile.png" Stretch="UniformToFill"/>
                                 </VisualBrush.Visual>
                             </VisualBrush>
 
                         </Ellipse.Fill>
                     </Ellipse>
+                    
+                    <!-- Edit Profile Elements -->
                     <Ellipse x:Name="overlayEllipse" Grid.Row="0" Width="120" Height="120" Fill="Gray" Opacity="0" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0"/>
                     <Image x:Name="imgEdit" Source="../../../Resources/profileEdit.png" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" Margin="-1,13,0,0" MouseDown="ProfileCircle_MouseDown"/>
 
 
+                    <!-- Basic Info -->
                     <Label Grid.Row="1" Content="{Binding Name}" Foreground="{StaticResource PrimaryTextColor}" FontSize="23" FontWeight="SemiBold" HorizontalAlignment="Center"/>
                     <Label Grid.Row="2" Content="{Binding Email}" Foreground="{StaticResource TextSecundaryColor}" FontSize="15" HorizontalAlignment="Center"/>
                     <Label Grid.Row="4" Content="About" Foreground="{StaticResource PrimaryBlueColor}" FontSize="23" FontWeight="SemiBold" HorizontalAlignment="Center"/>
                     <TextBox x:Name="tbAbout" Grid.Row="5" Text="{Binding About}" HorizontalContentAlignment="Center" Background="Transparent" BorderThickness="0" IsReadOnly="True" CaretBrush="White" Foreground="{StaticResource PrimaryTextColor}" FontSize="13" HorizontalAlignment="Center" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Disabled" TextWrapping="Wrap" Width="230" Margin="0,5,0,5"/>
                 </Grid>
 
+                <!-- Main Info Edit -->
                 <Grid Grid.Column="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
@@ -70,6 +74,7 @@
 
                     <Label Grid.Row="1" Content="Personal Details" Foreground="{StaticResource PrimaryBlueColor}" FontWeight="SemiBold" FontSize="18" Margin="-4,10,0,0"/>
 
+                    <!-- Name and Email Fields -->
                     <StackPanel Grid.Row="2" Orientation="Horizontal">
 
                         <StackPanel Orientation="Vertical">
@@ -94,6 +99,7 @@
                                 
                     </StackPanel>
 
+                    <!-- Phone Number -->
                     <StackPanel Grid.Row="3" Orientation="Horizontal">
 
                         <StackPanel Grid.Row="2" Orientation="Vertical">
@@ -103,33 +109,42 @@
 
                     </StackPanel>
 
+                    <!-- Change Password Section -->
                     <StackPanel x:Name="spChangePwrd" Grid.Row="4" Visibility="Collapsed">
                         <Label Content="Change Password" Foreground="{StaticResource PrimaryBlueColor}" FontWeight="SemiBold" FontSize="18" Margin="-4,0,0,0"/>
 
                         <StackPanel Orientation="Horizontal">
+                            <!-- Current Password -->
                             <StackPanel Orientation="Vertical">
                                 <Label Content="Current Password" Foreground="White" FontSize="15" Margin="-4,0,0,0"/>
                                 <TextBox x:Name="tbCurrentPwrd" Text="" Background="{StaticResource PrimaryBackgroundColor}" CaretBrush="White" Foreground="White" BorderBrush="{StaticResource FourthIconColor}" HorizontalAlignment="Left" BorderThickness="2" Height="23" Width="245"/>
                             </StackPanel>
+                            
+                            <!-- New Password -->
                             <StackPanel Orientation="Vertical" Margin="15,0,0,0">
                                 <Label Content="New Password" Foreground="White" FontSize="15" Margin="-4,0,0,0"/>
                                 <TextBox x:Name="tbChangedPwrd" Background="{StaticResource PrimaryBackgroundColor}" CaretBrush="White" Foreground="White" BorderBrush="{StaticResource FourthIconColor}" HorizontalAlignment="Left" BorderThickness="2" Height="23" Width="245"/>
                             </StackPanel>
                         </StackPanel>
 
+                        <!-- Confirm Password -->
                         <StackPanel Orientation="Vertical" Margin="0,8,0,0">
                             <Label Content="Confirm New Password" Foreground="White" FontSize="15" Margin="-4,0,0,0"/>
                             <TextBox x:Name="tbConfirmPwrd" Background="{StaticResource PrimaryBackgroundColor}" CaretBrush="White" Foreground="White" BorderBrush="{StaticResource FourthIconColor}" HorizontalAlignment="Left" BorderThickness="2" Height="23" Width="245"/>
                         </StackPanel>
                     </StackPanel>
 
+                    <!-- School Information -->
                     <StackPanel Grid.Row="5" Margin="0,5,0,0">
                         <Label Content="Homeschool" Foreground="{StaticResource PrimaryBlueColor}" FontWeight="SemiBold" FontSize="18" Margin="-4,0,0,0"/>
                         <Label Content="{Binding HomeSchool.Name}" Foreground="{StaticResource TextSecundaryColor}" FontWeight="Medium" HorizontalAlignment="Left" BorderThickness="2" Margin="-4,-6,0,0"/>
                         <Label x:Name="lSchoolAddress" Content="" Foreground="{StaticResource TextTertiaryColor}" FontWeight="Medium" HorizontalAlignment="Left" BorderThickness="2" Margin="-4,-9,0,0"/>
                     </StackPanel>
 
+                    <!-- Update | Save | Cancel -->
                     <StackPanel Grid.Row="6" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,8,8">
+                        
+                        <!-- Cancel Button -->
                         <Button x:Name="btCancel" Content="Cancel" Height="30" Width="70" Foreground="{StaticResource PrimaryTextColor}" BorderThickness="0" Visibility="Collapsed" Click="btCancel_Click">
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">
@@ -152,6 +167,7 @@
                             </Button.Style>
                         </Button>
 
+                        <!-- Update Button -->
                         <Button x:Name="btUpdate" Content="Update" Height="30" Width="70" Foreground="{StaticResource PrimaryTextColor}" BorderThickness="0" Margin="5,0,0,0" Click="btUpdate_Click">
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">
@@ -174,6 +190,7 @@
                             </Button.Style>
                         </Button>
 
+                        <!-- Save Button -->
                         <Button x:Name="btSave" Content="Save" Height="30" Width="70" Foreground="{StaticResource PrimaryTextColor}" BorderThickness="0" Margin="5,0,0,0" Visibility="Collapsed" Click="btSave_Click">
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">

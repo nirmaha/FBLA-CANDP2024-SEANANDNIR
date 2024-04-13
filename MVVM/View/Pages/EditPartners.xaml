@@ -42,6 +42,7 @@
                                 <Label Content="* Indicates required field" FontSize="15" Foreground="#FFCC5241" Margin="40,0,0,0" />
                             </StackPanel>
 
+                            <!-- Input Fields | Start -->
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="Company Name" FontSize="23" Foreground="White" Margin="40,0,0,0" />
                                 <Label Content="*" FontSize="23" Foreground="#FFCC5241" Margin="-7,0,0,0" />
@@ -102,7 +103,8 @@
                                 <Label Content="*" FontSize="23" Foreground="#FFCC5241" Margin="-7,0,0,0" />
                             </StackPanel>
                             <TextBox x:Name="tbSavings" Tag="required" Text="{Binding Savings}" FontSize="23" Width="350" Height="36" BorderBrush="Gray" BorderThickness="2" Foreground="White" Background="{StaticResource PrimaryBackgroundColor}" Margin="45,0,0,0" />
-
+                            <!-- Input Fields | End -->
+                            
                             <Button Content="Save" FontSize="25" Width="160" Height="40" IsDefault="True" Foreground="{StaticResource PrimaryTextColor}" BorderThickness="0"  Margin="45,20,0,0" Click="UpdatePartner_Clicked">
                                 <Button.Style>
                                     <Style TargetType="{x:Type Button}">
