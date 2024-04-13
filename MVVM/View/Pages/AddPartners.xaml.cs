@@ -41,6 +41,7 @@ namespace EduPartners.MVVM.View.Pages
         private async void AddPartner_Cliked(object sender, RoutedEventArgs e)
         {
             bool isEmpty = false;
+            
 
             foreach (UIElement uIElement in spMain.Children)
             {
@@ -52,7 +53,15 @@ namespace EduPartners.MVVM.View.Pages
                     lErrorMsg.Visibility = Visibility.Visible;
                     isEmpty = true;
                 }
-                else if (uIElement is DatePicker datePicker && ((datePicker.Tag != null && datePicker.Tag.ToString() == "required") && datePicker.SelectedDate == null))
+                else if (uIElement is TextBox textbox1 && ((textbox1.Tag != null && textbox1.Tag.ToString() == "required") && !string.IsNullOrEmpty(textbox1.Text)))
+                {
+                    textbox1.BorderBrush = Brushes.Gray;
+                    textbox1.BorderThickness = new Thickness(2);
+                    lErrorMsg.Visibility = Visibility.Collapsed;
+                    isEmpty = false;
+                }
+
+                if (uIElement is DatePicker datePicker && ((datePicker.Tag != null && datePicker.Tag.ToString() == "required") && datePicker.SelectedDate == null))
                 {
                     // Customize the appearance or behavior for the DatePicker control
                     datePicker.BorderBrush = Brushes.Red;
@@ -60,13 +69,28 @@ namespace EduPartners.MVVM.View.Pages
                     lErrorMsg.Visibility = Visibility.Visible;
                     isEmpty = true;
                 }
-                else if (uIElement is Border comboBox && ((comboBox.Tag != null && comboBox.Tag.ToString() == "required") && cbType.SelectedItem == null))
+                else if (uIElement is DatePicker datePicker1 && ((datePicker1.Tag != null && datePicker1.Tag.ToString() == "required") && datePicker1.SelectedDate != null))
+                {
+                    datePicker1.BorderBrush = Brushes.Gray;
+                    datePicker1.BorderThickness = new Thickness(2);
+                    lErrorMsg.Visibility = Visibility.Collapsed;
+                    isEmpty = false;
+                }
+
+                if (uIElement is Border comboBox && ((comboBox.Tag != null && comboBox.Tag.ToString() == "required") && cbType.SelectedItem == null))
                 {
                     // Customize the appearance or behavior for the ComboBox control
                     comboBox.BorderBrush = Brushes.Red;
                     comboBox.BorderThickness = new Thickness(2);
                     lErrorMsg.Visibility = Visibility.Visible;
                     isEmpty = true;
+                }
+                else if (uIElement is Border comboBox1 && ((comboBox1.Tag != null && comboBox1.Tag.ToString() == "required") && cbType.SelectedItem != null)) 
+                {
+                    comboBox1.BorderBrush = Brushes.Gray;
+                    comboBox1.BorderThickness = new Thickness(2);
+                    lErrorMsg.Visibility = Visibility.Collapsed;
+                    isEmpty = false;
                 }
             }
 
@@ -108,6 +132,12 @@ namespace EduPartners.MVVM.View.Pages
                 lErrorMsg.Visibility = Visibility.Visible;
                 return;
             }
+            else
+            {
+                tbRepresentativeEmail.BorderBrush = Brushes.Gray;
+                tbRepresentativeEmail.BorderThickness = new Thickness(2);
+                lErrorMsg.Visibility = Visibility.Collapsed;
+            }
 
             // Checks if there is a phone number and validates it
             if (!string.IsNullOrEmpty(tbRepresentativePhoneNumber.Text) && !phoneNumberMatch)
@@ -117,6 +147,12 @@ namespace EduPartners.MVVM.View.Pages
                 lErrorMsg.Visibility = Visibility.Visible;
                 return;
             }
+            else
+            {
+                tbRepresentativePhoneNumber.BorderBrush = Brushes.Gray;
+                tbRepresentativePhoneNumber.BorderThickness = new Thickness(2);
+                lErrorMsg.Visibility = Visibility.Collapsed;
+            }
 
             // Checks if the savings is valid
             if (!savingsMatch)
@@ -125,6 +161,12 @@ namespace EduPartners.MVVM.View.Pages
                 tbSavings.BorderThickness = new Thickness(2);
                 lErrorMsg.Visibility = Visibility.Visible;
                 return;
+            }
+            else
+            {
+                tbSavings.BorderBrush = Brushes.Red;
+                tbSavings.BorderThickness = new Thickness(2);
+                lErrorMsg.Visibility = Visibility.Collapsed;
             }
 
             // Creates a new partner
