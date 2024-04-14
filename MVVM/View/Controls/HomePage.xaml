@@ -69,7 +69,9 @@
                 <RowDefinition />
                 <RowDefinition Height="60" />
             </Grid.RowDefinitions>
-                        
+
+            <Rectangle Fill="Transparent"/>
+
             <Label x:Name="lBackgroundText" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="32" Content="Manage your Partnerships" Foreground="WhiteSmoke" />
             
             <!-- Bottom Circles -->

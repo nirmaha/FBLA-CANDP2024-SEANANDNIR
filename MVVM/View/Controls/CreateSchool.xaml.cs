@@ -204,6 +204,12 @@ namespace EduPartners.MVVM.View.Controls
             };
             await db.CreateSchool(school);
 
+            tbSchoolName.Clear();
+            tbAddress.Clear();
+            tbState.Clear();
+            tbCity.Clear();
+            tbZip.Clear();
+
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
             mainWindow.SetUserControl("HomePage");
         }
