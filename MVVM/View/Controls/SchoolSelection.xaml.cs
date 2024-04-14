@@ -36,6 +36,8 @@ namespace EduPartners.MVVM.View.Controls
         {
             PopulateComboBox();
             lErrorMessage.Visibility = Visibility.Collapsed;
+            cbSchool.SelectedIndex = -1;
+            tbSchoolId.Clear();
         }
 
         private async void PopulateComboBox()

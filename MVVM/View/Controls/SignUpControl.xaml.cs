@@ -35,19 +35,14 @@ namespace EduPartners.MVVM.View.Controls
         {
             lErrorMessage.Visibility = Visibility.Collapsed;
 
-            // Fills in saved data if not empty
-            if (!(string.IsNullOrEmpty(App.Current.Properties["FirstName"]?.ToString())))
-            {
-                tbFirstName.Text = App.Current.Properties["FirstName"].ToString();
-            }
-            if (!(string.IsNullOrEmpty(App.Current.Properties["LastName"]?.ToString())))
-            {
-                tbLastName.Text = App.Current.Properties["LastName"]?.ToString();
-            }
-            if (!(string.IsNullOrEmpty(App.Current.Properties["Email"]?.ToString())))
-            {
-                tbEmail.Text = App.Current.Properties["Email"].ToString();
-            }
+            // Fills in saved data
+            tbFirstName.Text = App.Current.Properties["FirstName"]?.ToString();
+            tbLastName.Text = App.Current.Properties["LastName"]?.ToString();
+            tbEmail.Text = App.Current.Properties["Email"]?.ToString();
+            pbPassword.Clear();
+            pbConfirmPassword.Clear();
+            cbTerms.IsChecked = false;
+            
         }
 
         private void SignUpBorder_MouseDown(object sender, MouseButtonEventArgs e)

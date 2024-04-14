@@ -23,8 +23,13 @@ namespace EduPartners.MVVM.ViewModel
             }
         }
 
+        /// <summary>
+        /// This function removes the <paramref name="partner"/> for the ObservableCollection.
+        /// </summary>
+        /// <param name="partner">The partner to remove.</param>
         public void RemovePartner(Partner partner)
         {
+            // Loops through the collection and deletes the selected partner.
             for (int i = 0; i < _items.Count; i++)
             {
                 if (_items[i].Id == partner.Id)
@@ -42,6 +47,10 @@ namespace EduPartners.MVVM.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// This function triggrers a property changed event.
+        /// </summary>
+        /// <param name="propertyName">The name of the proptery to notify.</param>
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
