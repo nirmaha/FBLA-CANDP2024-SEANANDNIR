@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Diagnostics;
+using System.Windows;
 
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -14,10 +15,10 @@ namespace EduPartners.Core
 {
     public class Database
     {
-        //private static string ConnectionUri = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString + "?retryWrites=true&w=majority";
-        private static string ConnectionUri = "mongodb://localhost:27017/";
-        //private static string BackupConnectionUri = "mongodb+srv://FBLANS2024:Zu9QiBwFOlWXC5SS@managementbackup.zsqbmhw.mongodb.net/";
-        private static string BackupConnectionUri = "mongodb://localhost:27017/";
+        private static string ConnectionUri = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString + "?retryWrites=true&w=majority";
+        // private static string ConnectionUri = "mongodb://localhost:27017/";
+        private static string BackupConnectionUri = "mongodb+srv://FBLANS2024:Zu9QiBwFOlWXC5SS@managementbackup.zsqbmhw.mongodb.net/";
+        // private static string BackupConnectionUri = "mongodb://localhost:27017/";
 
         private MongoClientSettings Settings = MongoClientSettings.FromConnectionString(ConnectionUri);
         private MongoClientSettings BackupSettings = MongoClientSettings.FromConnectionString(BackupConnectionUri);
@@ -50,8 +51,9 @@ namespace EduPartners.Core
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Could not connect to MAIN Database");
-                Debug.WriteLine(ex); 
+                MessageBox.Show("Could not connect to MAIN Database", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Debug.WriteLine(ex);
+                Environment.Exit(1);
             }    
             
             try
@@ -61,8 +63,9 @@ namespace EduPartners.Core
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Could not connect to BACKUP Database");
-                Debug.WriteLine(ex); 
+                MessageBox.Show("Could not connect to BACKUP Database", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Debug.WriteLine(ex);
+                Environment.Exit(1);
             }
 
             IMongoCollection<User> users = GetDBCollection<User>(UserCollection);

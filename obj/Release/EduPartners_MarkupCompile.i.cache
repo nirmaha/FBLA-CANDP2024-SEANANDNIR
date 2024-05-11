@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Release\
+D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Release\
 EduPartners
 none
 false
 TRACE
-C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\App.xaml
+D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\App.xaml
 211295741111
-2-160541274
+2-689316134
 29-2092486211
-154-273207151
+154310196351
 Assets\Icons.xaml;MVVM\View\Controls\CreateSchool.xaml;MVVM\View\Controls\HomeHelpControl.xaml;MVVM\View\Controls\HomePage.xaml;MVVM\View\Controls\LoginControl.xaml;MVVM\View\Controls\MainControl.xaml;MVVM\View\Controls\MenuItem.xaml;MVVM\View\Controls\SchoolSelection.xaml;MVVM\View\Controls\SignUpControl.xaml;MVVM\View\Controls\UserPopup.xaml;MVVM\View\MainWindow.xaml;MVVM\View\Pages\AddPartners.xaml;MVVM\View\Pages\Dashboard.xaml;MVVM\View\Pages\EditPartners.xaml;MVVM\View\Pages\Help.xaml;MVVM\View\Pages\Profile.xaml;MVVM\View\Pages\ViewPartners.xaml;Styles\MainStyle.xaml;Themes\DarkTheme.xaml;Styles\FilterButtonTheme.xaml;Themes\ScrollBarTheme.xaml;
 
 True

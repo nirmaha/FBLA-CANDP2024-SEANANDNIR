@@ -17,7 +17,7 @@ namespace EduPartners.MVVM.View.Pages
     public partial class Dashboard : Page
     {
         private Database db;
-
+        
         private Dictionary<string, int> IndustryPopulation = new Dictionary<string, int>();
         private Dictionary<int, int> YearToParnters = new Dictionary<int, int>();
         private Dictionary<string, double> IndustryToSavings = new Dictionary<string, double>();
@@ -26,7 +26,7 @@ namespace EduPartners.MVVM.View.Pages
         {
             InitializeComponent();
             db = App.Current.Properties["Database"] as Database;
-
+            
             this.Loaded += async (sender, e) =>
             {
                 School school = (await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString())).FirstOrDefault();
