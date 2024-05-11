@@ -7,10 +7,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using Microsoft.Win32;
 
 using EduPartners.Core;
 using EduPartners.MVVM.Model;
-using Microsoft.Win32;
 
 namespace EduPartners.MVVM.View.Controls
 {
@@ -25,7 +25,7 @@ namespace EduPartners.MVVM.View.Controls
         {
             InitializeComponent();
            
-            tbSchoolCode.Text = Guid.NewGuid().ToString();
+            tbSchoolCode.Text = Guid.NewGuid().ToString("N").Substring(0, 8);
             db = App.Current.Properties["Database"] as Database;
 
             this.Loaded += CreateSchool_Loaded;
@@ -249,7 +249,7 @@ namespace EduPartners.MVVM.View.Controls
 
         private void lCodeRefresh_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            tbSchoolCode.Text = Guid.NewGuid().ToString();
+            tbSchoolCode.Text = Guid.NewGuid().ToString("N").Substring(0, 8);
         }
     }
 }
