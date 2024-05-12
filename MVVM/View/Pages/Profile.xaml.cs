@@ -1,6 +1,7 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -15,7 +16,6 @@ using BCrypts = BCrypt.Net.BCrypt;
 using EduPartners.Core;
 using EduPartners.MVVM.Model;
 using EduPartners.MVVM.View.Controls;
-using System.Diagnostics;
 
 namespace EduPartners.MVVM.View.Pages
 {
@@ -237,7 +237,7 @@ namespace EduPartners.MVVM.View.Pages
                 About = tbAbout.Text,
                 PhoneNumber = tbPhoneNumber.Text,
                 Password = string.IsNullOrEmpty(tbChangedPwrd.Text) ? currentUser.Password : BCrypts.HashPassword(tbChangedPwrd.Text),
-                ProfileImage = new ProfileImangeInfo
+                ProfileImage = new ProfileImageInfo
                 {  
                     ImageData = File.ReadAllBytes(newProfileName),
                     ImageName = Path.GetFileName(newProfileName)
