@@ -34,7 +34,7 @@ namespace EduPartners.MVVM.View.Controls
             App.Current.Properties["MainControl"] = this;
         }
 
-        private async void MainControl_Loaded(object sender, RoutedEventArgs e)
+        private void MainControl_Loaded(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
 
@@ -43,18 +43,8 @@ namespace EduPartners.MVVM.View.Controls
             this.Height = 650;
             this.Width = 1000;
 
-            User user = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
-
             // Sets the profile image on navgation bar
-            if (user.ProfileImage == null || !File.Exists(Path.Combine(localDataPath, user.ProfileImage)))
-            {
-                // Default image if can not find stored image
-                imgProfile.ImageSource = new BitmapImage(new Uri("pack://application:,,,/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
-            }
-            else
-            {
-                imgProfile.ImageSource = new BitmapImage(new Uri(Path.Combine(localDataPath, user.ProfileImage), UriKind.RelativeOrAbsolute));
-            }
+            UpdateProfileImage();
 
             // Selects Dashboard as the default menuitem
             DashboardMenuItem.InternalMenu.IsChecked = true;
@@ -109,13 +99,41 @@ namespace EduPartners.MVVM.View.Controls
         public async void UpdateProfileImage()
         {
             User user = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
-            if (!File.Exists(Path.Combine(localDataPath, user.ProfileImage)))
+            try
             {
-                imgProfile.ImageSource = new BitmapImage(new Uri("pack://application:,,,/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
+                // Checks if the profile image exists
+                if (user.ProfileImage.ImageData != null && user.ProfileImage.ImageName != null)
+                {
+                    byte[] imageData = user.ProfileImage.ImageData.AsByteArray;
+                    string imageName = user.ProfileImage.ImageName;
+
+                    using (MemoryStream ms = new MemoryStream(imageData))
+                    {
+                        System.Drawing.Image image = System.Drawing.Image.FromStream(ms);
+
+                        if (!File.Exists(Path.Combine(localDataPath, imageName)))
+                        {
+                            image.Save(Path.Combine(localDataPath, imageName));
+                        }
+
+                        if (user.ProfileImage == null || !File.Exists(Path.Combine(localDataPath, imageName)))
+                        {
+                            imgProfile.ImageSource = new BitmapImage(new Uri("/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
+                        }
+                        else
+                        {
+                            imgProfile.ImageSource = new BitmapImage(new Uri($"{Path.Combine(localDataPath, imageName)}", UriKind.RelativeOrAbsolute));
+                        }
+                    }
+                }
+                else
+                {
+                    imgProfile.ImageSource = new BitmapImage(new Uri("/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
+                }
             }
-            else
+            catch
             {
-                imgProfile.ImageSource = new BitmapImage(new Uri(Path.Combine(localDataPath, user.ProfileImage), UriKind.RelativeOrAbsolute)) ?? new BitmapImage(new Uri("pack://application:,,,/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
+                MessageBox.Show("There was an error while loading your profile image.", "Profile Image Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

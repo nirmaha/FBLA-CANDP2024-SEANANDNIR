@@ -26,9 +26,15 @@ namespace EduPartners.MVVM.Model
         [BsonRequired]
         public string Password { get; set; }
 
-        public string ProfileImage { get; set; }
+        public ProfileImangeInfo ProfileImage { get; set; }
 
         [BsonRequired]
         public School HomeSchool { get; set; }
+    }
+
+    public class ProfileImangeInfo
+    {
+        public BsonBinaryData ImageData { get; set; }
+        public string ImageName { get; set; }
     }
 }

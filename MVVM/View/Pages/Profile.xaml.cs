@@ -15,6 +15,7 @@ using BCrypts = BCrypt.Net.BCrypt;
 using EduPartners.Core;
 using EduPartners.MVVM.Model;
 using EduPartners.MVVM.View.Controls;
+using System.Diagnostics;
 
 namespace EduPartners.MVVM.View.Pages
 {
@@ -46,15 +47,43 @@ namespace EduPartners.MVVM.View.Pages
                 currentUser = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
                 lSchoolAddress.Content = $"{currentUser.HomeSchool.Address}, {currentUser.HomeSchool.City}, {currentUser.HomeSchool.State} {currentUser.HomeSchool.Zip}";
 
-                // Checks if the profile image exists
-                if (currentUser.ProfileImage == null || !File.Exists(Path.Combine(localDataPath, currentUser.ProfileImage)))
+                try
                 {
-                    imgProfile.Source = new BitmapImage(new Uri("/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
+                    // Checks if the profile image exists
+                    if (currentUser.ProfileImage.ImageData != null && currentUser.ProfileImage.ImageName != null)
+                    {
+                        byte[] imageData = currentUser.ProfileImage.ImageData.AsByteArray;
+                        string imageName = currentUser.ProfileImage.ImageName;
+
+                        using (MemoryStream ms = new MemoryStream(imageData))
+                        {
+                            System.Drawing.Image image = System.Drawing.Image.FromStream(ms);
+
+                            if (!File.Exists(Path.Combine(localDataPath, imageName)))
+                            {
+                                image.Save(Path.Combine(localDataPath, imageName));
+                            }
+
+                            if (currentUser.ProfileImage == null || !File.Exists(Path.Combine(localDataPath, imageName)))
+                            {
+                                imgProfile.Source = new BitmapImage(new Uri("/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
+                            }
+                            else
+                            {
+                                imgProfile.Source = new BitmapImage(new Uri($"{Path.Combine(localDataPath, imageName)}", UriKind.RelativeOrAbsolute));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        imgProfile.Source = new BitmapImage(new Uri("/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
+                    }
                 }
-                else
-                { 
-                    imgProfile.Source = new BitmapImage(new Uri($"{Path.Combine(localDataPath, currentUser.ProfileImage)}", UriKind.RelativeOrAbsolute));
+                catch
+                {
+                    MessageBox.Show("There was an error while loading your profile image.", "Profile Image Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+
 
                 DataContext = currentUser;
             };
@@ -208,7 +237,11 @@ namespace EduPartners.MVVM.View.Pages
                 About = tbAbout.Text,
                 PhoneNumber = tbPhoneNumber.Text,
                 Password = string.IsNullOrEmpty(tbChangedPwrd.Text) ? currentUser.Password : BCrypts.HashPassword(tbChangedPwrd.Text),
-                ProfileImage = newProfileName,
+                ProfileImage = new ProfileImangeInfo
+                {  
+                    ImageData = File.ReadAllBytes(newProfileName),
+                    ImageName = Path.GetFileName(newProfileName)
+                },
                 HomeSchool = currentUser.HomeSchool
             };
 
@@ -247,15 +280,9 @@ namespace EduPartners.MVVM.View.Pages
 
                 if (openFileDialog.ShowDialog() == true)
                 {
-                    // If file doesn't exist copy it to local AppData
-                    if (!File.Exists(Path.Combine(localDataPath, Path.GetFileName(openFileDialog.FileName))))
-                    {
-                        File.Copy(openFileDialog.FileName, Path.Combine(localDataPath, Path.GetFileName(openFileDialog.FileName)));
-                    }
-
                     // Update the profile image visually
-                    newProfileName = Path.GetFileName(openFileDialog.FileName);
-                    imgProfile.Source = new BitmapImage(new Uri($"{Path.Combine(localDataPath, Path.GetFileName(openFileDialog.FileName))}", UriKind.RelativeOrAbsolute));
+                    newProfileName = openFileDialog.FileName;
+                    imgProfile.Source = new BitmapImage(new Uri($"{openFileDialog.FileName}", UriKind.RelativeOrAbsolute));
                 }
             }
         }
