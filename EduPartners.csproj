@@ -237,6 +237,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Core\Database.cs" />
+    <Compile Include="Core\DotEnv.cs" />
     <Compile Include="Core\IniFile.cs" />
     <Compile Include="MVVM\Model\Partner.cs" />
     <Compile Include="MVVM\Model\School.cs" />
@@ -352,6 +353,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include=".env" />
     <None Include="libmongocrypt.dylib" />
     <None Include="libmongocrypt.so" />
     <None Include="packages.config" />
