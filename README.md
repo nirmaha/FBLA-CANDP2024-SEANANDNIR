@@ -229,6 +229,8 @@ This is where the user can log out.
   - https://www.flaticon.com/free-icon/log-out_8944313?term=logout&page=1&position=21&origin=search&related_id=8944313
 - **Edit Icon:**
   - https://www.flaticon.com/free-icon/pencil_1828911?related_id=1828911
+- **Printer Icon:**
+  - https://www.flaticon.com/free-icon/printer_2544167?term=print&page=1&position=44&origin=search&related_id=2544167
 - **Help Icon:**
   - https://www.flaticon.com/free-icon/help_657093?term=help&page=1&position=59&origin=search&related_id=657093
 - **Search Icon:**
