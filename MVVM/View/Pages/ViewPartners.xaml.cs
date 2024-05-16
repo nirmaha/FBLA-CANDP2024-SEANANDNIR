@@ -363,5 +363,14 @@ namespace EduPartners.MVVM.View.Pages
             e.Handled = true;
         }
 
+        private void Print_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            PrintDialog printDialog = new PrintDialog();
+            if (printDialog.ShowDialog() == true)
+            {
+                IndividualPartnerReport individualPartnerReport = new IndividualPartnerReport();
+                printDialog.PrintVisual(individualPartnerReport, "Profile");
+            }
+        }
     }
 }

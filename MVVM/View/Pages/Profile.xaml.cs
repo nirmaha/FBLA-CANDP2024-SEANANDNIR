@@ -16,6 +16,14 @@ using BCrypts = BCrypt.Net.BCrypt;
 using EduPartners.Core;
 using EduPartners.MVVM.Model;
 using EduPartners.MVVM.View.Controls;
+using System.Windows.Documents.Serialization;
+using System.Drawing.Printing;
+using System.Printing;
+using System.Drawing.Imaging;
+using System.Windows.Documents;
+using System.Windows.Xps.Packaging;
+using System.Windows.Xps;
+
 
 namespace EduPartners.MVVM.View.Pages
 {
@@ -126,7 +134,7 @@ namespace EduPartners.MVVM.View.Pages
             currentUser = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
             DataContext = currentUser;
 
-            // Changes the button back to onl show the Update button
+            // Changes the button back to only show the Update button
             btUpdate.Visibility = Visibility.Visible;
             btCancel.Visibility = Visibility.Collapsed;
             btSave.Visibility = Visibility.Collapsed;
