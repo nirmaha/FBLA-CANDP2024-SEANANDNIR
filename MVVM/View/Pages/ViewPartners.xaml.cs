@@ -373,7 +373,7 @@ namespace EduPartners.MVVM.View.Pages
             {
                 App.Current.Properties["SelectedPartner"] = partner;
                 IndividualPartnerReport individualPartnerReport = new IndividualPartnerReport();
-                printDialog.PrintVisual(individualPartnerReport, "Profile");
+                printDialog.PrintVisual(individualPartnerReport, "Patrner Report");
             }
         }
     }
