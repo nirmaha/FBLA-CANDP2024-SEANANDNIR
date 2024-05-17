@@ -79,6 +79,7 @@
     <Reference Include="MongoDB.Libmongocrypt, Version=1.8.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\MongoDB.Libmongocrypt.1.8.2\lib\netstandard2.0\MongoDB.Libmongocrypt.dll</HintPath>
     </Reference>
+    <Reference Include="ReachFramework" />
     <Reference Include="SharpCompress, Version=0.36.0.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
       <HintPath>packages\SharpCompress.0.36.0\lib\net462\SharpCompress.dll</HintPath>
     </Reference>
@@ -113,6 +114,7 @@
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
+    <Reference Include="System.Printing" />
     <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
       <Private>True</Private>
@@ -292,6 +294,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\View\Pages\IndividualPartnerReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\Pages\Profile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -329,6 +335,9 @@
     </Compile>
     <Compile Include="MVVM\View\Pages\Help.xaml.cs">
       <DependentUpon>Help.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\Pages\IndividualPartnerReport.xaml.cs">
+      <DependentUpon>IndividualPartnerReport.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\Pages\Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
@@ -391,6 +400,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="mongocrypt.dll" />
+    <Resource Include="Resources\printer.png" />
     <Resource Include="Resources\profileEdit.png" />
     <Resource Include="Resources\help.png" />
     <Resource Include="Resources\clear-filter.png" />

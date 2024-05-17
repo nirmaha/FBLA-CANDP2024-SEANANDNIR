@@ -116,7 +116,7 @@
 
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="328*"/>
-                                                <ColumnDefinition Width="47*"/>
+                                                <ColumnDefinition Width="60*"/>
                                             </Grid.ColumnDefinitions>
 
                                             <Label Name="lParnterId" Content="{Binding Id}" Visibility="Collapsed"/>
@@ -126,12 +126,17 @@
                                             <StackPanel VerticalAlignment="Center" Grid.Column="1" Orientation="Horizontal" Panel.ZIndex="2">
                                                 
                                                 <!-- Edit Button -->
-                                                <Border Margin="18,0,0,0" Cursor="Hand" BorderThickness="0" Background="Transparent" MouseDown="Edit_MouseDown">
+                                                <Border Margin="6,0,0,0" Cursor="Hand" BorderThickness="0" Background="Transparent" MouseDown="Edit_MouseDown">
                                                     <Image Source="../../../Resources/edit.png" Width="30" ToolTip="Edit"/>
                                                 </Border>
                                                 
+                                                <!-- Print Button -->
+                                                <Border Margin="6,0,0,0" Cursor="Hand" BorderThickness="0" Background="Transparent" MouseDown="Print_MouseDown">
+                                                    <Image Source="../../../Resources/printer.png" Width="30" ToolTip="Print"/>
+                                                </Border>
+
                                                 <!-- Delete Button -->
-                                                <Border Margin="5,0,0,0" Cursor="Hand" BorderThickness="0" Background="Transparent" MouseDown="Delete_MouseDown">
+                                                <Border Margin="6,0,0,0" Cursor="Hand" BorderThickness="0" Background="Transparent" MouseDown="Delete_MouseDown">
                                                     <Image Source="../../../Resources/delete.png" Width="30" ToolTip="Delete"/>
                                                 </Border>
                                                 
