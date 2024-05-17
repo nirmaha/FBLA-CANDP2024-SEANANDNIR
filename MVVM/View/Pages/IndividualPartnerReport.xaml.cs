@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EduPartners.Core;
+using EduPartners.MVVM.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,16 @@ namespace EduPartners.MVVM.View.Pages
     /// </summary>
     public partial class IndividualPartnerReport : Page
     {
+        Database db;
         public IndividualPartnerReport()
         {
             InitializeComponent();
+            db = App.Current.Properties["Database"] as Database;
+            Partner partner = App.Current.Properties["SelectedPartner"] as Partner;
+            DataContext = partner;
+            InceptionDate.Text = partner.StartDate.ToString("MM/dd/yyyy");
+            GenerationDate.Text = DateTime.Now.ToString("MM/dd/yyyy");
+            Savings.Text = $"${partner.Savings.ToString()}";
         }
     }
 }

@@ -5,10 +5,66 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:EduPartners.MVVM.View.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="800"
       Title="IndividualPartnerReport">
 
-    <Grid Background="Red">
-        
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header Information -->
+        <Grid Grid.Row="0">
+            <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="24" HorizontalAlignment="Left" Margin="20,0,0,0" />
+            <TextBlock Text="{Binding Industry}" FontWeight="Bold" FontSize="24" HorizontalAlignment="Right" Margin="0,0,20,0" />
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <TextBlock Text="{Binding Address}" FontSize="24" HorizontalAlignment="Left" Margin="20,0,0,0" />
+            <TextBlock x:Name="Savings" FontSize="24" HorizontalAlignment="Right" Margin="0,0,20,0" />
+        </Grid>
+
+        <!-- Representative Information -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Text="{Binding RepresentativeName}" FontSize="24" Margin="0,0,80,0"/>
+            <TextBlock Text="{Binding RepresentativePhoneNumber}" FontSize="24" Margin="0,0,80,0"/>
+            <TextBlock Text="{Binding RepresentativeEmail}" FontSize="24"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="3" Text="Description" FontWeight="Bold" FontSize="24" Margin="20,0,0,0" />
+
+        <!-- Description Section -->
+        <TextBlock Grid.Row="4" TextWrapping="Wrap" FontSize="18" Margin="20,0,0,0">
+            <Run Text="   " />
+            <Run Text="{Binding Description}" />
+        </TextBlock>
+
+        <TextBlock Grid.Row="5" Text="Resources Available" FontWeight="Bold" FontSize="24" Margin="20,0,0,0" />
+
+        <!-- Resources Available Section -->
+        <TextBlock Grid.Row="6" TextWrapping="Wrap" FontSize="18" Margin="20,0,0,0">
+            <Run Text="   " />
+            <Run Text="{Binding ResourcesAvailable}" />
+        </TextBlock>
+
+        <!-- Partner Inception and Report Generated -->
+        <Grid Grid.Row="7">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="20,0,0,0">
+                <TextBlock Text="Partner Inception: " FontSize="24" />
+                <TextBlock x:Name="InceptionDate" FontSize="24" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
+                <TextBlock Text="Report Generated: " FontSize="24" />
+                <TextBlock x:Name="GenerationDate" FontSize="24" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

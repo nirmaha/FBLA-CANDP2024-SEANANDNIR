@@ -363,11 +363,15 @@ namespace EduPartners.MVVM.View.Pages
             e.Handled = true;
         }
 
-        private void Print_MouseDown(object sender, MouseButtonEventArgs e)
+        private async void Print_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            StackPanel borderParent = (StackPanel)((Border)sender).Parent;
+            Label partnerId = FindChild<Label>(borderParent.Parent, "lParnterId");
+            Partner partner = (await db.GetPartnerById(partnerId.Content.ToString())).FirstOrDefault();
             PrintDialog printDialog = new PrintDialog();
             if (printDialog.ShowDialog() == true)
             {
+                App.Current.Properties["SelectedPartner"] = partner;
                 IndividualPartnerReport individualPartnerReport = new IndividualPartnerReport();
                 printDialog.PrintVisual(individualPartnerReport, "Profile");
             }
