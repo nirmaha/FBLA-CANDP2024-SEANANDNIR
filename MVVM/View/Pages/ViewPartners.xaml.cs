@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Navigation;
-using System.Windows.Xps.Packaging;
+
 using EduPartners.Core;
 using EduPartners.MVVM.Model;
 using EduPartners.MVVM.View.Controls;
@@ -387,59 +385,13 @@ namespace EduPartners.MVVM.View.Pages
             StackPanel borderParent = (StackPanel)((Border)sender).Parent;
             Label partnerId = FindChild<Label>(borderParent.Parent, "lParnterId");
             Partner partner = (await db.GetPartnerById(partnerId.Content.ToString())).FirstOrDefault();
-            // Example usage within your method
             PrintDialog printDialog = new PrintDialog();
             if (printDialog.ShowDialog() == true)
             {
-                // Set the selected partner in application properties
                 App.Current.Properties["SelectedPartner"] = partner;
-
-                // Initialize the report
                 IndividualPartnerReport individualPartnerReport = new IndividualPartnerReport();
-
-                // Optionally set the DataContext or other properties here
-                // individualPartnerReport.DataContext = yourDataContext;
-
-                // Define the file name and path for the XPS document
-                string xpsFileName = "PartnerReport.xps";
-
-                // Save the report as an XPS document
-                SaveAsXpsDocument(individualPartnerReport, xpsFileName);
-
-                // Print the visual content directly
-                PrintVisualContent(individualPartnerReport, printDialog);
+                printDialog.PrintVisual(individualPartnerReport, "Patrner Report");
             }
         }
-
-        private void SaveAsXpsDocument(IndividualPartnerReport individualPartnerReport, string fileName)
-        {
-            PrintDialog printDialog = new PrintDialog();
-            // Set up the XPS document writer
-            using (var xpsDocument = new XpsDocument(fileName, FileAccess.Write))
-            {
-                var xpsDocumentWriter = XpsDocument.CreateXpsDocumentWriter(xpsDocument);
-
-                // Measure and arrange the report to ensure it's properly rendered
-                individualPartnerReport.Measure(new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight));
-                individualPartnerReport.Arrange(new Rect(new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight)));
-                individualPartnerReport.UpdateLayout();
-
-                // Write the visual to the XPS document
-                xpsDocumentWriter.Write(individualPartnerReport);
-            }
-
-        }
-
-        private void PrintVisualContent(UIElement visual, PrintDialog printDialog)
-        {
-            // Ensure the visual is properly rendered
-            visual.Measure(new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight));
-            visual.Arrange(new Rect(new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight)));
-            visual.UpdateLayout();
-
-            // Print the visual
-            printDialog.PrintVisual(visual, "Partner Report");
-        }
-
     }
 }
