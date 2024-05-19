@@ -243,3 +243,12 @@ This is where the user can log out.
   - https://www.freepik.com/free-photo/modern-office-building_1283894.htm#query=empty%20school%20building&position=21&from_view=search&track=ais&uuid=0b8357c9-b426-4284-bb45-60fb0c6ce106
 - **Create School Page Background Image:**
   - https://www.freepik.com/free-photo/medium-shot-people-sitting-library_20942917.htm#query=school%20board%20meeting&position=26&from_view=search&track=ais&uuid=081fe36a-f545-4b27-bcf2-0bd5cf9d45d0
+### Search Filter Icons:
+- **Name Filter Icon:**
+  - https://www.flaticon.com/free-icon/az_9346156?term=az&page=1&position=85&origin=search&related_id=9346156
+- **Industry Filter Icon:** 
+   - https://www.flaticon.com/free-icon/industry_546353?term=industry&related_id=546353
+- **Savings Filter Icon:**
+   -  https://www.flaticon.com/free-icon/dollar-symbol_2150150?term=dollar+sign&related_id=2150150
+- **Address Filter Icon:**
+   - https://www.flaticon.com/free-icon/placeholder_684908?term=address&page=1&position=3&origin=search&related_id=684908      
