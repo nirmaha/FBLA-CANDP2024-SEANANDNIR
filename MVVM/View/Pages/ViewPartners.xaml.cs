@@ -325,7 +325,24 @@ namespace EduPartners.MVVM.View.Pages
             // Searches the name starting with the search box
             if (!string.IsNullOrEmpty(tbSerachBox.Text))
             {
-                partners = partners.Where(partner => partner.Name.StartsWith(tbSerachBox.Text, StringComparison.OrdinalIgnoreCase)).ToList();
+                ComboBoxItem searchFilter = (ComboBoxItem)cbSearchFilter.SelectedItem;
+
+                switch (searchFilter.Tag.ToString())
+                {
+                    case "savings":
+                        partners = partners.Where(partner => partner.Savings.ToString().StartsWith(tbSerachBox.Text, StringComparison.OrdinalIgnoreCase)).ToList();
+                        break;
+                    case "industry":
+                        partners = partners.Where(partner => partner.Industry.StartsWith(tbSerachBox.Text, StringComparison.OrdinalIgnoreCase)).ToList();
+                        break;
+                    case "address":
+                        partners = partners.Where(partner => partner.Address.StartsWith(tbSerachBox.Text, StringComparison.OrdinalIgnoreCase)).ToList();
+                        break;
+                    default:
+                        partners = partners.Where(partner => partner.Name.StartsWith(tbSerachBox.Text, StringComparison.OrdinalIgnoreCase)).ToList();
+                        break;
+                }
+
             }
 
             // Goes through the filter list and applys the filter to the ViewModel

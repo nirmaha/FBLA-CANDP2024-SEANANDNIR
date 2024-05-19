@@ -400,6 +400,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="mongocrypt.dll" />
+    <Resource Include="Resources\az.png" />
+    <Resource Include="Resources\address.png" />
+    <Resource Include="Resources\dollar.png" />
+    <Resource Include="Resources\industry.png" />
     <Resource Include="Resources\printer.png" />
     <Resource Include="Resources\profileEdit.png" />
     <Resource Include="Resources\help.png" />
