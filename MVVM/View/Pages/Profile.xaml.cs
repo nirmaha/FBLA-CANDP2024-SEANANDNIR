@@ -16,13 +16,6 @@ using BCrypts = BCrypt.Net.BCrypt;
 using EduPartners.Core;
 using EduPartners.MVVM.Model;
 using EduPartners.MVVM.View.Controls;
-using System.Windows.Documents.Serialization;
-using System.Drawing.Printing;
-using System.Printing;
-using System.Drawing.Imaging;
-using System.Windows.Documents;
-using System.Windows.Xps.Packaging;
-using System.Windows.Xps;
 
 
 namespace EduPartners.MVVM.View.Pages

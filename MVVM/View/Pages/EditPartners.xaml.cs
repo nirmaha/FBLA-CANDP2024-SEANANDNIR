@@ -200,7 +200,7 @@ namespace EduPartners.MVVM.View.Pages
                 Savings = double.Parse(tbSavings.Text),
             };
 
-            await db.UpdatePartner(partner);
+            await db.UpdatePartner(updatePartner);
 
             School school = (await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString())).FirstOrDefault();
 
