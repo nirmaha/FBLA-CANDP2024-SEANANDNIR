@@ -2,18 +2,28 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 
 using EduPartners.Core;
 using EduPartners.MVVM.Model;
 using EduPartners.MVVM.View.Controls;
 using EduPartners.MVVM.ViewModel;
+using iText.IO.Image;
+using iText.Kernel.Geom;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Properties;
+// using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace EduPartners.MVVM.View.Pages
 {
@@ -58,6 +68,8 @@ namespace EduPartners.MVVM.View.Pages
     {
         private PartnerViewModel viewModel;
         private Database db;
+
+        private static string localDataPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "EduPartners");
 
         public ViewPartners()
         {
@@ -392,6 +404,61 @@ namespace EduPartners.MVVM.View.Pages
                 IndividualPartnerReport individualPartnerReport = new IndividualPartnerReport();
                 printDialog.PrintVisual(individualPartnerReport, "Patrner Report");
             }
+        }
+
+        private async void SaveAll_Clicked(object sender, RoutedEventArgs e)
+        {
+            User user = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
+            List<Partner> partners = user.HomeSchool.Partners.Value;
+
+            string tempPDFImage = System.IO.Path.Combine(localDataPath, "TempPDFImage");
+
+            if (!Directory.Exists(tempPDFImage))
+            {
+                Directory.CreateDirectory(tempPDFImage);
+            }
+
+            foreach (Partner partner in partners)
+            {
+                App.Current.Properties["SelectedPartner"] = partner;
+                // Assuming IndividualPartnerReport is a WPF Page/UserControl
+                IndividualPartnerReport individualPartnerReport = new IndividualPartnerReport();
+
+                // Force layout update
+                individualPartnerReport.Measure(new Size(individualPartnerReport.Width, individualPartnerReport.Height));
+                individualPartnerReport.Arrange(new Rect(new Size(individualPartnerReport.Width, individualPartnerReport.Height)));
+                individualPartnerReport.UpdateLayout();
+
+                // Wait for rendering to complete
+                individualPartnerReport.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Render, new Action(() => { }));
+
+                // Render the page to a bitmap
+                RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap((int)individualPartnerReport.Width, (int)individualPartnerReport.Height, 96, 96, PixelFormats.Pbgra32);
+                renderTargetBitmap.Render(individualPartnerReport);
+
+                // Save the image to a file
+                using (var fileStream = new FileStream("PageImage.png", FileMode.Create))
+                {
+                    PngBitmapEncoder encoder = new PngBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
+                    encoder.Save(fileStream);
+                }
+
+                // Generate PDF with the rendered image
+                using (var pdfWriter = new PdfWriter("Output.pdf"))
+                using (var pdfDocument = new PdfDocument(pdfWriter))
+                using (var document = new Document(pdfDocument))
+                {
+                    // Add the rendered image to the PDF
+                    iText.Layout.Element.Image img = new iText.Layout.Element.Image(ImageDataFactory.Create("PageImage.png"));
+                    img.ScaleToFit(pdfDocument.GetDefaultPageSize().GetWidth(), pdfDocument.GetDefaultPageSize().GetHeight());
+                    document.Add(img);
+                }
+
+                break;
+            }
+            RadioButton radioButton = (RadioButton)sender;
+            radioButton.IsChecked = false;
         }
     }
 }

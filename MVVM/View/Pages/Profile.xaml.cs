@@ -51,28 +51,23 @@ namespace EduPartners.MVVM.View.Pages
                 try
                 {
                     // Checks if the profile image exists
-                    if (currentUser.ProfileImage.ImageData != null && currentUser.ProfileImage.ImageName != null)
+                    if (currentUser.ProfileImage != null)
                     {
-                        byte[] imageData = currentUser.ProfileImage.ImageData.AsByteArray;
-                        string imageName = currentUser.ProfileImage.ImageName;
+                        byte[] imageData = currentUser.ProfileImage.AsByteArray;
 
                         using (MemoryStream ms = new MemoryStream(imageData))
                         {
-                            System.Drawing.Image image = System.Drawing.Image.FromStream(ms);
 
-                            if (!File.Exists(Path.Combine(localDataPath, imageName)))
-                            {
-                                image.Save(Path.Combine(localDataPath, imageName));
-                            }
+                            BitmapImage profileImageData = new BitmapImage();
+                            profileImageData.BeginInit();
+                            profileImageData.StreamSource = ms;
+                            profileImageData.CacheOption = BitmapCacheOption.OnLoad;
+                            profileImageData.EndInit();
+                            profileImageData.Freeze();
+                          
 
-                            if (currentUser.ProfileImage == null || !File.Exists(Path.Combine(localDataPath, imageName)))
-                            {
-                                imgProfile.Source = new BitmapImage(new Uri("/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
-                            }
-                            else
-                            {
-                                imgProfile.Source = new BitmapImage(new Uri($"{Path.Combine(localDataPath, imageName)}", UriKind.RelativeOrAbsolute));
-                            }
+                           imgProfile.Source = profileImageData;
+                          
                         }
                     }
                     else
@@ -238,11 +233,7 @@ namespace EduPartners.MVVM.View.Pages
                 About = tbAbout.Text,
                 PhoneNumber = tbPhoneNumber.Text,
                 Password = string.IsNullOrEmpty(tbChangedPwrd.Text) ? currentUser.Password : BCrypts.HashPassword(tbChangedPwrd.Text),
-                ProfileImage = new ProfileImageInfo
-                {  
-                    ImageData = File.ReadAllBytes(newProfileName),
-                    ImageName = Path.GetFileName(newProfileName)
-                },
+                ProfileImage = File.ReadAllBytes(newProfileName),
                 HomeSchool = currentUser.HomeSchool
             };
 

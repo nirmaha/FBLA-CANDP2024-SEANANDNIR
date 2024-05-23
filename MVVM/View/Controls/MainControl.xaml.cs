@@ -102,28 +102,22 @@ namespace EduPartners.MVVM.View.Controls
             try
             {
                 // Checks if the profile image exists
-                if (user.ProfileImage.ImageData != null && user.ProfileImage.ImageName != null)
+                if (user.ProfileImage != null)
                 {
-                    byte[] imageData = user.ProfileImage.ImageData.AsByteArray;
-                    string imageName = user.ProfileImage.ImageName;
+                    byte[] imageData = user.ProfileImage.AsByteArray;
 
                     using (MemoryStream ms = new MemoryStream(imageData))
                     {
-                        System.Drawing.Image image = System.Drawing.Image.FromStream(ms);
 
-                        if (!File.Exists(Path.Combine(localDataPath, imageName)))
-                        {
-                            image.Save(Path.Combine(localDataPath, imageName));
-                        }
+                        BitmapImage profileImageData = new BitmapImage();
+                        profileImageData.BeginInit();
+                        profileImageData.StreamSource = ms;
+                        profileImageData.CacheOption = BitmapCacheOption.OnLoad;
+                        profileImageData.EndInit();
+                        profileImageData.Freeze();
 
-                        if (user.ProfileImage == null || !File.Exists(Path.Combine(localDataPath, imageName)))
-                        {
-                            imgProfile.ImageSource = new BitmapImage(new Uri("/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
-                        }
-                        else
-                        {
-                            imgProfile.ImageSource = new BitmapImage(new Uri($"{Path.Combine(localDataPath, imageName)}", UriKind.RelativeOrAbsolute));
-                        }
+
+                        imgProfile.ImageSource = profileImageData;
                     }
                 }
                 else
