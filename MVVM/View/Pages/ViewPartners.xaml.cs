@@ -399,6 +399,17 @@ namespace EduPartners.MVVM.View.Pages
             {
                 App.Current.Properties["SelectedPartner"] = partner;
                 IndividualPartnerReport individualPartnerReport = new IndividualPartnerReport();
+
+                // Set page size to match printable area
+                individualPartnerReport.Width = printDialog.PrintableAreaWidth;
+                individualPartnerReport.Height = printDialog.PrintableAreaHeight;
+                individualPartnerReport.Measure(new Size(individualPartnerReport.Width, individualPartnerReport.Height));
+                individualPartnerReport.Arrange(new Rect(new Size(individualPartnerReport.Width, individualPartnerReport.Height)));
+                individualPartnerReport.UpdateLayout();
+
+                // Adjust position
+                individualPartnerReport.RenderTransform = new TranslateTransform(0, -10);
+
                 printDialog.PrintVisual(individualPartnerReport, "Partner Report");
             }
         }
