@@ -469,6 +469,7 @@ namespace EduPartners.MVVM.View.Pages
                     }
                 }
 
+                MessageBox.Show("Successfully downloaded all partner reports");
                 string[] files = Directory.GetFiles(tempPDFImage);
 
                 foreach (string file in files)
