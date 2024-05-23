@@ -20,7 +20,7 @@ using EduPartners.Core;
 using EduPartners.MVVM.Model;
 using EduPartners.MVVM.View.Controls;
 using EduPartners.MVVM.ViewModel;
-using System.Windows.Media.Media3D;
+
 
 namespace EduPartners.MVVM.View.Pages
 {
@@ -399,7 +399,7 @@ namespace EduPartners.MVVM.View.Pages
             {
                 App.Current.Properties["SelectedPartner"] = partner;
                 IndividualPartnerReport individualPartnerReport = new IndividualPartnerReport();
-                printDialog.PrintVisual(individualPartnerReport, "Patrner Report");
+                printDialog.PrintVisual(individualPartnerReport, "Partner Report");
             }
         }
 
@@ -424,7 +424,6 @@ namespace EduPartners.MVVM.View.Pages
                 foreach (Partner partner in partners)
                 {
                     App.Current.Properties["SelectedPartner"] = partner;
-                    // Assuming IndividualPartnerReport is a WPF Page/UserControl
                     IndividualPartnerReport individualPartnerReport = new IndividualPartnerReport();
 
                     // Force layout update
@@ -454,15 +453,11 @@ namespace EduPartners.MVVM.View.Pages
                     using (var pdfDocument = new PdfDocument(pdfWriter))
                     using (var document = new Document(pdfDocument))
                     {
-                        // Set the desired size explicitly
-                        double width = 800; // Set your desired width
-                        double height = 600; // Set your desired height
-
                         // Add the rendered image to the PDF
                         iText.Layout.Element.Image img = new iText.Layout.Element.Image(ImageDataFactory.Create(imgPath));
 
                         // Set the position of the image to move it to the left
-                        float xPosition = 12; // Change this value to move the image further to the right if needed
+                        float xPosition = 12;
                         float yPosition = pdfDocument.GetDefaultPageSize().GetHeight() - 450f;
 
                         // Set fixed position and size
