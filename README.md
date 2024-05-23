@@ -235,6 +235,8 @@ This is where the user can log out.
   - https://www.flaticon.com/free-icon/help_657093?term=help&page=1&position=59&origin=search&related_id=657093
 - **Search Icon:**
   - https://www.flaticon.com/free-icon/find_9177086?term=search&page=1&position=28&origin=search&related_id=9177086
+- **Save Icon:**
+  - https://www.flaticon.com/free-icon/download_724933?term=download&page=1&position=3&origin=search&related_id=724933 
 - **Clear Filter Icon:**
   - https://www.flaticon.com/free-icon/clear-filter_6159408?term=clear+filter&page=1&position=72&origin=search&related_id=6159408
 - **Main Page Images:**
