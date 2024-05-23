@@ -4,8 +4,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Security.AccessControl;
-using System.Security.Principal;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -14,16 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 
+using iText.IO.Image;
+using iText.Kernel.Pdf;
+using iText.Layout;
+
 using EduPartners.Core;
 using EduPartners.MVVM.Model;
 using EduPartners.MVVM.View.Controls;
 using EduPartners.MVVM.ViewModel;
-using iText.IO.Image;
-using iText.Kernel.Geom;
-using iText.Kernel.Pdf;
-using iText.Layout;
-using iText.Layout.Properties;
-// using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Windows.Media.Media3D;
 
 namespace EduPartners.MVVM.View.Pages
 {
@@ -418,45 +415,73 @@ namespace EduPartners.MVVM.View.Pages
                 Directory.CreateDirectory(tempPDFImage);
             }
 
-            foreach (Partner partner in partners)
+
+            System.Windows.Forms.FolderBrowserDialog folderDialog = new System.Windows.Forms.FolderBrowserDialog();
+            folderDialog.ShowNewFolderButton = true;
+
+            if (folderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) 
             {
-                App.Current.Properties["SelectedPartner"] = partner;
-                // Assuming IndividualPartnerReport is a WPF Page/UserControl
-                IndividualPartnerReport individualPartnerReport = new IndividualPartnerReport();
-
-                // Force layout update
-                individualPartnerReport.Measure(new Size(individualPartnerReport.Width, individualPartnerReport.Height));
-                individualPartnerReport.Arrange(new Rect(new Size(individualPartnerReport.Width, individualPartnerReport.Height)));
-                individualPartnerReport.UpdateLayout();
-
-                // Wait for rendering to complete
-                individualPartnerReport.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Render, new Action(() => { }));
-
-                // Render the page to a bitmap
-                RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap((int)individualPartnerReport.Width, (int)individualPartnerReport.Height, 96, 96, PixelFormats.Pbgra32);
-                renderTargetBitmap.Render(individualPartnerReport);
-
-                // Save the image to a file
-                using (var fileStream = new FileStream("PageImage.png", FileMode.Create))
+                foreach (Partner partner in partners)
                 {
-                    PngBitmapEncoder encoder = new PngBitmapEncoder();
-                    encoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
-                    encoder.Save(fileStream);
+                    App.Current.Properties["SelectedPartner"] = partner;
+                    // Assuming IndividualPartnerReport is a WPF Page/UserControl
+                    IndividualPartnerReport individualPartnerReport = new IndividualPartnerReport();
+
+                    // Force layout update
+                    individualPartnerReport.Measure(new Size(individualPartnerReport.Width, individualPartnerReport.Height));
+                    individualPartnerReport.Arrange(new Rect(new Size(individualPartnerReport.Width, individualPartnerReport.Height)));
+                    individualPartnerReport.UpdateLayout();
+
+                    // Wait for rendering to complete
+                    individualPartnerReport.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Render, new Action(() => { }));
+
+                    // Render the page to a bitmap
+                    RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap((int)individualPartnerReport.Width, (int)individualPartnerReport.Height, 92, 100, PixelFormats.Pbgra32);
+                    renderTargetBitmap.Render(individualPartnerReport);
+
+                    string imgPath = Path.Combine(tempPDFImage, $"{partner.Name}.png");
+
+                    // Save the image to a file
+                    using (var fileStream = new FileStream(imgPath, FileMode.Create))
+                    {
+                        PngBitmapEncoder encoder = new PngBitmapEncoder();
+                        encoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
+                        encoder.Save(fileStream);
+                    }
+
+                    // Generate PDF with the rendered image
+                    using (var pdfWriter = new PdfWriter(Path.Combine(folderDialog.SelectedPath, $"{partner.Name}.pdf")))
+                    using (var pdfDocument = new PdfDocument(pdfWriter))
+                    using (var document = new Document(pdfDocument))
+                    {
+                        // Set the desired size explicitly
+                        double width = 800; // Set your desired width
+                        double height = 600; // Set your desired height
+
+                        // Add the rendered image to the PDF
+                        iText.Layout.Element.Image img = new iText.Layout.Element.Image(ImageDataFactory.Create(imgPath));
+
+                        // Set the position of the image to move it to the left
+                        float xPosition = 12; // Change this value to move the image further to the right if needed
+                        float yPosition = pdfDocument.GetDefaultPageSize().GetHeight() - 450f;
+
+                        // Set fixed position and size
+                        img.SetFixedPosition(xPosition, yPosition);
+
+                        img.ScaleToFit(pdfDocument.GetDefaultPageSize().GetWidth(), pdfDocument.GetDefaultPageSize().GetHeight());
+
+                        document.Add(img);
+                    }
                 }
 
-                // Generate PDF with the rendered image
-                using (var pdfWriter = new PdfWriter("Output.pdf"))
-                using (var pdfDocument = new PdfDocument(pdfWriter))
-                using (var document = new Document(pdfDocument))
-                {
-                    // Add the rendered image to the PDF
-                    iText.Layout.Element.Image img = new iText.Layout.Element.Image(ImageDataFactory.Create("PageImage.png"));
-                    img.ScaleToFit(pdfDocument.GetDefaultPageSize().GetWidth(), pdfDocument.GetDefaultPageSize().GetHeight());
-                    document.Add(img);
-                }
+                string[] files = Directory.GetFiles(tempPDFImage);
 
-                break;
+                foreach (string file in files)
+                {
+                    File.Delete(file);
+                }
             }
+
             RadioButton radioButton = (RadioButton)sender;
             radioButton.IsChecked = false;
         }
