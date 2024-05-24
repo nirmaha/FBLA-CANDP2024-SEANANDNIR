@@ -151,6 +151,15 @@
             <summary>Return the content of the OCTET STRING as a <see cref="T:System.IO.Stream"/>.</summary>
             <returns>A <see cref="T:System.IO.Stream"/> represnting the OCTET STRING's content.</returns>
         </member>
+        <member name="F:Org.BouncyCastle.Asn1.Asn1RelativeOid.MaxContentsLength">
+            <summary>Implementation limit on the length of the contents octets for a Relative OID.</summary>
+            <remarks>
+            We adopt the same value used by OpenJDK for Object Identifier. In theory there is no limit on the length of
+            the contents, or the number of subidentifiers, or the length of individual subidentifiers. In practice,
+            supporting arbitrary lengths can lead to issues, e.g. denial-of-service attacks when attempting to convert a
+            parsed value to its (decimal) string form.
+            </remarks>
+        </member>
         <member name="M:Org.BouncyCastle.Asn1.Asn1Sequence.GetInstance(System.Object)">
              return an Asn1Sequence from the given object.
             
@@ -223,23 +232,27 @@
             which the reading was done as well, see GetObject below.</p>
         </member>
         <member name="M:Org.BouncyCastle.Asn1.Asn1TaggedObject.GetObject">
-            return whatever was following the tag.
-            <p>
-            Note: tagged objects are generally context dependent if you're
-            trying to extract a tagged object you should be going via the
-            appropriate GetInstance method.</p>
+            <summary>Return whatever was following the tag.</summary>
+            <remarks>
+            Tagged objects are generally context dependent. If you're trying to extract a tagged object you should be
+            going via the appropriate GetInstance method.
+            </remarks>
         </member>
         <member name="M:Org.BouncyCastle.Asn1.Asn1TaggedObject.GetBaseObject">
-            Needed for open types, until we have better type-guided parsing support. Use sparingly for other
-            purposes, and prefer {@link #getExplicitBaseTagged()}, {@link #getImplicitBaseTagged(int, int)} or
-            {@link #getBaseUniversal(boolean, int)} where possible. Before using, check for matching tag
-            {@link #getTagClass() class} and {@link #getTagNo() number}.
+            <summary>Needed for open types, until we have better type-guided parsing support.</summary>
+            <remarks>
+            Use sparingly for other purposes, and prefer <see cref="M:Org.BouncyCastle.Asn1.Asn1TaggedObject.GetExplicitBaseTagged"/>,
+            <see cref="M:Org.BouncyCastle.Asn1.Asn1TaggedObject.GetImplicitBaseTagged(System.Int32,System.Int32)"/> or <see cref="M:Org.BouncyCastle.Asn1.Asn1TaggedObject.GetBaseUniversal(System.Boolean,System.Int32)"/> where possible.
+            Before using, check for matching tag <see cref="P:Org.BouncyCastle.Asn1.Asn1TaggedObject.TagClass">class</see> and <see cref="P:Org.BouncyCastle.Asn1.Asn1TaggedObject.TagNo">number</see>.
+            </remarks>
         </member>
         <member name="M:Org.BouncyCastle.Asn1.Asn1TaggedObject.GetExplicitBaseObject">
-            Needed for open types, until we have better type-guided parsing support. Use
-            sparingly for other purposes, and prefer {@link #getExplicitBaseTagged()} or
-            {@link #getBaseUniversal(boolean, int)} where possible. Before using, check
-            for matching tag {@link #getTagClass() class} and {@link #getTagNo() number}.
+            <summary>Needed for open types, until we have better type-guided parsing support.</summary>
+            <remarks>
+            Use sparingly for other purposes, and prefer <see cref="M:Org.BouncyCastle.Asn1.Asn1TaggedObject.GetExplicitBaseTagged"/> or
+            <see cref="M:Org.BouncyCastle.Asn1.Asn1TaggedObject.GetBaseUniversal(System.Boolean,System.Int32)"/> where possible. Before using, check for matching tag
+            <see cref="P:Org.BouncyCastle.Asn1.Asn1TaggedObject.TagClass">class</see> and <see cref="P:Org.BouncyCastle.Asn1.Asn1TaggedObject.TagNo">number</see>.
+            </remarks>
         </member>
         <member name="M:Org.BouncyCastle.Asn1.Asn1TaggedObjectParser.ParseBaseUniversal(System.Boolean,System.Int32)">
             <exception cref="T:System.IO.IOException"/>
@@ -395,7 +408,7 @@
             SHA-1.PKCS12; 1.3.6.1.4.1.22554.1.1.2 
         </member>
         <member name="F:Org.BouncyCastle.Asn1.BC.BCObjectIdentifiers.bc_pbe_sha256_pkcs5">
-            SHA-256.PKCS12; 1.3.6.1.4.1.22554.1.2.1.1 
+            SHA-256.PKCS5; 1.3.6.1.4.1.22554.1.2.1.1 
         </member>
         <member name="F:Org.BouncyCastle.Asn1.BC.BCObjectIdentifiers.bc_pbe_sha256_pkcs12">
             SHA-256.PKCS12; 1.3.6.1.4.1.22554.1.2.1.2 
@@ -431,6 +444,9 @@
         <member name="F:Org.BouncyCastle.Asn1.BC.BCObjectIdentifiers.xmss_mt">
             XMSS^MT
         </member>
+        <member name="F:Org.BouncyCastle.Asn1.BC.BCObjectIdentifiers.qTESLA">
+            qTESLA
+        </member>
         <member name="F:Org.BouncyCastle.Asn1.BC.BCObjectIdentifiers.sphincsPlus">
             SPHINCS+
         </member>
@@ -454,14 +470,23 @@
         <member name="F:Org.BouncyCastle.Asn1.BC.BCObjectIdentifiers.pqc_kem_mceliece">
             Classic McEliece
         </member>
+        <member name="F:Org.BouncyCastle.Asn1.BC.BCObjectIdentifiers.pqc_kem_frodo">
+            Frodo
+        </member>
         <member name="F:Org.BouncyCastle.Asn1.BC.BCObjectIdentifiers.pqc_kem_saber">
             SABER
         </member>
         <member name="F:Org.BouncyCastle.Asn1.BC.BCObjectIdentifiers.pqc_kem_sike">
             SIKE
         </member>
+        <member name="F:Org.BouncyCastle.Asn1.BC.BCObjectIdentifiers.pqc_kem_ntru">
+            NTRU
+        </member>
         <member name="F:Org.BouncyCastle.Asn1.BC.BCObjectIdentifiers.pqc_kem_kyber">
             Kyber
+        </member>
+        <member name="F:Org.BouncyCastle.Asn1.BC.BCObjectIdentifiers.pqc_kem_ntruprime">
+            NTRUPrime
         </member>
         <member name="F:Org.BouncyCastle.Asn1.BC.BCObjectIdentifiers.pqc_kem_bike">
             BIKE
@@ -737,8 +762,10 @@
         <member name="F:Org.BouncyCastle.Asn1.Cmp.CmpObjectIdentifiers.dhBasedMac">
             id-DHBasedMac OBJECT IDENTIFIER ::= {1 2 840 113533 7 66 30}
         </member>
+        <member name="F:Org.BouncyCastle.Asn1.Cmp.CmpObjectIdentifiers.id_it">
+            RFC 4120: id-it: PKIX.4 = 1.3.6.1.5.5.7.4 
+        </member>
         <member name="F:Org.BouncyCastle.Asn1.Cmp.CmpObjectIdentifiers.it_caProtEncCert">
-            RFC 4120: it-id: PKIX.4 = 1.3.6.1.5.5.7.4 
             RFC 4120: 1.3.6.1.5.5.7.4.1
         </member>
         <member name="F:Org.BouncyCastle.Asn1.Cmp.CmpObjectIdentifiers.it_signKeyPairTypes">
@@ -973,6 +1000,59 @@
             }
             </pre>
             @return a basic ASN.1 object representation.
+        </member>
+        <member name="T:Org.BouncyCastle.Asn1.Cmp.KemBMParameter">
+            <pre>
+             KemBMParameter ::= SEQUENCE {
+                 kdf              AlgorithmIdentifier{KEY-DERIVATION, {...}},
+                 len              INTEGER (1..MAX),
+                 mac              AlgorithmIdentifier{MAC-ALGORITHM, {...}}
+              }
+            </pre>
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.Cmp.KemBMParameter.ToAsn1Object">
+             <pre>
+              KemBMParameter ::= SEQUENCE {
+                  kdf              AlgorithmIdentifier{KEY-DERIVATION, {...}},
+                  len              INTEGER (1..MAX),
+                  mac              AlgorithmIdentifier{MAC-ALGORITHM, {...}}
+                }
+             </pre>
+            
+             @return a basic ASN.1 object representation.
+        </member>
+        <member name="T:Org.BouncyCastle.Asn1.Cmp.KemCiphertextInfo">
+            <pre>
+               KemCiphertextInfo ::= SEQUENCE {
+                 kem              AlgorithmIdentifier{KEM-ALGORITHM, {...}},
+                 ct               OCTET STRING
+               }
+            </pre>
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.Cmp.KemCiphertextInfo.ToAsn1Object">
+             <pre>
+                KemCiphertextInfo ::= SEQUENCE {
+                  kem              AlgorithmIdentifier{KEM-ALGORITHM, {...}},
+                  ct               OCTET STRING
+                }
+             </pre>
+            
+             @return a basic ASN.1 object representation.
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.Cmp.KemOtherInfo.ToAsn1Object">
+             <pre>
+             KemOtherInfo ::= SEQUENCE {
+               staticString      PKIFreeText,   -- MUST be "CMP-KEM"
+               transactionID [0] OCTET STRING     OPTIONAL,
+               senderNonce   [1] OCTET STRING     OPTIONAL,
+               recipNonce    [2] OCTET STRING     OPTIONAL,
+               len               INTEGER (1..MAX),
+               mac               AlgorithmIdentifier{MAC-ALGORITHM, {...}}
+               ct                OCTET STRING
+             }
+             </pre>
+            
+             @return a basic ASN.1 object representation.
         </member>
         <member name="M:Org.BouncyCastle.Asn1.Cmp.KeyRecRepContent.ToAsn1Object">
             <pre>
@@ -1475,12 +1555,6 @@
             }
             </p>
         </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.Attribute.GetInstance(System.Object)">
-             return an Attribute object from the given object.
-            
-             @param o the object we want converted.
-             @exception ArgumentException if the object cannot be converted.
-        </member>
         <member name="M:Org.BouncyCastle.Asn1.Cms.Attribute.ToAsn1Object">
             Produce an object suitable for an Asn1OutputStream.
             <pre>
@@ -1513,21 +1587,6 @@
              @param attrType
              @param attrValue
              @return
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.AuthenticatedData.GetInstance(Org.BouncyCastle.Asn1.Asn1TaggedObject,System.Boolean)">
-             return an AuthenticatedData object from a tagged object.
-            
-             @param obj      the tagged object holding the object we want.
-             @param isExplicit true if the object is meant to be explicitly
-                             tagged false otherwise.
-             @throws ArgumentException if the object held by the
-                                              tagged object cannot be converted.
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.AuthenticatedData.GetInstance(System.Object)">
-             return an AuthenticatedData object from the given object.
-            
-             @param obj the object we want converted.
-             @throws ArgumentException if the object cannot be converted.
         </member>
         <member name="M:Org.BouncyCastle.Asn1.Cms.AuthenticatedData.ToAsn1Object">
              Produce an object suitable for an Asn1OutputStream.
@@ -1570,21 +1629,6 @@
             
              MessageAuthenticationCode ::= OCTET STRING
              </pre>
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.AuthEnvelopedData.GetInstance(Org.BouncyCastle.Asn1.Asn1TaggedObject,System.Boolean)">
-             return an AuthEnvelopedData object from a tagged object.
-            
-             @param obj      the tagged object holding the object we want.
-             @param isExplicit true if the object is meant to be explicitly
-                             tagged false otherwise.
-             @throws ArgumentException if the object held by the
-                                              tagged object cannot be converted.
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.AuthEnvelopedData.GetInstance(System.Object)">
-             return an AuthEnvelopedData object from the given object.
-            
-             @param obj the object we want converted.
-             @throws ArgumentException if the object cannot be converted.
         </member>
         <member name="M:Org.BouncyCastle.Asn1.Cms.AuthEnvelopedData.ToAsn1Object">
             Produce an object suitable for an Asn1OutputStream.
@@ -1633,6 +1677,12 @@
             id-ri OBJECT IDENTIFIER ::= { iso(1) identified-organization(3)
                                               dod(6) internet(1) security(5) mechanisms(5) pkix(7) ri(16) }
         </member>
+        <member name="F:Org.BouncyCastle.Asn1.Cms.CmsObjectIdentifiers.id_alg">
+            1.3.6.1.5.5.7.6 
+        </member>
+        <member name="F:Org.BouncyCastle.Asn1.Cms.CmsObjectIdentifiers.id_ori">
+            OtherRecipientInfo types
+        </member>
         <member name="T:Org.BouncyCastle.Asn1.Cms.CompressedData">
             RFC 3274 - CMS Compressed Data.
             <pre>
@@ -1642,21 +1692,6 @@
              encapContentInfo EncapsulatedContentInfo
             }
             </pre>
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.CompressedData.GetInstance(Org.BouncyCastle.Asn1.Asn1TaggedObject,System.Boolean)">
-             return a CompressedData object from a tagged object.
-            
-             @param ato the tagged object holding the object we want.
-             @param explicitly true if the object is meant to be explicitly
-                          tagged false otherwise.
-             @exception ArgumentException if the object held by the
-                      tagged object cannot be converted.
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.CompressedData.GetInstance(System.Object)">
-             return a CompressedData object from the given object.
-            
-             @param _obj the object we want converted.
-             @exception ArgumentException if the object cannot be converted.
         </member>
         <member name="T:Org.BouncyCastle.Asn1.Cms.CompressedDataParser">
             RFC 3274 - CMS Compressed Data.
@@ -1686,21 +1721,6 @@
                      [0] EXPLICIT ANY DEFINED BY contentType OPTIONAL }
             </pre>
         </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.Ecc.MQVuserKeyingMaterial.GetInstance(Org.BouncyCastle.Asn1.Asn1TaggedObject,System.Boolean)">
-             return an AuthEnvelopedData object from a tagged object.
-            
-             @param obj      the tagged object holding the object we want.
-             @param isExplicit true if the object is meant to be explicitly
-                             tagged false otherwise.
-             @throws ArgumentException if the object held by the
-                                              tagged object cannot be converted.
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.Ecc.MQVuserKeyingMaterial.GetInstance(System.Object)">
-             return an AuthEnvelopedData object from the given object.
-            
-             @param obj the object we want converted.
-             @throws ArgumentException if the object cannot be converted.
-        </member>
         <member name="M:Org.BouncyCastle.Asn1.Cms.Ecc.MQVuserKeyingMaterial.ToAsn1Object">
             Produce an object suitable for an Asn1OutputStream.
             <pre>
@@ -1708,12 +1728,6 @@
               ephemeralPublicKey OriginatorPublicKey,
               addedukm [0] EXPLICIT UserKeyingMaterial OPTIONAL  }
             </pre>
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.EncryptedContentInfo.GetInstance(System.Object)">
-             return an EncryptedContentInfo object from the given object.
-            
-             @param obj the object we want converted.
-             @exception ArgumentException if the object cannot be converted.
         </member>
         <member name="M:Org.BouncyCastle.Asn1.Cms.EncryptedContentInfo.ToAsn1Object">
             Produce an object suitable for an Asn1OutputStream.
@@ -1743,21 +1757,6 @@
             </pre>
             @return a basic ASN.1 object representation.
         </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.EnvelopedData.GetInstance(Org.BouncyCastle.Asn1.Asn1TaggedObject,System.Boolean)">
-             return an EnvelopedData object from a tagged object.
-            
-             @param obj the tagged object holding the object we want.
-             @param explicitly true if the object is meant to be explicitly
-                          tagged false otherwise.
-             @exception ArgumentException if the object held by the
-                      tagged object cannot be converted.
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.EnvelopedData.GetInstance(System.Object)">
-             return an EnvelopedData object from the given object.
-            
-             @param obj the object we want converted.
-             @exception ArgumentException if the object cannot be converted.
-        </member>
         <member name="M:Org.BouncyCastle.Asn1.Cms.EnvelopedData.ToAsn1Object">
             Produce an object suitable for an Asn1OutputStream.
             <pre>
@@ -1782,21 +1781,6 @@
             }
             </pre>
         </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.KekIdentifier.GetInstance(Org.BouncyCastle.Asn1.Asn1TaggedObject,System.Boolean)">
-             return a KekIdentifier object from a tagged object.
-            
-             @param obj the tagged object holding the object we want.
-             @param explicitly true if the object is meant to be explicitly
-                          tagged false otherwise.
-             @exception ArgumentException if the object held by the
-                      tagged object cannot be converted.
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.KekIdentifier.GetInstance(System.Object)">
-             return a KekIdentifier object from the given object.
-            
-             @param obj the object we want converted.
-             @exception ArgumentException if the object cannot be converted.
-        </member>
         <member name="M:Org.BouncyCastle.Asn1.Cms.KekIdentifier.ToAsn1Object">
             Produce an object suitable for an Asn1OutputStream.
             <pre>
@@ -1806,21 +1790,6 @@
                 other OtherKeyAttribute OPTIONAL
             }
             </pre>
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.KekRecipientInfo.GetInstance(Org.BouncyCastle.Asn1.Asn1TaggedObject,System.Boolean)">
-             return a KekRecipientInfo object from a tagged object.
-            
-             @param obj the tagged object holding the object we want.
-             @param explicitly true if the object is meant to be explicitly
-                          tagged false otherwise.
-             @exception ArgumentException if the object held by the
-                      tagged object cannot be converted.
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.KekRecipientInfo.GetInstance(System.Object)">
-             return a KekRecipientInfo object from the given object.
-            
-             @param obj the object we want converted.
-             @exception ArgumentException if the object cannot be converted.
         </member>
         <member name="M:Org.BouncyCastle.Asn1.Cms.KekRecipientInfo.ToAsn1Object">
             Produce an object suitable for an Asn1OutputStream.
@@ -1833,21 +1802,6 @@
             }
             </pre>
         </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.KeyAgreeRecipientIdentifier.GetInstance(Org.BouncyCastle.Asn1.Asn1TaggedObject,System.Boolean)">
-             return an KeyAgreeRecipientIdentifier object from a tagged object.
-            
-             @param obj the tagged object holding the object we want.
-             @param isExplicit true if the object is meant to be explicitly
-                          tagged false otherwise.
-             @exception ArgumentException if the object held by the
-                      tagged object cannot be converted.
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.KeyAgreeRecipientIdentifier.GetInstance(System.Object)">
-             return an KeyAgreeRecipientIdentifier object from the given object.
-            
-             @param obj the object we want converted.
-             @exception ArgumentException if the object cannot be converted.
-        </member>
         <member name="M:Org.BouncyCastle.Asn1.Cms.KeyAgreeRecipientIdentifier.ToAsn1Object">
             Produce an object suitable for an Asn1OutputStream.
             <pre>
@@ -1856,21 +1810,6 @@
                 rKeyId [0] IMPLICIT RecipientKeyIdentifier
             }
             </pre>
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.KeyAgreeRecipientInfo.GetInstance(Org.BouncyCastle.Asn1.Asn1TaggedObject,System.Boolean)">
-             return a KeyAgreeRecipientInfo object from a tagged object.
-            
-             @param obj the tagged object holding the object we want.
-             @param explicitly true if the object is meant to be explicitly
-                          tagged false otherwise.
-             @exception ArgumentException if the object held by the
-                      tagged object cannot be converted.
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.KeyAgreeRecipientInfo.GetInstance(System.Object)">
-             return a KeyAgreeRecipientInfo object from the given object.
-            
-             @param obj the object we want converted.
-             @exception ArgumentException if the object cannot be converted.
         </member>
         <member name="M:Org.BouncyCastle.Asn1.Cms.KeyAgreeRecipientInfo.ToAsn1Object">
                      * Produce an object suitable for an Asn1OutputStream.
@@ -1885,12 +1824,6 @@
             		 *
             		 * UserKeyingMaterial ::= OCTET STRING
                      * </pre>
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.KeyTransRecipientInfo.GetInstance(System.Object)">
-             return a KeyTransRecipientInfo object from the given object.
-            
-             @param obj the object we want converted.
-             @exception ArgumentException if the object cannot be converted.
         </member>
         <member name="M:Org.BouncyCastle.Asn1.Cms.KeyTransRecipientInfo.ToAsn1Object">
             Produce an object suitable for an Asn1OutputStream.
@@ -1914,21 +1847,6 @@
             </pre>
             @return
         </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.OriginatorIdentifierOrKey.GetInstance(Org.BouncyCastle.Asn1.Asn1TaggedObject,System.Boolean)">
-             return an OriginatorIdentifierOrKey object from a tagged object.
-            
-             @param o the tagged object holding the object we want.
-             @param explicitly true if the object is meant to be explicitly
-                          tagged false otherwise.
-             @exception ArgumentException if the object held by the
-                      tagged object cannot be converted.
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.OriginatorIdentifierOrKey.GetInstance(System.Object)">
-             return an OriginatorIdentifierOrKey object from the given object.
-            
-             @param o the object we want converted.
-             @exception ArgumentException if the object cannot be converted.
-        </member>
         <member name="M:Org.BouncyCastle.Asn1.Cms.OriginatorIdentifierOrKey.ToAsn1Object">
              Produce an object suitable for an Asn1OutputStream.
              <pre>
@@ -1941,21 +1859,6 @@
              SubjectKeyIdentifier ::= OCTET STRING
              </pre>
         </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.OriginatorInfo.GetInstance(Org.BouncyCastle.Asn1.Asn1TaggedObject,System.Boolean)">
-             return an OriginatorInfo object from a tagged object.
-            
-             @param obj the tagged object holding the object we want.
-             @param explicitly true if the object is meant to be explicitly
-                          tagged false otherwise.
-             @exception ArgumentException if the object held by the
-                      tagged object cannot be converted.
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.OriginatorInfo.GetInstance(System.Object)">
-             return an OriginatorInfo object from the given object.
-            
-             @param obj the object we want converted.
-             @exception ArgumentException if the object cannot be converted.
-        </member>
         <member name="M:Org.BouncyCastle.Asn1.Cms.OriginatorInfo.ToAsn1Object">
             Produce an object suitable for an Asn1OutputStream.
             <pre>
@@ -1964,21 +1867,6 @@
                 crls [1] IMPLICIT CertificateRevocationLists OPTIONAL
             }
             </pre>
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.OriginatorPublicKey.GetInstance(Org.BouncyCastle.Asn1.Asn1TaggedObject,System.Boolean)">
-             return an OriginatorPublicKey object from a tagged object.
-            
-             @param obj the tagged object holding the object we want.
-             @param explicitly true if the object is meant to be explicitly
-                          tagged false otherwise.
-             @exception ArgumentException if the object held by the
-                      tagged object cannot be converted.
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.OriginatorPublicKey.GetInstance(System.Object)">
-             return an OriginatorPublicKey object from the given object.
-            
-             @param obj the object we want converted.
-             @exception ArgumentException if the object cannot be converted.
         </member>
         <member name="M:Org.BouncyCastle.Asn1.Cms.OriginatorPublicKey.ToAsn1Object">
             Produce an object suitable for an Asn1OutputStream.
@@ -1989,12 +1877,6 @@
             }
             </pre>
         </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.OtherKeyAttribute.GetInstance(System.Object)">
-             return an OtherKeyAttribute object from the given object.
-            
-             @param o the object we want converted.
-             @exception ArgumentException if the object cannot be converted.
-        </member>
         <member name="M:Org.BouncyCastle.Asn1.Cms.OtherKeyAttribute.ToAsn1Object">
             Produce an object suitable for an Asn1OutputStream.
             <pre>
@@ -2004,21 +1886,6 @@
             }
             </pre>
         </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.OtherRecipientInfo.GetInstance(Org.BouncyCastle.Asn1.Asn1TaggedObject,System.Boolean)">
-             return a OtherRecipientInfo object from a tagged object.
-            
-             @param obj the tagged object holding the object we want.
-             @param explicitly true if the object is meant to be explicitly
-                          tagged false otherwise.
-             @exception ArgumentException if the object held by the
-                      tagged object cannot be converted.
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.OtherRecipientInfo.GetInstance(System.Object)">
-             return a OtherRecipientInfo object from the given object.
-            
-             @param obj the object we want converted.
-             @exception ArgumentException if the object cannot be converted.
-        </member>
         <member name="M:Org.BouncyCastle.Asn1.Cms.OtherRecipientInfo.ToAsn1Object">
             Produce an object suitable for an Asn1OutputStream.
             <pre>
@@ -2027,21 +1894,6 @@
                oriValue ANY DEFINED BY oriType }
             </pre>
         </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.OtherRevocationInfoFormat.GetInstance(Org.BouncyCastle.Asn1.Asn1TaggedObject,System.Boolean)">
-             return a OtherRevocationInfoFormat object from a tagged object.
-            
-             @param obj the tagged object holding the object we want.
-             @param explicit true if the object is meant to be explicitly
-                          tagged false otherwise.
-             @exception IllegalArgumentException if the object held by the
-                      tagged object cannot be converted.
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.OtherRevocationInfoFormat.GetInstance(System.Object)">
-             return a OtherRevocationInfoFormat object from the given object.
-            
-             @param obj the object we want converted.
-             @exception IllegalArgumentException if the object cannot be converted.
-        </member>
         <member name="M:Org.BouncyCastle.Asn1.Cms.OtherRevocationInfoFormat.ToAsn1Object">
             Produce an object suitable for an ASN1OutputStream.
             <pre>
@@ -2049,21 +1901,6 @@
                  otherRevInfoFormat OBJECT IDENTIFIER,
                  otherRevInfo ANY DEFINED BY otherRevInfoFormat }
             </pre>
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.PasswordRecipientInfo.GetInstance(Org.BouncyCastle.Asn1.Asn1TaggedObject,System.Boolean)">
-             return a PasswordRecipientInfo object from a tagged object.
-            
-             @param obj the tagged object holding the object we want.
-             @param explicitly true if the object is meant to be explicitly
-                          tagged false otherwise.
-             @exception ArgumentException if the object held by the
-                      tagged object cannot be converted.
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.PasswordRecipientInfo.GetInstance(System.Object)">
-             return a PasswordRecipientInfo object from the given object.
-            
-             @param obj the object we want converted.
-             @exception ArgumentException if the object cannot be converted.
         </member>
         <member name="M:Org.BouncyCastle.Asn1.Cms.PasswordRecipientInfo.ToAsn1Object">
             Produce an object suitable for an Asn1OutputStream.
@@ -2076,21 +1913,6 @@
              encryptedKey EncryptedKey }
             </pre>
         </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.RecipientEncryptedKey.GetInstance(Org.BouncyCastle.Asn1.Asn1TaggedObject,System.Boolean)">
-             return an RecipientEncryptedKey object from a tagged object.
-            
-             @param obj the tagged object holding the object we want.
-             @param isExplicit true if the object is meant to be explicitly
-                          tagged false otherwise.
-             @exception ArgumentException if the object held by the
-                      tagged object cannot be converted.
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.RecipientEncryptedKey.GetInstance(System.Object)">
-             return a RecipientEncryptedKey object from the given object.
-            
-             @param obj the object we want converted.
-             @exception ArgumentException if the object cannot be converted.
-        </member>
         <member name="M:Org.BouncyCastle.Asn1.Cms.RecipientEncryptedKey.ToAsn1Object">
             Produce an object suitable for an Asn1OutputStream.
             <pre>
@@ -2099,12 +1921,6 @@
                 encryptedKey EncryptedKey
             }
             </pre>
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.RecipientIdentifier.GetInstance(System.Object)">
-             return a RecipientIdentifier object from the given object.
-            
-             @param o the object we want converted.
-             @exception ArgumentException if the object cannot be converted.
         </member>
         <member name="M:Org.BouncyCastle.Asn1.Cms.RecipientIdentifier.ToAsn1Object">
              Produce an object suitable for an Asn1OutputStream.
@@ -2127,21 +1943,6 @@
                 pwri [3] PasswordRecipientInfo,
                 ori [4] OtherRecipientInfo }
             </pre>
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.RecipientKeyIdentifier.GetInstance(Org.BouncyCastle.Asn1.Asn1TaggedObject,System.Boolean)">
-             return a RecipientKeyIdentifier object from a tagged object.
-            
-             @param _ato the tagged object holding the object we want.
-             @param _explicit true if the object is meant to be explicitly
-                          tagged false otherwise.
-             @exception ArgumentException if the object held by the
-                      tagged object cannot be converted.
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.RecipientKeyIdentifier.GetInstance(System.Object)">
-             return a RecipientKeyIdentifier object from the given object.
-            
-             @param _obj the object we want converted.
-             @exception ArgumentException if the object cannot be converted.
         </member>
         <member name="M:Org.BouncyCastle.Asn1.Cms.RecipientKeyIdentifier.ToAsn1Object">
              Produce an object suitable for an Asn1OutputStream.
@@ -2190,12 +1991,6 @@
                 signerInfos SignerInfos
               }
             </pre>
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.Cms.SignerIdentifier.GetInstance(System.Object)">
-             return a SignerIdentifier object from the given object.
-            
-             @param o the object we want converted.
-             @exception ArgumentException if the object cannot be converted.
         </member>
         <member name="M:Org.BouncyCastle.Asn1.Cms.SignerIdentifier.ToAsn1Object">
              Produce an object suitable for an Asn1OutputStream.
@@ -2659,20 +2454,6 @@
         <member name="P:Org.BouncyCastle.Asn1.CryptoPro.Gost3410NamedParameters.Names">
             <summary>Enumerate the available parameter set names in this registry.</summary>
         </member>
-        <member name="M:Org.BouncyCastle.Asn1.DerBitString.GetInstance(System.Object)">
-             return a Bit string from the passed in object
-            
-             @exception ArgumentException if the object cannot be converted.
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.DerBitString.GetInstance(Org.BouncyCastle.Asn1.Asn1TaggedObject,System.Boolean)">
-             return a Bit string from a tagged object.
-            
-             @param obj the tagged object holding the object we want
-             @param explicitly true if the object is meant to be explicitly
-                          tagged false otherwise.
-             @exception ArgumentException if the tagged object cannot
-                           be converted.
-        </member>
         <member name="M:Org.BouncyCastle.Asn1.DerBitString.#ctor(System.Byte[],System.Int32)">
             @param data the octets making up the bit string.
             @param padBits the number of extra bits at the end of the string.
@@ -2855,6 +2636,15 @@
             
              @param str string to validate.
              @return true if numeric, fale otherwise.
+        </member>
+        <member name="F:Org.BouncyCastle.Asn1.DerObjectIdentifier.MaxContentsLength">
+            <summary>Implementation limit on the length of the contents octets for an Object Identifier.</summary>
+            <remarks>
+            We adopt the same value used by OpenJDK. In theory there is no limit on the length of the contents, or the
+            number of subidentifiers, or the length of individual subidentifiers. In practice, supporting arbitrary
+            lengths can lead to issues, e.g. denial-of-service attacks when attempting to convert a parsed value to its
+            (decimal) string form.
+            </remarks>
         </member>
         <member name="M:Org.BouncyCastle.Asn1.DerObjectIdentifier.GetInstance(System.Object)">
              return an OID from the passed in object
@@ -3467,6 +3257,18 @@
         </member>
         <member name="P:Org.BouncyCastle.Asn1.GM.GMNamedCurves.Names">
             <summary>Enumerate the available curve names in this registry.</summary>
+        </member>
+        <member name="F:Org.BouncyCastle.Asn1.GM.GMObjectIdentifiers.wapip192v1">
+            &lt;Information security technology — Cryptographic application identifier criterion specification&gt;
+            <url>http://c.gb688.cn/bzgk/gb/showGb?type=online&amp;hcno=252CF0F72A7BE339A56DEA7D774E8994</url>,
+            Page 21 only cover from 301.1 to 301.3
+        </member>
+        <member name="F:Org.BouncyCastle.Asn1.GM.GMObjectIdentifiers.wapi192v1">
+            &lt;WAPI certificate management—Part 5: Example of certificate format (draft)&gt;
+            <url>http://www.chinabwips.org.cn/zqyjgs1.htm</url> and
+            <url>http://www.chinabwips.org.cn/doc/101.pdf</url>,
+            Page 9 and page 10 states the OID of ECDSA-192 algorithm based on SHA-256 is 1.2.156.11235.1.1.1
+            
         </member>
         <member name="F:Org.BouncyCastle.Asn1.Gnu.GnuObjectIdentifiers.EllipticCurve">
             1.3.6.1.4.1.11591.15 - ellipticCurve 
@@ -4607,42 +4409,6 @@
         <member name="P:Org.BouncyCastle.Asn1.Nist.NistNamedCurves.Names">
             <summary>Enumerate the available curve names in this registry.</summary>
         </member>
-        <member name="F:Org.BouncyCastle.Asn1.Nist.NistObjectIdentifiers.IdDsaWithSha3_224">
-            2.16.840.1.101.3.4.3.5 
-        </member>
-        <member name="F:Org.BouncyCastle.Asn1.Nist.NistObjectIdentifiers.IdDsaWithSha3_256">
-            2.16.840.1.101.3.4.3.6 
-        </member>
-        <member name="F:Org.BouncyCastle.Asn1.Nist.NistObjectIdentifiers.IdDsaWithSha3_384">
-            2.16.840.1.101.3.4.3.7 
-        </member>
-        <member name="F:Org.BouncyCastle.Asn1.Nist.NistObjectIdentifiers.IdDsaWithSha3_512">
-            2.16.840.1.101.3.4.3.8 
-        </member>
-        <member name="F:Org.BouncyCastle.Asn1.Nist.NistObjectIdentifiers.IdEcdsaWithSha3_224">
-            2.16.840.1.101.3.4.3.9 
-        </member>
-        <member name="F:Org.BouncyCastle.Asn1.Nist.NistObjectIdentifiers.IdEcdsaWithSha3_256">
-            2.16.840.1.101.3.4.3.10 
-        </member>
-        <member name="F:Org.BouncyCastle.Asn1.Nist.NistObjectIdentifiers.IdEcdsaWithSha3_384">
-            2.16.840.1.101.3.4.3.11 
-        </member>
-        <member name="F:Org.BouncyCastle.Asn1.Nist.NistObjectIdentifiers.IdEcdsaWithSha3_512">
-            2.16.840.1.101.3.4.3.12 
-        </member>
-        <member name="F:Org.BouncyCastle.Asn1.Nist.NistObjectIdentifiers.IdRsassaPkcs1V15WithSha3_224">
-            2.16.840.1.101.3.4.3.9 
-        </member>
-        <member name="F:Org.BouncyCastle.Asn1.Nist.NistObjectIdentifiers.IdRsassaPkcs1V15WithSha3_256">
-            2.16.840.1.101.3.4.3.10 
-        </member>
-        <member name="F:Org.BouncyCastle.Asn1.Nist.NistObjectIdentifiers.IdRsassaPkcs1V15WithSha3_384">
-            2.16.840.1.101.3.4.3.11 
-        </member>
-        <member name="F:Org.BouncyCastle.Asn1.Nist.NistObjectIdentifiers.IdRsassaPkcs1V15WithSha3_512">
-            2.16.840.1.101.3.4.3.12 
-        </member>
         <member name="T:Org.BouncyCastle.Asn1.Ntt.NttObjectIdentifiers">
             <summary>From RFC 3657</summary>
         </member>
@@ -5269,12 +5035,187 @@
                         }
             </pre>
         </member>
+        <member name="T:Org.BouncyCastle.Asn1.Tsp.ArchiveTimeStamp">
+            Implementation of the Archive Timestamp type defined in RFC4998.
+            @see <a href="https://tools.ietf.org/html/rfc4998">RFC 4998</a>
+            <p/>
+            ASN.1 Archive Timestamp
+            <p/>
+            ArchiveTimeStamp ::= SEQUENCE {
+            digestAlgorithm [Ø] AlgorithmIdentifier OPTIONAL,
+            attributes      [1] Attributes OPTIONAL,
+            reducedHashtree [2] SEQUENCE OF PartialHashtree OPTIONAL,
+            timeStamp       ContentInfo}
+            <p/>
+            PartialHashtree ::= SEQUENCE OF OCTET STRING
+            <p/>
+            Attributes ::= SET SIZE (1..MAX) OF Attribute
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.Tsp.ArchiveTimeStamp.GetInstance(System.Object)">
+             Return an ArchiveTimestamp from the given object.
+            
+             @param obj the object we want converted.
+             @return an ArchiveTimestamp instance, or null.
+             @throws IllegalArgumentException if the object cannot be converted.
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.Tsp.ArchiveTimeStamp.DigestAlgorithm">
+             Return the contents of the digestAlgorithm field - null if not set.
+            
+             @return the contents of the digestAlgorithm field, or null if not set.
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.Tsp.ArchiveTimeStamp.GetHashTreeLeaf">
+             Return the first node in the reduced hash tree which contains the leaf node.
+            
+             @return the node containing the data hashes, null if no reduced hash tree is present.
+        </member>
+        <member name="T:Org.BouncyCastle.Asn1.Tsp.ArchiveTimeStampChain">
+            Implementation of ArchiveTimeStampChain type, as defined in RFC4998 and RFC6283.
+            <p/>
+            An ArchiveTimeStampChain corresponds to a SEQUENCE OF ArchiveTimeStamps, and has the following
+            ASN.1 Syntax:
+            <p/>
+            ArchiveTimeStampChain ::= SEQUENCE OF ArchiveTimeStamp
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.Tsp.ArchiveTimeStampChain.GetInstance(System.Object)">
+             Return an ArchiveTimeStampChain from the given object.
+            
+             @param obj the object we want converted.
+             @return an ArchiveTimeStampChain instance, or null.
+             @throws IllegalArgumentException if the object cannot be converted.
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.Tsp.ArchiveTimeStampChain.Append(Org.BouncyCastle.Asn1.Tsp.ArchiveTimeStamp)">
+             Adds an {@link ArchiveTimeStamp} object to the archive timestamp chain.
+            
+             @param archiveTimeStamp the {@link ArchiveTimeStamp} to add.
+             @return returns the modified chain.
+        </member>
+        <member name="T:Org.BouncyCastle.Asn1.Tsp.ArchiveTimeStampSequence">
+            Implementation of ArchiveTimeStampSequence type, as defined in RFC4998.
+            <p/>
+            An ArchiveTimeStampSequence corresponds to a SEQUENCE OF ArchiveTimeStampChains and has the
+            following ASN.1 Syntax:
+            <p/>
+            ArchiveTimeStampSequence ::= SEQUENCE OF ArchiveTimeStampChain
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.Tsp.ArchiveTimeStampSequence.GetInstance(System.Object)">
+             Return an ArchiveTimestampSequence from the given object.
+            
+             @param obj the object we want converted.
+             @return an ArchiveTimeStampSequence instance, or null.
+             @throws IllegalArgumentException if the object cannot be converted.
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.Tsp.ArchiveTimeStampSequence.GetArchiveTimeStampChains">
+             Returns the sequence of ArchiveTimeStamp chains that compose the ArchiveTimeStamp sequence.
+            
+             @return the {@link ASN1Sequence} containing the ArchiveTimeStamp chains.
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.Tsp.ArchiveTimeStampSequence.Append(Org.BouncyCastle.Asn1.Tsp.ArchiveTimeStampChain)">
+             Adds an {@link ArchiveTimeStampChain} to the ArchiveTimeStamp sequence.
+            
+             @param chain the {@link ArchiveTimeStampChain} to add
+             @return returns the modified sequence.
+        </member>
+        <member name="T:Org.BouncyCastle.Asn1.Tsp.CryptoInfos">
+            Implementation of the CryptoInfos element defined in RFC 4998:
+            <p/>
+            CryptoInfos ::= SEQUENCE SIZE (1..MAX) OF Attribute
+        </member>
+        <member name="T:Org.BouncyCastle.Asn1.Tsp.EncryptionInfo">
+            Implementation of the EncryptionInfo element defined in RFC 4998:
+            <p/>
+            1988 ASN.1 EncryptionInfo
+            <p/>
+            EncryptionInfo       ::=     SEQUENCE {
+            encryptionInfoType     OBJECT IDENTIFIER,
+            encryptionInfoValue    ANY DEFINED BY encryptionInfoType
+            }
+            <p/>
+            1997-ASN.1 EncryptionInfo
+            <p/>
+            EncryptionInfo       ::=     SEQUENCE {
+            encryptionInfoType   ENCINFO-TYPE.&amp;id
+            ({SupportedEncryptionAlgorithms}),
+            encryptionInfoValue  ENCINFO-TYPE.&amp;Type
+            ({SupportedEncryptionAlgorithms}{&#064;encryptionInfoType})
+            }
+            <p/>
+            ENCINFO-TYPE ::= TYPE-IDENTIFIER
+            <p/>
+            SupportedEncryptionAlgorithms ENCINFO-TYPE ::= {...}
+        </member>
+        <member name="F:Org.BouncyCastle.Asn1.Tsp.EncryptionInfo.m_encryptionInfoType">
+            The OID for EncryptionInfo type.
+        </member>
+        <member name="F:Org.BouncyCastle.Asn1.Tsp.EncryptionInfo.m_encryptionInfoValue">
+            The value of EncryptionInfo
+        </member>
+        <member name="T:Org.BouncyCastle.Asn1.Tsp.EvidenceRecord">
+             <a href="https://tools.ietf.org/html/rfc4998">RFC 4998</a>:
+             Evidence Record Syntax (ERS)
+             <p/>
+             <pre>
+             EvidenceRecord ::= SEQUENCE {
+               version                   INTEGER { v1(1) } ,
+               digestAlgorithms          SEQUENCE OF AlgorithmIdentifier,
+               cryptoInfos               [0] CryptoInfos OPTIONAL,
+               encryptionInfo            [1] EncryptionInfo OPTIONAL,
+               archiveTimeStampSequence  ArchiveTimeStampSequence
+             }
+            
+             CryptoInfos ::= SEQUENCE SIZE (1..MAX) OF Attribute
+             </pre>
+        </member>
+        <member name="F:Org.BouncyCastle.Asn1.Tsp.EvidenceRecord.Oid">
+            ERS {iso(1) identified-organization(3) dod(6) internet(1) security(5) mechanisms(5) ltans(11)
+            id-mod(0) id-mod-ers88(2) id-mod-ers88-v1(1) }
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.Tsp.EvidenceRecord.GetInstance(System.Object)">
+             Return an EvidenceRecord from the given object.
+            
+             @param obj the object we want converted.
+             @return an EvidenceRecord instance, or null.
+             @throws IllegalArgumentException if the object cannot be converted.
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.Tsp.EvidenceRecord.#ctor(Org.BouncyCastle.Asn1.Tsp.CryptoInfos,Org.BouncyCastle.Asn1.Tsp.EncryptionInfo,Org.BouncyCastle.Asn1.Tsp.ArchiveTimeStamp)">
+            Build a basic evidence record from an initial
+            ArchiveTimeStamp.
+            
+            @param cryptoInfos
+            @param encryptionInfo
+            @param archiveTimeStamp
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.Tsp.EvidenceRecord.AddArchiveTimeStamp(Org.BouncyCastle.Asn1.Tsp.ArchiveTimeStamp,System.Boolean)">
+             Return a new EvidenceRecord with an added ArchiveTimeStamp
+            
+             @param ats         the archive timestamp to add
+             @param newChain states whether this new archive timestamp must be added as part of a
+                                new sequence (i.e. in the case of hashtree renewal) or not (i.e. in the case of timestamp
+                                renewal)
+             @return the new EvidenceRecord
+        </member>
         <member name="M:Org.BouncyCastle.Asn1.Tsp.MessageImprint.ToAsn1Object">
             <pre>
                MessageImprint ::= SEQUENCE  {
                   hashAlgorithm                AlgorithmIdentifier,
                   hashedMessage                OCTET STRING  }
             </pre>
+        </member>
+        <member name="T:Org.BouncyCastle.Asn1.Tsp.PartialHashtree">
+            Implementation of PartialHashtree, as defined in RFC 4998.
+            <p/>
+            The ASN.1 notation for a PartialHashTree is:
+            <p/>
+            PartialHashtree ::= SEQUENCE OF OCTET STRING
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.Tsp.PartialHashtree.GetInstance(System.Object)">
+             Return a PartialHashtree from the given object.
+            
+             @param obj the object we want converted.
+             @return a PartialHashtree instance, or null.
+             @throws IllegalArgumentException if the object cannot be converted.
+        </member>
+        <member name="F:Org.BouncyCastle.Asn1.Tsp.PartialHashtree.m_values">
+            Hash values that constitute the hash tree, as ASN.1 Octet Strings.
         </member>
         <member name="M:Org.BouncyCastle.Asn1.Tsp.TimeStampReq.ToAsn1Object">
             <pre>
@@ -5489,7 +5430,7 @@
             </pre>
         </member>
         <member name="T:Org.BouncyCastle.Asn1.X500.Rdn">
-            Holding class for a single Relative Distinguished Name (RDN).
+            <summary>Holding class for a single Relative Distinguished Name (RDN).</summary>
         </member>
         <member name="M:Org.BouncyCastle.Asn1.X500.Rdn.#ctor(Org.BouncyCastle.Asn1.DerObjectIdentifier,Org.BouncyCastle.Asn1.Asn1Encodable)">
              Create a single valued RDN.
@@ -7004,8 +6945,11 @@
              @exception IOException - if the bit string doesn't represent a Der
              encoded object.
         </member>
+        <member name="P:Org.BouncyCastle.Asn1.X509.SubjectPublicKeyInfo.PublicKey">
+            <summary>Return the public key as a raw bit string.</summary>
+        </member>
         <member name="P:Org.BouncyCastle.Asn1.X509.SubjectPublicKeyInfo.PublicKeyData">
-            for when the public key is raw bits...
+            <summary>Return the public key as a raw bit string.</summary>
         </member>
         <member name="M:Org.BouncyCastle.Asn1.X509.SubjectPublicKeyInfo.ToAsn1Object">
             Produce an object suitable for an Asn1OutputStream.
@@ -10281,6 +10225,11 @@
             </summary>
             <returns>true if protection MAC PBE based, false otherwise.</returns>
         </member>
+        <member name="P:Org.BouncyCastle.Cmp.ProtectedPkiMessage.ProtectionAlgorithm">
+             Return the message's protection algorithm.
+            
+             @return the algorithm ID for the message's protection algorithm.
+        </member>
         <member name="M:Org.BouncyCastle.Cmp.ProtectedPkiMessage.GetCertificates">
             <summary>
             Return the extra certificates associated with this message.
@@ -10829,6 +10778,11 @@
              @exception NoSuchStoreException if the store type isn't available.
              @exception CmsException if a general exception prevents creation of the X509Store
         </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsSignedData.GetDigestAlgorithmIDs">
+             Return the digest algorithm identifiers for the SignedData object
+            
+             @return the set of digest algorithm identifiers
+        </member>
         <member name="P:Org.BouncyCastle.Cms.CmsSignedData.SignedContentType">
             <summary>
             Return the <c>DerObjectIdentifier</c> associated with the encapsulated
@@ -10846,14 +10800,41 @@
             
              @param encoding the ASN.1 encoding format to use ("BER" or "DER").
         </member>
-        <member name="M:Org.BouncyCastle.Cms.CmsSignedData.ReplaceSigners(Org.BouncyCastle.Cms.CmsSignedData,Org.BouncyCastle.Cms.SignerInformationStore)">
-             Replace the signerinformation store associated with this
-             CmsSignedData object with the new one passed in. You would
-             probably only want to do this if you wanted to change the unsigned
-             attributes associated with a signer, or perhaps delete one.
+        <member name="M:Org.BouncyCastle.Cms.CmsSignedData.AddDigestAlgorithm(Org.BouncyCastle.Cms.CmsSignedData,Org.BouncyCastle.Asn1.X509.AlgorithmIdentifier)">
+             Return a new CMSSignedData which guarantees to have the passed in digestAlgorithm
+             in it. Uses the DefaultDigestAlgorithmFinder for creating the digest sets.
             
-             @param signedData the signed data object to be used as a base.
+             @param signedData      the signed data object to be used as a base.
+             @param digestAlgorithm the digest algorithm to be added to the signed data.
+             @return a new signed data object.
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsSignedData.AddDigestAlgorithm(Org.BouncyCastle.Cms.CmsSignedData,Org.BouncyCastle.Asn1.X509.AlgorithmIdentifier,Org.BouncyCastle.Operators.Utilities.IDigestAlgorithmFinder)">
+             Return a new CMSSignedData which guarantees to have the passed in digestAlgorithm
+             in it. Uses the passed in IDigestAlgorithmFinder for creating the digest sets.
+            
+             @param signedData      the signed data object to be used as a base.
+             @param digestAlgorithm the digest algorithm to be added to the signed data.
+             @param digestAlgorithmFinder the digest algorithm finder to generate the digest set with.
+             @return a new signed data object.
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsSignedData.ReplaceSigners(Org.BouncyCastle.Cms.CmsSignedData,Org.BouncyCastle.Cms.SignerInformationStore)">
+             Replace the SignerInformation store associated with this CMSSignedData object with the new one passed in
+             using the DefaultDigestAlgorithmFinder for creating the digest sets. You would probably only want
+             to do this if you wanted to change the unsigned attributes associated with a signer, or perhaps delete one.
+            
+             @param signedData             the signed data object to be used as a base.
              @param signerInformationStore the new signer information store to use.
+             @return a new signed data object.
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsSignedData.ReplaceSigners(Org.BouncyCastle.Cms.CmsSignedData,Org.BouncyCastle.Cms.SignerInformationStore,Org.BouncyCastle.Operators.Utilities.IDigestAlgorithmFinder)">
+             Replace the SignerInformation store associated with this CMSSignedData object with the new one passed in
+             using the passed in IDigestAlgorithmFinder for creating the digest sets. You would probably only
+             want to do this if you wanted to change the unsigned attributes associated with a signer, or perhaps delete
+             one.
+            
+             @param signedData             the signed data object to be used as a base.
+             @param signerInformationStore the new signer information store to use.
+             @param digestAlgorithmFinder the digest algorithm finder to generate the digest set with.
              @return a new signed data object.
         </member>
         <member name="M:Org.BouncyCastle.Cms.CmsSignedData.ReplaceCertificatesAndCrls(Org.BouncyCastle.Cms.CmsSignedData,Org.BouncyCastle.Utilities.Collections.IStore{Org.BouncyCastle.X509.X509Certificate},Org.BouncyCastle.Utilities.Collections.IStore{Org.BouncyCastle.X509.X509Crl})">
@@ -11307,9 +11288,6 @@
         <member name="M:Org.BouncyCastle.Cms.KeyTransRecipientInformation.GetContentStream(Org.BouncyCastle.Crypto.ICipherParameters)">
             decrypt the content and return it as a byte array.
         </member>
-        <member name="T:Org.BouncyCastle.Cms.OriginatorID">
-            a basic index for an originator.
-        </member>
         <member name="M:Org.BouncyCastle.Cms.OriginatorInformation.GetCertificates">
              Return the certificates stored in the underlying OriginatorInfo object.
             
@@ -11400,9 +11378,6 @@
             
              @param selector a recipient id to select against.
              @return a collection of RecipientInformation objects.
-        </member>
-        <member name="T:Org.BouncyCastle.Cms.SignerID">
-            a basic index for a signer.
         </member>
         <member name="M:Org.BouncyCastle.Cms.SignerInfoGeneratorBuilder.SetDirectSignature(System.Boolean)">
              If the passed in flag is true, the signer signature will be based on the data, not
@@ -11577,6 +11552,24 @@
             Return the token associated with this control (a UTF8String).
             </summary>
         </member>
+        <member name="M:Org.BouncyCastle.Crmf.CertificateRepMessage.IsOnlyX509PKCertificates">
+             Return true if the message only contains X.509 public key certificates.
+            
+             @return true if only X.509 PK, false otherwise.
+        </member>
+        <member name="M:Org.BouncyCastle.Crmf.CertificateRepMessage.GetCmpCertificates">
+             Return the actual CMP certificates - useful if the array also contains non-X509 PK certificates.
+            
+             @return CMPCertificate array
+        </member>
+        <member name="T:Org.BouncyCastle.Crmf.CertificateRepMessageBuilder">
+            <summary>Builder for a CertificateRepMessage.</summary>
+        </member>
+        <member name="M:Org.BouncyCastle.Crmf.CertificateRepMessageBuilder.#ctor(Org.BouncyCastle.X509.X509Certificate[])">
+             Base constructor which can accept 0 or more certificates representing the CA plus its chain.
+            
+             @param caCerts the CA public key and it's support certificates (optional)
+        </member>
         <member name="M:Org.BouncyCastle.Crmf.CertificateRequestMessage.#ctor(System.Byte[])">
             <summary>
             Create a CertificateRequestMessage from the passed in bytes.
@@ -11588,6 +11581,12 @@
             Return the underlying ASN.1 object defining this CertificateRequestMessage object.
             </summary>
             <returns>A CertReqMsg</returns>
+        </member>
+        <member name="M:Org.BouncyCastle.Crmf.CertificateRequestMessage.GetCertReqID">
+            <summary>
+            Return the certificate request ID for this message.
+            </summary>
+            <returns>the certificate request ID.</returns>
         </member>
         <member name="M:Org.BouncyCastle.Crmf.CertificateRequestMessage.GetCertTemplate">
             <summary>
@@ -11643,11 +11642,80 @@
             <exception cref="T:System.InvalidOperationException">if there is a problem in verification or content verifier creation.</exception>
             <exception cref="T:System.InvalidOperationException">if POP not appropriate.</exception>
         </member>
+        <member name="M:Org.BouncyCastle.Crmf.CertificateRequestMessage.IsValidSigningKeyPop(Org.BouncyCastle.Crypto.IVerifierFactoryProvider,Org.BouncyCastle.Crmf.PKMacBuilder,System.Char[])">
+            <summary>
+            Return whether or not a signing key proof-of-possession (POP), with an associated PKMAC, is valid.
+            </summary>
+            <param name="verifierProvider">a provider that can produce content verifiers for the signature contained in this POP.</param>
+            <param name="macBuilder">a suitable PKMacBuilder to create the MAC verifier.</param>
+            <param name="password">the password used to key the MAC calculation.</param>
+            <returns>true if the POP is valid, false otherwise.</returns>
+            <exception cref="T:System.InvalidOperationException">if there is a problem in verification or content verifier creation.</exception>
+            <exception cref="T:System.InvalidOperationException">if POP not appropriate.</exception>
+        </member>
         <member name="M:Org.BouncyCastle.Crmf.CertificateRequestMessage.GetEncoded">
             <summary>
             Return the ASN.1 encoding of the certReqMsg we wrap.
             </summary>
             <returns>a byte array containing the binary encoding of the certReqMsg.</returns>
+        </member>
+        <member name="T:Org.BouncyCastle.Crmf.CertificateResponse">
+            <summary>High level wrapper for the CertResponse CRMF structure.</summary>
+        </member>
+        <member name="P:Org.BouncyCastle.Crmf.CertificateResponse.HasEncryptedCertificate">
+             Return true if the response contains an encrypted certificate.
+            
+             @return true if certificate in response encrypted, false otherwise.
+        </member>
+        <member name="M:Org.BouncyCastle.Crmf.CertificateResponse.GetEncryptedCertificate">
+             Return a CMSEnvelopedData representing the encrypted certificate contained in the response.
+            
+             @return a CMEEnvelopedData if an encrypted certificate is present.
+             @throws IllegalStateException if no encrypted certificate is present, or there is an issue with the enveloped data.
+        </member>
+        <member name="M:Org.BouncyCastle.Crmf.CertificateResponse.GetCertificate">
+             Return the CMPCertificate representing the plaintext certificate in the response.
+            
+             @return a CMPCertificate if a plaintext certificate is present.
+             @throws IllegalStateException if no plaintext certificate is present.
+        </member>
+        <member name="M:Org.BouncyCastle.Crmf.CertificateResponse.ToAsn1Structure">
+             Return this object's underlying ASN.1 structure.
+            
+             @return a CertResponse
+        </member>
+        <member name="T:Org.BouncyCastle.Crmf.CertificateResponseBuilder">
+            <summary>Builder for CertificateResponse objects (the CertResponse CRMF equivalent).</summary>
+        </member>
+        <member name="M:Org.BouncyCastle.Crmf.CertificateResponseBuilder.#ctor(Org.BouncyCastle.Asn1.DerInteger,Org.BouncyCastle.Asn1.Cmp.PkiStatusInfo)">
+             Base constructor.
+            
+             @param certReqId the request ID for the response.
+             @param statusInfo the status info to associate with the response.
+        </member>
+        <member name="M:Org.BouncyCastle.Crmf.CertificateResponseBuilder.WithCertificate(Org.BouncyCastle.X509.X509Certificate)">
+             Specify the certificate to assign to this response (in plaintext).
+            
+             @param certificate the X.509 PK certificate to include.
+             @return the current builder.
+        </member>
+        <member name="M:Org.BouncyCastle.Crmf.CertificateResponseBuilder.WithCertificate(Org.BouncyCastle.Asn1.Cmp.CmpCertificate)">
+             Specify the certificate to assign to this response (in plaintext).
+            
+             @param cmpCertificate the X.509 PK certificate to include.
+             @return the current builder.
+        </member>
+        <member name="M:Org.BouncyCastle.Crmf.CertificateResponseBuilder.WithCertificate(Org.BouncyCastle.Cms.CmsEnvelopedData)">
+             Specify the encrypted certificate to assign to this response (in plaintext).
+            
+             @param encryptedCertificate an encrypted
+             @return the current builder.
+        </member>
+        <member name="M:Org.BouncyCastle.Crmf.CertificateResponseBuilder.WithResponseInfo(System.Byte[])">
+             Specify the response info field on the response.
+            
+             @param responseInfo a response info string.
+             @return the current builder.
         </member>
         <member name="M:Org.BouncyCastle.Crmf.EncryptedValueBuilder.#ctor(Org.BouncyCastle.Crypto.IKeyWrapper,Org.BouncyCastle.Crypto.ICipherBuilderWithKey)">
             
@@ -11693,6 +11761,21 @@
              <returns>an EncryptedValue containing an EncryptedPrivateKeyInfo structure.</returns>
              <exception cref="T:Org.BouncyCastle.Crmf.CrmfException">on a failure to encrypt the data, or wrap the symmetric key for this value.</exception>
             
+        </member>
+        <member name="T:Org.BouncyCastle.Crmf.EncryptedValueParser">
+            <summary>Parser for EncryptedValue structures.</summary>
+        </member>
+        <member name="M:Org.BouncyCastle.Crmf.EncryptedValueParser.#ctor(Org.BouncyCastle.Asn1.Crmf.EncryptedValue)">
+             Basic constructor - create a parser to read the passed in value.
+            
+             @param value the value to be parsed.
+        </member>
+        <member name="M:Org.BouncyCastle.Crmf.EncryptedValueParser.#ctor(Org.BouncyCastle.Asn1.Crmf.EncryptedValue,Org.BouncyCastle.Crmf.IEncryptedValuePadder)">
+             Create a parser to read the passed in value, assuming the padder was
+             applied to the data prior to encryption.
+            
+             @param value  the value to be parsed.
+             @param padder the padder to be used to remove padding from the decrypted value..
         </member>
         <member name="T:Org.BouncyCastle.Crmf.IControl">
             <summary>
@@ -11756,6 +11839,12 @@
             <returns>the archive control type.</returns>
         </member>
         <member name="P:Org.BouncyCastle.Crmf.PkiArchiveControl.EnvelopedData">
+            <summary>
+            Return whether this control contains enveloped data.
+            </summary>
+            <returns>true if the control contains enveloped data, false otherwise.</returns>
+        </member>
+        <member name="M:Org.BouncyCastle.Crmf.PkiArchiveControl.IsEnvelopedData">
             <summary>
             Return whether this control contains enveloped data.
             </summary>
@@ -11825,18 +11914,18 @@
             <returns>this</returns>
             <exception cref="T:System.ArgumentException">if iteration count is less than 100</exception>
         </member>
-        <member name="M:Org.BouncyCastle.Crmf.PKMacBuilder.SetParameters(Org.BouncyCastle.Asn1.Cmp.PbmParameter)">
-            <summary>
-            Set PbmParameters
-            </summary>
-            <param name="parameters">The parameters.</param>
-            <returns>this</returns>
-        </member>
         <member name="M:Org.BouncyCastle.Crmf.PKMacBuilder.SetSecureRandom(Org.BouncyCastle.Security.SecureRandom)">
             <summary>
             The Secure random
             </summary>
             <param name="random">The random.</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Org.BouncyCastle.Crmf.PKMacBuilder.SetParameters(Org.BouncyCastle.Asn1.Cmp.PbmParameter)">
+            <summary>
+            Set PbmParameters
+            </summary>
+            <param name="parameters">The parameters.</param>
             <returns>this</returns>
         </member>
         <member name="M:Org.BouncyCastle.Crmf.PKMacBuilder.Build(System.Char[])">
@@ -14209,7 +14298,7 @@
             @exception InvalidCipherTextException if the decrypted block turns out to
             be badly formatted.
         </member>
-        <member name="M:Org.BouncyCastle.Crypto.Encodings.OaepEncoding.MaskGeneratorFunction1(System.Byte[],System.Int32,System.Int32,System.Int32)">
+        <member name="M:Org.BouncyCastle.Crypto.Encodings.OaepEncoding.MaskGeneratorFunction1(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Int32)">
             mask generator function, as described in PKCS1v2.
         </member>
         <member name="T:Org.BouncyCastle.Crypto.Encodings.Pkcs1Encoding">
@@ -14247,13 +14336,15 @@
             @param fallback
                        The fallback value, we don't to a arraycopy here.
         </member>
-        <member name="M:Org.BouncyCastle.Crypto.Encodings.Pkcs1Encoding.CheckPkcs1Encoding(System.Byte[],System.Int32)">
-            Checks if the argument is a correctly PKCS#1.5 encoded Plaintext
-            for encryption.
-            
-            @param encoded The Plaintext.
-            @param pLen Expected length of the plaintext.
-            @return Either 0, if the encoding is correct, or -1, if it is incorrect.
+        <member name="M:Org.BouncyCastle.Crypto.Encodings.Pkcs1Encoding.CheckPkcs1Encoding1(System.Byte[])">
+            Check the argument is a valid encoding with type 1. Returns the plaintext length if valid, or -1 if invalid.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Encodings.Pkcs1Encoding.CheckPkcs1Encoding2(System.Byte[])">
+            Check the argument is a valid encoding with type 2. Returns the plaintext length if valid, or -1 if invalid.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Encodings.Pkcs1Encoding.CheckPkcs1Encoding2(System.Byte[],System.Int32)">
+            Check the argument is a valid encoding with type 2 of a plaintext with the given length. Returns 0 if
+            valid, or -1 if invalid.
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Encodings.Pkcs1Encoding.DecodeBlockOrRandom(System.Byte[],System.Int32,System.Int32)">
             Decode PKCS#1.5 encoding, and return a random value if the padding is not correct.
@@ -15136,13 +15227,37 @@
             Specification.
         </member>
         <member name="T:Org.BouncyCastle.Crypto.Engines.Rfc3394WrapEngine">
+            <summary>An implementation of the AES Key Wrap with Padding specification as described in RFC 3349.</summary>
             <remarks>
-            An implementation of the AES Key Wrapper from the NIST Key Wrap
-            Specification as described in RFC 3394.
-            <p/>
-            For further details see: <a href="http://www.ietf.org/rfc/rfc3394.txt">http://www.ietf.org/rfc/rfc3394.txt</a>
-            and  <a href="http://csrc.nist.gov/encryption/kms/key-wrap.pdf">http://csrc.nist.gov/encryption/kms/key-wrap.pdf</a>.
+            For further details see: Schaad, J. and R. Housley, "Advanced Encryption Standard (AES) Key Wrap Algorithm",
+            RFC 3394, DOI 10.17487/RFC3394, September 2002, &lt;https://www.rfc-editor.org/info/rfc3394\&gt;, and
+            http://csrc.nist.gov/encryption/kms/key-wrap.pdf.
             </remarks>
+        </member>
+        <member name="T:Org.BouncyCastle.Crypto.Engines.Rfc5649WrapEngine">
+            <summary>An implementation of the AES Key Wrap with Padding specification as described in RFC 5649.</summary>
+            <remarks>
+            For further details see: Housley, R. and M. Dworkin, "Advanced Encryption Standard (AES) Key Wrap with Padding Algorithm",
+            RFC 5649, DOI 10.17487/RFC5649, September 2009, &lt;https://www.rfc-editor.org/info/rfc5649&gt;, and
+            http://csrc.nist.gov/encryption/kms/key-wrap.pdf.
+            </remarks>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Engines.Rfc5649WrapEngine.Rfc3394UnwrapNoIvCheck(System.Byte[],System.Int32,System.Int32,System.Byte[])">
+             Performs steps 1 and 2 of the unwrap process defined in RFC 3394.
+             This code is duplicated from RFC3394WrapEngine because that class
+             will throw an error during unwrap because the IV won't match up.
+            
+             @param in
+             @param inOff
+             @param inLen
+             @return Unwrapped data.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Engines.Rfc5649WrapEngine.PadPlaintext(System.Byte[])">
+             Pads the plaintext (i.e., the key to be wrapped)
+             as per section 4.1 of RFC 5649.
+            
+             @param plaintext The key being wrapped.
+             @return The padded key.
         </member>
         <member name="T:Org.BouncyCastle.Crypto.Engines.RijndaelEngine">
             an implementation of Rijndael, based on the documentation and reference implementation
@@ -15261,7 +15376,7 @@
              @throws DataLengthException the input block is too large.
         </member>
         <member name="T:Org.BouncyCastle.Crypto.Engines.RsaCoreEngine">
-            this does your basic RSA algorithm.
+            <summary>This does your basic RSA algorithm.</summary>
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Engines.RsaCoreEngine.Init(System.Boolean,Org.BouncyCastle.Crypto.ICipherParameters)">
              initialise the RSA engine.
@@ -15461,6 +15576,14 @@
             <remarks>
             The implementation here is based on the document <a href="http://eprint.iacr.org/2008/329.pdf">http://eprint.iacr.org/2008/329.pdf</a>
             by Whitfield Diffie and George Ledin, which is a translation of Prof. LU Shu-wang's original standard.
+            </remarks>
+        </member>
+        <member name="T:Org.BouncyCastle.Crypto.Engines.SparkleEngine">
+            <summary>Sparkle v1.2, based on the current round 3 submission, https://sparkle-lwc.github.io/ .</summary>
+            <remarks>
+            Reference C implementation: https://github.com/cryptolu/sparkle.<br/>
+            Specification:
+            https://csrc.nist.gov/CSRC/media/Projects/lightweight-cryptography/documents/finalist-round/updated-spec-doc/sparkle-spec-final.pdf .
             </remarks>
         </member>
         <member name="T:Org.BouncyCastle.Crypto.Engines.TeaEngine">
@@ -16558,7 +16681,7 @@
         <member name="T:Org.BouncyCastle.Crypto.IDigestFactory">
             <summary>
             Base interface for operator factories that create stream-based digest calculators.
-            </summary>   
+            </summary>
         </member>
         <member name="P:Org.BouncyCastle.Crypto.IDigestFactory.AlgorithmDetails">
             <summary>The algorithm details object for calculators made by this factory.</summary>
@@ -19280,7 +19403,7 @@
              @param digest digest to build the HMAC on.
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Signers.HMacDsaKCalculator.InitAdditionalInput0(Org.BouncyCastle.Crypto.Macs.HMac)">
-            <summary>Supports use of additional input.</summary>
+            <summary>Supply additional input to HMAC_K(V || 0x00 || int2octets(x) || bits2octets(h1)).</summary>
             <remarks>
             RFC 6979 3.6. Additional data may be added to the input of HMAC [..]. A use case may be a protocol that
             requires a non-deterministic signature algorithm on a system that does not have access to a high-quality
@@ -19292,6 +19415,13 @@
             that this calculator may be used for many signatures.
             </remarks>
             <param name="hmac0">The <see cref="T:Org.BouncyCastle.Crypto.Macs.HMac"/> to which the additional input should be added.</param>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Signers.HMacDsaKCalculator.InitAdditionalInput1(Org.BouncyCastle.Crypto.Macs.HMac)">
+            <summary>Supply additional input to HMAC_K(V || 0x01 || int2octets(x) || bits2octets(h1)).</summary>
+            <remarks>
+            Refer to comments for <see cref="M:Org.BouncyCastle.Crypto.Signers.HMacDsaKCalculator.InitAdditionalInput0(Org.BouncyCastle.Crypto.Macs.HMac)"/>.
+            </remarks>
+            <param name="hmac1">The <see cref="T:Org.BouncyCastle.Crypto.Macs.HMac"/> to which the additional input should be added.</param>
         </member>
         <member name="T:Org.BouncyCastle.Crypto.Signers.IDsaEncoding">
             <summary>
@@ -19607,6 +19737,10 @@
             reset the underlying cipher. This leaves it in the same state
             it was at after the last init (if there was one).
         </member>
+        <member name="M:Org.BouncyCastle.Crypto.Tls.TlsRsaKeyExchange.CheckPkcs1Encoding2(System.Byte[],System.Int32,System.Int32)">
+            Check the argument is a valid encoding with type 2 of a plaintext with the given length. Returns 0 if
+            valid, or -1 if invalid.
+        </member>
         <member name="M:Org.BouncyCastle.Crypto.Utilities.AlgorithmIdentifierFactory.GenerateEncryptionAlgID(Org.BouncyCastle.Asn1.DerObjectIdentifier,System.Int32,Org.BouncyCastle.Security.SecureRandom)">
              Create an AlgorithmIdentifier for the passed in encryption algorithm.
             
@@ -19637,6 +19771,37 @@
              @param random a source of random to initialise the generator with.
              @return an initialised CipherKeyGenerator.
              @throws IllegalArgumentException if the algorithm cannot be identified.
+        </member>
+        <member name="T:Org.BouncyCastle.Crypto.Utilities.DerOtherInfo">
+            Builder and holder class for preparing SP 800-56A compliant OtherInfo. The data is ultimately encoded as a DER SEQUENCE.
+            Empty octet strings are used to represent nulls in compulsory fields.
+        </member>
+        <member name="T:Org.BouncyCastle.Crypto.Utilities.DerOtherInfo.Builder">
+            Builder to create OtherInfo
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Utilities.DerOtherInfo.Builder.#ctor(Org.BouncyCastle.Asn1.X509.AlgorithmIdentifier,System.Byte[],System.Byte[])">
+             Create a basic builder with just the compulsory fields.
+            
+             @param algorithmID the algorithm associated with this invocation of the KDF.
+             @param partyUInfo  sender party info.
+             @param partyVInfo  receiver party info.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Utilities.DerOtherInfo.Builder.WithSuppPubInfo(System.Byte[])">
+             Add optional supplementary public info (DER tagged, implicit, 0).
+            
+             @param suppPubInfo supplementary public info.
+             @return  the current builder instance.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Utilities.DerOtherInfo.Builder.WithSuppPrivInfo(System.Byte[])">
+             Add optional supplementary private info (DER tagged, implicit, 1).
+            
+             @param suppPrivInfo supplementary private info.
+             @return the current builder instance.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Utilities.DerOtherInfo.Builder.Build">
+             Build the KTSOtherInfo.
+            
+             @return an KTSOtherInfo containing the data.
         </member>
         <member name="F:Org.BouncyCastle.Crypto.Utilities.OpenSshPrivateKeyUtilities.AUTH_MAGIC">
             <summary>Magic value for proprietary OpenSSH private key.</summary>
@@ -19725,6 +19890,32 @@
         </member>
         <member name="T:Org.BouncyCastle.Operators.CmsKeyTransRecipientInfoGenerator">
             <deprecated>Use KeyTransRecipientInfoGenerator</deprecated>
+        </member>
+        <member name="T:Org.BouncyCastle.Operators.Utilities.IDigestAlgorithmFinder">
+            <summary>
+            Base interface for a finder of digest algorithm identifiers used with signatures.
+            </summary>
+        </member>
+        <member name="M:Org.BouncyCastle.Operators.Utilities.IDigestAlgorithmFinder.Find(Org.BouncyCastle.Asn1.X509.AlgorithmIdentifier)">
+            <summary>
+            Find the digest algorithm identifier that matches with the passed in signature algorithm identifier.
+            </summary>
+            <param name="signatureAlgorithm">the signature algorithm of interest.</param>
+            <returns>an algorithm identifier for the corresponding digest.</returns>
+        </member>
+        <member name="M:Org.BouncyCastle.Operators.Utilities.IDigestAlgorithmFinder.Find(Org.BouncyCastle.Asn1.DerObjectIdentifier)">
+            <summary>
+            Find the digest algorithm identifier that matches with the passed in digest name.
+            </summary>
+            <param name="digestOid">the OID of the digest algorithm of interest.</param>
+            <returns>an algorithm identifier for the digest signature.</returns>
+        </member>
+        <member name="M:Org.BouncyCastle.Operators.Utilities.IDigestAlgorithmFinder.Find(System.String)">
+            <summary>
+            Find the digest algorithm identifier that matches with the passed in digest name.
+            </summary>
+            <param name="digestName">the name of the digest algorithm of interest.</param>
+            <returns>an algorithm identifier for the digest signature.</returns>
         </member>
         <member name="M:Org.BouncyCastle.Math.BigInteger.AddMagnitudes(System.UInt32[],System.UInt32[])">
             return a = a + b - b preserved.
@@ -20633,6 +20824,16 @@
             <returns><c>false</c> if <paramref name="baseValue"/> is a witness to compositeness (so
             <paramref name="candidate"/> is definitely NOT prime), or else <c>true</c>.</returns>
         </member>
+        <member name="T:Org.BouncyCastle.Math.Raw.Mod">
+            <summary>
+            Modular inversion as implemented in this class is based on the paper "Fast constant-time gcd computation and
+            modular inversion" by Daniel J. Bernstein and Bo-Yin Yang.
+            </summary>
+            <remarks>
+            In some cases (when it is faster) we use the "half delta" variant of safegcd based on
+            <a href="https://github.com/sipa/safegcd-bounds">hddivsteps</a>. 
+            </remarks>
+        </member>
         <member name="T:Org.BouncyCastle.Ocsp.BasicOcspResp">
             <remarks>
             <code>
@@ -20873,7 +21074,7 @@
         </member>
         <member name="M:Org.BouncyCastle.Security.DigestUtilities.GetObjectIdentifier(System.String)">
             <summary>
-            Returns a ObjectIdentifier for a given digest mechanism.
+            Returns an ObjectIdentifier for a given digest mechanism.
             </summary>
             <param name="mechanism">A string representation of the digest meanism.</param>
             <returns>A DerObjectIdentifier, null if the Oid is not available.</returns>
@@ -20970,9 +21171,9 @@
         </member>
         <member name="M:Org.BouncyCastle.Security.SignerUtilities.GetObjectIdentifier(System.String)">
             <summary>
-            Returns an ObjectIdentifier for a given encoding.
+            Returns an ObjectIdentifier for a given signature mechanism.
             </summary>
-            <param name="mechanism">A string representation of the encoding.</param>
+            <param name="mechanism">A string representation of the signature mechanism.</param>
             <returns>A DerObjectIdentifier, null if the OID is not available.</returns>
         </member>
         <member name="T:Org.BouncyCastle.Security.WrapperUtilities">
@@ -22682,6 +22883,108 @@
             </summary>
             <returns>a formatted string describing the <code>TrustAnchor</code></returns>
         </member>
+        <member name="T:Org.BouncyCastle.Pqc.Asn1.KyberPrivateKey">
+            Crystal Kyber Private Key Format.
+            See https://www.ietf.org/archive/id/draft-uni-qsckeys-kyber-00.html for details.
+            <pre>
+                KyberPrivateKey ::= SEQUENCE {
+                version     INTEGER {v0(0)}   -- version (round 3)
+                s           OCTET STRING,     -- EMPTY
+                hpk         OCTET STRING      -- EMPTY
+                nonce       OCTET STRING,     -- d
+                publicKey   [0] IMPLICIT KyberPublicKey OPTIONAL,
+                                              -- see next section
+                }
+            </pre>
+        </member>
+        <member name="T:Org.BouncyCastle.Pqc.Asn1.KyberPublicKey">
+            Crystal Kyber Public Key Format.
+            See https://www.ietf.org/archive/id/draft-uni-qsckeys-kyber-00.html for details.
+            <pre>
+                KyberPublicKey ::= SEQUENCE {
+                 t           OCTET STRING,
+                 rho         OCTET STRING
+             }
+            </pre>
+        </member>
+        <member name="F:Org.BouncyCastle.Pqc.Asn1.PqcObjectIdentifiers.rainbow">
+            1.3.6.1.4.1.8301.3.1.3.5.3.2 
+        </member>
+        <member name="F:Org.BouncyCastle.Pqc.Asn1.PqcObjectIdentifiers.rainbowWithSha1">
+            1.3.6.1.4.1.8301.3.1.3.5.3.2.1 
+        </member>
+        <member name="F:Org.BouncyCastle.Pqc.Asn1.PqcObjectIdentifiers.rainbowWithSha224">
+            1.3.6.1.4.1.8301.3.1.3.5.3.2.2 
+        </member>
+        <member name="F:Org.BouncyCastle.Pqc.Asn1.PqcObjectIdentifiers.rainbowWithSha256">
+            1.3.6.1.4.1.8301.3.1.3.5.3.2.3 
+        </member>
+        <member name="F:Org.BouncyCastle.Pqc.Asn1.PqcObjectIdentifiers.rainbowWithSha384">
+            1.3.6.1.4.1.8301.3.1.3.5.3.2.4 
+        </member>
+        <member name="F:Org.BouncyCastle.Pqc.Asn1.PqcObjectIdentifiers.rainbowWithSha512">
+            1.3.6.1.4.1.8301.3.1.3.5.3.2.5 
+        </member>
+        <member name="F:Org.BouncyCastle.Pqc.Asn1.PqcObjectIdentifiers.gmss">
+            1.3.6.1.4.1.8301.3.1.3.3 
+        </member>
+        <member name="F:Org.BouncyCastle.Pqc.Asn1.PqcObjectIdentifiers.gmssWithSha1">
+            1.3.6.1.4.1.8301.3.1.3.3.1 
+        </member>
+        <member name="F:Org.BouncyCastle.Pqc.Asn1.PqcObjectIdentifiers.gmssWithSha224">
+            1.3.6.1.4.1.8301.3.1.3.3.2 
+        </member>
+        <member name="F:Org.BouncyCastle.Pqc.Asn1.PqcObjectIdentifiers.gmssWithSha256">
+            1.3.6.1.4.1.8301.3.1.3.3.3 
+        </member>
+        <member name="F:Org.BouncyCastle.Pqc.Asn1.PqcObjectIdentifiers.gmssWithSha384">
+            1.3.6.1.4.1.8301.3.1.3.3.4 
+        </member>
+        <member name="F:Org.BouncyCastle.Pqc.Asn1.PqcObjectIdentifiers.gmssWithSha512">
+            1.3.6.1.4.1.8301.3.1.3.3.5 
+        </member>
+        <member name="F:Org.BouncyCastle.Pqc.Asn1.PqcObjectIdentifiers.mcEliece">
+            1.3.6.1.4.1.8301.3.1.3.4.1 
+        </member>
+        <member name="F:Org.BouncyCastle.Pqc.Asn1.PqcObjectIdentifiers.mcElieceCca2">
+            1.3.6.1.4.1.8301.3.1.3.4.2 
+        </member>
+        <member name="F:Org.BouncyCastle.Pqc.Asn1.PqcObjectIdentifiers.xmss">
+            XMSS
+        </member>
+        <member name="F:Org.BouncyCastle.Pqc.Asn1.PqcObjectIdentifiers.xmss_mt">
+            XMSS^MT
+        </member>
+        <member name="F:Org.BouncyCastle.Pqc.Asn1.PqcObjectIdentifiers.qTESLA">
+            qTESLA
+        </member>
+        <member name="F:Org.BouncyCastle.Pqc.Asn1.PqcObjectIdentifiers.id_Dilithium3_RSA_PKCS15_SHA256">
+            Explicit composite algorithms
+        </member>
+        <member name="T:Org.BouncyCastle.Pqc.Asn1.SphincsPlusPrivateKey">
+            See https://datatracker.ietf.org/doc/draft-uni-qsckeys-sphincsplus/00/ for details
+            ASN.1 Encoding for a
+            SphincsPlus private key for fully populated:
+            <pre>
+              SPHINCSPLUSPrivateKey ::= SEQUENCE {
+                version          INTEGER {v2(1)}     --syntax version 2 (round 3)
+                skseed          OCTET STRING,        --n-byte private key seed
+                skprf           OCTET STRING,        --n-byte private key seed
+                PublicKey       SPHINCSPLUSPublicKey --public key
+              }
+            </pre>
+        </member>
+        <member name="T:Org.BouncyCastle.Pqc.Asn1.SphincsPlusPublicKey">
+            See https://datatracker.ietf.org/doc/draft-uni-qsckeys-sphincsplus/00/ for details.
+            ASN.1 Encoding for a
+            SphincsPlus public key for fully populated:
+            <pre>
+              SPHINCSPPLUSPublicKey := SEQUENCE {
+                pkseed          OCTET STRING,     --n-byte public key seed
+                pkroot          OCTET STRING      --n-byte public hypertree root
+              }
+            </pre>
+        </member>
         <member name="M:Org.BouncyCastle.Pqc.Crypto.Bike.BikeEngine.GenKeyPair(System.Byte[],System.Byte[],System.Byte[],System.Byte[],Org.BouncyCastle.Security.SecureRandom)">
                      Generate key pairs
                      - Secret key : (h0, h1, sigma)
@@ -22715,18 +23018,6 @@
                      * @param c1            ciphertext
                      * @param k             session key
                      *
-        </member>
-        <member name="M:Org.BouncyCastle.Pqc.Crypto.Bike.BikePrivateKeyParameters.#ctor(Org.BouncyCastle.Pqc.Crypto.Bike.BikeParameters,System.Byte[],System.Byte[],System.Byte[])">
-             Constructor.
-            
-             @param h0    h0
-             @param h1    h1
-             @param sigma random bytes sigma
-        </member>
-        <member name="M:Org.BouncyCastle.Pqc.Crypto.Bike.BikePublicKeyParameters.#ctor(Org.BouncyCastle.Pqc.Crypto.Bike.BikeParameters,System.Byte[])">
-             Constructor.
-            
-             @param publicKey      byte
         </member>
         <member name="M:Org.BouncyCastle.Pqc.Crypto.Hqc.GF2PolynomialCalculator.karatsuba(System.Int64[],System.Int32,System.Int64[],System.Int32,System.Int64[],System.Int32,System.Int32,System.Int64[],System.Int32)">
              Karatsuba multiplication of a and b, Implementation inspired from the NTL library.
@@ -22789,27 +23080,23 @@
             
         </member>
         <member name="T:Org.BouncyCastle.Pqc.Crypto.IMessageSigner">
-            Base interface for a PQC signing algorithm.
+            <summary>Base interface for a PQC signature algorithm.</summary>
         </member>
         <member name="M:Org.BouncyCastle.Pqc.Crypto.IMessageSigner.Init(System.Boolean,Org.BouncyCastle.Crypto.ICipherParameters)">
-             initialise the signer for signature generation or signature
-             verification.
-            
-             @param forSigning true if we are generating a signature, false
-                               otherwise.
-             @param param      key parameters for signature generation.
+            <summary>Initialise this instance for signature generation or verification.</summary>
+            <param name="forSigning">true if we are generating a signature, false otherwise.</param>
+            <param name="param">parameters for signature generation or verification.</param>
         </member>
         <member name="M:Org.BouncyCastle.Pqc.Crypto.IMessageSigner.GenerateSignature(System.Byte[])">
-             sign the passed in message (usually the output of a hash function).
-            
-             @param message the message to be signed.
-             @return the signature of the message
+            <summary>Sign a message.</summary>
+            <param name="message">the message to be signed.</param>
+            <returns>the signature of the message.</returns>
         </member>
         <member name="M:Org.BouncyCastle.Pqc.Crypto.IMessageSigner.VerifySignature(System.Byte[],System.Byte[])">
-             verify the message message against the signature value.
-            
-             @param message the message that was supposed to have been signed.
-             @param signature the signature of the message
+            <summary>Verify a purported signature for a message.</summary>
+            <param name="message">the message supposedly signed.</param>
+            <param name="signature">the purported signature to verify.</param>
+            <returns>true if and only if the signature verified against the message.</returns>
         </member>
         <member name="T:Org.BouncyCastle.Pqc.Crypto.Lms.Composer">
             Type to assist in build LMS messages.
@@ -23023,6 +23310,54 @@
         </member>
         <member name="M:Org.BouncyCastle.Pqc.Crypto.SphincsPlus.SphincsPlusSigner.#ctor">
             Base constructor.
+        </member>
+        <member name="T:Org.BouncyCastle.Pqc.Crypto.Utilities.PqcOtherInfoGenerator">
+            OtherInfo Generator for which can be used for populating the SuppPrivInfo field used to provide shared
+            secret data used with NIST SP 800-56A agreement algorithms.
+        </member>
+        <member name="M:Org.BouncyCastle.Pqc.Crypto.Utilities.PqcOtherInfoGenerator.#ctor(Org.BouncyCastle.Asn1.X509.AlgorithmIdentifier,System.Byte[],System.Byte[],Org.BouncyCastle.Security.SecureRandom)">
+             Create a basic builder with just the compulsory fields.
+            
+             @param algorithmID the algorithm associated with this invocation of the KDF.
+             @param partyUInfo  sender party info.
+             @param partyVInfo  receiver party info.
+             @param random a source of randomness.
+        </member>
+        <member name="T:Org.BouncyCastle.Pqc.Crypto.Utilities.PqcOtherInfoGenerator.PartyU">
+            Party U (initiator) generation.
+        </member>
+        <member name="M:Org.BouncyCastle.Pqc.Crypto.Utilities.PqcOtherInfoGenerator.PartyU.#ctor(Org.BouncyCastle.Pqc.Crypto.IKemParameters,Org.BouncyCastle.Asn1.X509.AlgorithmIdentifier,System.Byte[],System.Byte[],Org.BouncyCastle.Security.SecureRandom)">
+             Create a basic builder with just the compulsory fields for the initiator.
+            
+             @param kemParams the key type parameters for populating the private info field.
+             @param algorithmID the algorithm associated with this invocation of the KDF.
+             @param partyUInfo  sender party info.
+             @param partyVInfo  receiver party info.
+             @param random a source of randomness.
+        </member>
+        <member name="M:Org.BouncyCastle.Pqc.Crypto.Utilities.PqcOtherInfoGenerator.PartyU.WithSuppPubInfo(System.Byte[])">
+             Add optional supplementary public info (DER tagged, implicit, 0).
+            
+             @param suppPubInfo supplementary public info.
+             @return the current builder instance.
+        </member>
+        <member name="T:Org.BouncyCastle.Pqc.Crypto.Utilities.PqcOtherInfoGenerator.PartyV">
+            Party V (responder) generation.
+        </member>
+        <member name="M:Org.BouncyCastle.Pqc.Crypto.Utilities.PqcOtherInfoGenerator.PartyV.#ctor(Org.BouncyCastle.Pqc.Crypto.IKemParameters,Org.BouncyCastle.Asn1.X509.AlgorithmIdentifier,System.Byte[],System.Byte[],Org.BouncyCastle.Security.SecureRandom)">
+             Create a basic builder with just the compulsory fields for the responder.
+            
+             @param kemParams the key type parameters for populating the private info field.
+             @param algorithmID the algorithm associated with this invocation of the KDF.
+             @param partyUInfo  sender party info.
+             @param partyVInfo  receiver party info.
+             @param random a source of randomness.
+        </member>
+        <member name="M:Org.BouncyCastle.Pqc.Crypto.Utilities.PqcOtherInfoGenerator.PartyV.WithSuppPubInfo(System.Byte[])">
+             Add optional supplementary public info (DER tagged, implicit, 0).
+            
+             @param suppPubInfo supplementary public info.
+             @return the current builder instance.
         </member>
         <member name="M:Org.BouncyCastle.Pqc.Crypto.Utilities.PqcPrivateKeyFactory.CreateKey(System.Byte[])">
             <summary> Create a private key parameter from a PKCS8 PrivateKeyInfo encoding.</summary>
@@ -24005,6 +24340,20 @@
             <returns>the amount of data written to output.</returns>
             <exception cref="T:System.IO.IOException">in case of failure.</exception>
         </member>
+        <member name="M:Org.BouncyCastle.Tls.Crypto.Impl.TlsAeadCipherImpl.DoFinal(System.Byte[],System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32)">
+            <summary>Perform the cipher encryption/decryption returning the output in output.</summary>
+            <remarks>
+            Note: we have to use DoFinal() here as it is the only way to guarantee output from the underlying cipher.
+            </remarks>
+            <param name="additionalData">any additional data to be included in the MAC calculation.</param>
+            <param name="input">array holding input data to the cipher.</param>
+            <param name="inputOffset">offset into input array data starts at.</param>
+            <param name="inputLength">length of the input data in the array.</param>
+            <param name="output">array to hold the cipher output.</param>
+            <param name="outputOffset">offset into output array to start saving output.</param>
+            <returns>the amount of data written to output.</returns>
+            <exception cref="T:System.IO.IOException">in case of failure.</exception>
+        </member>
         <member name="T:Org.BouncyCastle.Tls.Crypto.Impl.TlsBlockCipher">
             <summary>A generic TLS 1.0-1.2 block cipher. This can be used for AES or 3DES for example.</summary>
         </member>
@@ -24814,9 +25163,6 @@
         <member name="M:Org.BouncyCastle.Tls.DtlsProtocol.ApplyMaxFragmentLengthExtension(Org.BouncyCastle.Tls.DtlsRecordLayer,System.Int16)">
             <exception cref="T:System.IO.IOException"/>
         </member>
-        <member name="M:Org.BouncyCastle.Tls.DtlsProtocol.EvaluateMaxFragmentLengthExtension(System.Boolean,System.Collections.Generic.IDictionary{System.Int32,System.Byte[]},System.Collections.Generic.IDictionary{System.Int32,System.Byte[]},System.Int16)">
-            <exception cref="T:System.IO.IOException"/>
-        </member>
         <member name="M:Org.BouncyCastle.Tls.DtlsProtocol.GenerateCertificate(Org.BouncyCastle.Tls.TlsContext,Org.BouncyCastle.Tls.Certificate,System.IO.Stream)">
             <exception cref="T:System.IO.IOException"/>
         </member>
@@ -24883,7 +25229,7 @@
         <member name="M:Org.BouncyCastle.Tls.DtlsRecordLayer.SendRecord(System.Int16,System.Byte[],System.Int32,System.Int32)">
             <exception cref="T:System.IO.IOException"/>
         </member>
-        <member name="M:Org.BouncyCastle.Tls.DtlsReliableHandshake.ReadClientRequest(System.Byte[],System.Int32,System.Int32,System.IO.Stream)">
+        <member name="M:Org.BouncyCastle.Tls.DtlsReliableHandshake.ReceiveClientHelloMessage(System.Byte[],System.Int32,System.Int32)">
             <exception cref="T:System.IO.IOException"/>
         </member>
         <member name="M:Org.BouncyCastle.Tls.DtlsReliableHandshake.SendHelloVerifyRequest(Org.BouncyCastle.Tls.DatagramSender,System.Int64,System.Byte[])">
@@ -25012,6 +25358,16 @@
         </member>
         <member name="M:Org.BouncyCastle.Tls.DtlsTransport.Close">
             <exception cref="T:System.IO.IOException"/>
+        </member>
+        <member name="T:Org.BouncyCastle.Tls.DtlsVerifier">
+            <summary>
+            Implements cookie generation/verification for a DTLS server as described in RFC 4347,
+            4.2.1. Denial of Service Countermeasures.
+            </summary>
+            <remarks>
+            RFC 4347 4.2.1 additionally recommends changing the secret frequently. This class does not handle that
+            internally, so the instance should be replaced instead.
+            </remarks>
         </member>
         <member name="T:Org.BouncyCastle.Tls.ECCurveType">
             <summary>RFC 4492 5.4</summary>
@@ -25891,6 +26247,9 @@
         <member name="M:Org.BouncyCastle.Tls.TlsExtensionsUtilities.GetClientCertificateTypeExtensionClient(System.Collections.Generic.IDictionary{System.Int32,System.Byte[]})">
             <exception cref="T:System.IO.IOException"/>
         </member>
+        <member name="M:Org.BouncyCastle.Tls.TlsExtensionsUtilities.GetClientCertificateTypeExtensionServer(System.Collections.Generic.IDictionary{System.Int32,System.Byte[]})">
+            <exception cref="T:System.IO.IOException"/>
+        </member>
         <member name="M:Org.BouncyCastle.Tls.TlsExtensionsUtilities.GetClientCertificateTypeExtensionServer(System.Collections.Generic.IDictionary{System.Int32,System.Byte[]},System.Int16)">
             <exception cref="T:System.IO.IOException"/>
         </member>
@@ -25940,6 +26299,9 @@
             <exception cref="T:System.IO.IOException"/>
         </member>
         <member name="M:Org.BouncyCastle.Tls.TlsExtensionsUtilities.GetServerCertificateTypeExtensionClient(System.Collections.Generic.IDictionary{System.Int32,System.Byte[]})">
+            <exception cref="T:System.IO.IOException"/>
+        </member>
+        <member name="M:Org.BouncyCastle.Tls.TlsExtensionsUtilities.GetServerCertificateTypeExtensionServer(System.Collections.Generic.IDictionary{System.Int32,System.Byte[]})">
             <exception cref="T:System.IO.IOException"/>
         </member>
         <member name="M:Org.BouncyCastle.Tls.TlsExtensionsUtilities.GetServerCertificateTypeExtensionServer(System.Collections.Generic.IDictionary{System.Int32,System.Byte[]},System.Int16)">
@@ -26336,13 +26698,6 @@
             an infinite timeout (i.e.the handshake will never time out).
             </remarks>
             <returns>the handshake timeout, in milliseconds.</returns>
-        </member>
-        <member name="M:Org.BouncyCastle.Tls.TlsPeer.AllowLegacyResumption">
-            <summary>Specify the time, in milliseconds, after which a handshake packet is resent.</summary>
-            <remarks>
-            NOTE: Currently only respected by DTLS protocols.
-            </remarks>
-            <returns>the handshake resend time, in milliseconds.</returns>
         </member>
         <member name="M:Org.BouncyCastle.Tls.TlsPeer.RequiresCloseNotify">
             <remarks>
@@ -27112,6 +27467,24 @@
         <member name="M:Org.BouncyCastle.Tls.TlsUtilities.GetPskExternalsClient(Org.BouncyCastle.Tls.TlsClient,System.Int32[])">
             <exception cref="T:System.IO.IOException"/>
         </member>
+        <member name="M:Org.BouncyCastle.Tls.TlsUtilities.ProcessMaxFragmentLengthExtension(System.Collections.Generic.IDictionary{System.Int32,System.Byte[]},System.Collections.Generic.IDictionary{System.Int32,System.Byte[]},System.Int16)">
+            <exception cref="T:System.IO.IOException"/>
+        </member>
+        <member name="M:Org.BouncyCastle.Tls.TlsUtilities.ProcessClientCertificateTypeExtension(System.Collections.Generic.IDictionary{System.Int32,System.Byte[]},System.Collections.Generic.IDictionary{System.Int32,System.Byte[]},System.Int16)">
+            <exception cref="T:System.IO.IOException"/>
+        </member>
+        <member name="M:Org.BouncyCastle.Tls.TlsUtilities.ProcessClientCertificateTypeExtension13(System.Collections.Generic.IDictionary{System.Int32,System.Byte[]},System.Collections.Generic.IDictionary{System.Int32,System.Byte[]},System.Int16)">
+            <exception cref="T:System.IO.IOException"/>
+        </member>
+        <member name="M:Org.BouncyCastle.Tls.TlsUtilities.ProcessServerCertificateTypeExtension(System.Collections.Generic.IDictionary{System.Int32,System.Byte[]},System.Collections.Generic.IDictionary{System.Int32,System.Byte[]},System.Int16)">
+            <exception cref="T:System.IO.IOException"/>
+        </member>
+        <member name="M:Org.BouncyCastle.Tls.TlsUtilities.ProcessServerCertificateTypeExtension13(System.Collections.Generic.IDictionary{System.Int32,System.Byte[]},System.Collections.Generic.IDictionary{System.Int32,System.Byte[]},System.Int16)">
+            <exception cref="T:System.IO.IOException"/>
+        </member>
+        <member name="M:Org.BouncyCastle.Tls.TlsUtilities.ValidateCertificateType13(System.Int16,System.Int16)">
+            <exception cref="T:System.IO.IOException"/>
+        </member>
         <member name="M:Org.BouncyCastle.Tls.TrustedAuthority.Encode(System.IO.Stream)">
             <summary>Encode this <see cref="T:Org.BouncyCastle.Tls.TrustedAuthority"/> to a <see cref="T:System.IO.Stream"/>.</summary>
             <param name="output">the <see cref="T:System.IO.Stream"/> to encode to.</param>
@@ -27220,6 +27593,11 @@
         </member>
         <member name="M:Org.BouncyCastle.Tsp.TimeStampResponse.GetEncoded">
             return the ASN.1 encoded representation of this object.
+        </member>
+        <member name="M:Org.BouncyCastle.Tsp.TimeStampResponse.GetEncoded(System.String)">
+             return the ASN.1 encoded representation of this object for the specific encoding type.
+            
+             @param encoding encoding style ("DER", "DL", "BER")
         </member>
         <member name="T:Org.BouncyCastle.Tsp.TimeStampResponseGenerator">
             Generator for RFC 3161 Time Stamp Responses.
@@ -28455,9 +28833,9 @@
         </member>
         <member name="P:Org.BouncyCastle.X509.X509Certificate.SigAlgName">
             <summary>
-            A meaningful version of the Signature Algorithm. (EG SHA1WITHRSA)
+            A meaningful version of the Signature Algorithm. (e.g. SHA1WITHRSA)
             </summary>
-            <returns>A sting representing the signature algorithm.</returns>
+            <returns>A string representing the signature algorithm.</returns>
         </member>
         <member name="P:Org.BouncyCastle.X509.X509Certificate.SigAlgOid">
             <summary>
@@ -28470,6 +28848,9 @@
             Get the signature algorithms parameters. (EG DSA Parameters)
             </summary>
             <returns>A byte array containing the Der encoded version of the parameters or null if there are none.</returns>
+        </member>
+        <member name="P:Org.BouncyCastle.X509.X509Certificate.SignatureAlgorithm">
+            <summary>The signature algorithm.</summary>
         </member>
         <member name="P:Org.BouncyCastle.X509.X509Certificate.IssuerUniqueID">
             <summary>
@@ -28486,6 +28867,11 @@
         <member name="M:Org.BouncyCastle.X509.X509Certificate.GetKeyUsage">
             <summary>
             Get a key usage guidlines.
+            </summary>
+        </member>
+        <member name="P:Org.BouncyCastle.X509.X509Certificate.SubjectPublicKeyInfo">
+            <summary>
+            Return the plain SubjectPublicKeyInfo that holds the encoded public key.
             </summary>
         </member>
         <member name="M:Org.BouncyCastle.X509.X509Certificate.GetPublicKey">
@@ -28611,6 +28997,12 @@
             </param>
             <exception cref="T:System.Exception">If verifier provider is not appropriate or the CRL alternative signature
             algorithm is invalid.</exception>
+        </member>
+        <member name="P:Org.BouncyCastle.X509.X509Crl.SigAlgName">
+            <summary>
+            A meaningful version of the Signature Algorithm. (e.g. SHA1WITHRSA)
+            </summary>
+            <returns>A string representing the signature algorithm.</returns>
         </member>
         <member name="M:Org.BouncyCastle.X509.X509Crl.GetEncoded">
             <summary>
@@ -28967,6 +29359,12 @@
             Set the public key that this certificate identifies.
             </summary>
             <param name="publicKey"/>
+        </member>
+        <member name="M:Org.BouncyCastle.X509.X509V3CertificateGenerator.SetSubjectPublicKeyInfo(Org.BouncyCastle.Asn1.X509.SubjectPublicKeyInfo)">
+            <summary>
+            Set the SubjectPublicKeyInfo for the public key that this certificate identifies.
+            </summary>
+            <param name="subjectPublicKeyInfo"/>
         </member>
         <member name="M:Org.BouncyCastle.X509.X509V3CertificateGenerator.SetSubjectUniqueID(System.Boolean[])">
             <summary>

@@ -69,9 +69,9 @@ namespace EduPartners.Core
             }
 
             IMongoCollection<User> users = GetDBCollection<User>(UserCollection);
-            IndexKeysDefinition<User> UnquieIndex = Builders<User>.IndexKeys.Ascending(user => user.Email);
+            IndexKeysDefinition<User> UniqueIndex = Builders<User>.IndexKeys.Ascending(user => user.Email);
             CreateIndexOptions Options = new CreateIndexOptions() { Unique = true };
-            CreateIndexModel<User> model = new CreateIndexModel<User>(UnquieIndex, Options);
+            CreateIndexModel<User> model = new CreateIndexModel<User>(UniqueIndex, Options);
             users.Indexes.CreateOne(model);
         }
 
@@ -164,7 +164,7 @@ namespace EduPartners.Core
         }
 
         /// <summary>
-        /// This function updates a user speficed in <paramref name="UpdateUser"/>
+        /// This function updates a user specified in <paramref name="UpdateUser"/>
         /// </summary>
         /// <param name="UpdateUser">This parameter of type `User`, which
         /// represents a user entity in your application. It contains the data that needs to be updated for a
@@ -184,7 +184,7 @@ namespace EduPartners.Core
         }
 
         /// <summary>
-        /// This function deletes a user speficed in <paramref name="DeleteUser"/>
+        /// This function deletes a user specified in <paramref name="DeleteUser"/>
         /// </summary>
         /// <param name="DeleteUser">This parameter of type `User`, which
         /// represents a user entity in your application. It contains the data to delete the
@@ -267,7 +267,7 @@ namespace EduPartners.Core
         }
 
         /// <summary>
-        /// This function updates a school speficed in <paramref name="UpdateSchool"/>
+        /// This function updates a school specified in <paramref name="UpdateSchool"/>
         /// </summary>
         /// <param name="UpdateSchool">This parameter of type `School`, which
         /// represents a school entity in your application. It contains the data that needs to be updated for a
@@ -287,7 +287,7 @@ namespace EduPartners.Core
         }
 
         /// <summary>
-        /// This function deletes a school speficed in <paramref name="DeleteSchool"/>
+        /// This function deletes a school specified in <paramref name="DeleteSchool"/>
         /// </summary>
         /// <param name="DeleteSchool">This parameter of type `School`, which
         /// represents a school entity in your application. It contains the data to delete the
@@ -370,7 +370,7 @@ namespace EduPartners.Core
         }
 
         /// <summary>
-        /// This function updates a partner speficed in <paramref name="UpdatePartner"/>
+        /// This function updates a partner specified in <paramref name="UpdatePartner"/>
         /// </summary>
         /// <param name="UpdatePartner">This parameter of type `Partner`, which
         /// represents a partner entity in your application. It contains the data that needs to be updated for a
@@ -391,7 +391,7 @@ namespace EduPartners.Core
         }
 
         /// <summary>
-        /// This function deletes a partner speficed in <paramref name="DeletePartner"/>
+        /// This function deletes a partner specified in <paramref name="DeletePartner"/>
         /// </summary>
         /// <param name="DeletePartner">This parameter of type `Partner`, which
         /// represents a partner entity in your application. It contains the data to delete the

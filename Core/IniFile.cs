@@ -88,7 +88,7 @@ namespace EduPartners.Core
         }
 
         /// <summary>
-        /// This funtion gets the value from the specified key in the specified section.
+        /// This function gets the value from the specified key in the specified section.
         /// </summary>
         /// <param name="section">The section that the <paramref name="key"/> is in.</param>
         /// <param name="key">The name the value is assigned to.</param>
@@ -104,7 +104,7 @@ namespace EduPartners.Core
         }
 
         /// <summary>
-        /// This function sets value to a speficed <paramref name="key"/> in a <paramref name="section"/>.
+        /// This function sets value to a specified <paramref name="key"/> in a <paramref name="section"/>.
         /// </summary>
         /// <param name="section">The section that the <paramref name="key"/> is in.</param>
         /// <param name="key">The name the value is assigned to.</param>
@@ -121,7 +121,7 @@ namespace EduPartners.Core
         }
 
         /// <summary>
-        /// This funtion gets all of the sections in a file.
+        /// This function gets all of the sections in a file.
         /// </summary>
         /// <returns>A list of sections.</returns>
         public List<string> GetSectionNames()

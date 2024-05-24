@@ -62,7 +62,7 @@
                     <Label x:Name="lZip" Grid.Row="5" Content="Zip" Foreground="Gray" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Cursor="IBeam" MouseDown="lZip_Clicked" Margin="221,0,0,0" Height="30" Width="31"/>
 
                     <TextBox x:Name="tbSchoolCode" Grid.Row="6" IsReadOnly="True" Background="#ededed" VerticalAlignment="Center" HorizontalAlignment="Left" Width="298" Height="38" VerticalContentAlignment="Center" FontSize="20" Margin="17,8,0,8" />
-                    <Label Content="&#x1f4cb;" Grid.Row="6" Cursor="Arrow" FontSize="20" Margin="320,10,0,39" MouseDown="lCopyCliboard_MouseDown" Grid.RowSpan="2"/>
+                    <Label Content="&#x1f4cb;" Grid.Row="6" Cursor="Arrow" FontSize="20" Margin="320,10,0,39" MouseDown="lCopyClipboard_MouseDown" Grid.RowSpan="2"/>
                     <Label Content="&#x27f3;" Grid.Row="6" Cursor="Arrow"  FontSize="25" Margin="345,4,0,34" MouseDown="lCodeRefresh_MouseDown" Grid.RowSpan="2"/>
 
                     <!-- Input Fields | End -->

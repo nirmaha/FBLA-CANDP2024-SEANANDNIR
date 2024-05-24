@@ -19,7 +19,7 @@ namespace EduPartners.MVVM.View.Controls
     /// </summary>
     public partial class MainControl : UserControl
     {
-        private Button curentMenuItem;
+        private Button currentMenuItem;
         private Database db;
 
         private static string localDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "EduPartners");
@@ -43,7 +43,7 @@ namespace EduPartners.MVVM.View.Controls
             this.Height = 650;
             this.Width = 1000;
 
-            // Sets the profile image on navgation bar
+            // Sets the profile image on navigation bar
             UpdateProfileImage();
 
             // Selects Dashboard as the default menuitem
@@ -177,7 +177,7 @@ namespace EduPartners.MVVM.View.Controls
         private void btView_Clicked(object sender, RoutedEventArgs e)
         {
             fContainer.Navigate(new Uri("MVVM/View/Pages/ViewPartners.xaml", UriKind.RelativeOrAbsolute));
-            curentMenuItem = (Button)sender;
+            currentMenuItem = (Button)sender;
         }
 
         // Add Menu Button Events
@@ -201,7 +201,7 @@ namespace EduPartners.MVVM.View.Controls
         private void btAdd_Clicked(object sender, RoutedEventArgs e)
         {
             fContainer.Navigate(new Uri("MVVM/View/Pages/AddPartners.xaml", UriKind.RelativeOrAbsolute));
-            curentMenuItem = (Button)sender;
+            currentMenuItem = (Button)sender;
         }
 
         // Help Menu Button Events
@@ -225,7 +225,7 @@ namespace EduPartners.MVVM.View.Controls
         private void btHelp_Clicked(object sender, RoutedEventArgs e)
         {
             fContainer.Navigate(new Uri("MVVM/View/Pages/Help.xaml", UriKind.RelativeOrAbsolute));
-            curentMenuItem = (Button)sender;
+            currentMenuItem = (Button)sender;
         }
 
         // Profile Menu Button Events
@@ -249,7 +249,7 @@ namespace EduPartners.MVVM.View.Controls
         private void btProfile_Clicked(object sender, RoutedEventArgs e)
         {
             fContainer.Navigate(new Uri("MVVM/View/Pages/Profile.xaml", UriKind.RelativeOrAbsolute));
-            curentMenuItem = (Button)sender;
+            currentMenuItem = (Button)sender;
         }
 
         // Logout Menu Button Events
@@ -274,7 +274,7 @@ namespace EduPartners.MVVM.View.Controls
         {
             MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure you want to log out?", "Log Out", MessageBoxButton.YesNo, MessageBoxImage.Question);
             
-            // Retruns user to the home page
+            // Returns user to the home page
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 App.Current.Properties["User"] = "";
@@ -284,10 +284,10 @@ namespace EduPartners.MVVM.View.Controls
                 return;
             }
 
-            if (curentMenuItem.Name == "btProfile")
+            if (currentMenuItem.Name == "btProfile")
             {
                 // Gets the MenuItem inside of the button
-                foreach (object child in ((Grid)curentMenuItem.Content).Children)
+                foreach (object child in ((Grid)currentMenuItem.Content).Children)
                 {
                     if (child is MenuItem menuItem)
                     { 
@@ -299,8 +299,8 @@ namespace EduPartners.MVVM.View.Controls
             }
 
             // Sets user back to the page they were on
-            ((MenuItem)curentMenuItem.Content).InternalMenu.IsChecked = true;
-            curentMenuItem.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            ((MenuItem)currentMenuItem.Content).InternalMenu.IsChecked = true;
+            currentMenuItem.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
         // End: MenuLeft PopupButton //
 

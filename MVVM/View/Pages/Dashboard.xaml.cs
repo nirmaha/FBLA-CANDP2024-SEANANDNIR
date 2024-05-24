@@ -10,7 +10,7 @@ using EduPartners.MVVM.Model;
 namespace EduPartners.MVVM.View.Pages
 {
     /// <summary>
-    /// Lógica de interacción para Dashboard.xaml
+    /// Interaction Logic for Dashboard.xaml
     /// </summary>
     /// 
 
@@ -34,10 +34,10 @@ namespace EduPartners.MVVM.View.Pages
                 List<Partner> partners = school.Partners.Value;
                 partners = partners.OrderBy(p => p.StartDate.Year).ToList();
 
-                // Populates Dashbord Graphs
+                // Populates Dashboard Graphs
                 foreach (Partner partner in partners) 
                 {
-                    // Industy Pie Chart
+                    // Industry Pie Chart
                     if (!IndustryPopulation.ContainsKey(partner.Industry))
                     {
                         IndustryPopulation.Add(partner.Industry, 1);

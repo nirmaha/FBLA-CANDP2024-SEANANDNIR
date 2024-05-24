@@ -40,7 +40,7 @@ namespace EduPartners.MVVM.View.Controls
         {
             lErrorMessage.Visibility = Visibility.Collapsed;
 
-            // Clears User information propteries
+            // Clears User information properties
             App.Current.Properties["FirstName"] = "";
             App.Current.Properties["LastName"] = "";
             App.Current.Properties["Email"] = "";
@@ -48,7 +48,7 @@ namespace EduPartners.MVVM.View.Controls
 
             IniFile iniFile = new IniFile(filePath, localDataPath);
 
-            // Keeps Remeber me on if there is cookies
+            // Keeps Remember me on if there is cookies
             if (iniFile.GetValue("SECURITY", "EMAILLOGIN") != "")
             {
                 cbRememberMe.IsChecked = true;
@@ -178,7 +178,7 @@ namespace EduPartners.MVVM.View.Controls
             }
 
             User user = (await db.GetUserByEmail(tbEmail.Text)).FirstOrDefault();
-            User logingInUser = null;
+            User loggingInUser = null;
             IniFile iniFile = new IniFile(filePath, localDataPath);
 
             // Checks if the user inputted the correct email
@@ -192,8 +192,8 @@ namespace EduPartners.MVVM.View.Controls
             // Checks if the correct password was inputted
             if (BCrypts.Verify(pbPassword.Password, user.Password))
             {
-                logingInUser = user;
-                App.Current.Properties["User"] = logingInUser.Id;
+                loggingInUser = user;
+                App.Current.Properties["User"] = loggingInUser.Id;
             }
             else
             {
@@ -219,8 +219,8 @@ namespace EduPartners.MVVM.View.Controls
                 iniFile.Save();
             }
 
-            App.Current.Properties["CurrentSchoolId"] = logingInUser.HomeSchool.Id;
-            App.Current.Properties["CurrentUserId"] = logingInUser.Id;
+            App.Current.Properties["CurrentSchoolId"] = loggingInUser.HomeSchool.Id;
+            App.Current.Properties["CurrentUserId"] = loggingInUser.Id;
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
             mainWindow.SetUserControl("MainControl");

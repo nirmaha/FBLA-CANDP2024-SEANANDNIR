@@ -4433,13 +4433,6 @@
         </member>
         <member name="M:Amazon.Runtime.Internal.RuntimeInformationProvider.IsMobile">
             <inheritdoc/>
-            <remarks>
-            SDK does not do intelligent checks like checking package references or reflection to determine whether
-            the current project is a mobile project because of performance reasons. Moving forward, when .NET 6 support is added,
-            it should use OperatingSystem.IsAndroid <see href="https://docs.microsoft.com/en-us/dotnet/api/system.operatingsystem.isandroid"/>
-            or OperatingSystem.IsIOS <see href="https://docs.microsoft.com/en-us/dotnet/api/system.operatingsystem.isios"/> to determine
-            whether the current application is running on Mobile or not.
-            </remarks>
         </member>
         <member name="T:Amazon.Runtime.Internal.RuntimePipelineCustomizerRegistry">
             <summary>
@@ -4750,6 +4743,14 @@
         <member name="T:Amazon.Runtime.Internal.Transform.NullableIntUnmarshaller">
             <summary>
             Unmarshaller for nullable int fields. Implemented only for JSON context
+            to handle cases where value can be null e.g. {'Priority': null}.
+            This unmarshaller is not implemented for XML context, as XML responses
+            will null elements (xsi:nil='true') will be skipped by the XML parser.
+            </summary>
+        </member>
+        <member name="T:Amazon.Runtime.Internal.Transform.NullableBoolUnmarshaller">
+            <summary>
+            Unmarshaller for nullable bool fields. Implemented only for JSON context
             to handle cases where value can be null e.g. {'Priority': null}.
             This unmarshaller is not implemented for XML context, as XML responses
             will null elements (xsi:nil='true') will be skipped by the XML parser.
@@ -6836,6 +6837,111 @@
             The destructor for the client class.
             </summary>
         </member>
+        <member name="T:Amazon.Runtime.Internal.Util.MultiValueHeaderParser">
+            <summary>
+            Functions for parsing multiple comma-delimited header values out of a
+            single header. This parsing adheres to
+            [RFC-7230's specification of header values](https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6).
+            </summary>
+        </member>
+        <member name="M:Amazon.Runtime.Internal.Util.MultiValueHeaderParser.ToStringList(System.String)">
+            <summary>
+            Reads a header string which is optionally comma-delimited and converts it to a list of 
+            strings.
+            </summary>
+            <param name="header">The header string to parse which is optionally a comma-delimited list 
+            of header values. Examples:
+            <list type="bullet">
+                <item>
+                    <description>
+                        "\"b,c\", \"\\\"def\\\"\", a" => ["b,c", "\"def\"", "a"]
+                    </description>
+                </item>
+                <item>
+                    <description>
+                        "1, 2, 3" => ["1", "2", "3"]
+                    </description>
+                </item>
+                <item>
+                    <description>
+                        "a" => ["a"]
+                    </description>
+                </item>
+                <item>
+                    <description>
+                        "" => []
+                    </description>
+                </item>
+            </list>
+            </param>
+            <returns>A list of strings representing the comma-delimited header values.</returns>
+        </member>
+        <member name="M:Amazon.Runtime.Internal.Util.MultiValueHeaderParser.ToDateTimeList(System.String,System.String)">
+            <summary>
+            Reads a header string which is optionally comma-delimited and converts it to a list of 
+            DateTime values.
+            </summary>        
+            <param name="header">The header string to parse which is optionally a comma-delimited list 
+            of header value timestamps matching the specified format. Examples:
+            <list type="bullet">
+                <item>
+                    <description>
+                        "2019-12-16T23:48:18Z, 2019-12-16T23:48:18Z" => [ DateTime, DateTime ]
+                    </description>
+                </item>
+                <item>
+                    <description>
+                        "Mon, 16 Dec 2019 23:48:18 GMT, Mon, 16 Dec 2019 23:48:18 GMT" => [ DateTime, DateTime ]
+                    </description>
+                </item>
+                <item>
+                    <description>
+                        "1576540098, 1576540098" => [ DateTime, DateTime ]
+                    </description>
+                </item>
+                <item>
+                    <description>
+                        "" => []
+                    </description>
+                </item>
+            </list>
+            </param>
+            <param name="format">ISO8601, RFC822, UnixTimestamp</param>
+            <returns>List of DateTimes processed from the comma separated string.</returns>
+        </member>
+        <member name="M:Amazon.Runtime.Internal.Util.MultiValueHeaderParser.ToValueTypeList``1(System.String)">
+            <summary>
+            Reads a header string which is optionally comma-delimited and converts it to a list of 
+            type T.
+            </summary>
+            <typeparam name="T">A value type such as int, double, etc.</typeparam>
+            <param name="header">The header string to parse which is optionally a comma-delimited list 
+            of header values. Examples:
+            <list type="bullet">
+                <item>
+                    <description>
+                        "1.1, 1.2, 1.3" => [1.1, 1.2, 1.3]
+                    </description>
+                </item>
+                <item>
+                    <description>
+                        "1, 2, 3" => [1, 2, 3]
+                    </description>
+                </item>
+                <item>
+                    <description>
+                        "1" => [1]
+                    </description>
+                </item>
+                <item>
+                    <description>
+                        "" => []
+                    </description>
+                </item>
+            </list>
+            </param>
+            <returns>A list of type T representing the comma-delimited header values.</returns>
+        </member>
         <member name="T:Amazon.Runtime.Internal.Util.NonDisposingWrapperStream">
             <summary>
             A wrapper stream which supresses disposal of the underlying stream.
@@ -7198,7 +7304,7 @@
         </member>
         <member name="T:Amazon.Runtime.Internal.Util.StringUtils">
             <summary>
-            Utilities for converting objects to strings. Used by the marshaller classes.
+            Utilities for converting objects to strings or strings to objects. Used by the marshaller classes.
             </summary>
         </member>
         <member name="M:Amazon.Runtime.Internal.Util.StringUtils.FromDateTimeToISO8601(System.DateTime)">
@@ -7208,7 +7314,13 @@
         </member>
         <member name="M:Amazon.Runtime.Internal.Util.StringUtils.FromDateTimeToISO8601NoMs(System.DateTime)">
             <summary>
-            Converts a DateTime to ISO8601 formatted string.
+            Converts a DateTime to ISO8601 formatted string without milliseconds.
+            </summary>
+        </member>
+        <member name="M:Amazon.Runtime.Internal.Util.StringUtils.FromDateTimeToISO8601WithOptionalMs(System.DateTime)">
+            <summary>
+            Converts a DateTime to ISO8601 formatted string with milliseconds
+            if they are not zero.
             </summary>
         </member>
         <member name="M:Amazon.Runtime.Internal.Util.StringUtils.FromDateTimeToRFC822(System.DateTime)">
@@ -7223,14 +7335,14 @@
         </member>
         <member name="M:Amazon.Runtime.Internal.Util.StringUtils.FromList(System.Collections.Generic.IEnumerable{System.Enum})">
             <summary>
-            Combines a list of enums into a comma-separated string to be marshalled as a header
+            Combines an enumerable of enums into a comma-separated string to be marshalled as a header.
             </summary>
             <param name="values">List of enums</param>
             <returns>Header value representing the list of enums</returns>
         </member>
         <member name="M:Amazon.Runtime.Internal.Util.StringUtils.FromList(System.Collections.Generic.List{System.Enum})">
             <summary>
-            Combines a list of enums into a comma-separated string to be marshalled as a header
+            Combines a list of enums into a comma-separated string to be marshalled as a header.
             </summary>
             <param name="values">List of enums</param>
             <returns>Header value representing the list of enums</returns>
@@ -7249,6 +7361,20 @@
             <param name="values">List of enums</param>
             <returns>Header value representing the list of enums</returns>
         </member>
+        <member name="M:Amazon.Runtime.Internal.Util.StringUtils.FromValueTypeList``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Combines an enumerable of T into a comma-separated string to be marshalled as a header.
+            </summary>
+            <param name="values">List of T</param>
+            <returns>Header value representing the list of T.</returns>
+        </member>
+        <member name="M:Amazon.Runtime.Internal.Util.StringUtils.FromValueTypeList``1(System.Collections.Generic.List{``0})">
+            <summary>
+            Combines a List of T into a comma-separated string to be marshalled as a header.
+            </summary>
+            <param name="values">List of T</param>
+            <returns>Header value representing the list of T</returns>
+        </member>
         <member name="M:Amazon.Runtime.Internal.Util.StringUtils.FromList(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
             Combines a list of strings into a comma-separated string to be marshalled as a header
@@ -7258,7 +7384,8 @@
         </member>
         <member name="M:Amazon.Runtime.Internal.Util.StringUtils.EscapeHeaderListEntry(System.String)">
             <summary>
-            Wraps an item to be sent in 
+            Escapes a header list entry wrapping each item with quotes where a quote 
+            or comma exists in the entry. All backslashes are encoded in the item.
             </summary>
             <param name="headerListEntry">Single item from the header's list</param>
             <returns>Item wrapped in double quotes if appropriate</returns>
@@ -9575,9 +9702,16 @@
         </member>
         <member name="P:Amazon.Runtime.ClientConfig.ClientAppId">
             <summary>
-            Customers can opt-in to provide an app id that is intended to identify their applications
-            in the user agent header string. The value must not exceed <see cref="F:Amazon.Runtime.Internal.EnvironmentVariableInternalConfiguration.AWS_SDK_UA_APP_ID_MAX_LENGTH"/> characters.
+            <para>
+            ClientAppId is an optional application specific identifier that can be set. When set it will be appended to the User-Agent header of every request in the form of <c>app/{ClientAppId}</c>. 
+            </para>
+            <para>
+            If the ClientAppId is not set on the object the SDK will search the environment variable <c>AWS_SDK_UA_APP_ID</c> and the shared config profile attribute <c>sdk_ua_app_id</c> for a potential value for the ClientAppId.
+            </para>
             </summary>
+            <remarks>
+            See <see href="https://docs.aws.amazon.com/sdkref/latest/guide/settings-reference.html"/> for more information on environment variables and shared config settings.
+            </remarks>
         </member>
         <member name="P:Amazon.Runtime.ClientConfig.ThrottleRetries">
             <summary>
@@ -11617,7 +11751,7 @@
         </member>
         <member name="P:Amazon.Runtime.Credentials.Internal.SsoToken.ClientSecret">
             <summary>
-            he client secret generated when performing the registration portion of the OIDC authorization flow.
+            The client secret generated when performing the registration portion of the OIDC authorization flow.
             The <see cref="P:Amazon.Runtime.Credentials.Internal.SsoToken.ClientSecret"/> is used alongside the <see cref="P:Amazon.Runtime.Credentials.Internal.SsoToken.RefreshToken"/> to refresh the <see cref="P:Amazon.Runtime.Credentials.Internal.SsoToken.AccessToken"/>.
             </summary>
         </member>
@@ -11754,6 +11888,9 @@
         <member name="P:Amazon.Runtime.Credentials.Internal.SSOTokenManagerGetTokenOptions.SsoVerificationCallback">
             <inheritdoc cref="P:Amazon.Runtime.SSOAWSCredentialsOptions.SsoVerificationCallback"/>
         </member>
+        <member name="P:Amazon.Runtime.Credentials.Internal.SSOTokenManagerGetTokenOptions.PkceFlowOptions">
+            <inheritdoc cref="P:Amazon.Runtime.SharedInterfaces.GetSsoTokenRequest.PkceFlowOptions"/>
+        </member>
         <member name="P:Amazon.Runtime.Credentials.Internal.SSOTokenManagerGetTokenOptions.SupportsGettingNewToken">
             <summary>
             This field controls how <see cref="T:Amazon.Runtime.Credentials.Internal.SSOTokenManager"/> should behave if it does not find a valid or
@@ -11764,8 +11901,8 @@
             If <c>false</c> <see cref="T:Amazon.Runtime.Credentials.Internal.SSOTokenManager"/> will throw an exception if it finds
             an expired token.  It will take no action if finds no cached token.
             <para />
-            NOTE: If setting to <c>true</c>, <see cref="P:Amazon.Runtime.Credentials.Internal.SSOTokenManagerGetTokenOptions.SsoVerificationCallback"/> must also be set
-            for authorization flow to succeed.
+            NOTE: If setting to <c>true</c>, either <see cref="P:Amazon.Runtime.Credentials.Internal.SSOTokenManagerGetTokenOptions.SsoVerificationCallback"/> or <see cref="P:Amazon.Runtime.Credentials.Internal.SSOTokenManagerGetTokenOptions.PkceFlowOptions"/> must 
+            also be set for authorization flow to succeed.
             </summary>
         </member>
         <member name="M:Amazon.Runtime.Credentials.Internal.SsoTokenUtils.IsExpired(Amazon.Runtime.Credentials.Internal.SsoToken)">
@@ -12267,6 +12404,12 @@
             A callback that is used to initiate the SSO Login flow with the user.
             </summary>
         </member>
+        <member name="P:Amazon.Runtime.SSOAWSCredentialsOptions.PkceFlowOptions">
+            <summary>
+            This property MUST be specified if the client wishes to use the Authorization Code Flow 
+            with PKCE (if null, the SSO Token Manager will default to the Device Authorization Flow).
+            </summary>
+        </member>
         <member name="P:Amazon.Runtime.SSOAWSCredentialsOptions.SupportsGettingNewToken">
             <summary>
             This field controls whether a new sso token will be generated if a valid cached token or 
@@ -12276,8 +12419,8 @@
             sso authorization flow is started, a new token is generated and the result is cached.
             If <c>false</c> and a valid cached token or refreshable token is not found, an exception is thrown.
             <para />
-            NOTE: If setting to <c>true</c>, <see cref="P:Amazon.Runtime.SSOAWSCredentialsOptions.SsoVerificationCallback"/> must also be set
-            for authorization flow to succeed.
+            NOTE: If setting to <c>true</c>, either <see cref="P:Amazon.Runtime.SSOAWSCredentialsOptions.SsoVerificationCallback"/> or <see cref="P:Amazon.Runtime.SSOAWSCredentialsOptions.PkceFlowOptions"/> must 
+            also be set for authorization flow to succeed.
             </summary>
         </member>
         <member name="P:Amazon.Runtime.SSOAWSCredentialsOptions.ProxySettings">
@@ -14435,9 +14578,16 @@
         </member>
         <member name="P:Amazon.Runtime.IClientConfig.ClientAppId">
             <summary>
-            Customers can opt-in to provide an app id that is intended to identify their applications
-            in the user agent header string. The value should have a maximum length of 50.
+            <para>
+            ClientAppId is an optional application specific identifier that can be set. When set it will be appended to the User-Agent header of every request in the form of <c>app/{ClientAppId}</c>. 
+            </para>
+            <para>
+            If the ClientAppId is not set on the object the SDK will search the environment variable <c>AWS_SDK_UA_APP_ID</c> and the shared config profile attribute <c>sdk_ua_app_id</c> for a potential value for the ClientAppId.
+            </para>
             </summary>
+            <remarks>
+            See <see href="https://docs.aws.amazon.com/sdkref/latest/guide/settings-reference.html"/> for more information on environment variables and shared config settings.
+            </remarks>
         </member>
         <member name="P:Amazon.Runtime.IClientConfig.ThrottleRetries">
             <summary>
@@ -15779,6 +15929,48 @@
             </para>
             </summary>
         </member>
+        <member name="T:Amazon.Runtime.SharedInterfaces.PkceFlowOptions">
+            <summary>
+            Options applicable for the Authorization Code Flow with PKCE. 
+            </summary>
+        </member>
+        <member name="P:Amazon.Runtime.SharedInterfaces.PkceFlowOptions.RedirectUri">
+            <summary>
+            Redirect URI defined by the client. 
+            At completion of authorization, it is used to restrict what location the user agent can be redirected back to.
+            </summary>
+        </member>
+        <member name="P:Amazon.Runtime.SharedInterfaces.PkceFlowOptions.GrantTypes">
+            <summary>
+            List of OAuth grant types that are defined by the client (it's used to restrict the token granting flows available to the client).
+            In addition to <c>authorization_code</c>, <c>refresh_token</c> must be included in order for the SSO Token Manager
+            to be able to refresh the access token before it expires.
+            </summary>
+            <remarks>Defaults to <c>["authorization_code", "refresh_token"]</c></remarks>
+        </member>
+        <member name="P:Amazon.Runtime.SharedInterfaces.PkceFlowOptions.IssuerUrl">
+            <summary>
+            Used by Identity Center to issue tokens to registered applications and clients.
+            </summary>
+        </member>
+        <member name="P:Amazon.Runtime.SharedInterfaces.PkceFlowOptions.RetrieveAuthorizationCodeCallback">
+            <summary>
+            The SDK will construct an authorization URL which the client must send an HTTP GET to retrieve the authorization code (as described in RFC 7636). 
+            The return value of this delegate will then be used when invoking the <c>CreateToken</c> operation (in addition to the generated <c>code_verifier</c>).
+            </summary>
+            <remarks>
+            This callback will only be invoked in the synchronous code path of the SSO token manager.
+            </remarks>
+        </member>
+        <member name="P:Amazon.Runtime.SharedInterfaces.PkceFlowOptions.RetrieveAuthorizationCodeCallbackAsync">
+            <summary>
+            The SDK will construct an authorization URL which the client must send an HTTP GET to retrieve the authorization code (as described in RFC 7636). 
+            The return value of this delegate will then be used when invoking the <c>CreateToken</c> operation (in addition to the generated <c>code_verifier</c>).
+            </summary>
+            <remarks>
+            This callback will only be invoked in the asynchronous code path of the SSO token manager.
+            </remarks>
+        </member>
         <member name="P:Amazon.Runtime.SharedInterfaces.GetSsoTokenRequest.ClientName">
             <summary>
             Name of the application or system used during SSO client registration.
@@ -15786,7 +15978,7 @@
         </member>
         <member name="P:Amazon.Runtime.SharedInterfaces.GetSsoTokenRequest.ClientType">
             <summary>
-            OAuth client type
+            OAuth client type (e.g. <c>public</c>).
             </summary>
         </member>
         <member name="P:Amazon.Runtime.SharedInterfaces.GetSsoTokenRequest.StartUrl">
@@ -15808,6 +16000,12 @@
         <member name="P:Amazon.Runtime.SharedInterfaces.GetSsoTokenRequest.Scopes">
             <summary>
             The SSO scopes that are provided for authorization when using AWS SSO.
+            </summary>
+        </member>
+        <member name="P:Amazon.Runtime.SharedInterfaces.GetSsoTokenRequest.PkceFlowOptions">
+            <summary>
+            This property MUST be specified if the client wishes to use the Authorization Code Flow 
+            with PKCE (if null, the SSO Token Manager will default to the Device Authorization Flow).
             </summary>
         </member>
         <member name="P:Amazon.Runtime.SharedInterfaces.GetSsoTokenResponse.AccessToken">
@@ -15833,7 +16031,7 @@
         </member>
         <member name="P:Amazon.Runtime.SharedInterfaces.GetSsoTokenResponse.ClientSecret">
             <summary>
-            he client secret generated when performing the registration portion of the OIDC authorization flow.
+            The client secret generated when performing the registration portion of the OIDC authorization flow.
             The <see cref="P:Amazon.Runtime.SharedInterfaces.GetSsoTokenResponse.ClientSecret"/> is used alongside the <see cref="P:Amazon.Runtime.SharedInterfaces.GetSsoTokenResponse.RefreshToken"/> to refresh the <see cref="P:Amazon.Runtime.SharedInterfaces.GetSsoTokenResponse.AccessToken"/>.
             </summary>
         </member>
@@ -15858,6 +16056,13 @@
             is useful in other contexts. Logic that requires the SSO start URL as part of the SSO
             token provider MUST use the SSO start URL configured on the profile and MUST NOT
             use the SSO start URL in the cached token.
+            </summary>
+        </member>
+        <member name="P:Amazon.Runtime.SharedInterfaces.GetSsoTokenResponse.CodeVerifier">
+            <summary>
+            When using the Authorization Code Flow with PKCE, the SDK will generate a verifier that's used to
+            validate the client as the originator of the request (as defined in RFC 7636).
+            This field is set as a convenience and is not directly used by the token provider but is useful in other contexts.
             </summary>
         </member>
         <member name="T:Amazon.Runtime.SignatureException">

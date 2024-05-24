@@ -803,7 +803,7 @@
         <member name="M:MongoDB.Driver.Core.Authentication.DefaultAuthenticator.AuthenticateAsync(MongoDB.Driver.Core.Connections.IConnection,MongoDB.Driver.Core.Connections.ConnectionDescription,System.Threading.CancellationToken)">
             <inheritdoc/>
         </member>
-        <member name="M:MongoDB.Driver.Core.Authentication.DefaultAuthenticator.CustomizeInitialHelloCommand(MongoDB.Bson.BsonDocument)">
+        <member name="M:MongoDB.Driver.Core.Authentication.DefaultAuthenticator.CustomizeInitialHelloCommand(MongoDB.Bson.BsonDocument,System.Threading.CancellationToken)">
             <inheritdoc/>
         </member>
         <member name="P:MongoDB.Driver.Core.Authentication.External.AwsCredentials.Expiration">
@@ -816,28 +816,22 @@
             A GSSAPI SASL authenticator.
             </summary>
         </member>
+        <member name="F:MongoDB.Driver.Core.Authentication.GssapiAuthenticator.MechanismName">
+            <summary>
+            The name of the mechanism.
+            </summary>
+        </member>
+        <member name="F:MongoDB.Driver.Core.Authentication.GssapiAuthenticator.DefaultServiceName">
+            <summary>
+            The default service name.
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.Core.Authentication.GssapiAuthenticator.CanonicalizeHostNamePropertyName">
             <summary>
             Gets the name of the canonicalize host name property.
             </summary>
             <value>
             The name of the canonicalize host name property.
-            </value>
-        </member>
-        <member name="P:MongoDB.Driver.Core.Authentication.GssapiAuthenticator.DefaultServiceName">
-            <summary>
-            Gets the default service name.
-            </summary>
-            <value>
-            The default service name.
-            </value>
-        </member>
-        <member name="P:MongoDB.Driver.Core.Authentication.GssapiAuthenticator.MechanismName">
-            <summary>
-            Gets the name of the mechanism.
-            </summary>
-            <value>
-            The name of the mechanism.
             </value>
         </member>
         <member name="P:MongoDB.Driver.Core.Authentication.GssapiAuthenticator.RealmPropertyName">
@@ -950,11 +944,12 @@
             <param name="cancellationToken">The cancellation token.</param>
             <returns>A Task.</returns>
         </member>
-        <member name="M:MongoDB.Driver.Core.Authentication.IAuthenticator.CustomizeInitialHelloCommand(MongoDB.Bson.BsonDocument)">
+        <member name="M:MongoDB.Driver.Core.Authentication.IAuthenticator.CustomizeInitialHelloCommand(MongoDB.Bson.BsonDocument,System.Threading.CancellationToken)">
             <summary>
             Optionally customizes hello or legacy hello command.
             </summary>
             <param name="helloCommand">Initial command.</param>
+            <param name="cancellationToken">The cancellation token.</param>
             <returns>Optionally mutated command.</returns>
         </member>
         <member name="T:MongoDB.Driver.Core.Authentication.IAuthenticatorFactory">
@@ -1092,7 +1087,7 @@
         <member name="M:MongoDB.Driver.Core.Authentication.MongoDBCRAuthenticator.AuthenticateAsync(MongoDB.Driver.Core.Connections.IConnection,MongoDB.Driver.Core.Connections.ConnectionDescription,System.Threading.CancellationToken)">
             <inheritdoc/>
         </member>
-        <member name="M:MongoDB.Driver.Core.Authentication.MongoDBCRAuthenticator.CustomizeInitialHelloCommand(MongoDB.Bson.BsonDocument)">
+        <member name="M:MongoDB.Driver.Core.Authentication.MongoDBCRAuthenticator.CustomizeInitialHelloCommand(MongoDB.Bson.BsonDocument,System.Threading.CancellationToken)">
             <inheritdoc/>
         </member>
         <member name="T:MongoDB.Driver.Core.Authentication.MongoDBX509Authenticator">
@@ -1130,8 +1125,92 @@
         <member name="M:MongoDB.Driver.Core.Authentication.MongoDBX509Authenticator.AuthenticateAsync(MongoDB.Driver.Core.Connections.IConnection,MongoDB.Driver.Core.Connections.ConnectionDescription,System.Threading.CancellationToken)">
             <inheritdoc/>
         </member>
-        <member name="M:MongoDB.Driver.Core.Authentication.MongoDBX509Authenticator.CustomizeInitialHelloCommand(MongoDB.Bson.BsonDocument)">
+        <member name="M:MongoDB.Driver.Core.Authentication.MongoDBX509Authenticator.CustomizeInitialHelloCommand(MongoDB.Bson.BsonDocument,System.Threading.CancellationToken)">
             <inheritdoc/>
+        </member>
+        <member name="T:MongoDB.Driver.Core.Authentication.NoTransitionClientLastSaslStep">
+            <summary>
+            Represents a last SASL step.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.NoTransitionClientLastSaslStep.#ctor(System.Byte[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Authentication.NoTransitionClientLastSaslStep"/> class.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Authentication.NoTransitionClientLastSaslStep.BytesToSendToServer">
+            <inheritdoc/>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Authentication.NoTransitionClientLastSaslStep.IsComplete">
+            <inheritdoc/>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.NoTransitionClientLastSaslStep.Transition(MongoDB.Driver.Core.Authentication.SaslAuthenticator.SaslConversation,System.Byte[])">
+            <inheritdoc/>
+        </member>
+        <member name="T:MongoDB.Driver.Core.Authentication.Oidc.OidcCallbackParameters">
+            <summary>
+            Represents OIDC callback request.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.Oidc.OidcCallbackParameters.#ctor(System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Authentication.Oidc.OidcCallbackParameters" /> class.
+            </summary>
+            <param name="version">Callback API version number.</param>
+            <param name="userName">User name.</param>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Authentication.Oidc.OidcCallbackParameters.Version">
+            <summary>
+            Callback API version number.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Authentication.Oidc.OidcCallbackParameters.UserName">
+            <summary>
+            User name.
+            </summary>
+        </member>
+        <member name="T:MongoDB.Driver.Core.Authentication.Oidc.OidcAccessToken">
+            <summary>
+            Represents OIDC callback response.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.Oidc.OidcAccessToken.#ctor(System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Authentication.Oidc.OidcAccessToken" /> class.
+            </summary>
+            <param name="accessToken">OIDC Access Token string.</param>
+            <param name="expiresIn">Expiration duration for the Access Token.</param>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Authentication.Oidc.OidcAccessToken.AccessToken">
+            <summary>
+            OIDC Access Token string.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Authentication.Oidc.OidcAccessToken.ExpiresIn">
+            <summary>
+            Expiration duration for the Access Token.
+            </summary>
+        </member>
+        <member name="T:MongoDB.Driver.Core.Authentication.Oidc.IOidcCallback">
+            <summary>
+            Represents OIDC callback provider.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.Oidc.IOidcCallback.GetOidcAccessToken(MongoDB.Driver.Core.Authentication.Oidc.OidcCallbackParameters,System.Threading.CancellationToken)">
+            <summary>
+            Get OIDC callback response.
+            </summary>
+            <param name="parameters">The information used by callbacks to authenticate with the Identity Provider.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>OIDC callback response</returns>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.Oidc.IOidcCallback.GetOidcAccessTokenAsync(MongoDB.Driver.Core.Authentication.Oidc.OidcCallbackParameters,System.Threading.CancellationToken)">
+            <summary>
+            Get OIDC callback response.
+            </summary>
+            <param name="parameters">The information used by callbacks to authenticate with the Identity Provider.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>OIDC callback response</returns>
         </member>
         <member name="T:MongoDB.Driver.Core.Authentication.PlainAuthenticator">
             <summary>
@@ -1167,6 +1246,16 @@
             Base class for a SASL authenticator.
             </summary>
         </member>
+        <member name="F:MongoDB.Driver.Core.Authentication.SaslAuthenticator.SaslStartCommand">
+            <summary>
+            The SASL start command.
+            </summary>
+        </member>
+        <member name="F:MongoDB.Driver.Core.Authentication.SaslAuthenticator.SaslContinueCommand">
+            <summary>
+            The SASL continue command.
+            </summary>
+        </member>
         <member name="M:MongoDB.Driver.Core.Authentication.SaslAuthenticator.#ctor(MongoDB.Driver.Core.Authentication.SaslAuthenticator.ISaslMechanism)">
             <summary>
             Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Authentication.SaslAuthenticator"/> class.
@@ -1197,8 +1286,17 @@
         <member name="M:MongoDB.Driver.Core.Authentication.SaslAuthenticator.AuthenticateAsync(MongoDB.Driver.Core.Connections.IConnection,MongoDB.Driver.Core.Connections.ConnectionDescription,System.Threading.CancellationToken)">
             <inheritdoc/>
         </member>
-        <member name="M:MongoDB.Driver.Core.Authentication.SaslAuthenticator.CustomizeInitialHelloCommand(MongoDB.Bson.BsonDocument)">
+        <member name="M:MongoDB.Driver.Core.Authentication.SaslAuthenticator.CustomizeInitialHelloCommand(MongoDB.Bson.BsonDocument,System.Threading.CancellationToken)">
             <inheritdoc/>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.SaslAuthenticator.TryGetSpeculativeFirstStep(MongoDB.Driver.Core.Connections.ConnectionDescription,MongoDB.Driver.Core.Authentication.SaslAuthenticator.ISaslStep@,MongoDB.Bson.BsonDocument@)">
+            <summary>
+            Determines whether saslStart should be skipped.
+            </summary>
+            <param name="description">The connection description.</param>
+            <param name="firstStep">The first sasl step.</param>
+            <param name="result">The result.</param>
+            <returns>A flag whether saslStart command can be skipped.</returns>
         </member>
         <member name="T:MongoDB.Driver.Core.Authentication.SaslAuthenticator.SaslConversation">
             <summary>
@@ -1241,13 +1339,24 @@
             The name.
             </value>
         </member>
-        <member name="M:MongoDB.Driver.Core.Authentication.SaslAuthenticator.ISaslMechanism.Initialize(MongoDB.Driver.Core.Connections.IConnection,MongoDB.Driver.Core.Authentication.SaslAuthenticator.SaslConversation,MongoDB.Driver.Core.Connections.ConnectionDescription)">
+        <member name="M:MongoDB.Driver.Core.Authentication.SaslAuthenticator.ISaslMechanism.Initialize(MongoDB.Driver.Core.Connections.IConnection,MongoDB.Driver.Core.Authentication.SaslAuthenticator.SaslConversation,MongoDB.Driver.Core.Connections.ConnectionDescription,System.Threading.CancellationToken)">
             <summary>
             Initializes the mechanism.
             </summary>
             <param name="connection">The connection.</param>
             <param name="conversation">The SASL conversation.</param>
             <param name="description">The connection description.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The initial SASL step.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.SaslAuthenticator.ISaslMechanism.InitializeAsync(MongoDB.Driver.Core.Connections.IConnection,MongoDB.Driver.Core.Authentication.SaslAuthenticator.SaslConversation,MongoDB.Driver.Core.Connections.ConnectionDescription,System.Threading.CancellationToken)">
+            <summary>
+            Initializes the mechanism.
+            </summary>
+            <param name="connection">The connection.</param>
+            <param name="conversation">The SASL conversation.</param>
+            <param name="description">The connection description.</param>
+            <param name="cancellationToken">The cancellation token.</param>
             <returns>The initial SASL step.</returns>
         </member>
         <member name="T:MongoDB.Driver.Core.Authentication.SaslAuthenticator.ISaslStep">
@@ -1279,6 +1388,15 @@
             <param name="bytesReceivedFromServer">The bytes received from server.</param>
             <returns>The next SASL step.</returns>
         </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.SaslAuthenticator.ISaslStep.TransitionAsync(MongoDB.Driver.Core.Authentication.SaslAuthenticator.SaslConversation,System.Byte[],System.Threading.CancellationToken)">
+            <summary>
+            Transitions the SASL conversation to the next step.
+            </summary>
+            <param name="conversation">The SASL conversation.</param>
+            <param name="bytesReceivedFromServer">The bytes received from server.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The next SASL step.</returns>
+        </member>
         <member name="T:MongoDB.Driver.Core.Authentication.SaslAuthenticator.CompletedStep">
             <summary>
             Represents a completed SASL step.
@@ -1302,6 +1420,9 @@
             <inheritdoc/>
         </member>
         <member name="M:MongoDB.Driver.Core.Authentication.SaslAuthenticator.CompletedStep.Transition(MongoDB.Driver.Core.Authentication.SaslAuthenticator.SaslConversation,System.Byte[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.SaslAuthenticator.CompletedStep.TransitionAsync(MongoDB.Driver.Core.Authentication.SaslAuthenticator.SaslConversation,System.Byte[],System.Threading.CancellationToken)">
             <inheritdoc/>
         </member>
         <member name="T:MongoDB.Driver.Core.Authentication.SaslMapParser">
@@ -1607,7 +1728,7 @@
         <member name="P:MongoDB.Driver.Core.Authentication.ScramShaAuthenticator.DatabaseName">
             <inheritdoc/>
         </member>
-        <member name="M:MongoDB.Driver.Core.Authentication.ScramShaAuthenticator.CustomizeInitialHelloCommand(MongoDB.Bson.BsonDocument)">
+        <member name="M:MongoDB.Driver.Core.Authentication.ScramShaAuthenticator.CustomizeInitialHelloCommand(MongoDB.Bson.BsonDocument,System.Threading.CancellationToken)">
             <inheritdoc/>
         </member>
         <member name="T:MongoDB.Driver.Core.Authentication.Sspi.AuthIdentity">
@@ -4565,7 +4686,7 @@
             Represents settings for a cluster.
             </summary>
         </member>
-        <member name="M:MongoDB.Driver.Core.Configuration.ClusterSettings.#ctor(MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ClusterConnectionMode},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ConnectionModeSwitch},MongoDB.Driver.Optional{MongoDB.Driver.Core.Configuration.CryptClientSettings},MongoDB.Driver.Optional{System.Nullable{System.Boolean}},MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{System.Net.EndPoint}},MongoDB.Driver.Optional{System.Boolean},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{System.String},MongoDB.Driver.Optional{MongoDB.Driver.ServerApi},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ServerSelectors.IServerSelector},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ServerSelectors.IServerSelector},MongoDB.Driver.Optional{MongoDB.Driver.Core.Configuration.ConnectionStringScheme},MongoDB.Driver.Optional{System.Int32})">
+        <member name="M:MongoDB.Driver.Core.Configuration.ClusterSettings.#ctor(MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ClusterConnectionMode},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ConnectionModeSwitch},MongoDB.Driver.Optional{MongoDB.Driver.Core.Configuration.CryptClientSettings},MongoDB.Driver.Optional{System.Nullable{System.Boolean}},MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{System.Net.EndPoint}},MongoDB.Driver.Optional{System.Boolean},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{System.String},MongoDB.Driver.Optional{MongoDB.Driver.ServerApi},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ServerSelectors.IServerSelector},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ServerSelectors.IServerSelector},MongoDB.Driver.Optional{MongoDB.Driver.Core.Configuration.ConnectionStringScheme},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{System.String})">
             <summary>
             Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Configuration.ClusterSettings"/> class.
             </summary>
@@ -4584,6 +4705,7 @@
             <param name="postServerSelector">The post server selector.</param>
             <param name="scheme">The connection string scheme.</param>
             <param name="srvMaxHosts">Limits the number of SRV records used to populate the seedlist during initial discovery, as well as the number of additional hosts that may be added during SRV polling.</param>
+            <param name="srvServiceName"> The SRV service name which modifies the srv URI to look like: <code>_{srvServiceName}._tcp.{hostname}.{domainname}</code> Defaults to "mongodb".</param>
         </member>
         <member name="P:MongoDB.Driver.Core.Configuration.ClusterSettings.ConnectionMode">
             <summary>
@@ -4676,6 +4798,13 @@
             that may be added during SRV polling.
             </summary>
         </member>
+        <member name="P:MongoDB.Driver.Core.Configuration.ClusterSettings.SrvServiceName">
+            <summary>
+            Gets the SRV service name which modifies the srv URI to look like:
+            <code>_{srvServiceName}._tcp.{hostname}.{domainname}</code>
+            The default value is "mongodb".
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.Core.Configuration.ClusterSettings.PreServerSelector">
             <summary>
             Gets the pre server selector.
@@ -4692,7 +4821,7 @@
             The post server selector.
             </value>
         </member>
-        <member name="M:MongoDB.Driver.Core.Configuration.ClusterSettings.With(MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ClusterConnectionMode},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ConnectionModeSwitch},MongoDB.Driver.Optional{MongoDB.Driver.Core.Configuration.CryptClientSettings},MongoDB.Driver.Optional{System.Nullable{System.Boolean}},MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{System.Net.EndPoint}},MongoDB.Driver.Optional{System.Boolean},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{System.String},MongoDB.Driver.Optional{MongoDB.Driver.ServerApi},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ServerSelectors.IServerSelector},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ServerSelectors.IServerSelector},MongoDB.Driver.Optional{MongoDB.Driver.Core.Configuration.ConnectionStringScheme},MongoDB.Driver.Optional{System.Int32})">
+        <member name="M:MongoDB.Driver.Core.Configuration.ClusterSettings.With(MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ClusterConnectionMode},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ConnectionModeSwitch},MongoDB.Driver.Optional{MongoDB.Driver.Core.Configuration.CryptClientSettings},MongoDB.Driver.Optional{System.Nullable{System.Boolean}},MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{System.Net.EndPoint}},MongoDB.Driver.Optional{System.Boolean},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{System.String},MongoDB.Driver.Optional{MongoDB.Driver.ServerApi},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ServerSelectors.IServerSelector},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ServerSelectors.IServerSelector},MongoDB.Driver.Optional{MongoDB.Driver.Core.Configuration.ConnectionStringScheme},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{System.String})">
             <summary>
             Returns a new ClusterSettings instance with some settings changed.
             </summary>
@@ -4711,6 +4840,7 @@
             <param name="postServerSelector">The post server selector.</param>
             <param name="scheme">The connection string scheme.</param>
             <param name="srvMaxHosts">Limits the number of SRV records used to populate the seedlist during initial discovery, as well as the number of additional hosts that may be added during SRV polling.</param>
+            <param name="srvServiceName"> The SRV service name which modifies the srv URI to look like: <code>_{srvServiceName}._tcp.{hostname}.{domainname}</code> Defaults to "mongodb".</param>
             <returns>A new ClusterSettings instance.</returns>
         </member>
         <member name="T:MongoDB.Driver.Core.Configuration.CompressorConfiguration">
@@ -5128,6 +5258,12 @@
             Limits the number of SRV records used to populate the seedlist
             during initial discovery, as well as the number of additional hosts
             that may be added during SRV polling.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Configuration.ConnectionString.SrvServiceName">
+            <summary>
+            Gets the SRV service name which modifies the srv URI to look like:
+            <code>_{srvServiceName}._tcp.{hostname}.{domainname}</code>
             </summary>
         </member>
         <member name="P:MongoDB.Driver.Core.Configuration.ConnectionString.Ssl">
@@ -5878,6 +6014,11 @@
             <param name="value">The value.</param>
             <returns>A connection description.</returns>
         </member>
+        <member name="T:MongoDB.Driver.Core.Connections.ConnectionDescriptionExtensions">
+            <summary>
+            Represents internal ConnectionDescription extension methods.
+            </summary>
+        </member>
         <member name="T:MongoDB.Driver.Core.Connections.ConnectionExtensions">
             <summary>
             Represents internal IConnection extension methods (used to easily access the IConnectionInternal methods).
@@ -6242,6 +6383,19 @@
             </summary>
             <param name="cancellationToken">The cancellation token.</param>
             <returns>A Task.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Connections.IConnection.Reauthenticate(System.Threading.CancellationToken)">
+            <summary>
+            Reauthenticate the connection.
+            </summary>
+            <param name="cancellationToken">The cancellation token.</param>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Connections.IConnection.ReauthenticateAsync(System.Threading.CancellationToken)">
+            <summary>
+            Reauthenticate the connection.
+            </summary>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>A task.</returns>
         </member>
         <member name="M:MongoDB.Driver.Core.Connections.IConnection.ReceiveMessage(System.Int32,MongoDB.Driver.Core.WireProtocol.Messages.Encoders.IMessageEncoderSelector,MongoDB.Driver.Core.WireProtocol.Messages.Encoders.MessageEncoderSettings,System.Threading.CancellationToken)">
             <summary>
@@ -9296,7 +9450,7 @@
         </member>
         <member name="P:MongoDB.Driver.Core.Misc.Feature.AggregateAccumulator">
             <summary>
-            Gets the aggregate accumulato feature.
+            Gets the aggregate accumulator feature.
             </summary>
         </member>
         <member name="P:MongoDB.Driver.Core.Misc.Feature.AggregateAddFields">
@@ -9497,6 +9651,11 @@
         <member name="P:MongoDB.Driver.Core.Misc.Feature.Csfle2QEv2">
             <summary>
             Gets the client side field level encryption 2 queryable encryption v2 feature.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Misc.Feature.Csfle2QEv2RangePreviewAlgorithm">
+            <summary>
+            Gets the csfle2 range preview algorithm feature.
             </summary>
         </member>
         <member name="P:MongoDB.Driver.Core.Misc.Feature.CurrentOpCommand">
@@ -9900,6 +10059,16 @@
         </member>
         <member name="M:MongoDB.Driver.Core.Misc.Feature.ToString">
             <inheritdoc/>
+        </member>
+        <member name="T:MongoDB.Driver.Core.Misc.IFileSystemProvider">
+            <summary>
+            Abstractions of the file system.
+            </summary>
+        </member>
+        <member name="T:MongoDB.Driver.Core.Misc.IFile">
+            <summary>
+            Abstraction for static methods in <see cref="T:System.IO.File" />.
+            </summary>
         </member>
         <member name="T:MongoDB.Driver.Core.Misc.FixedCountBatchableSourceSerializer`1">
             <summary>
@@ -10537,6 +10706,16 @@
         <member name="F:MongoDB.Driver.Core.Misc.WireVersion.Server72">
             <summary>
             Wire version 23.
+            </summary>
+        </member>
+        <member name="F:MongoDB.Driver.Core.Misc.WireVersion.Server73">
+            <summary>
+            Wire version 24.
+            </summary>
+        </member>
+        <member name="F:MongoDB.Driver.Core.Misc.WireVersion.Server80">
+            <summary>
+            Wire version 25.
             </summary>
         </member>
         <member name="T:MongoDB.Driver.Core.Operations.AggregateExplainOperation">
@@ -15683,6 +15862,17 @@
         </member>
         <member name="M:MongoDB.Driver.Core.Operations.RenameCollectionOperation.ExecuteAsync(MongoDB.Driver.Core.Bindings.IWriteBinding,System.Threading.CancellationToken)">
             <inheritdoc/>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Operations.RetryabilityHelper.IsReauthenticationRequested(MongoDB.Driver.MongoCommandException,MongoDB.Bson.BsonDocument)">
+            <summary>
+            Value indicating whether the exception requests additional authentication attempt.
+            </summary>
+            <param name="mongoCommandException">The command exception.</param>
+            <param name="command">The command.</param>
+            <returns>The flag.</returns>
+            <remarks>
+            This logic is completely separate from a standard retry mechanism and related only to authentication.
+            </remarks>
         </member>
         <member name="T:MongoDB.Driver.Core.Operations.RetryableDeleteCommandOperation">
             <summary>

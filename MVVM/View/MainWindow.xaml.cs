@@ -12,7 +12,7 @@ using EduPartners.MVVM.View.Controls;
 namespace EduPartners.MVVM.View
 {
     /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
+    /// Interaction Logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -36,7 +36,7 @@ namespace EduPartners.MVVM.View
         }
 
         /// <summary>
-        /// This function pre-loads all usercontrols inside of a Dictionary.
+        /// This function pre-loads all user controls inside of a Dictionary.
         /// </summary>
         private void InitializeUserControls()
         {
@@ -53,9 +53,9 @@ namespace EduPartners.MVVM.View
         }
 
         /// <summary>
-        /// This function sets dockpanel to the specified <paramref name="userControl"/>.
+        /// This function sets dock panel to the specified <paramref name="userControl"/>.
         /// </summary>
-        /// <param name="userControl">The name of the usercontrol that is going to be switched to.</param>
+        /// <param name="userControl">The name of the user control that is going to be switched to.</param>
         public void SetUserControl(string userControl)
         {
             Main.Children.Clear();

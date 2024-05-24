@@ -189,7 +189,7 @@ namespace EduPartners.MVVM.View.Pages
                 return;
             }
 
-            // Checks if phonenumber is valid
+            // Checks if phone number is valid
             if (!string.IsNullOrEmpty(tbPhoneNumber.Text) && !phoneNumberMatch)
             {
                 tbPhoneNumber.BorderBrush = Brushes.Red;
@@ -263,7 +263,7 @@ namespace EduPartners.MVVM.View.Pages
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog()
                 {
-                    Title = "Selete a Profile Image",
+                    Title = "Select a Profile Image",
                     Filter = "Images (*.png, *.jpg, *gif, *.bmp) | *.png;*.jpg;*.gif;*.bmp",
                     InitialDirectory = "C:\\",
                     CheckFileExists = true,

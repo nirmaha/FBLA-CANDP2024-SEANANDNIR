@@ -38,7 +38,7 @@ namespace EduPartners.MVVM.View.Pages
             }
         }
 
-        private async void AddPartner_Cliked(object sender, RoutedEventArgs e)
+        private async void AddPartner_Clicked(object sender, RoutedEventArgs e)
         {
             bool isEmpty = false;
             
@@ -187,7 +187,7 @@ namespace EduPartners.MVVM.View.Pages
 
             await db.CreatePartner(partner);
 
-            // Updates school list in databse
+            // Updates school list in database
             School school = (await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString())).FirstOrDefault();
             school.Partners.Value.Add(partner);
 

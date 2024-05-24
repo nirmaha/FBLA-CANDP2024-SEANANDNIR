@@ -1100,7 +1100,7 @@
             </summary>
             <typeparam name="TDocument">The type of the document.</typeparam>
         </member>
-        <member name="M:MongoDB.Driver.BulkWriteResult`1.#ctor(System.Int32,System.Collections.Generic.IEnumerable{MongoDB.Driver.WriteModel{`0}})">
+        <member name="M:MongoDB.Driver.BulkWriteResult`1.#ctor(System.Int32,System.Collections.Generic.IReadOnlyList{MongoDB.Driver.WriteModel{`0}})">
             <summary>
             Initializes a new instance of the <see cref="T:MongoDB.Driver.BulkWriteResult" /> class.
             </summary>
@@ -1117,7 +1117,7 @@
             Result from an acknowledged write concern.
             </summary>
         </member>
-        <member name="M:MongoDB.Driver.BulkWriteResult`1.Acknowledged.#ctor(System.Int32,System.Int64,System.Int64,System.Int64,System.Nullable{System.Int64},System.Collections.Generic.IEnumerable{MongoDB.Driver.WriteModel{`0}},System.Collections.Generic.IEnumerable{MongoDB.Driver.BulkWriteUpsert})">
+        <member name="M:MongoDB.Driver.BulkWriteResult`1.Acknowledged.#ctor(System.Int32,System.Int64,System.Int64,System.Int64,System.Nullable{System.Int64},System.Collections.Generic.IReadOnlyList{MongoDB.Driver.WriteModel{`0}},System.Collections.Generic.IEnumerable{MongoDB.Driver.BulkWriteUpsert})">
             <summary>
             Initializes a new instance of the <see cref="T:MongoDB.Driver.BulkWriteResult`1.Acknowledged" /> class.
             </summary>
@@ -1155,7 +1155,7 @@
             Result from an unacknowledged write concern.
             </summary>
         </member>
-        <member name="M:MongoDB.Driver.BulkWriteResult`1.Unacknowledged.#ctor(System.Int32,System.Collections.Generic.IEnumerable{MongoDB.Driver.WriteModel{`0}})">
+        <member name="M:MongoDB.Driver.BulkWriteResult`1.Unacknowledged.#ctor(System.Int32,System.Collections.Generic.IReadOnlyList{MongoDB.Driver.WriteModel{`0}})">
             <summary>
             Initializes a new instance of the <see cref="T:MongoDB.Driver.BulkWriteResult`1.Unacknowledged"/> class.
             </summary>
@@ -13899,6 +13899,11 @@
             Provides functionality to evaluate queries against MongoDB.
             </summary>
         </member>
+        <member name="P:MongoDB.Driver.Linq.IMongoQueryable.LoggedStages">
+            <summary>
+            Gets the pipeline stages that were logged when the queryable was executed.
+            </summary>
+        </member>
         <member name="M:MongoDB.Driver.Linq.IMongoQueryable.GetExecutionModel">
             <summary>
             Gets the execution model.
@@ -13940,6 +13945,11 @@
         <member name="P:MongoDB.Driver.Linq.IMongoQueryProvider.CollectionNamespace">
             <summary>
             Gets the collection namespace.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Linq.IMongoQueryProvider.LoggedStages">
+            <summary>
+            Gets the most recently logged stages.
             </summary>
         </member>
         <member name="P:MongoDB.Driver.Linq.IMongoQueryProvider.PipelineInputSerializer">
@@ -18662,6 +18672,13 @@
             that may be added during SRV polling.
             </summary>
         </member>
+        <member name="P:MongoDB.Driver.MongoClientSettings.SrvServiceName">
+            <summary>
+            Gets or sets the SRV service name which modifies the srv URI to look like:
+            <code>_{srvServiceName}._tcp.{hostname}.{domainname}</code>
+            The default value is "mongodb".
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.MongoClientSettings.SslSettings">
             <summary>
             Gets or sets the SSL settings.
@@ -19305,6 +19322,22 @@
             <param name="username">The username.</param>
             <param name="password">The password.</param>
             <returns>A credential for MONGODB-CR.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.MongoCredential.CreateOidcCredential(MongoDB.Driver.Core.Authentication.Oidc.IOidcCallback,System.String)">
+            <summary>
+            Creates a credential used with MONGODB-OIDC.
+            </summary>
+            <param name="callback">The OIDC callback.</param>
+            <param name="principalName">The principal name.</param>
+            <returns>The OIDC credential.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.MongoCredential.CreateOidcCredential(System.String,System.String)">
+            <summary>
+            Creates a credential used with MONGODB-OIDC.
+            </summary>
+            <param name="environment">The built in environemnt.</param>
+            <param name="userName">User name.</param>
+            <returns>The OIDC credential.</returns>
         </member>
         <member name="M:MongoDB.Driver.MongoCredential.CreateMongoX509Credential(System.String)">
             <summary>
@@ -20215,6 +20248,17 @@
             <param name="databaseName">Name of the database.</param>
             <param name="username">The username.</param>
         </member>
+        <member name="T:MongoDB.Driver.MongoOidcIdentity">
+            <summary>
+            Represents an OIDC identity.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.MongoOidcIdentity.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.MongoOidcIdentity" /> class.
+            </summary>
+            <param name="username">The username.</param>
+        </member>
         <member name="T:MongoDB.Driver.MongoServerAddress">
             <summary>
             The address of a MongoDB server.
@@ -20511,6 +20555,12 @@
             Limits the number of SRV records used to populate the seedlist
             during initial discovery, as well as the number of additional hosts
             that may be added during SRV polling.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.MongoUrl.SrvServiceName">
+            <summary>
+            Gets the SRV service name which modifies the srv URI to look like:
+            <code>_{srvServiceName}._tcp.{hostname}.{domainname}</code>
             </summary>
         </member>
         <member name="P:MongoDB.Driver.MongoUrl.TlsDisableCertificateRevocationCheck">
@@ -20876,6 +20926,12 @@
             Limits the number of SRV records used to populate the seedlist
             during initial discovery, as well as the number of additional hosts
             that may be added during SRV polling.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.MongoUrlBuilder.SrvServiceName">
+            <summary>
+            Gets or sets the SRV service name which modifies the srv URI to look like:
+            <code>_{srvServiceName}._tcp.{hostname}.{domainname}</code>
             </summary>
         </member>
         <member name="P:MongoDB.Driver.MongoUrlBuilder.TlsDisableCertificateRevocationCheck">

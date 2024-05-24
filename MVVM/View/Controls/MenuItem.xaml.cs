@@ -115,11 +115,11 @@ namespace EduPartners.MVVM.View.Controls
 
         public BitmapImage ImageSource
         {
-            get { return (BitmapImage)GetValue(ImageSourceProptery); }
-            set { SetValue(ImageSourceProptery, value); }
+            get { return (BitmapImage)GetValue(ImageSourceProperty); }
+            set { SetValue(ImageSourceProperty, value); }
         }
 
-        public static readonly DependencyProperty ImageSourceProptery =
+        public static readonly DependencyProperty ImageSourceProperty =
             DependencyProperty.Register("ImageSource", typeof(BitmapImage), typeof(MenuItem));
 
     }

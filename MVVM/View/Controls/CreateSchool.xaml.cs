@@ -15,7 +15,7 @@ using EduPartners.MVVM.Model;
 namespace EduPartners.MVVM.View.Controls
 {
     /// <summary>
-    /// Interaction logic for CreateScool.xaml
+    /// Interaction logic for CreateSchool.xaml
     /// </summary>
     public partial class CreateSchool : UserControl
     {
@@ -241,7 +241,7 @@ namespace EduPartners.MVVM.View.Controls
             tbZip.Focus();
         }
 
-        private void lCopyCliboard_MouseDown(object sender, MouseButtonEventArgs e)
+        private void lCopyClipboard_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Clipboard.SetText(tbSchoolCode.Text);
             MessageBox.Show("Successfully copied to clipboard!");

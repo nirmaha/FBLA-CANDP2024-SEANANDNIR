@@ -28,7 +28,7 @@
 
                     <!-- Top Logo -->
                     <Grid Grid.Row="0">
-                        <Border Margin="14,0,0,0" Width="32" Height="24" HorizontalAlignment="Left">
+                        <Border Margin="14,0,0,0" Width="32" Height="24" HorizontalAlignment="Left" ToolTip="EduPartners">
                             <Border.Background>
                                 <ImageBrush ImageSource="../../../Resources/icon.png" Stretch="Uniform"/>
                             </Border.Background>

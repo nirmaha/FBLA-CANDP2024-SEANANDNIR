@@ -6642,6 +6642,12 @@
             </summary>
             <param name="element">An element to add to the document.</param>
         </member>
+        <member name="M:MongoDB.Bson.BsonDocument.#ctor(MongoDB.Bson.BsonDocument)">
+            <summary>
+            Initializes a new instance of the BsonDocument by coping elements from another BsonDocument.
+            </summary>
+            <param name="document">The document whose elements will be copied</param>
+        </member>
         <member name="M:MongoDB.Bson.BsonDocument.#ctor(System.Collections.Generic.Dictionary{System.String,System.Object})">
             <summary>
             Initializes a new instance of the BsonDocument class and adds new elements from a dictionary of key/value pairs.
@@ -6932,14 +6938,14 @@
             Compares this document to another document.
             </summary>
             <param name="rhs">The other document.</param>
-            <returns>A 32-bit signed integer that indicates whether this document is less than, equal to, or greather than the other.</returns>
+            <returns>A 32-bit signed integer that indicates whether this document is less than, equal to, or greater than the other.</returns>
         </member>
         <member name="M:MongoDB.Bson.BsonDocument.CompareTo(MongoDB.Bson.BsonValue)">
             <summary>
             Compares the BsonDocument to another BsonValue.
             </summary>
             <param name="other">The other BsonValue.</param>
-            <returns>A 32-bit signed integer that indicates whether this BsonDocument is less than, equal to, or greather than the other BsonValue.</returns>
+            <returns>A 32-bit signed integer that indicates whether this BsonDocument is less than, equal to, or greater than the other BsonValue.</returns>
         </member>
         <member name="M:MongoDB.Bson.BsonDocument.Contains(System.String)">
             <summary>

@@ -126,11 +126,11 @@
                                         <ColumnDefinition Width="50"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBox x:Name="tbSerachBox" Foreground="White" CaretBrush="White" Background="Transparent" FontSize="15" VerticalContentAlignment="Center" BorderThickness="0" Margin="10,5,0,5" TextWrapping="NoWrap" TextChanged="tbSerachBox_TextChanged"/>
+                                    <TextBox x:Name="tbSerachBox" Foreground="White" CaretBrush="White" Background="Transparent" FontSize="15" VerticalContentAlignment="Center" BorderThickness="0" Margin="10,5,0,5" TextWrapping="NoWrap" TextChanged="tbSearchBox_TextChanged"/>
                                     <Label x:Name="lSearchLabel" Content="Search" Cursor="Hand" Foreground="DarkGray" FontSize="14" Grid.ColumnSpan="2" Margin="10,0,40,0" VerticalContentAlignment="Center" ToolTip="Search" MouseDown="lSearchLabel_MouseDown"/>
 
                                     <!-- Search Button -->
-                                    <Button BorderThickness="0" Grid.Column="2" Cursor="Hand" Click="Serach_MouseDown" IsDefault="True" ToolTip="Search">
+                                    <Button BorderThickness="0" Grid.Column="2" Cursor="Hand" Click="Search_MouseDown" IsDefault="True" ToolTip="Search">
                                         <Image Source="../../../Resources/search.png" Width="25"/>
                                         <Button.Style>
                                             <Style TargetType="{x:Type Button}">
@@ -182,7 +182,7 @@
                                                 <ColumnDefinition Width="60*"/>
                                             </Grid.ColumnDefinitions>
 
-                                            <Label Name="lParnterId" Content="{Binding Id}" Visibility="Collapsed"/>
+                                            <Label Name="lPartnerId" Content="{Binding Id}" Visibility="Collapsed"/>
                                             <Label Name="lPartnerName" Margin="11,0,0,0" Foreground="White" Content="{Binding Name}" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="23" Height="41"/>
 
                                             <!-- Edit & Delete Buttons -->

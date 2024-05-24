@@ -94,22 +94,22 @@ namespace EduPartners.MVVM.View.Pages
             // Retrieve all partners from the database
             List<Partner> allPartners = await db.GetPartners();
 
-            // Loops thorugh each partner in the schools list
+            // Loops through each partner in the schools list
             for (int i = 0; i < school.Partners.Value.Count; i++)
             {
-                bool foundParnter = false;
+                bool foundPartner = false;
 
                 // Loops through each partner in the collection
                 for (int j = 0; j < allPartners.Count; j++)
                 {
                     if (school.Partners.Value[i].Id == allPartners[j].Id)
                     { 
-                        foundParnter = true;
+                        foundPartner = true;
                         break;
                     }
                 }
 
-                if (!foundParnter)
+                if (!foundPartner)
                 {
                     school.Partners.Value.RemoveAt(i);
                     i--;
@@ -156,12 +156,12 @@ namespace EduPartners.MVVM.View.Pages
         }
 
         /// <summary>
-        /// This funtion recursively searches for a child element of a specified type with a given
+        /// This function recursively searches for a child element of a specified type with a given
         /// name within a parent `DependencyObject`.
         /// </summary>
-        /// <param name="parent">The parnter of the element, passed thorugh the Generic (T).</param>
+        /// <param name="parent">The partner of the element, passed through the Generic (T).</param>
         /// <param name="childName">The the name of the child element you are looking for within the visual tree hierarchy.</param>
-        /// <returns>Returns the element speficed in Generic (T) and the <paramref name="childName"/>. If no matching child is found, it returns null.
+        /// <returns>Returns the element specified in Generic (T) and the <paramref name="childName"/>. If no matching child is found, it returns null.
         /// </returns>
         private T FindChild<T>(DependencyObject parent, string childName) where T : DependencyObject
         {
@@ -194,7 +194,7 @@ namespace EduPartners.MVVM.View.Pages
         private async void Edit_MouseDown(object sender, MouseButtonEventArgs e)
         {
             StackPanel borderParent = (StackPanel)((Border)sender).Parent;
-            Label partnerId = FindChild<Label>(borderParent.Parent, "lParnterId");
+            Label partnerId = FindChild<Label>(borderParent.Parent, "lPartnerId");
 
             Partner partner = (await db.GetPartnerById(partnerId.Content.ToString())).FirstOrDefault();
 
@@ -210,7 +210,7 @@ namespace EduPartners.MVVM.View.Pages
         {
             StackPanel borderParent = (StackPanel)((Border)sender).Parent;
 
-            MessageBoxResult deleteMsgBox = MessageBox.Show("Are you sure you want to delete this parnter?", "Delete Partner", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            MessageBoxResult deleteMsgBox = MessageBox.Show("Are you sure you want to delete this partner?", "Delete Partner", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
 
             if (deleteMsgBox == MessageBoxResult.No)
             {
@@ -219,7 +219,7 @@ namespace EduPartners.MVVM.View.Pages
 
 
             // Finds the label with the ID in it
-            Label partnerId = FindChild<Label>(borderParent.Parent, "lParnterId");
+            Label partnerId = FindChild<Label>(borderParent.Parent, "lPartnerId");
 
             // Deletes the partner
             Partner partner = (await db.GetPartnerById(partnerId.Content.ToString())).FirstOrDefault();
@@ -253,7 +253,7 @@ namespace EduPartners.MVVM.View.Pages
             e.Handled = true;
         }
 
-        private void tbSerachBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void tbSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (tbSerachBox.Text != "")
             {
@@ -291,13 +291,13 @@ namespace EduPartners.MVVM.View.Pages
             FilterPartners(button);
         }
 
-        private void Serach_MouseDown(object sender, RoutedEventArgs e)
+        private void Search_MouseDown(object sender, RoutedEventArgs e)
         {
             FilterPartners();
             e.Handled = true;
         }
 
-        private List<string> filters = new List<string>();
+        private readonly List<string> filters = new List<string>();
 
         private async void FilterPartners(RadioButton radioButton = null)
         {
@@ -354,7 +354,7 @@ namespace EduPartners.MVVM.View.Pages
 
             }
 
-            // Goes through the filter list and applys the filter to the ViewModel
+            // Goes through the filter list and applies the filter to the ViewModel
             for (int i = 0; i < filters.Count; i++)
             {
                 switch (filters[i])
@@ -392,7 +392,7 @@ namespace EduPartners.MVVM.View.Pages
         private async void Print_MouseDown(object sender, MouseButtonEventArgs e)
         {
             StackPanel borderParent = (StackPanel)((Border)sender).Parent;
-            Label partnerId = FindChild<Label>(borderParent.Parent, "lParnterId");
+            Label partnerId = FindChild<Label>(borderParent.Parent, "lPartnerId");
             Partner partner = (await db.GetPartnerById(partnerId.Content.ToString())).FirstOrDefault();
             PrintDialog printDialog = new PrintDialog();
             if (printDialog.ShowDialog() == true)

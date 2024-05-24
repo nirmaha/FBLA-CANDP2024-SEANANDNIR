@@ -48,9 +48,9 @@ namespace EduPartners.MVVM.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// This function triggrers a property changed event.
+        /// This function triggers a property changed event.
         /// </summary>
-        /// <param name="propertyName">The name of the proptery to notify.</param>
+        /// <param name="propertyName">The name of the property to notify.</param>
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));

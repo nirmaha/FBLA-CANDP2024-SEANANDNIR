@@ -28,7 +28,7 @@ namespace EduPartners.MVVM.View.Controls
         string[] backgroundTexts = new string[]
         {
             "Manage your Partnerships",
-            "Administer Accademic Growth",
+            "Administer Academic Growth",
             "Promote Collaboration"
         };
 
