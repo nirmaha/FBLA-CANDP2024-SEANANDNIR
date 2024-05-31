@@ -419,7 +419,7 @@ namespace EduPartners.MVVM.View.Pages
             User user = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
             List<Partner> partners = user.HomeSchool.Partners.Value;
 
-            string tempPDFImage = System.IO.Path.Combine(localDataPath, "TempPDFImage");
+            string tempPDFImage = Path.Combine(localDataPath, "TempPDFImage");
 
             if (!Directory.Exists(tempPDFImage))
             {
@@ -452,7 +452,7 @@ namespace EduPartners.MVVM.View.Pages
                     string imgPath = Path.Combine(tempPDFImage, $"{partner.Name}.png");
 
                     // Save the image to a file
-                    using (var fileStream = new FileStream(imgPath, FileMode.Create))
+                    using (FileStream fileStream = new FileStream(imgPath, FileMode.Create))
                     {
                         PngBitmapEncoder encoder = new PngBitmapEncoder();
                         encoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
@@ -460,9 +460,9 @@ namespace EduPartners.MVVM.View.Pages
                     }
 
                     // Generate PDF with the rendered image
-                    using (var pdfWriter = new PdfWriter(Path.Combine(folderDialog.SelectedPath, $"{partner.Name}.pdf")))
-                    using (var pdfDocument = new PdfDocument(pdfWriter))
-                    using (var document = new Document(pdfDocument))
+                    using (PdfWriter pdfWriter = new PdfWriter(Path.Combine(folderDialog.SelectedPath, $"{partner.Name}.pdf")))
+                    using (PdfDocument pdfDocument = new PdfDocument(pdfWriter))
+                    using (Document document = new Document(pdfDocument))
                     {
                         // Add the rendered image to the PDF
                         iText.Layout.Element.Image img = new iText.Layout.Element.Image(ImageDataFactory.Create(imgPath));
@@ -480,7 +480,7 @@ namespace EduPartners.MVVM.View.Pages
                     }
                 }
 
-                MessageBox.Show("Successfully downloaded all partner reports");
+                MessageBox.Show("Successfully downloaded all partner reports", "Partners Download Successful", MessageBoxButton.OK, MessageBoxImage.Information);
                 string[] files = Directory.GetFiles(tempPDFImage);
 
                 foreach (string file in files)

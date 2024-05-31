@@ -216,7 +216,9 @@
                                                 <Run Text="{Binding StartDate, StringFormat={}{0:MM/dd/yyyy}}"/>
                                             </TextBlock>
 
-                                            <TextBlock Margin="13,0,13,0" Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding Description}" FontSize="12" Foreground="Gray" TextWrapping="Wrap"/>
+                                            <ScrollViewer Margin="13,0,13,0" Grid.Row="2" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                                                <TextBlock Text="{Binding Description}" FontSize="12" Foreground="Gray" TextWrapping="Wrap"/>
+                                            </ScrollViewer>
 
                                             <!-- More Info -->
                                             <Grid x:Name="gMoreInfo" Grid.Row="3" Grid.ColumnSpan="2" Visibility="Collapsed">
