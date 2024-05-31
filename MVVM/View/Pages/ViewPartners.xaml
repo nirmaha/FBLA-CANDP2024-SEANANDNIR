@@ -208,7 +208,7 @@
                                             <TextBlock Grid.Row="1" Margin="13,0,0,48" Padding="0,0,0,11" Foreground="White" FontSize="14" VerticalAlignment="Center" Grid.RowSpan="2">
                                                 <Run Text="{Binding Industry}"/>
                                                 <Run Text="-"/>
-                                                <Run Text="{Binding Savings, StringFormat=${0}}"/>
+                                                <Run Text="{Binding Savings, StringFormat={}{0:C2}}"/>
                                             </TextBlock>
 
                                             <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Margin="13,0,13,0" Padding="0,0,0,8" Foreground="White" FontSize="13" VerticalAlignment="Center" HorizontalAlignment="Right">

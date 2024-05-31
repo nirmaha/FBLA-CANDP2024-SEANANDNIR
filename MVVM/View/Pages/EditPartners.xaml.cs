@@ -21,8 +21,8 @@ namespace EduPartners.MVVM.View.Pages
         private Database db;
         private Partner partner;
 
-        private List<string> industries = new List<string>() { "IT", "Architecture", "Educational Services", "Emergency Services", "Food Services", 
-            "Arts, Entertainment and Recreation", "Administration Service", "Business Support", "Construction", "Finance and Insurance", 
+        private List<string> industries = new List<string>() { "IT", "Architecture", "Educational Services", "Emergency Services", "Food Services",
+            "Arts, Entertainment and Recreation", "Administration Service", "Business Support", "Construction", "Finance and Insurance",
             "Healthcare", "Information", "Real Estate and Rental and Leasing", "Transportation", "Utilities", "Technology" };
 
         public EditPartners()
@@ -137,6 +137,7 @@ namespace EduPartners.MVVM.View.Pages
             bool emailMatch = Regex.IsMatch(tbRepresentativeEmail.Text, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
             bool phoneNumberMatch = tbRepresentativePhoneNumber.Text.Length == 14;
             bool savingsMatch = Regex.IsMatch(tbSavings.Text, @"^[0-9,.]+$");
+            bool savingsEditMatch = Regex.IsMatch(tbEditSavings.Text, @"^[0-9,.]+$");
 
             // Checks if the email if valid
             if (!emailMatch)
@@ -178,10 +179,31 @@ namespace EduPartners.MVVM.View.Pages
             }
             else
             {
-                tbSavings.BorderBrush = Brushes.Red;
+                tbSavings.BorderBrush = Brushes.Gray;
                 tbSavings.BorderThickness = new Thickness(2);
                 lErrorMsg.Visibility = Visibility.Collapsed;
             }
+
+            string operation = string.Empty;
+            double amount = 0.0;
+
+            if (!string.IsNullOrEmpty(tbEditSavings.Text) && !savingsEditMatch)
+            {
+                tbEditSavings.BorderBrush = Brushes.Red;
+                tbEditSavings.BorderThickness = new Thickness(2);
+                lErrorMsg.Visibility = Visibility.Visible;
+                return;
+            }
+            else if (!string.IsNullOrEmpty(tbEditSavings.Text) && savingsEditMatch)
+            {
+                tbSavings.BorderBrush = Brushes.Gray;
+                tbSavings.BorderThickness = new Thickness(2);
+                lErrorMsg.Visibility = Visibility.Collapsed;
+
+                operation = ((ComboBoxItem)cbSign.SelectedItem).Tag.ToString();
+                amount = double.Parse(tbEditSavings.Text);
+            }
+
 
             // Update the selected partner
             Partner updatePartner = new Partner()
@@ -197,7 +219,11 @@ namespace EduPartners.MVVM.View.Pages
                 RepresentativePhoneNumber = string.IsNullOrEmpty(tbRepresentativePhoneNumber.Text) ? "No Phone Number" : tbRepresentativePhoneNumber.Text,
                 Website = string.IsNullOrEmpty(tbWebsite.Text) ? "No Website" : tbWebsite.Text,
                 Address = string.IsNullOrEmpty(tbAddress.Text) ? "No Address" : tbAddress.Text,
-                Savings = double.Parse(tbSavings.Text),
+                Savings = operation == "add"
+                        ? amount + double.Parse(tbSavings.Text)
+                        : (double.Parse(tbSavings.Text) - amount <= 0
+                            ? 0
+                            : double.Parse(tbSavings.Text) - amount),
             };
 
             await db.UpdatePartner(updatePartner);
@@ -208,7 +234,7 @@ namespace EduPartners.MVVM.View.Pages
             foreach (Partner searchPartner in school.Partners.Value)
             {
                 if (searchPartner.Id == updatePartner.Id)
-                { 
+                {
                     school.Partners.Value.Remove(searchPartner);
                     break;
                 }

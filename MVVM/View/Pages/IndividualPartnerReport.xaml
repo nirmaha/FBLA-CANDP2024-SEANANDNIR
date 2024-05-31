@@ -34,7 +34,7 @@
 
         <Grid Grid.Row="1" Margin="0,0,0,8">
             <TextBlock Text="{Binding Address}" FontSize="20" HorizontalAlignment="Left" Margin="20,0,0,0" />
-            <TextBlock Text="{Binding Savings, StringFormat=${0}}" FontSize="20" HorizontalAlignment="Right" Margin="0,0,20,0" />
+            <TextBlock Text="{Binding Savings, StringFormat={}{0:C2}}" FontSize="20" HorizontalAlignment="Right" Margin="0,0,20,0" />
         </Grid>
 
         <!-- Representative Information -->
@@ -71,7 +71,7 @@
         <Grid Grid.Row="11">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="20,0,0,0">
                 <TextBlock Text="Partner Inception: " FontSize="15" VerticalAlignment="Bottom"/>
-                <TextBlock Text="{Binding StartDate, StringFormat=MM/dd/yyyy}" FontSize="15" />
+                <TextBlock Text="{Binding StartDate, StringFormat=MM/dd/yy}" FontSize="15" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
                 <TextBlock Text="Report Generated: " FontSize="15" />

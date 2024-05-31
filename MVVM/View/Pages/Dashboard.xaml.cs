@@ -12,8 +12,6 @@ namespace EduPartners.MVVM.View.Pages
     /// <summary>
     /// Interaction Logic for Dashboard.xaml
     /// </summary>
-    /// 
-
     public partial class Dashboard : Page
     {
         private Database db;

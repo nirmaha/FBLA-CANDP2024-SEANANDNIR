@@ -102,7 +102,17 @@
                                 <Label Content="Savings Due to Business (Per Year)" FontSize="25" Foreground="White" Margin="40,0,0,0" />
                                 <Label Content="*" FontSize="23" Foreground="#FFCC5241" Margin="-7,0,0,0" />
                             </StackPanel>
-                            <TextBox x:Name="tbSavings" Tag="required" Text="{Binding Savings}" FontSize="23" Width="350" Height="36" BorderBrush="Gray" BorderThickness="2" Foreground="White" Background="{StaticResource PrimaryBackgroundColor}" Margin="45,0,0,0" />
+
+                            <StackPanel>
+                                <TextBox x:Name="tbSavings" Tag="required" Text="{Binding Savings, StringFormat={}{0:0.00}}" FontSize="23" Width="350" Height="36" BorderBrush="Gray" BorderThickness="2" Foreground="White" Background="{StaticResource PrimaryBackgroundColor}" Margin="45,0,0,0" />
+                                <StackPanel Orientation="Horizontal">
+                                    <ComboBox x:Name="cbSign" FontSize="23" Width="50" Height="50" VerticalContentAlignment="Center">
+                                        <ComboBoxItem Tag="add" Content="+" IsSelected="True"/>
+                                        <ComboBoxItem Tag="minus" Content="-"/>
+                                    </ComboBox>
+                                    <TextBox x:Name="tbEditSavings" FontSize="23" Width="350" Height="36" BorderBrush="Gray" BorderThickness="2" Foreground="White" Background="{StaticResource PrimaryBackgroundColor}" Margin="17,10,0,0"/>
+                                </StackPanel>
+                            </StackPanel>
                             <!-- Input Fields | End -->
                             
                             <Button Content="Save" FontSize="25" Width="160" Height="40" IsDefault="True" Foreground="{StaticResource PrimaryTextColor}" BorderThickness="0"  Margin="45,20,0,0" Click="UpdatePartner_Clicked">
