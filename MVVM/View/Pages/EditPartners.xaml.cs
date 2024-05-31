@@ -230,18 +230,21 @@ namespace EduPartners.MVVM.View.Pages
 
             School school = (await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString())).FirstOrDefault();
 
+            int index = 0;
+
             // Removes the old partner from the school list
-            foreach (Partner searchPartner in school.Partners.Value)
+            for (int i = 0; i < school.Partners.Value.Count; i++)
             {
-                if (searchPartner.Id == updatePartner.Id)
+                if (school.Partners.Value[i].Id == updatePartner.Id)
                 {
-                    school.Partners.Value.Remove(searchPartner);
+                    index = i;
+                    school.Partners.Value.Remove(school.Partners.Value[i]);
                     break;
                 }
             }
 
             // Adds the new partner in the school list
-            school.Partners.Value.Add(updatePartner);
+            school.Partners.Value.Insert(index, updatePartner);
 
             await db.UpdateSchool(school);
 
