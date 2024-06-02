@@ -66,7 +66,7 @@ namespace EduPartners.MVVM.View.Pages
         private PartnerViewModel viewModel;
         private Database db;
 
-        private static string localDataPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "EduPartners");
+        private static string localDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "EduPartners");
 
         public ViewPartners()
         {

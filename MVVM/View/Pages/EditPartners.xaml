@@ -106,67 +106,80 @@
                             <StackPanel>
                                 <TextBox x:Name="tbSavings" Tag="required" Text="{Binding Savings, StringFormat={}{0:0.00}}" FontSize="23" Width="350" Height="36" BorderBrush="Gray" BorderThickness="2" Foreground="White" Background="{StaticResource PrimaryBackgroundColor}" Margin="45,0,0,0" />
                                 <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
-                                    <ComboBox x:Name="cbSign" FontSize="18" Width="40" Height="30" VerticalContentAlignment="Center" Margin="0,10,0,0" Background="{StaticResource PrimaryBackgroundColor}">
+                                    <ComboBox x:Name="cbSign" FontSize="26" Foreground="White" Width="43" Height="40" VerticalContentAlignment="Center" Margin="0,10,0,0" Background="{StaticResource PrimaryBackgroundColor}">
                                         <ComboBoxItem Tag="add" Content="+" IsSelected="True" Foreground="White"/>
                                         <ComboBoxItem Tag="minus" Content="-" Foreground="White"/>
                                         <ComboBox.Resources>
                                             <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#131725" />
                                         </ComboBox.Resources>
                                         <ComboBox.Template>
-        <ControlTemplate TargetType="ComboBox">
-            <Grid>
-                <ToggleButton x:Name="ToggleButton" 
-                              Grid.Column="2" 
-                              Focusable="false"
-                              IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                              ClickMode="Press">
-                    <ToggleButton.Template>
-                        <ControlTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="5*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Border x:Name="Border" Grid.ColumnSpan="2" CornerRadius="5" Background="{StaticResource PrimaryBackgroundColor}" BorderThickness="1" />
-                            </Grid>
-                        </ControlTemplate>
-                    </ToggleButton.Template>
-                </ToggleButton>
-                <ContentPresenter x:Name="ContentSite"
-                                  IsHitTestVisible="False"
-                                  Content="{TemplateBinding SelectionBoxItem}"
-                                  ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                                  ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                                  Margin="3,3,23,3"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Left" />
-                <Popup x:Name="Popup"
-                       Placement="Bottom"
-                       IsOpen="{TemplateBinding IsDropDownOpen}"
-                       AllowsTransparency="True"
-                       Focusable="False"
-                       PopupAnimation="Slide">
-                    <Grid x:Name="DropDown"
-                          SnapsToDevicePixels="True"
-                          MinWidth="{TemplateBinding ActualWidth}"
-                          MaxHeight="{TemplateBinding MaxDropDownHeight}">
-                        <Border x:Name="DropDownBorder"
-                                Background="{StaticResource PrimaryBackgroundColor}" />
-                        <ScrollViewer Margin="4,6,4,6"
-                                      SnapsToDevicePixels="True">
-                            <StackPanel IsItemsHost="True" />
-                        </ScrollViewer>
-                    </Grid>
-                </Popup>
-            </Grid>
-        </ControlTemplate>
-    </ComboBox.Template>
+                                            <ControlTemplate TargetType="ComboBox">
+                                                <Grid>
+                                                    <ToggleButton x:Name="ToggleButton"
+                                                                    Grid.Column="2"
+                                                                    Focusable="false"
+                                                                    IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                    ClickMode="Press">
+                                                        <ToggleButton.Template>
+                                                            <ControlTemplate TargetType="ToggleButton">
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="*" />
+                                                                        <ColumnDefinition Width="Auto" />
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <Border x:Name="Border" Grid.ColumnSpan="2" CornerRadius="5" Background="{StaticResource PrimaryBackgroundColor}" BorderThickness="1" />
+                                                                    <ContentPresenter
+                                                                        x:Name="ContentSite"
+                                                                        VerticalAlignment="Center"
+                                                                        HorizontalAlignment="Center"
+                                                                        Margin="3,3,23,3"
+                                                                        Content="{TemplateBinding Content}"
+                                                                        ContentTemplate="{TemplateBinding ContentTemplate}" />
+                                                                    <Path x:Name="Arrow" Margin="0,1,10,0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z" Fill="White" />
+                                                                </Grid>
+                                                            </ControlTemplate>
+                                                        </ToggleButton.Template>
+                                                    </ToggleButton>
+                                                    <ContentPresenter x:Name="ContentSite"
+                                                            IsHitTestVisible="False"
+                                                            Content="{TemplateBinding SelectionBoxItem}"
+                                                            ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                            ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                                            Margin="3,0,23,3"
+                                                            VerticalAlignment="Center"
+                                                            HorizontalAlignment="Center" />
+                                                                                            
+                                                    <Popup x:Name="Popup"
+                                                            Placement="Bottom"
+                                                            IsOpen="{TemplateBinding IsDropDownOpen}"
+                                                            AllowsTransparency="True"
+                                                            Focusable="False"
+                                                            PopupAnimation="Slide">
+                                                                                                
+                                                        <Grid x:Name="DropDown"
+                                                                SnapsToDevicePixels="True"
+                                                                MinWidth="{TemplateBinding ActualWidth}"
+                                                                MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                                                                                    
+                                                            <Border x:Name="DropDownBorder"
+                                                                    Background="{StaticResource PrimaryBackgroundColor}" />
+                                                                                                    
+                                                            <ScrollViewer Margin="4,6,4,6"
+                                                                    SnapsToDevicePixels="True">
+                                                                
+                                                            <StackPanel IsItemsHost="True" />
+                                                            </ScrollViewer>
+                                                        </Grid>
+                                                    </Popup>
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </ComboBox.Template>
                                     </ComboBox>
-                                    <TextBox x:Name="tbEditSavings" FontSize="23" Width="350" Height="36" BorderBrush="Gray" BorderThickness="2" Foreground="White" Background="{StaticResource PrimaryBackgroundColor}" Margin="17,10,0,0"/>
+                                    <TextBox x:Name="tbEditSavings" FontSize="23" Width="350" Height="36" BorderBrush="Gray" BorderThickness="2" Foreground="White" Background="{StaticResource PrimaryBackgroundColor}" Margin="14,10,0,0"/>
                                 </StackPanel>
                             </StackPanel>
                             <!-- Input Fields | End -->
-                            
+
                             <Button Content="Save" FontSize="25" Width="160" Height="40" IsDefault="True" Foreground="{StaticResource PrimaryTextColor}" BorderThickness="0"  Margin="45,20,0,0" Click="UpdatePartner_Clicked">
                                 <Button.Style>
                                     <Style TargetType="{x:Type Button}">
