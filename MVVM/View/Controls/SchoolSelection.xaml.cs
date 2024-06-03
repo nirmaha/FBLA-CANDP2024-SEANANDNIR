@@ -29,15 +29,13 @@ namespace EduPartners.MVVM.View.Controls
 
             lErrorMessage.Visibility = Visibility.Collapsed;
 
-            this.Loaded += SchoolSelection_Loaded;
-        }
-
-        private void SchoolSelection_Loaded(object sender, RoutedEventArgs e)
-        {
-            PopulateComboBox();
-            lErrorMessage.Visibility = Visibility.Collapsed;
-            cbSchool.SelectedIndex = -1;
-            tbSchoolId.Clear();
+            this.Loaded += (sender, e) => 
+            {
+                PopulateComboBox();
+                lErrorMessage.Visibility = Visibility.Collapsed;
+                cbSchool.SelectedIndex = -1;
+                tbSchoolId.Clear();
+            };
         }
 
         private async void PopulateComboBox()

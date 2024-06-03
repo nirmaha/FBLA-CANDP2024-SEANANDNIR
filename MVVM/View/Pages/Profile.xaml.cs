@@ -233,7 +233,7 @@ namespace EduPartners.MVVM.View.Pages
                 About = tbAbout.Text,
                 PhoneNumber = tbPhoneNumber.Text,
                 Password = string.IsNullOrEmpty(tbChangedPwrd.Text) ? currentUser.Password : BCrypts.HashPassword(tbChangedPwrd.Text),
-                ProfileImage = File.ReadAllBytes(newProfileName),
+                ProfileImage = string.IsNullOrEmpty(newProfileName) ? currentUser.ProfileImage : File.ReadAllBytes(newProfileName),
                 HomeSchool = currentUser.HomeSchool
             };
 

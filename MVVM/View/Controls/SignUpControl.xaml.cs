@@ -27,22 +27,19 @@ namespace EduPartners.MVVM.View.Controls
 
             lErrorMessage.Visibility = Visibility.Collapsed;
 
-            this.Loaded += SignUpControl_Loaded;
+            this.Loaded += (sender, e) => 
+            {
+                lErrorMessage.Visibility = Visibility.Collapsed;
 
-        }
+                // Fills in saved data
+                tbFirstName.Text = App.Current.Properties["FirstName"]?.ToString();
+                tbLastName.Text = App.Current.Properties["LastName"]?.ToString();
+                tbEmail.Text = App.Current.Properties["Email"]?.ToString();
+                pbPassword.Clear();
+                pbConfirmPassword.Clear();
+                cbTerms.IsChecked = false;
+            };
 
-        private void SignUpControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            lErrorMessage.Visibility = Visibility.Collapsed;
-
-            // Fills in saved data
-            tbFirstName.Text = App.Current.Properties["FirstName"]?.ToString();
-            tbLastName.Text = App.Current.Properties["LastName"]?.ToString();
-            tbEmail.Text = App.Current.Properties["Email"]?.ToString();
-            pbPassword.Clear();
-            pbConfirmPassword.Clear();
-            cbTerms.IsChecked = false;
-            
         }
 
         private void SignUpBorder_MouseDown(object sender, MouseButtonEventArgs e)

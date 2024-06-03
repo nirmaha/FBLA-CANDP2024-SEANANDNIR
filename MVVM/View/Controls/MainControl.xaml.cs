@@ -46,7 +46,7 @@ namespace EduPartners.MVVM.View.Controls
             // Sets the profile image on navigation bar
             UpdateProfileImage();
 
-            // Selects Dashboard as the default menuitem
+            // Selects Dashboard as the default menu item
             DashboardMenuItem.InternalMenu.IsChecked = true;
             btDashboard.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
@@ -131,7 +131,7 @@ namespace EduPartners.MVVM.View.Controls
             }
         }
 
-        // Start: MenuLeft PopupButton //
+        // Start: MenuLeft PopupButton
 
         // Dashboard Menu Button Events
         private void btDashboard_MouseEnter(object sender, MouseEventArgs e)
