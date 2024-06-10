@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:EduPartners.MVVM.View.Pages"
-      xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=DotNetProjects.DataVisualization.Toolkit"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Dashboard">
@@ -26,41 +26,59 @@
                 <!-- Partnersships per Year Line Graph -->
                 <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Orientation="Vertical" Background="#ACC2DC">
                     <Label Content="Partnerships Started per Year" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="Black"/>
-                    <DVC:Chart Name="lineNumofPartners" Height="240" Margin="0,-40,0,0" BorderThickness="0">
-                        <DVC:Chart.Axes>
-                            <DVC:LinearAxis Orientation="X" Interval="2" />
-                            <DVC:LinearAxis Orientation="Y" Interval="1" />
-                        </DVC:Chart.Axes>
-                        <DVC:Chart.Series>
-                            <DVC:LineSeries Title="Number of Parnterships"
-                               IndependentValueBinding="{Binding Path=Key}"  
-                               DependentValueBinding="{Binding Path=Value}"/>
-                        </DVC:Chart.Series>
-                    </DVC:Chart>
+                
+
+                    <lvc:CartesianChart Name="lineNumofPartners" Background="White" Height="184" >
+                        <lvc:CartesianChart.AxisY>
+                            <lvc:Axis Title="Partners" Foreground="Black">
+                                <lvc:Axis.Separator>
+                                    <lvc:Separator Step="1"/>
+                                </lvc:Axis.Separator>
+                            </lvc:Axis>
+                        </lvc:CartesianChart.AxisY>
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:Axis Title="Years" Foreground="Black">
+                                <lvc:Axis.Separator>
+                                    <lvc:Separator Step="1"/>
+                                </lvc:Axis.Separator>
+                            </lvc:Axis>
+                        </lvc:CartesianChart.AxisX>
+                    </lvc:CartesianChart>
+
+
                 </StackPanel>
 
                 <!-- Industries Pie Chart -->
                 <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical" Background="#ACC2DC">
                     <Label Content="Industries" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="Black"/>
-                    <DVC:Chart Name="pieIndustry" Height="240" Margin="0,-40,0,0" BorderThickness="0">
+                    <!--<DVC:Chart Name="pieIndustry" Height="240" Margin="0,-40,0,0" BorderThickness="0">
                         <DVC:Chart.Series>
                             <DVC:PieSeries
                             IndependentValueBinding="{Binding Path=Key}"  
                             DependentValueBinding="{Binding Path=Value}"/>
                         </DVC:Chart.Series>
-                    </DVC:Chart>
+                    </DVC:Chart>-->
+
+                    <lvc:PieChart Name="pieIndustry" LegendLocation="Right" Height="180" Margin="-120,0,0,0">
+                        <lvc:PieChart.ChartLegend>
+                            <lvc:DefaultLegend Orientation="Vertical" Grid.Column="1" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="-100,0,0,0" Width="170"/>
+
+                        </lvc:PieChart.ChartLegend>
+                    </lvc:PieChart>
+
+
                 </StackPanel>
 
                 <!-- Industries Svaings Pie Chart -->
                 <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical" Background="#ACC2DC">
                     <Label Content="Industry Savings" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="Black"/>
-                    <DVC:Chart Name="pieIndustrySavings" Height="240" Margin="0,-40,0,0" BorderThickness="0">
+                    <!--<DVC:Chart Name="pieIndustrySavings" Height="240" Margin="0,-40,0,0" BorderThickness="0">
                         <DVC:Chart.Series>
                             <DVC:PieSeries
                             IndependentValueBinding="{Binding Path=Key}"  
                             DependentValueBinding="{Binding Path=Value}"/>
                         </DVC:Chart.Series>
-                    </DVC:Chart>
+                    </DVC:Chart>-->
                 </StackPanel>
             </Grid>
         </DockPanel>
