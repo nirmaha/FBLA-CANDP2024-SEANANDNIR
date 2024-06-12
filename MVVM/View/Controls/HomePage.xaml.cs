@@ -62,101 +62,81 @@ namespace EduPartners.MVVM.View.Controls
             switchTimer = new System.Timers.Timer();
             animationTimer = new System.Timers.Timer();
 
-            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow.WindowState = WindowState.Normal;
-
-            ParameterizedThreadStart thread = new ParameterizedThreadStart((object parm) => 
+            animationTimer.Interval = animTimeSpan;
+            animationTimer.Elapsed += delegate
             {
-                animationTimer.Interval = animTimeSpan;
-                
-                animationTimer.Elapsed += delegate
+                Dispatcher.Invoke(() =>
                 {
-                    Dispatcher.InvokeAsync(() =>
+                    if (isFadingIn)
                     {
-                        if (isFadingIn)
-                        {
-                            ibBackground.Opacity += 0.05;
-                            lBackgroundText.Opacity += 0.05;
+                        ibBackground.Opacity += 0.05;
+                        lBackgroundText.Opacity += 0.05;
 
-                            // Switch when image is fully faded in
-                            if (ibBackground.Opacity >= 1)
+                        if (ibBackground.Opacity >= 1)
+                        {
+                            isFadingIn = false;
+                            animationTimer.Stop();
+                            switchTimer.Start();
+                        }
+                    }
+                    else
+                    {
+                        ibBackground.Opacity -= 0.05;
+                        lBackgroundText.Opacity -= 0.05;
+
+                        if (ibBackground.Opacity <= 0)
+                        {
+                            isFadingIn = true;
+                            panelNum = (panelNum + 1) % images.Length;
+
+                            ibBackground.ImageSource = new BitmapImage(new Uri(images[panelNum], UriKind.RelativeOrAbsolute));
+                            lBackgroundText.Content = backgroundTexts[panelNum];
+
+                            switch (panelNum)
                             {
-                                isFadingIn = false;
-                                animationTimer.Stop();
-                                switchTimer.Start();
+                                case 0:
+                                    SetPanelCircleProperties(0.7, Colors.White, 0.5, Colors.Gray, 0.5, Colors.Gray);
+                                    break;
+                                case 1:
+                                    SetPanelCircleProperties(0.5, Colors.Gray, 0.7, Colors.White, 0.5, Colors.Gray);
+                                    break;
+                                case 2:
+                                    SetPanelCircleProperties(0.5, Colors.Gray, 0.5, Colors.Gray, 0.7, Colors.White);
+                                    break;
+                                default:
+                                    break;
                             }
                         }
-                        else
-                        {
-                            ibBackground.Opacity -= 0.05;
-                            lBackgroundText.Opacity -= 0.05;
+                    }
+                });
 
-                            if (ibBackground.Opacity <= 0)
-                            {
-                                isFadingIn = true;
-                                panelNum++;
 
-                                if (panelNum == images.Length)
-                                {
-                                    panelNum = 0;
-                                }
-
-                                ibBackground.ImageSource = new BitmapImage(new Uri(images[panelNum], UriKind.RelativeOrAbsolute));
-                                lBackgroundText.Content = backgroundTexts[panelNum];
-
-                                // Switches circles as images cycle
-                                switch (panelNum)
-                                {
-                                    case 0:
-                                        firstPanelCircle.Opacity = 0.7;
-                                        firstPanelCircle.Background = new SolidColorBrush(Colors.White);
-                                        secondPanelCircle.Opacity = 0.5;
-                                        secondPanelCircle.Background = new SolidColorBrush(Colors.Gray);
-                                        thirdPanelCircle.Opacity = 0.5;
-                                        thirdPanelCircle.Background = new SolidColorBrush(Colors.Gray);
-                                        break;
-                                    case 1:
-                                        firstPanelCircle.Opacity = 0.5;
-                                        firstPanelCircle.Background = new SolidColorBrush(Colors.Gray);
-                                        secondPanelCircle.Opacity = 0.7;
-                                        secondPanelCircle.Background = new SolidColorBrush(Colors.White);
-                                        thirdPanelCircle.Opacity = 0.5;
-                                        thirdPanelCircle.Background = new SolidColorBrush(Colors.Gray);
-                                        break;
-                                    case 2:
-                                        firstPanelCircle.Opacity = 0.5;
-                                        firstPanelCircle.Background = new SolidColorBrush(Colors.Gray);
-                                        secondPanelCircle.Opacity = 0.5;
-                                        secondPanelCircle.Background = new SolidColorBrush(Colors.Gray);
-                                        thirdPanelCircle.Opacity = 0.7;
-                                        thirdPanelCircle.Background = new SolidColorBrush(Colors.White);
-                                        break;
-                                }
-                            }
-                        }
-                    });
-                };
-
-                // Start the animation when switching to the next image
                 switchTimer.Elapsed += delegate
                 {
-                    Dispatcher.InvokeAsync(() => { 
+                    Dispatcher.Invoke(() =>
+                    {
                         animationTimer.Start();
                         switchTimer.Stop();
                     });
-                    
                 };
 
                 switchTimer.Interval = 5000;
                 switchTimer.Start();
-            });
 
-            Thread thread1 = new Thread(thread);
-            thread1.SetApartmentState(ApartmentState.STA);
-            thread1.Start("[STA]");
+            };
         }
 
-        private void CreateSchool_Clicked(object sender, RoutedEventArgs e)
+        private void SetPanelCircleProperties(double firstOpacity, Color firstColor, double secondOpacity, Color secondColor, double thirdOpacity, Color thirdColor)
+        {
+            firstPanelCircle.Opacity = firstOpacity;
+            firstPanelCircle.Background = new SolidColorBrush(firstColor);
+            secondPanelCircle.Opacity = secondOpacity;
+            secondPanelCircle.Background = new SolidColorBrush(secondColor);
+            thirdPanelCircle.Opacity = thirdOpacity;
+            thirdPanelCircle.Background = new SolidColorBrush(thirdColor);
+        }
+
+            private void CreateSchool_Clicked(object sender, RoutedEventArgs e)
         {
             switchTimer.Stop();
             animationTimer.Stop();

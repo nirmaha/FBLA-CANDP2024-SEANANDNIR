@@ -164,7 +164,7 @@ namespace EduPartners.MVVM.View.Pages
             }
             else
             {
-                tbSavings.BorderBrush = Brushes.Red;
+                tbSavings.BorderBrush = Brushes.Gray;
                 tbSavings.BorderThickness = new Thickness(2);
                 lErrorMsg.Visibility = Visibility.Collapsed;
             }

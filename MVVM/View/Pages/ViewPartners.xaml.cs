@@ -20,6 +20,7 @@ using EduPartners.Core;
 using EduPartners.MVVM.Model;
 using EduPartners.MVVM.View.Controls;
 using EduPartners.MVVM.ViewModel;
+using System.Threading.Tasks;
 
 
 namespace EduPartners.MVVM.View.Pages
@@ -90,7 +91,6 @@ namespace EduPartners.MVVM.View.Pages
             }
         }
 
-
         /// <summary>
         /// This function checks if the Partners inside of School's list still exist inside of the Partner collection.
         /// </summary>
@@ -102,27 +102,10 @@ namespace EduPartners.MVVM.View.Pages
             // Retrieve all partners from the database
             List<Partner> allPartners = await db.GetPartners();
 
-            // Loops through each partner in the schools list
-            for (int i = 0; i < school.Partners.Value.Count; i++)
-            {
-                bool foundPartner = false;
+            HashSet<string> partnerIds = new HashSet<string>(allPartners.Select(p => p.Id));
 
-                // Loops through each partner in the collection
-                for (int j = 0; j < allPartners.Count; j++)
-                {
-                    if (school.Partners.Value[i].Id == allPartners[j].Id)
-                    { 
-                        foundPartner = true;
-                        break;
-                    }
-                }
-
-                if (!foundPartner)
-                {
-                    school.Partners.Value.RemoveAt(i);
-                    i--;
-                }
-            }
+            // Filter out partners that do not exist in the partner collection
+            school.Partners.Value.RemoveAll(partner => !partnerIds.Contains(partner.Id));
 
             await db.UpdateSchool(school);
         }
@@ -133,12 +116,18 @@ namespace EduPartners.MVVM.View.Pages
         /// </summary>
         private async void PopulateView()
         {
-            SyncList();
+            await Task.Run(() => 
+            {      
+                SyncList();
 
-            School homeSchool = (await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString())).FirstOrDefault();
+                School homeSchool = (db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString()).Result).FirstOrDefault();
 
-            viewModel.Items.Clear();
-            homeSchool.Partners.Value.ForEach(p => viewModel.Items.Add(p));
+                Application.Current.Dispatcher.Invoke(() =>
+                { 
+                    viewModel.Items.Clear();
+                    homeSchool.Partners.Value.ForEach(p => viewModel.Items.Add(p));
+                });
+            });
         }
    
         private void Card_MouseDown(object sender, MouseButtonEventArgs e)
@@ -187,13 +176,11 @@ namespace EduPartners.MVVM.View.Pages
                 {
                     return typedChild;
                 }
-                // If it doesn't match it will recursively search for the child
-                else
-                {
-                    T result = FindChild<T>(child, childName);
-                    if (result != null)
-                        return result;
-                }
+              
+                T result = FindChild<T>(child, childName);
+                if (result != null)
+                    return result;
+                
             }
             return null;
         }
@@ -263,14 +250,7 @@ namespace EduPartners.MVVM.View.Pages
 
         private void tbSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (tbSerachBox.Text != "")
-            {
-                lSearchLabel.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                lSearchLabel.Visibility = Visibility.Visible;
-            }
+            lSearchLabel.Visibility = string.IsNullOrEmpty(tbSerachBox.Text) ? Visibility.Visible : Visibility.Collapsed;
 
             FilterPartners();
 
@@ -288,11 +268,11 @@ namespace EduPartners.MVVM.View.Pages
             RadioButton button = e.Source as RadioButton;
 
             // Makes sure only one button is clicked at a time
-            foreach (object stackButton in spFilterButtons.Children)
+            foreach (RadioButton child in spFilterButtons.Children.OfType<RadioButton>())
             {
-                if (stackButton is RadioButton checkButton && stackButton != button)
+                if (child != button)
                 {
-                    checkButton.IsChecked = false;
+                    child.IsChecked = false;
                 }
             }
 
@@ -315,28 +295,8 @@ namespace EduPartners.MVVM.View.Pages
             // Checks the tag to know what filter it is and adds it to the filter list
             if (radioButton != null)
             { 
-                switch (radioButton.Tag.ToString()) 
-                {
-                    case "AZ":
-                        filters.Clear();
-                        filters.Add(radioButton.Tag.ToString());
-                        break;
-                    case "ZA":
-                        filters.Clear();
-                        filters.Add(radioButton.Tag.ToString());
-                        break;
-                    case "$":
-                        filters.Clear();
-                        filters.Add(radioButton.Tag.ToString());
-                        break;
-                    case "clear":
-                        filters.Clear();
-                        filters.Add(radioButton.Tag.ToString());
-                        break;
-                    default:
-                        break;
-
-                }
+                filters.Clear();
+                filters.Add(radioButton.Tag.ToString());
             }
 
             // Searches the name starting with the search box
@@ -344,28 +304,21 @@ namespace EduPartners.MVVM.View.Pages
             {
                 ComboBoxItem searchFilter = (ComboBoxItem)cbSearchFilter.SelectedItem;
 
-                switch (searchFilter.Tag.ToString())
-                {
-                    case "savings":
-                        partners = partners.Where(partner => partner.Savings.ToString().StartsWith(tbSerachBox.Text, StringComparison.OrdinalIgnoreCase)).ToList();
-                        break;
-                    case "industry":
-                        partners = partners.Where(partner => partner.Industry.StartsWith(tbSerachBox.Text, StringComparison.OrdinalIgnoreCase)).ToList();
-                        break;
-                    case "address":
-                        partners = partners.Where(partner => partner.Address.StartsWith(tbSerachBox.Text, StringComparison.OrdinalIgnoreCase)).ToList();
-                        break;
-                    default:
-                        partners = partners.Where(partner => partner.Name.StartsWith(tbSerachBox.Text, StringComparison.OrdinalIgnoreCase)).ToList();
-                        break;
-                }
+                string searchText = tbSerachBox.Text;
+
+                partners = partners.Where(partner =>
+                    (searchFilter.Tag.ToString() == "savings" && partner.Savings.ToString().StartsWith(searchText, StringComparison.OrdinalIgnoreCase)) ||
+                    (searchFilter.Tag.ToString() == "industry" && partner.Industry.StartsWith(searchText, StringComparison.OrdinalIgnoreCase)) ||
+                    (searchFilter.Tag.ToString() == "address" && partner.Address.StartsWith(searchText, StringComparison.OrdinalIgnoreCase)) ||
+                    (searchFilter.Tag.ToString() != "savings" && searchFilter.Tag.ToString() != "industry" && searchFilter.Tag.ToString() != "address" && partner.Name.StartsWith(searchText, StringComparison.OrdinalIgnoreCase))
+                ).ToList();
 
             }
 
             // Goes through the filter list and applies the filter to the ViewModel
-            for (int i = 0; i < filters.Count; i++)
+            foreach (string filter in filters)
             {
-                switch (filters[i])
+                switch (filter)
                 {
                     case "AZ":
                         partners = partners.OrderBy(partner => partner.Name).ToList();
@@ -379,7 +332,7 @@ namespace EduPartners.MVVM.View.Pages
                     case "clear":
                         filters.Clear();
                         radioButton.IsChecked = false;
-                        i = filters.Count;
+                        filters.Add("clear");
                         break;
                     default:
                         break;

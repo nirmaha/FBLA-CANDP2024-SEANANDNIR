@@ -29,7 +29,7 @@
                     <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Orientation="Vertical">
                         <Label Content="Partnerships Started per Year" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
 
-                        <lvc:CartesianChart Name="lineNumofPartners" Background="{StaticResource PrimaryBackgroundColor}" Height="184" >
+                        <lvc:CartesianChart Name="lineNumofPartners" Background="{StaticResource PrimaryBackgroundColor}" Height="184">
                             <lvc:CartesianChart.AxisY>
                                 <lvc:Axis Title="Partners" Foreground="White">
                                     <lvc:Axis.Separator>
