@@ -209,8 +209,8 @@ This is where the user can log out.
   - https://github.com/BcryptNet/bcrypt.net
 - **MongoDB:**
   - https://www.mongodb.com/docs/
-- **Data Vizualtion Charting:**
-  - https://www.nuget.org/packages/DotNetProjects.WpfToolkit.DataVisualization/6.1.94
+- **LiveCharts:**
+  - https://www.nuget.org/packages/LiveCharts/
 
 #### Resources
 - **Dashboard Template:**
