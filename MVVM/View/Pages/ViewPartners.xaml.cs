@@ -80,6 +80,12 @@ namespace EduPartners.MVVM.View.Pages
 
             icViewParnter.ItemsSource = viewModel.Items;
             DataContext = viewModel;
+
+            if (App.Current.Properties["PreFilteredIndustry"] != null)
+            {
+                PreFilter_Industry();
+                App.Current.Properties["PreFilteredIndustry"] = null;
+            }
         }
 
 
@@ -491,6 +497,13 @@ namespace EduPartners.MVVM.View.Pages
 
             RadioButton radioButton = (RadioButton)sender;
             radioButton.IsChecked = false;
+        }
+
+        private void PreFilter_Industry()
+        {
+            tbSerachBox.Text = App.Current.Properties["PreFilteredIndustry"].ToString();
+            cbSearchFilter.SelectedIndex = 1;
+            FilterPartners();
         }
     }
 }

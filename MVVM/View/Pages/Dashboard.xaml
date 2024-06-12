@@ -59,7 +59,7 @@
                                 <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
 
-                            <lvc:PieChart Name="pieIndustry" Grid.Column="0" LegendLocation="None" DataClick="PieChart_DataClick" HorizontalAlignment="Center" VerticalAlignment="Top" Width="250" Height="175"/>
+                            <lvc:PieChart Name="pieIndustry" Grid.Column="0" LegendLocation="None" DataClick="PieChart_DataClick" HorizontalAlignment="Center" VerticalAlignment="Top" Width="250" Height="175" DataTooltip="{x:Null}"/>
 
                             <ListBox Name="legendListBox" Grid.Column="1" IsHitTestVisible="True" VerticalAlignment="Center" FontSize="10"
                                      ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="177" Margin="0,0,5,0" Foreground="White" Background="{StaticResource PrimaryBackgroundColor}">
@@ -80,7 +80,7 @@
                     <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
                         <Label Content="Industry Savings" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
 
-                        <lvc:CartesianChart x:Name="barIndustrySavings" LegendLocation="None" Background="{StaticResource PrimaryBackgroundColor}" Height="176" Margin="5,0,0,0">
+                        <lvc:CartesianChart x:Name="barIndustrySavings" LegendLocation="None" Background="{StaticResource PrimaryBackgroundColor}" Height="176" Margin="5,0,0,0" DataClick="BarGraph_DataClick">
                             <lvc:CartesianChart.AxisX>
                                 <lvc:Axis Title="Industries" Foreground="White" Labels="{Binding BarChartLabels}" ShowLabels="False"/>
                             </lvc:CartesianChart.AxisX>

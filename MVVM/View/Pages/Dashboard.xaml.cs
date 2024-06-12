@@ -158,15 +158,15 @@ namespace EduPartners.MVVM.View.Pages
 
         private void PieChart_DataClick(object sender, ChartPoint chartPoint)
         {
-            PieChart chart = (PieChart)chartPoint.ChartView;
+            App.Current.Properties["PreFilteredIndustry"] = chartPoint.SeriesView.Title;
+            mainControl.Load_Page("MVVM/View/Pages/ViewPartners.xaml");
+        }
 
-            foreach (PieSeries series in chart.Series)
-            {
-                series.PushOut = 0;
-            }
-
-            PieSeries selectedSeries = (PieSeries)chartPoint.SeriesView;
-            selectedSeries.PushOut = 8;
+        private void BarGraph_DataClick(object sender, ChartPoint chartPoint)
+        {
+            double xValue = chartPoint.X;
+            App.Current.Properties["PreFilteredIndustry"] = barIndustrySavings.AxisX[0].Labels[(int)chartPoint.X];
+            mainControl.Load_Page("MVVM/View/Pages/ViewPartners.xaml");
         }
     }
 }

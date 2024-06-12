@@ -182,7 +182,6 @@ C:\Users\CSDSTUDENT12\Source\Repos\nirmaha\FBLA-CANDP2024-SEANANDNIR\obj\Debug\E
 C:\Users\CSDSTUDENT12\Source\Repos\nirmaha\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.exe
 C:\Users\CSDSTUDENT12\Source\Repos\nirmaha\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.pdb
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartn.9BA38DCF.Up2Date
-C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\DotNetProjects.DataVisualization.Toolkit.dll
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
 C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\obj\Debug\MVVM\View\Pages\EditPartners.g.cs
@@ -585,3 +584,8 @@ D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.csproj.CoreCompileInpu
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartn.9BA38DCF.Up2Date
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.exe
 D:\dev\C#\FBLA-CANDP2024-SEANANDNIR\obj\Debug\EduPartners.pdb
+C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\LiveCharts.dll
+C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\LiveCharts.Wpf.dll
+C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\LiveCharts.xml
+C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\LiveCharts.Wpf.pdb
+C:\dev\GitHub\FBLA-CANDP2024-SEANANDNIR\bin\Debug\LiveCharts.Wpf.xml
