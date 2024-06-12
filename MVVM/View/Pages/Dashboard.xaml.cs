@@ -11,6 +11,7 @@ using LiveCharts.Wpf;
 
 using EduPartners.Core;
 using EduPartners.MVVM.Model;
+using EduPartners.MVVM.View.Controls;
 
 namespace EduPartners.MVVM.View.Pages
 {
@@ -25,20 +26,23 @@ namespace EduPartners.MVVM.View.Pages
     /// </summary>
     public partial class Dashboard : Page
     {
-        private Database db;
-        private Random rnd = new Random();
+        private readonly Database db;
+        private readonly MainControl mainControl;
+        
 
         public ObservableCollection<CustomLegendItem> LegendItems { get; set; }
 
-        private Dictionary<string, double> IndustryToSavings = new Dictionary<string, double>();
+        private readonly Dictionary<string, double> IndustryToSavings = new Dictionary<string, double>();
 
         public string[] BarChartLabels { get; set; }
         public Func<double, string> CurrencyFormatter { get; set; }
+
 
         public Dashboard()
         {
             InitializeComponent();
             db = App.Current.Properties["Database"] as Database;
+            mainControl = App.Current.Properties["MainControl"] as MainControl;
             DataContext = this;
 
             this.Loaded += async (sender, e) =>
@@ -50,6 +54,7 @@ namespace EduPartners.MVVM.View.Pages
 
                 List<int> dates = new List<int>();
                 List<string> industries = new List<string>();
+
 
                 // Populates Dashboard Graphs
                 foreach (Partner partner in partners) 
@@ -86,8 +91,7 @@ namespace EduPartners.MVVM.View.Pages
                 {
                     Title = "Partners",
                     Values = values,
-                    PointGeometry = DefaultGeometries.Circle,
-                    
+                    PointGeometry = DefaultGeometries.Circle,   
                 };
 
                 lineNumofPartners.Series = new SeriesCollection() { lineSeries };
@@ -99,19 +103,20 @@ namespace EduPartners.MVVM.View.Pages
 
                 SeriesCollection pieSeries = new SeriesCollection();
 
+                int colorIndex = 0;
+
                 foreach (KeyValuePair<string, int> industry in industryCount)
                 {
-                    SolidColorBrush randomColor = new SolidColorBrush(Color.FromRgb((byte)rnd.Next(256), (byte)rnd.Next(256), (byte)rnd.Next(256)));
-
                     pieSeries.Add
                     (
-                        new PieSeries() 
-                        { 
-                            Title = industry.Key, 
+                        new PieSeries()
+                        {
+                            Title = industry.Key,
                             Values = new ChartValues<int> { industry.Value },
-                            Fill = randomColor
+                            Fill = mainControl.savedColors[colorIndex]
                         }
                     );
+                    colorIndex++;
                 }
 
                 LegendItems = new ObservableCollection<CustomLegendItem>();

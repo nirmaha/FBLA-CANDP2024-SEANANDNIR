@@ -8,9 +8,8 @@
       d:DesignHeight="450" d:DesignWidth="800" FontFamily="Poppins"
       Title="Profile">
 
-    
     <Viewbox>
-        <DockPanel Background="{StaticResource SecundaryBackgroundColor}" Height="450" Width="800">
+        <DockPanel Height="450" Width="800" Background="{DynamicResource SecundaryBackgroundColor}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="250"/>
@@ -39,10 +38,9 @@
                                     <Image x:Name="imgProfile" Source="../../../Resources/defaultProfile.png" Stretch="UniformToFill"/>
                                 </VisualBrush.Visual>
                             </VisualBrush>
-
                         </Ellipse.Fill>
                     </Ellipse>
-                    
+
                     <!-- Edit Profile Elements -->
                     <Ellipse x:Name="overlayEllipse" Grid.Row="0" Width="120" Height="120" Fill="Gray" Opacity="0" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0"/>
                     <Image x:Name="imgEdit" Source="../../../Resources/profileEdit.png" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" Margin="-1,13,0,0" MouseDown="ProfileCircle_MouseDown"/>
@@ -59,7 +57,7 @@
                 <Grid Grid.Column="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
-                        <RowDefinition Height="45"/> 
+                        <RowDefinition Height="45"/>
                         <RowDefinition Height="60"/>
                         <RowDefinition Height="60"/>
                         <RowDefinition Height="auto"/>
@@ -83,20 +81,20 @@
                                 <Label Content="Full Name" Foreground="White" FontSize="15" Margin="-4,0,0,0"/>
                                 <Label Content="*" FontSize="23" Foreground="#FFCC5241" Margin="-8,-3,0,0" />
                             </StackPanel>
-                            
+
                             <TextBox x:Name="tbName" Text="{Binding Name}" Background="{StaticResource PrimaryBackgroundColor}" CaretBrush="White" Foreground="White" BorderBrush="{StaticResource FourthIconColor}" BorderThickness="2" Height="23" Width="245" IsReadOnly="True"/>
-                        </StackPanel>  
-                                
+                        </StackPanel>
+
                         <StackPanel Margin="15,0,0,0" Orientation="Vertical">
-                            
+
                             <StackPanel Height="25" Orientation="Horizontal">
                                 <Label Content="Email" Foreground="White" FontSize="15" Margin="-4,0,0,0"/>
                                 <Label Content="*" FontSize="23" Foreground="#FFCC5241" Margin="-8,-3,0,0" />
                             </StackPanel>
-                            
+
                             <TextBox x:Name="tbEmail" Text="{Binding Email}" Background="{StaticResource PrimaryBackgroundColor}" CaretBrush="White" Foreground="White" BorderBrush="{StaticResource FourthIconColor}" BorderThickness="2" Height="23" Width="245" IsReadOnly="True"/>
                         </StackPanel>
-                                
+
                     </StackPanel>
 
                     <!-- Phone Number -->
@@ -119,7 +117,7 @@
                                 <Label Content="Current Password" Foreground="White" FontSize="15" Margin="-4,0,0,0"/>
                                 <TextBox x:Name="tbCurrentPwrd" Text="" Background="{StaticResource PrimaryBackgroundColor}" CaretBrush="White" Foreground="White" BorderBrush="{StaticResource FourthIconColor}" HorizontalAlignment="Left" BorderThickness="2" Height="23" Width="245"/>
                             </StackPanel>
-                            
+
                             <!-- New Password -->
                             <StackPanel Orientation="Vertical" Margin="15,0,0,0">
                                 <Label Content="New Password" Foreground="White" FontSize="15" Margin="-4,0,0,0"/>
@@ -143,7 +141,7 @@
 
                     <!-- Update | Save | Cancel -->
                     <StackPanel Grid.Row="6" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,8,8">
-                        
+
                         <!-- Cancel Button -->
                         <Button x:Name="btCancel" Content="Cancel" Height="30" Width="70" Foreground="{StaticResource PrimaryTextColor}" BorderThickness="0" Visibility="Collapsed" Click="btCancel_Click">
                             <Button.Style>

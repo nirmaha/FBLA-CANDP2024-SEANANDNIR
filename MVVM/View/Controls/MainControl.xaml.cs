@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 using EduPartners.Core;
@@ -24,6 +25,33 @@ namespace EduPartners.MVVM.View.Controls
 
         private static string localDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "EduPartners");
 
+        private Random rnd = new Random();
+        private List<Color> distinctColors = new List<Color>
+        {
+            Colors.Red,
+            Colors.Green,
+            Colors.Blue,
+            Colors.Yellow,
+            Colors.Orange,
+            Colors.Purple,
+            Colors.Pink,
+            Colors.Brown,
+            Colors.Gray,
+            Colors.Cyan,
+            Colors.Magenta,
+            Colors.Lime,
+            Colors.Maroon,
+            Colors.Navy,
+            Colors.Olive,
+            Colors.Teal,
+            Colors.Violet,
+            Colors.Gold,
+            Colors.Silver,
+            Colors.IndianRed
+        };
+        public List<SolidColorBrush> savedColors = new List<SolidColorBrush>();
+
+
         public MainControl()
         {
             InitializeComponent();
@@ -34,7 +62,7 @@ namespace EduPartners.MVVM.View.Controls
             App.Current.Properties["MainControl"] = this;
         }
 
-        private void MainControl_Loaded(object sender, RoutedEventArgs e)
+        private async void MainControl_Loaded(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
 
@@ -46,13 +74,48 @@ namespace EduPartners.MVVM.View.Controls
             // Sets the profile image on navigation bar
             UpdateProfileImage();
 
+            School school = (await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString())).FirstOrDefault();
+
+            List<Partner> partners = school.Partners.Value;
+            List<string> industries = new List<string>();
+
+            foreach (Partner partner in partners)
+            {
+                if (!industries.Contains(partner.Industry))
+                {
+                    industries.Add(partner.Industry);  
+                }
+            }
+
+            ShuffleColors();
+            int colorIndex = 0;
+
+            foreach (string industry in industries)
+            {
+                SolidColorBrush randomColor = new SolidColorBrush(distinctColors[colorIndex]);
+                colorIndex = (colorIndex + 1) % distinctColors.Count;
+
+                savedColors.Add(randomColor);
+            }
+
             // Selects Dashboard as the default menu item
             DashboardMenuItem.InternalMenu.IsChecked = true;
             btDashboard.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
 
+        private void ShuffleColors()
+        {
+            for (int i = distinctColors.Count - 1; i > 0; i--)
+            {
+                int j = rnd.Next(i + 1);
+                Color temp = distinctColors[i];
+                distinctColors[i] = distinctColors[j];
+                distinctColors[j] = temp;
+            }
+        }
+
         /// <summary>
-        /// This function navigates to a specified <paramref name="PpgeUri"/> and updates the corresponding
+        /// This function navigates to a specified <paramref name="pageUri"/> and updates the corresponding
         /// buttons and menu items accordingly.
         /// </summary>
         /// <param name="pageUri">The URI of the page that needs to be loaded in the application. It is used to
@@ -154,6 +217,7 @@ namespace EduPartners.MVVM.View.Controls
         private void btDashboard_Click(object sender, RoutedEventArgs e)
         {
             fContainer.Navigate(new Uri("MVVM/View/Pages/Dashboard.xaml", UriKind.RelativeOrAbsolute));
+            currentMenuItem = (Button)sender;
         }
 
         // View Menu Button Events

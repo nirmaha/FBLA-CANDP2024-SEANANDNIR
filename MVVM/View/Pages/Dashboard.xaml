@@ -9,85 +9,88 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Dashboard">
 
-    <Viewbox>
-        <DockPanel Dock="Top" Width="800" Height="450">
-            <Grid Background="{DynamicResource SecundaryBackgroundColor}">
+    <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}" VerticalAlignment="Center">
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+        <Viewbox>
+            <DockPanel Dock="Top" Width="800" Height="450">
+                <Grid>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-                <!-- Partnersships per Year Line Graph -->
-                <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Orientation="Vertical" Background="#ACC2DC">
-                    <Label Content="Partnerships Started per Year" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="Black"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Partnersships per Year Line Graph -->
+                    <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Orientation="Vertical">
+                        <Label Content="Partnerships Started per Year" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
+
+                        <lvc:CartesianChart Name="lineNumofPartners" Background="{StaticResource PrimaryBackgroundColor}" Height="184" >
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis Title="Partners" Foreground="White">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="1" IsEnabled="True"/>
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisY>
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis Title="Years" Foreground="White">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="1" IsEnabled="False"/>
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+                        </lvc:CartesianChart>
 
 
-                    <lvc:CartesianChart Name="lineNumofPartners" Background="White" Height="184" >
-                        <lvc:CartesianChart.AxisY>
-                            <lvc:Axis Title="Partners" Foreground="Black">
-                                <lvc:Axis.Separator>
-                                    <lvc:Separator Step="1"/>
-                                </lvc:Axis.Separator>
-                            </lvc:Axis>
-                        </lvc:CartesianChart.AxisY>
-                        <lvc:CartesianChart.AxisX>
-                            <lvc:Axis Title="Years" Foreground="Black">
-                                <lvc:Axis.Separator>
-                                    <lvc:Separator Step="1"/>
-                                </lvc:Axis.Separator>
-                            </lvc:Axis>
-                        </lvc:CartesianChart.AxisX>
-                    </lvc:CartesianChart>
+                    </StackPanel>
 
+                    <!-- Industries Pie Chart -->
+                    <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical">
+                        <Label Content="Industries" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
 
-                </StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
 
-                <!-- Industries Pie Chart -->
-                <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical" Background="#ACC2DC">
-                    <Label Content="Industries" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="Black"/>
+                            <lvc:PieChart Name="pieIndustry" Grid.Column="0" LegendLocation="None" DataClick="PieChart_DataClick" HorizontalAlignment="Center" VerticalAlignment="Top" Width="250" Height="175"/>
 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="2*"/>
-                        </Grid.ColumnDefinitions>
+                            <ListBox Name="legendListBox" Grid.Column="1" IsHitTestVisible="True" VerticalAlignment="Center" FontSize="10"
+                                     ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="177" Margin="0,0,5,0" Foreground="White" Background="{StaticResource PrimaryBackgroundColor}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" Margin="5">
+                                            <Ellipse Stroke="White" StrokeThickness="1" Width="16" Height="16" Fill="{Binding Color}"/>
+                                            <TextBlock Text="{Binding Title}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
 
-                        <lvc:PieChart Name="pieIndustry" Grid.Column="0" LegendLocation="None" DataClick="PieChart_DataClick" HorizontalAlignment="Center" VerticalAlignment="Top" Width="250" Height="175"/>
+                    </StackPanel>
 
-                        <ListBox Name="legendListBox" Grid.Column="1" IsHitTestVisible="True" VerticalAlignment="Center" FontSize="10"
-                                     ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="177" Margin="0,0,5,0">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" Margin="5">
-                                        <Ellipse Stroke="Black" StrokeThickness="1" Width="16" Height="16" Fill="{Binding Color}"/>
-                                        <TextBlock Text="{Binding Title}" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                    </Grid>
+                    <!-- Industries Svaings Pie Chart -->
+                    <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
+                        <Label Content="Industry Savings" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
 
-                </StackPanel>
-
-                <!-- Industries Svaings Pie Chart -->
-                <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical" Background="#ACC2DC">
-                    <Label Content="Industry Savings" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="Black"/>
-                    <lvc:CartesianChart x:Name="barIndustrySavings" LegendLocation="None" Background="White" Height="176" Margin="5,0,0,0">
-                        <lvc:CartesianChart.AxisX>
-                            <lvc:Axis Title="Industries" Foreground="Black" Labels="{Binding BarChartLabels}" ShowLabels="False"/>
-                        </lvc:CartesianChart.AxisX>
-                        <lvc:CartesianChart.AxisY>
-                            <lvc:Axis Title="Savings" Foreground="Black" LabelFormatter="{Binding CurrencyFormatter}"/>
-                        </lvc:CartesianChart.AxisY>
-                    </lvc:CartesianChart>
-                </StackPanel>
-            </Grid>
-        </DockPanel>
-    </Viewbox>
+                        <lvc:CartesianChart x:Name="barIndustrySavings" LegendLocation="None" Background="{StaticResource PrimaryBackgroundColor}" Height="176" Margin="5,0,0,0">
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis Title="Industries" Foreground="White" Labels="{Binding BarChartLabels}" ShowLabels="False"/>
+                            </lvc:CartesianChart.AxisX>
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis Title="Savings" Foreground="White" LabelFormatter="{Binding CurrencyFormatter}"/>
+                            </lvc:CartesianChart.AxisY>
+                        </lvc:CartesianChart>
+                    </StackPanel>
+                </Grid>
+            </DockPanel>
+        </Viewbox>
+    </Border>
 </Page>
