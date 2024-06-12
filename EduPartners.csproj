@@ -7,6 +7,7 @@
     <ProjectGuid>{A9942F73-2E8A-4C44-A96D-C46709445911}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>EduPartners</RootNamespace>
+    <LangVersion>12</LangVersion>
     <AssemblyName>EduPartners</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

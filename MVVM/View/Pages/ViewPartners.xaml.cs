@@ -27,6 +27,8 @@ namespace EduPartners.MVVM.View.Pages
     /// <summary>
     /// Interaction logic for ViewPartners.xaml
     /// </summary>
+    ///
+
     public class EmailToUriConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
