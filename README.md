@@ -3,7 +3,7 @@
 ## Authors
 Nirmaha Mukherjee and Sean Ryan
 
-## Missouri State Competition
+## Missouri Nationals Competition
 
 ### Prompt
 Create a program for your school’s Career and Technical Education Department to collect and store information about local businesses and community partners. The program should cover details for at least 25 different partners, including the type of organization, available resources, and direct contact information for an individual. Users should be able to search and filter the information as needed.
