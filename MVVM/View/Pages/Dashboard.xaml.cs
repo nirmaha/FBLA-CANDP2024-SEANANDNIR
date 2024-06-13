@@ -55,7 +55,6 @@ namespace EduPartners.MVVM.View.Pages
                 List<int> dates = new List<int>();
                 List<string> industries = new List<string>();
 
-
                 // Populates Dashboard Graphs
                 foreach (Partner partner in partners) 
                 {
@@ -126,7 +125,7 @@ namespace EduPartners.MVVM.View.Pages
                 }
 
                 pieIndustry.Series = pieSeries;
-                legendListBox.ItemsSource = LegendItems;
+                lbPieLegend.ItemsSource = LegendItems;
 
                 ChartValues<double> savings = new ChartValues<double>();
 
@@ -166,6 +165,17 @@ namespace EduPartners.MVVM.View.Pages
         {
             double xValue = chartPoint.X;
             App.Current.Properties["PreFilteredIndustry"] = barIndustrySavings.AxisX[0].Labels[(int)chartPoint.X];
+            mainControl.Load_Page("MVVM/View/Pages/ViewPartners.xaml");
+        }
+
+        private void lbPieLegend_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!(lbPieLegend.SelectedItem is CustomLegendItem item))
+            {
+                return;
+            }
+
+            App.Current.Properties["PreFilteredIndustry"] = item.Title;
             mainControl.Load_Page("MVVM/View/Pages/ViewPartners.xaml");
         }
     }
