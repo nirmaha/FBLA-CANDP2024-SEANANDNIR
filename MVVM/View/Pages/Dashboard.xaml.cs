@@ -163,14 +163,13 @@ namespace EduPartners.MVVM.View.Pages
 
         private void BarGraph_DataClick(object sender, ChartPoint chartPoint)
         {
-            double xValue = chartPoint.X;
             App.Current.Properties["PreFilteredIndustry"] = barIndustrySavings.AxisX[0].Labels[(int)chartPoint.X];
             mainControl.Load_Page("MVVM/View/Pages/ViewPartners.xaml");
         }
 
         private void lbPieLegend_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!(lbPieLegend.SelectedItem is CustomLegendItem item))
+            if (lbPieLegend.SelectedItem is not CustomLegendItem item)
             {
                 return;
             }

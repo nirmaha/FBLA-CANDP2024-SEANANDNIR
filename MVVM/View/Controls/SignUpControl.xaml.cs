@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -48,11 +49,13 @@ namespace EduPartners.MVVM.View.Controls
             if (!(e.Source is TextBox || e.Source is PasswordBox))
             {
                 Keyboard.ClearFocus();
-                tbFirstName.Background = new SolidColorBrush(Color.FromRgb(237, 237, 237));
-                tbLastName.Background = new SolidColorBrush(Color.FromRgb(237, 237, 237));
-                tbEmail.Background = new SolidColorBrush(Color.FromRgb(237, 237, 237));
-                pbPassword.Background = new SolidColorBrush(Color.FromRgb(237, 237, 237));
-                pbConfirmPassword.Background = new SolidColorBrush(Color.FromRgb(237, 237, 237));
+
+                SolidColorBrush newBackground = new SolidColorBrush(Color.FromRgb(237, 237, 237));
+                tbFirstName.Background = newBackground;
+                tbLastName.Background = newBackground;
+                tbEmail.Background = newBackground;
+                pbPassword.Background = newBackground;
+                pbConfirmPassword.Background = newBackground;
             }
         }
 
@@ -68,14 +71,7 @@ namespace EduPartners.MVVM.View.Controls
 
         private void tbEmail_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (tbEmail.Text != "")
-            {
-                lEmail.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                lEmail.Visibility = Visibility.Visible;
-            }
+            lEmail.Visibility = string.IsNullOrEmpty(tbEmail.Text) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void lEmail_Clicked(object sender, MouseButtonEventArgs e)
@@ -95,14 +91,7 @@ namespace EduPartners.MVVM.View.Controls
 
         private void pbPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (pbPassword.Password != "")
-            {
-                lPassword.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                lPassword.Visibility = Visibility.Visible;
-            }
+            lPassword.Visibility = string.IsNullOrEmpty(pbPassword.Password) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void lPassword_Clicked(object sender, MouseButtonEventArgs e)
@@ -122,14 +111,7 @@ namespace EduPartners.MVVM.View.Controls
 
         private void tbFirstName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (tbFirstName.Text != "")
-            {
-                lFirstName.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                lFirstName.Visibility = Visibility.Visible;
-            }
+            lFirstName.Visibility = string.IsNullOrEmpty(tbFirstName.Text) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void lFirstName_Clicked(object sender, MouseButtonEventArgs e)
@@ -149,14 +131,7 @@ namespace EduPartners.MVVM.View.Controls
 
         private void tbLastName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (tbLastName.Text != "")
-            {
-                lLastName.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                lLastName.Visibility = Visibility.Visible;
-            }
+            lLastName.Visibility = string.IsNullOrEmpty(tbLastName.Text) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void lLastName_Clicked(object sender, MouseButtonEventArgs e)
@@ -176,14 +151,7 @@ namespace EduPartners.MVVM.View.Controls
 
         private void pbConfirmPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (pbConfirmPassword.Password != "")
-            {
-                lConfirmPassword.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                lConfirmPassword.Visibility = Visibility.Visible;
-            }
+            lConfirmPassword.Visibility = string.IsNullOrEmpty(pbConfirmPassword.Password) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void lConfirmPassword_Clicked(object sender, MouseButtonEventArgs e)
@@ -205,55 +173,40 @@ namespace EduPartners.MVVM.View.Controls
 
         private async void btNext_Clicked(object sender, RoutedEventArgs e)
         {
-            // Checks if the inputted email is valid
-            bool emailMatch = Regex.IsMatch(tbEmail.Text, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
-
             // Checks if any textbox is empty
-            if (tbFirstName.Text == "" || tbLastName.Text == "" || tbEmail.Text == "" || pbPassword.Password == "" || pbConfirmPassword.Password == "")
+            if (string.IsNullOrWhiteSpace(tbFirstName.Text) || string.IsNullOrWhiteSpace(tbLastName.Text) || string.IsNullOrWhiteSpace(tbEmail.Text) || string.IsNullOrWhiteSpace(pbPassword.Password) || string.IsNullOrWhiteSpace(pbConfirmPassword.Password))
             {
-                lErrorMessage.FontSize = 18;
-                lErrorMessage.Visibility = Visibility.Visible;
-                lErrorMessage.Content = "Please fill in all the fields.";
+                ShowErrorMessage("Please fill in all the fields.", 18);
                 return;
             }
 
             List<User> users = await db.GetUsers();
-
-            foreach (User user in users)
+           
+            // Checks if the email doesn't already exist
+            if (users.Any(user => user.Email == tbEmail.Text))
             {
-                // Checks if the email doesn't already exist
-                if (tbEmail.Text == user.Email)
-                {
-                    lErrorMessage.FontSize = 18;
-                    lErrorMessage.Visibility = Visibility.Visible;
-                    lErrorMessage.Content = "Cannot create account due to the email already existing.";
-                    return;
-                }
+                ShowErrorMessage("Cannot create account due to the email already existing.", 18);
+                return;
             }
+            
 
             if (pbPassword.Password != pbConfirmPassword.Password)
             {
-                lErrorMessage.Visibility = Visibility.Visible;
-                lErrorMessage.Content = "Confirmed password does not match given password.";
-                lErrorMessage.FontSize = 15;
+                ShowErrorMessage("Confirmed password does not match given password.", 15);
                 return;
             }
 
             // Makes sure that the terms check box has been clicked
             if (cbTerms.IsChecked == false)
             {
-                lErrorMessage.FontSize = 18;
-                lErrorMessage.Visibility = Visibility.Visible;
-                lErrorMessage.Content = "Please agree to the terms and conditions.";
+                ShowErrorMessage("Please agree to the terms and conditions.", 18);
                 return;
             }
 
             // Checks if a valid email has been inputted
-            if (!emailMatch)
+            if (!Regex.IsMatch(tbEmail.Text, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"))
             {
-                lErrorMessage.FontSize = 18;
-                lErrorMessage.Visibility = Visibility.Visible;
-                lErrorMessage.Content = "Please enter a valid email.";
+                ShowErrorMessage("Please enter a valid email.", 18);
                 return;
             }
 
@@ -265,6 +218,13 @@ namespace EduPartners.MVVM.View.Controls
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
             mainWindow.SetUserControl("SchoolSelection");
+        }
+
+        private void ShowErrorMessage(string message, int fontSize)
+        { 
+            lErrorMessage.FontSize = fontSize;
+            lErrorMessage.Visibility = Visibility.Visible;
+            lErrorMessage.Content = message;
         }
     }
 }

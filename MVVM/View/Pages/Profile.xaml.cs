@@ -72,7 +72,7 @@ namespace EduPartners.MVVM.View.Pages
                     }
                     else
                     {
-                        imgProfile.Source = new BitmapImage(new Uri("/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
+                        imgProfile.Source = new BitmapImage(new Uri("pack://application:,,,/EduPartners;component/Resources/defaultProfile.png"));
                     }
                 }
                 catch

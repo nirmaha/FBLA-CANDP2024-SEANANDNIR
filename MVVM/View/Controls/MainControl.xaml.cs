@@ -185,7 +185,7 @@ namespace EduPartners.MVVM.View.Controls
                 }
                 else
                 {
-                    imgProfile.ImageSource = new BitmapImage(new Uri("/EduPartners;component/Resources/defaultProfile.png", UriKind.RelativeOrAbsolute));
+                    imgProfile.ImageSource = new BitmapImage(new Uri("pack://application:,,,/EduPartners;component/Resources/defaultProfile.png"));
                 }
             }
             catch

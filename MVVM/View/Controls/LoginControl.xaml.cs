@@ -22,6 +22,7 @@ namespace EduPartners.MVVM.View.Controls
     public partial class LoginControl : UserControl
     {
         private Database db;
+        private IniFile iniFile;
 
         // Path to the local AppData folder and to EduPartners folder
         private static string localDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "EduPartners");
@@ -32,7 +33,8 @@ namespace EduPartners.MVVM.View.Controls
             InitializeComponent();
             
             db = App.Current.Properties["Database"] as Database;
-            
+            iniFile = new IniFile(filePath, localDataPath);
+
             this.Loaded += LoginControl_Loaded;
         }
 
@@ -46,13 +48,17 @@ namespace EduPartners.MVVM.View.Controls
             App.Current.Properties["Email"] = "";
             App.Current.Properties["Password"] = "";
 
-            IniFile iniFile = new IniFile(filePath, localDataPath);
+            // Keeps Remember me on if there are cookies
+            string emailLogin = iniFile.GetValue("SECURITY", "EMAILLOGIN");
+            string passwordLogin = iniFile.GetValue("SECURITY", "PASSWORDLOGIN");
+            string dateLoginSaved = iniFile.GetValue("SECURITY", "DATELOGINSAVED");
+
 
             // Keeps Remember me on if there is cookies
-            if (iniFile.GetValue("SECURITY", "EMAILLOGIN") != "")
+            if (!string.IsNullOrEmpty(emailLogin))
             {
                 cbRememberMe.IsChecked = true;
-                tbEmail.Text = iniFile.GetValue("SECURITY", "EMAILLOGIN");
+                tbEmail.Text = emailLogin;
                 pbPassword.Focus();
             }
             else
@@ -61,20 +67,19 @@ namespace EduPartners.MVVM.View.Controls
             }
 
             // If Password cookie is empty password box to nothing
-            if (iniFile.GetValue("SECURITY", "PASSWORDLOGIN") == "")
+            if (string.IsNullOrEmpty(passwordLogin))
             {
                 cbRememberMe.IsChecked = true;
                 pbPassword.Password = "";
             }
-          
             // Checks if it has been 30 days (or more) then it sets the password field
-            if (iniFile.GetValue("SECURITY", "PASSWORDLOGIN") != "" && iniFile.GetValue("SECURITY", "DATELOGINSAVED") != "" && !HasPassedDays(Convert.ToDateTime(iniFile.GetValue("SECURITY", "DATELOGINSAVED")), 30))
+            else if (!string.IsNullOrEmpty(passwordLogin) && !string.IsNullOrEmpty(dateLoginSaved) && !HasPassedDays(Convert.ToDateTime(dateLoginSaved), 30))
             {
                 // Has not been 30 days
                 cbRememberMe.IsChecked = true;
-                pbPassword.Password = iniFile.GetValue("SECURITY", "PASSWORDLOGIN");
+                pbPassword.Password = passwordLogin;
             }
-            else if (iniFile.GetValue("SECURITY", "DATELOGINSAVED") != "" && HasPassedDays(Convert.ToDateTime(iniFile.GetValue("SECURITY", "DATELOGINSAVED")), 30))
+            else if (!string.IsNullOrEmpty(passwordLogin) && HasPassedDays(Convert.ToDateTime(dateLoginSaved), 30))
             {
                 // Has been 30 days -- clears the password cookie
                 pbPassword.Password = "";
@@ -92,14 +97,7 @@ namespace EduPartners.MVVM.View.Controls
         /// <returns>If it has or has not been <paramref name="days"/>.</returns>
         private bool HasPassedDays(DateTime previousDate, int days)
         {
-            // Calculate the current date
-            DateTime currentDate = DateTime.Now;
-
-            // Calculate the difference in days
-            int differenceInDays = (int)(currentDate - previousDate).TotalDays;
-
-            // Check if the difference is greater than or equal to the specified number of days
-            return differenceInDays >= days;
+           return (int)previousDate.Subtract(DateTime.Now).TotalDays >= days;
         }
 
         private void pbPassword_GotFocus(object sender, RoutedEventArgs e)
@@ -134,26 +132,12 @@ namespace EduPartners.MVVM.View.Controls
 
         private void tbEmail_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (tbEmail.Text != "")
-            {
-                lEmail.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                lEmail.Visibility = Visibility.Visible;
-            }
+           lEmail.Visibility = string.IsNullOrEmpty(tbEmail.Text) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void pbPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (pbPassword.Password != "")
-            {
-                lPassword.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                lPassword.Visibility = Visibility.Visible;
-            }
+            lPassword.Visibility = string.IsNullOrEmpty(pbPassword.Password) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void LoginBorder_MouseDown(object sender, MouseButtonEventArgs e)
@@ -172,58 +156,60 @@ namespace EduPartners.MVVM.View.Controls
             // Checks for emptiness
             if (tbEmail.Text == "" || pbPassword.Password == "")
             {
-                lErrorMessage.Visibility = Visibility.Visible;
-                lErrorMessage.Content = "Please enter a username and a password.";
+                ShowErrorMessage("Please enter a username and a password.");
                 return;
             }
 
             User user = (await db.GetUserByEmail(tbEmail.Text)).FirstOrDefault();
-            User loggingInUser = null;
-            IniFile iniFile = new IniFile(filePath, localDataPath);
-
-            // Checks if the user inputted the correct email
-            if (user == null)
+            if (user == null || !BCrypts.Verify(pbPassword.Password, user.Password))
             {
-                lErrorMessage.Visibility = Visibility.Visible;
-                lErrorMessage.Content = "Username / Password is incorrect.";
-                return;
-            }
-
-            // Checks if the correct password was inputted
-            if (BCrypts.Verify(pbPassword.Password, user.Password))
-            {
-                loggingInUser = user;
-                App.Current.Properties["User"] = loggingInUser.Id;
-            }
-            else
-            {
-                lErrorMessage.Visibility = Visibility.Visible;
-                lErrorMessage.Content = "Username / Password is incorrect.";
+                ShowErrorMessage("Username / Password is incorrect.");
                 return;
             }
 
             // Fills in cookies if Remember me is checked
             if (cbRememberMe.IsChecked == true)
             {
-                iniFile.SetValue("SECURITY", "EMAILLOGIN", tbEmail.Text);
-                iniFile.SetValue("SECURITY", "PASSWORDLOGIN", pbPassword.Password);
-                iniFile.SetValue("SECURITY", "DATELOGINSAVED", DateTime.Now.ToString());
-                iniFile.Save();
+                SetRememberMeCookies(tbEmail.Text, pbPassword.Password);
             }
             // Clears in cookies if Remember me is not checked
             else
             {
-                iniFile.SetValue("SECURITY", "EMAILLOGIN", "");
-                iniFile.SetValue("SECURITY", "PASSWORDLOGIN", "");
-                iniFile.SetValue("SECURITY", "DATELOGINSAVED", "");
-                iniFile.Save();
+                ClearRememberMeCookies();
             }
 
-            App.Current.Properties["CurrentSchoolId"] = loggingInUser.HomeSchool.Id;
-            App.Current.Properties["CurrentUserId"] = loggingInUser.Id;
+            SetUserProperties(user);
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
             mainWindow.SetUserControl("MainControl");
+        }
+
+        private void ShowErrorMessage(string message)
+        { 
+            lErrorMessage.Visibility = Visibility.Visible;
+            lErrorMessage.Content = message;
+        }
+
+        private void SetRememberMeCookies(string email, string password)
+        {
+            iniFile.SetValue("SECURITY", "EMAILLOGIN", email);
+            iniFile.SetValue("SECURITY", "PASSWORDLOGIN", password);
+            iniFile.SetValue("SECURITY", "DATELOGINSAVED", DateTime.Now.ToString());
+            iniFile.Save();
+        }
+
+        private void ClearRememberMeCookies()
+        {
+            iniFile.SetValue("SECURITY", "EMAILLOGIN", "");
+            iniFile.SetValue("SECURITY", "PASSWORDLOGIN", "");
+            iniFile.SetValue("SECURITY", "DATELOGINSAVED", "");
+            iniFile.Save();
+        }
+
+        private void SetUserProperties(User user)
+        {
+            App.Current.Properties["CurrentSchoolId"] = user.HomeSchool.Id;
+            App.Current.Properties["CurrentUserId"] = user.Id;
         }
 
         private void SignUpRedirect_MouseDown(object sender, MouseButtonEventArgs e)

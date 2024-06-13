@@ -41,13 +41,9 @@ namespace EduPartners.MVVM.View.Controls
         private async void PopulateComboBox()
         {
             cbSchool.Items.Clear();
-            List<School> schools = await db.GetSchools();
-            schools = schools.OrderBy(s => s.Name).ToList();
+            List<School> schools = (await db.GetSchools()).OrderBy(s => s.Name).ToList();
 
-            foreach (School school in schools)
-            {
-                cbSchool.Items.Add(school.Name);
-            }
+            schools.ForEach(school => cbSchool.Items.Add(school.Name));
         }
 
         private void SchoolSelectionBorder_MouseDown(object sender, MouseButtonEventArgs e)
