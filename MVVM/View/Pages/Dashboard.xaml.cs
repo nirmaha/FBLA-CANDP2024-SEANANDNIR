@@ -13,6 +13,8 @@ using EduPartners.Core;
 using EduPartners.MVVM.Model;
 using EduPartners.MVVM.View.Controls;
 
+# pragma warning disable CA1416 // Validate platform compatibility
+
 namespace EduPartners.MVVM.View.Pages
 {
     public class CustomLegendItem
@@ -32,7 +34,7 @@ namespace EduPartners.MVVM.View.Pages
 
         public ObservableCollection<CustomLegendItem> LegendItems { get; set; }
 
-        private readonly Dictionary<string, double> IndustryToSavings = new Dictionary<string, double>();
+        private readonly Dictionary<string, double> IndustryToSavings = [];
 
         public string[] BarChartLabels { get; set; }
         public Func<double, string> CurrencyFormatter { get; set; }
@@ -52,8 +54,8 @@ namespace EduPartners.MVVM.View.Pages
                 List<Partner> partners = school.Partners.Value;
                 partners = partners.OrderBy(p => p.StartDate.Year).ToList();
 
-                List<int> dates = new List<int>();
-                List<string> industries = new List<string>();
+                List<int> dates = [];
+                List<string> industries = [];
 
                 // Populates Dashboard Graphs
                 foreach (Partner partner in partners) 
@@ -86,21 +88,21 @@ namespace EduPartners.MVVM.View.Pages
                 }
 
 
-                LineSeries lineSeries = new LineSeries()
+                LineSeries lineSeries = new()
                 {
                     Title = "Partners",
                     Values = values,
                     PointGeometry = DefaultGeometries.Circle,   
                 };
 
-                lineNumofPartners.Series = new SeriesCollection() { lineSeries };
+                lineNumofPartners.Series = [lineSeries];
 
                 // Industry Pie Chart
                 Dictionary<string, int> industryCount = industries
                           .GroupBy(industry => industry)
                           .ToDictionary(group => group.Key, group => group.Count());
 
-                SeriesCollection pieSeries = new SeriesCollection();
+                SeriesCollection pieSeries = [];
 
                 int colorIndex = 0;
 
@@ -118,7 +120,7 @@ namespace EduPartners.MVVM.View.Pages
                     colorIndex++;
                 }
 
-                LegendItems = new ObservableCollection<CustomLegendItem>();
+                LegendItems = [];
                 foreach (Series series in pieSeries)
                 {
                     LegendItems.Add(new CustomLegendItem { Title = series.Title, Color = series.Fill });
@@ -127,7 +129,7 @@ namespace EduPartners.MVVM.View.Pages
                 pieIndustry.Series = pieSeries;
                 lbPieLegend.ItemsSource = LegendItems;
 
-                ChartValues<double> savings = new ChartValues<double>();
+                ChartValues<double> savings = [];
 
                 foreach (double saving in IndustryToSavings.Values)
                 {
@@ -135,13 +137,13 @@ namespace EduPartners.MVVM.View.Pages
                 }
 
                 // Bar Graph
-                ColumnSeries columnSeries = new ColumnSeries()
+                ColumnSeries columnSeries = new()
                 {
                     Title = "Partners",
                     Values = savings,
                 };
 
-                List<string> listLabels = new List<string>();
+                List<string> listLabels = [];
                 foreach (string industry in IndustryToSavings.Keys)
                 { 
                     listLabels.Add(industry);

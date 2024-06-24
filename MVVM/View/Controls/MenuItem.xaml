@@ -98,7 +98,7 @@
                                 <Path Data="{Binding Icon, ElementName=this, FallbackValue={StaticResource DefaultIcon}, TargetNullValue={StaticResource DefaultIcon}}" Margin="{Binding IconMargin, FallbackValue='0,0,0,0', TargetNullValue='20,0,0,0'}"
                                       Stretch="Uniform" Width="{Binding IconWidth, ElementName=this, FallbackValue=20,TargetNullValue=20}" Style="{StaticResource MenuIconStyle}"/>
 
-                                <Image Source="{Binding ImageSource, ElementName=this, FallbackValue={StaticResource defaultProfile}, TargetNullValue={StaticResource defaultProfile}}" 
+                                <Image Source="{Binding ImageSource, ElementName=this}" 
                                             Margin="16,0,18,0"
                                             Width="NaN"
                                             Style="{StaticResource MenuIconStyleImage}"/>

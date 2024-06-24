@@ -22,6 +22,7 @@ using EduPartners.MVVM.View.Controls;
 using EduPartners.MVVM.ViewModel;
 using System.Threading.Tasks;
 
+# pragma warning disable CA1416 // Validate platform compatibility
 
 namespace EduPartners.MVVM.View.Pages
 {
@@ -66,10 +67,10 @@ namespace EduPartners.MVVM.View.Pages
 
     public partial class ViewPartners : Page
     {
-        private PartnerViewModel viewModel;
-        private Database db;
+        private readonly PartnerViewModel viewModel;
+        private readonly Database db;
 
-        private static string localDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "EduPartners");
+        private readonly string localDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "EduPartners");
 
         public ViewPartners()
         {
@@ -102,7 +103,7 @@ namespace EduPartners.MVVM.View.Pages
             // Retrieve all partners from the database
             List<Partner> allPartners = await db.GetPartners();
 
-            HashSet<string> partnerIds = new HashSet<string>(allPartners.Select(p => p.Id));
+            HashSet<string> partnerIds = new(allPartners.Select(p => p.Id));
 
             // Filter out partners that do not exist in the partner collection
             school.Partners.Value.RemoveAll(partner => !partnerIds.Contains(partner.Id));
@@ -141,14 +142,7 @@ namespace EduPartners.MVVM.View.Pages
             // Now you have access to the gMoreInfo Grid
             if (gMoreInfo != null)
             {
-                if (gMoreInfo.Visibility == Visibility.Collapsed)
-                {
-                    gMoreInfo.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    gMoreInfo.Visibility = Visibility.Collapsed;
-                }
+                gMoreInfo.Visibility = (gMoreInfo.Visibility == Visibility.Collapsed) ? Visibility.Visible : Visibility.Collapsed;
             }
         }
 
@@ -160,7 +154,7 @@ namespace EduPartners.MVVM.View.Pages
         /// <param name="childName">The the name of the child element you are looking for within the visual tree hierarchy.</param>
         /// <returns>Returns the element specified in Generic (T) and the <paramref name="childName"/>. If no matching child is found, it returns null.
         /// </returns>
-        private T FindChild<T>(DependencyObject parent, string childName) where T : DependencyObject
+        private static T FindChild<T>(DependencyObject parent, string childName) where T : DependencyObject
         {
             if (parent == null) return null;
 
@@ -285,7 +279,7 @@ namespace EduPartners.MVVM.View.Pages
             e.Handled = true;
         }
 
-        private readonly List<string> filters = new List<string>();
+        private readonly List<string> filters = [];
 
         private async void FilterPartners(RadioButton radioButton = null)
         {

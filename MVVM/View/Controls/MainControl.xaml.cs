@@ -21,13 +21,13 @@ namespace EduPartners.MVVM.View.Controls
     public partial class MainControl : UserControl
     {
         private Button currentMenuItem;
-        private Database db;
+        private readonly Database db;
 
         private static string localDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "EduPartners");
 
         private Random rnd = new Random();
-        private List<Color> distinctColors = new List<Color>
-        {
+        private readonly List<Color> distinctColors =
+        [
             Colors.Red,
             Colors.Green,
             Colors.Blue,
@@ -48,8 +48,8 @@ namespace EduPartners.MVVM.View.Controls
             Colors.Gold,
             Colors.Silver,
             Colors.IndianRed
-        };
-        public List<SolidColorBrush> savedColors = new List<SolidColorBrush>();
+        ];
+        public List<SolidColorBrush> savedColors = [];
 
 
         public MainControl()
@@ -77,7 +77,7 @@ namespace EduPartners.MVVM.View.Controls
             School school = (await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString())).FirstOrDefault();
 
             List<Partner> partners = school.Partners.Value;
-            List<string> industries = new List<string>();
+            List<string> industries = [];
 
             foreach (Partner partner in partners)
             {
