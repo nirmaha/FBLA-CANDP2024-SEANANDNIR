@@ -19,7 +19,7 @@ Create a program for your school’s Career and Technical Education Department t
 
 ## File Structure
 ```
-D:.
+C:.
 ├───Assets
 ├───bin
 │   └───Debug
@@ -36,7 +36,7 @@ D:.
 └───Themes
 ```
 
-## Model
+## Models
 ### User Model
 ```cs
 public class User
@@ -58,7 +58,7 @@ public class User
    [BsonRequired]
    public string Password { get; set; }
 
-   public string ProfileImage { get; set; }
+   public BsonBinaryData ProfileImage { get; set; }
 
    [BsonRequired]
    public School HomeSchool { get; set; }
@@ -192,7 +192,7 @@ This is where the user can log out.
 
 ## References
 
-#### Tools Used
+### Tools Used
 - **Visual Studio:**
   - https://visualstudio.microsoft.com/
 - **.Net Framework:**
@@ -202,7 +202,7 @@ This is where the user can log out.
 - **MongoDB Compass:**
   - https://www.mongodb.com/products/tools/compass
 
-#### Libraries
+### Libraries
 - **Nuget Pack Manager:**
   - https://learn.microsoft.com/en-us/nuget/
 - **Bcrypt:**
@@ -212,7 +212,7 @@ This is where the user can log out.
 - **LiveCharts:**
   - https://www.nuget.org/packages/LiveCharts/
 
-#### Resources
+### Resources
 - **Dashboard Template:**
   - https://github.com/Jeyderht/WPFModernVerticalMenu
 - **Login Page Background Image:**
