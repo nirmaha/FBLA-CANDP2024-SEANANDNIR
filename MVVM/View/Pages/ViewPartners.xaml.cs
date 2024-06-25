@@ -218,7 +218,7 @@ namespace EduPartners.MVVM.View.Pages
             // Removes the partner for the school list
             School school = (await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString())).FirstOrDefault();
 
-            school.Partners.Value.Remove(partner);
+            school.Partners.Value.RemoveAll(p => p.Id == partner.Id);
 
             await db.UpdateSchool(school);
 
@@ -310,8 +310,10 @@ namespace EduPartners.MVVM.View.Pages
             }
 
             // Goes through the filter list and applies the filter to the ViewModel
-            foreach (string filter in filters)
+            for (int i = 0; i < filters.Count; i++)
             {
+                string filter = filters[i];
+           
                 switch (filter)
                 {
                     case "AZ":
@@ -326,7 +328,7 @@ namespace EduPartners.MVVM.View.Pages
                     case "clear":
                         filters.Clear();
                         radioButton.IsChecked = false;
-                        filters.Add("clear");
+                        i = 0;
                         break;
                     default:
                         break;

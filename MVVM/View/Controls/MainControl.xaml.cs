@@ -47,7 +47,12 @@ namespace EduPartners.MVVM.View.Controls
             Colors.Violet,
             Colors.Gold,
             Colors.Silver,
-            Colors.IndianRed
+            Colors.IndianRed,
+            Colors.LightBlue,
+            Colors.LightGreen,
+            Colors.BlueViolet,
+            Colors.DeepSkyBlue,
+            Colors.OrangeRed,
         ];
         public List<SolidColorBrush> savedColors = [];
 

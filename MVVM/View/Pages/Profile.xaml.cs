@@ -105,7 +105,7 @@ namespace EduPartners.MVVM.View.Pages
             tbPhoneNumber.IsReadOnly = false;
 
             // Show Profile edit elements
-            overlayEllipse.Opacity = 0.5;
+            overlayEllipse.Visibility = Visibility.Visible;
             imgEdit.Visibility = Visibility.Visible;
         }
 
@@ -156,8 +156,8 @@ namespace EduPartners.MVVM.View.Pages
             tbChangedPwrd.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#323B4B"));
 
             // Hide profile edit elements
-            overlayEllipse.Opacity = 0;
-            imgEdit.Visibility = Visibility.Hidden;
+            overlayEllipse.Visibility = Visibility.Collapsed;
+            imgEdit.Visibility = Visibility.Collapsed;
 
         }
 
