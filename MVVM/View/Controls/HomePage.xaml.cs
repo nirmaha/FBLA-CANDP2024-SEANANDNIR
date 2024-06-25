@@ -4,7 +4,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Threading;
 
 
 namespace EduPartners.MVVM.View.Controls
@@ -19,13 +18,13 @@ namespace EduPartners.MVVM.View.Controls
 
         int panelNum = 0;
 
-        string[] images = new string[]
-        {   "../../Resources/first_panel_background.png",
-            "../../Resources/second_panel_background.jpg",
-            "../../Resources/third_panel_background.png"
-        };
+        readonly string[] images =
+        [   "pack://application:,,,/Resources/first_panel_background.png",
+            "pack://application:,,,/Resources/second_panel_background.jpg",
+            "pack://application:,,,/Resources/third_panel_background.png"
+        ];
 
-        string[] backgroundTexts = new string[]
+        readonly string[] backgroundTexts =
         {
             "Manage your Partnerships",
             "Administer Academic Growth",
@@ -170,7 +169,7 @@ namespace EduPartners.MVVM.View.Controls
             animationTimer.Start();
         }
 
-        private void bHelp_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Help_MouseDown(object sender, MouseButtonEventArgs e)
         {
             switchTimer.Dispose();
             animationTimer.Dispose();

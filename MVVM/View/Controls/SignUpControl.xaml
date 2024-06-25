@@ -8,7 +8,7 @@
              Height="450" Width="800" FontFamily="Poppins">
 
     <UserControl.Background>
-        <ImageBrush ImageSource="../../../Resources/signup_background.jpg" Opacity="0.6" />
+        <ImageBrush ImageSource="pack://application:,,,/Resources/signup_background.jpg" Opacity="0.6" />
     </UserControl.Background>
 
     <Grid x:Name="SignUpMainGrid" >

@@ -8,7 +8,7 @@
              Height="450" Width="800">
     
     <UserControl.Background>
-        <ImageBrush ImageSource="../../../Resources/first_panel_background.png" Opacity="1.0" x:Name="ibBackground" />
+        <ImageBrush ImageSource="pack://application:,,,/Resources/first_panel_background.png" Opacity="1.0" x:Name="ibBackground" />
     </UserControl.Background>
 
     <Grid>
@@ -22,7 +22,7 @@
             
             <!-- EduPartners Logo -->
             <StackPanel Margin="20,0,0,0" Orientation="Horizontal">
-                <Image Source="../../../Resources/icon.png" Height="45"/>
+                <Image Source="pack://application:,,,/Resources/icon.png" Height="45"/>
                 <Label Content="EduPartners" Margin="10,0,0,0" Foreground="White" FontSize="28" FontFamily="Poppins" VerticalContentAlignment="Center"/>
             </StackPanel>
             
@@ -56,8 +56,8 @@
                 </Button>
                 
                 <!-- Help Button -->
-                <Border Cursor="Hand" ToolTip="Help" Margin="0,0,20,0" MouseDown="bHelp_MouseDown">
-                    <Image Height="35" Source="../../../Resources/help.png"/>
+                <Border Cursor="Hand" ToolTip="Help" Margin="0,0,20,0" MouseDown="Help_MouseDown">
+                    <Image Height="35" Source="pack://application:,,,/Resources/help.png"/>
                 </Border>
                 
             </StackPanel>

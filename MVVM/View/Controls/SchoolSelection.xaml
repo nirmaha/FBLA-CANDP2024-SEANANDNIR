@@ -8,7 +8,7 @@
              Height="450" Width="800" FontFamily="Poppins">
     
     <UserControl.Background>
-        <ImageBrush ImageSource="../../../Resources/schoolSelection_background.jpg" Opacity="0.6" />
+        <ImageBrush ImageSource="pack://application:,,,/Resources/schoolSelection_background.jpg" Opacity="0.6" />
     </UserControl.Background>
 
     <Grid>

@@ -18,12 +18,12 @@ namespace EduPartners.MVVM.View.Pages
     /// </summary>
     public partial class EditPartners : Page
     {
-        private Database db;
+        private readonly Database db;
         private Partner partner;
 
-        private List<string> industries = new List<string>() { "IT", "Architecture", "Educational Services", "Emergency Services", "Food Services",
+        private readonly List<string> industries = [ "IT", "Architecture", "Educational Services", "Emergency Services", "Food Services",
             "Arts, Entertainment and Recreation", "Administration Service", "Business Support", "Construction", "Finance and Insurance",
-            "Healthcare", "Information", "Real Estate and Rental and Leasing", "Transportation", "Utilities", "Technology" };
+            "Healthcare", "Information", "Real Estate and Rental and Leasing", "Transportation", "Utilities", "Technology" ];
 
         public EditPartners()
         {
@@ -206,7 +206,7 @@ namespace EduPartners.MVVM.View.Pages
 
 
             // Update the selected partner
-            Partner updatePartner = new Partner()
+            Partner updatePartner = new()
             {
                 Id = partner.Id,
                 Name = tbName.Text,
