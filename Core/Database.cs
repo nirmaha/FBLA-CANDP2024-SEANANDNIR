@@ -14,11 +14,11 @@ namespace EduPartners.Core
 {
     public class Database
     {
-        private static string ConnectionUri = DotEnv.Load("MAINDB") + "?retryWrites=true&w=majority";
-        private static string BackupConnectionUri = DotEnv.Load("BACKUPDB") + "?retryWrites=true&w=majority";
-        
-        // private static string ConnectionUri = "mongodb://localhost:27017/";
-        // private static string BackupConnectionUri = "mongodb://localhost:27017/";
+        //private static string ConnectionUri = DotEnv.Load("MAINDB") + "?retryWrites=true&w=majority";
+        //private static string BackupConnectionUri = DotEnv.Load("BACKUPDB") + "?retryWrites=true&w=majority";
+
+        private static string ConnectionUri = "mongodb://localhost:27017/";
+        private static string BackupConnectionUri = "mongodb://localhost:27017/";
 
         private MongoClientSettings Settings = MongoClientSettings.FromConnectionString(ConnectionUri);
         private MongoClientSettings BackupSettings = MongoClientSettings.FromConnectionString(BackupConnectionUri);
