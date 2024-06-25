@@ -108,21 +108,19 @@ namespace EduPartners.MVVM.View.Controls
                         }
                     }
                 });
-
-
-                switchTimer.Elapsed += delegate
-                {
-                    Dispatcher.Invoke(() =>
-                    {
-                        animationTimer.Start();
-                        switchTimer.Stop();
-                    });
-                };
-
-                switchTimer.Interval = 5000;
-                switchTimer.Start();
-
             };
+
+            switchTimer.Elapsed += delegate
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    animationTimer.Start();
+                    switchTimer.Stop();
+                });
+            };
+
+            switchTimer.Interval = 5000;
+            switchTimer.Start();
         }
 
         private void SetPanelCircleProperties(double firstOpacity, Color firstColor, double secondOpacity, Color secondColor, double thirdOpacity, Color thirdColor)
@@ -135,7 +133,7 @@ namespace EduPartners.MVVM.View.Controls
             thirdPanelCircle.Background = new SolidColorBrush(thirdColor);
         }
 
-            private void CreateSchool_Clicked(object sender, RoutedEventArgs e)
+        private void CreateSchool_Clicked(object sender, RoutedEventArgs e)
         {
             switchTimer.Stop();
             animationTimer.Stop();
