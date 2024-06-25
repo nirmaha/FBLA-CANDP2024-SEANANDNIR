@@ -35,7 +35,7 @@
                         <Ellipse.Fill>
                             <VisualBrush>
                                 <VisualBrush.Visual>
-                                    <Image x:Name="imgProfile" Source="../../../Resources/defaultProfile.png" Stretch="UniformToFill"/>
+                                    <Image x:Name="imgProfile" Source="pack://application:,,,/Resources/defaultProfile.png" Stretch="UniformToFill"/>
                                 </VisualBrush.Visual>
                             </VisualBrush>
                         </Ellipse.Fill>
@@ -43,7 +43,7 @@
 
                     <!-- Edit Profile Elements -->
                     <Ellipse x:Name="overlayEllipse" Grid.Row="0" Width="120" Height="120" Fill="Gray" Opacity="0.5" Visibility="Collapsed" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0" Cursor="Hand"/>
-                    <Image x:Name="imgEdit" Source="../../../Resources/profileEdit.png" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" Margin="-1,13,0,0" MouseDown="ProfileCircle_MouseDown" Cursor="Hand"/>
+                    <Image x:Name="imgEdit" Source="pack://application:,,,/Resources/profileEdit.png" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" Margin="-1,13,0,0" MouseDown="ProfileCircle_MouseDown" Cursor="Hand"/>
 
 
                     <!-- Basic Info -->

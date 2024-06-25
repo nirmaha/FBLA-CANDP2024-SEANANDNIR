@@ -8,7 +8,7 @@
              Height="450" Width="800">
     
     <UserControl.Background>
-        <ImageBrush ImageSource="../../../Resources/first_panel_background.png" Opacity="1.0" x:Name="ibBackground" />
+        <ImageBrush ImageSource="pack://application:,,,/Resources/first_panel_background.png" Opacity="1.0" x:Name="ibBackground" />
     </UserControl.Background>
 
     <Grid>

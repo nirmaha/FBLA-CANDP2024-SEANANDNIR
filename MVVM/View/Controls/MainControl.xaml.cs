@@ -190,7 +190,7 @@ namespace EduPartners.MVVM.View.Controls
                 }
                 else
                 {
-                    imgProfile.ImageSource = new BitmapImage(new Uri("pack://application:,,,/EduPartners;component/Resources/defaultProfile.png"));
+                    imgProfile.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Resources/defaultProfile.png"));
                 }
             }
             catch

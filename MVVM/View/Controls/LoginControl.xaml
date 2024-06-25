@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     
     <UserControl.Background>
-        <ImageBrush ImageSource="../../../Resources/login_background.jpg" Opacity="0.6" />
+        <ImageBrush ImageSource="pack://application:,,,/Resources/login_background.jpg" Opacity="0.6" />
     </UserControl.Background>
 
     <Grid x:Name="LoginMainGrid">

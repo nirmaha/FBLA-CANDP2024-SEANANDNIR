@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -20,7 +21,6 @@ using EduPartners.Core;
 using EduPartners.MVVM.Model;
 using EduPartners.MVVM.View.Controls;
 using EduPartners.MVVM.ViewModel;
-using System.Threading.Tasks;
 
 # pragma warning disable CA1416 // Validate platform compatibility
 
