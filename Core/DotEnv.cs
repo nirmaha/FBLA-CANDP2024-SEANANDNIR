@@ -7,6 +7,11 @@ namespace EduPartners.Core
 {
     public static class DotEnv
     {
+        /// <summary>
+        /// Loads environment variables from an embedded resource file.
+        /// </summary>
+        /// <param name="variableName">The name of the environment variable to retrieve.</param>
+        /// <returns>The value of the specified environment variable.</returns>
         public static string Load(string variableName)
         {
             // Name of the embedded resource file containing environment variables

@@ -16,7 +16,7 @@ namespace EduPartners.Core
     {
         //private static string ConnectionUri = DotEnv.Load("MAINDB") + "?retryWrites=true&w=majority";
         //private static string BackupConnectionUri = DotEnv.Load("BACKUPDB") + "?retryWrites=true&w=majority";
-
+        
         private static string ConnectionUri = "mongodb://localhost:27017/";
         private static string BackupConnectionUri = "mongodb://localhost:27017/";
 
@@ -144,15 +144,12 @@ namespace EduPartners.Core
             return results.ToList();
         }
 
+
         /// <summary>
-        /// This function creates a new user.
+        /// This function creates a new user and stores a backup in a separate collection.
         /// </summary>
-        /// <param name="CreateUser">
-        /// The method takes a parameter of type `User`, which represents the user information
-        /// needed to create a new user account.</param>
-        /// <returns>
-        /// Returns a `Task` object.
-        /// </returns>
+        /// <param name="CreateUser">The user object to be created.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
         public Task CreateUser(User CreateUser) 
         {
             IMongoCollection<User> users = GetDBCollection<User>(UserCollection);

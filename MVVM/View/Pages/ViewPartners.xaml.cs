@@ -93,44 +93,53 @@ namespace EduPartners.MVVM.View.Pages
         }
 
         /// <summary>
-        /// This function checks if the Partners inside of School's list still exist inside of the Partner collection.
+        /// Asynchronously synchronizes the list of partners for the current school.
         /// </summary>
         private async void SyncList()
         {
-            // Retrieve the current school
+            // Retrieve the current school using the current school ID
             School school = (await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString())).FirstOrDefault();
 
             // Retrieve all partners from the database
             List<Partner> allPartners = await db.GetPartners();
 
+            // Create a HashSet of partner IDs for efficient lookup
             HashSet<string> partnerIds = new(allPartners.Select(p => p.Id));
 
             // Filter out partners that do not exist in the partner collection
             school.Partners.Value.RemoveAll(partner => !partnerIds.Contains(partner.Id));
 
+            // Update the school in the database
             await db.UpdateSchool(school);
         }
 
 
         /// <summary>
-        /// This function populates the ViewModel collection of partners.
+        /// This function asynchronously populates the view with partners from the home school.
         /// </summary>
         private async void PopulateView()
         {
-            await Task.Run(() => 
-            {      
+            // Asynchronously run the following code
+            await Task.Run(() =>
+            {
+                // Sync the list of partners
                 SyncList();
 
+                // Retrieve the current school using the school ID stored in the application properties
                 School homeSchool = (db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString()).Result).FirstOrDefault();
 
+                // Update the UI on the main thread
                 Application.Current.Dispatcher.Invoke(() =>
-                { 
+                {
+                    // Clear the existing items in the ViewModel
                     viewModel.Items.Clear();
+
+                    // Add each partner from the home school to the ViewModel
                     homeSchool.Partners.Value.ForEach(p => viewModel.Items.Add(p));
                 });
             });
         }
-   
+
         private void Card_MouseDown(object sender, MouseButtonEventArgs e)
         {
             // Assuming sender is the Border clicked
@@ -147,35 +156,43 @@ namespace EduPartners.MVVM.View.Pages
         }
 
         /// <summary>
-        /// This function recursively searches for a child element of a specified type with a given
-        /// name within a parent `DependencyObject`.
+        /// Recursively finds a child element of type T by name in the visual tree starting from the given parent element.
         /// </summary>
-        /// <param name="parent">The partner of the element, passed through the Generic (T).</param>
-        /// <param name="childName">The the name of the child element you are looking for within the visual tree hierarchy.</param>
-        /// <returns>Returns the element specified in Generic (T) and the <paramref name="childName"/>. If no matching child is found, it returns null.
-        /// </returns>
+        /// <typeparam name="T">The type of the child element to search for.</typeparam>
+        /// <param name="parent">The parent element to start the search from.</param>
+        /// <param name="childName">The name of the child element to find.</param>
+        /// <returns>The child element of type T with the specified name if found, otherwise null.</returns>
         private static T FindChild<T>(DependencyObject parent, string childName) where T : DependencyObject
         {
-            if (parent == null) return null;
+            // If the parent is null, return null as there are no children to search
+            if (parent == null)
+                return null;
 
+            // Get the total number of children elements in the parent
             int childrenCount = VisualTreeHelper.GetChildrenCount(parent);
 
-            // Loops though each child in the parent
+            // Loop through each child in the parent
             for (int i = 0; i < childrenCount; i++)
             {
+                // Get the current child element
                 DependencyObject child = VisualTreeHelper.GetChild(parent, i);
 
-                // If it matches the type and name return the element
+                // Check if the child is of the specified type T and has the matching name
                 if (child is T typedChild && ((FrameworkElement)child).Name == childName)
                 {
+                    // If the child matches the type and name, return the element
                     return typedChild;
                 }
-              
+
+                // Recursively call FindChild on the current child to search deeper in the visual tree
                 T result = FindChild<T>(child, childName);
+
+                // If a matching child element is found in the recursive call, return the result
                 if (result != null)
                     return result;
-                
             }
+
+            // If no matching child element is found, return null
             return null;
         }
 
@@ -281,19 +298,24 @@ namespace EduPartners.MVVM.View.Pages
 
         private readonly List<string> filters = [];
 
+        /// <summary>
+        /// Filters the list of partners based on user input and applies filters to the ViewModel.
+        /// </summary>
+        /// <param name="radioButton">The radio button selected as a filter, can be null.</param>
         private async void FilterPartners(RadioButton radioButton = null)
         {
+            // Get the current user
             User user = (await db.GetUserById(App.Current.Properties["CurrentUserId"].ToString())).FirstOrDefault();
             List<Partner> partners = user.HomeSchool.Partners.Value;
-            
-            // Checks the tag to know what filter it is and adds it to the filter list
+
+            // Check if a radio button is selected and update the filter list
             if (radioButton != null)
-            { 
+            {
                 filters.Clear();
                 filters.Add(radioButton.Tag.ToString());
             }
 
-            // Searches the name starting with the search box
+            // Filter partners based on the search box input
             if (!string.IsNullOrEmpty(tbSerachBox.Text))
             {
                 ComboBoxItem searchFilter = (ComboBoxItem)cbSearchFilter.SelectedItem;
@@ -309,11 +331,11 @@ namespace EduPartners.MVVM.View.Pages
 
             }
 
-            // Goes through the filter list and applies the filter to the ViewModel
+            // Apply filters to the partners list
             for (int i = 0; i < filters.Count; i++)
             {
                 string filter = filters[i];
-           
+
                 switch (filter)
                 {
                     case "AZ":
@@ -336,6 +358,7 @@ namespace EduPartners.MVVM.View.Pages
                 }
             }
 
+            // Clear current items in the ViewModel and add filtered partners
             viewModel.Items.Clear();
             partners.ForEach(filter => viewModel.Items.Add(filter));
         }

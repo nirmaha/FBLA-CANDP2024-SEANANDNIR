@@ -47,23 +47,26 @@ namespace EduPartners.MVVM.View.Pages
             mainControl = App.Current.Properties["MainControl"] as MainControl;
             DataContext = this;
 
+            // Event handler for when the Dashboard page is loaded
             this.Loaded += async (sender, e) =>
             {
+                // Retrieve the school information
                 School school = (await db.GetSchoolById(App.Current.Properties["CurrentSchoolId"].ToString())).FirstOrDefault();
 
+                // Get the list of partners from the school and order them by start date
                 List<Partner> partners = school.Partners.Value;
                 partners = partners.OrderBy(p => p.StartDate.Year).ToList();
 
-                List<int> dates = [];
-                List<string> industries = [];
+                List<int> dates = new List<int>();
+                List<string> industries = new List<string>();
 
-                // Populates Dashboard Graphs
-                foreach (Partner partner in partners) 
+                // Populates the dates and industries lists for Dashboard Graphs
+                foreach (Partner partner in partners)
                 {
                     dates.Add(partner.StartDate.Year);
                     industries.Add(partner.Industry);
 
-                    // Industry Savings Pie Chart
+                    // Calculate industry savings for the Pie Chart
                     if (!IndustryToSavings.ContainsKey(partner.Industry))
                     {
                         IndustryToSavings.Add(partner.Industry, partner.Savings);
@@ -72,10 +75,9 @@ namespace EduPartners.MVVM.View.Pages
                     {
                         IndustryToSavings[partner.Industry] += partner.Savings;
                     }
-
                 }
 
-                // Line Graph
+                // Generate data for the Line Graph
                 Dictionary<int, int> yearCounts = dates
                           .GroupBy(year => year)
                           .ToDictionary(group => group.Key, group => group.Count());
@@ -87,22 +89,22 @@ namespace EduPartners.MVVM.View.Pages
                     values.Add(new ObservablePoint(year.Key, year.Value));
                 }
 
-
-                LineSeries lineSeries = new()
+                // Create the Line Series for the Line Graph
+                LineSeries lineSeries = new LineSeries
                 {
                     Title = "Partners",
                     Values = values,
-                    PointGeometry = DefaultGeometries.Circle,   
+                    PointGeometry = DefaultGeometries.Circle,
                 };
 
-                lineNumofPartners.Series = [lineSeries];
+                lineNumofPartners.Series = new SeriesCollection { lineSeries };
 
-                // Industry Pie Chart
+                // Generate data for the Industry Pie Chart
                 Dictionary<string, int> industryCount = industries
                           .GroupBy(industry => industry)
                           .ToDictionary(group => group.Key, group => group.Count());
 
-                SeriesCollection pieSeries = [];
+                SeriesCollection pieSeries = new SeriesCollection();
 
                 int colorIndex = 0;
 
@@ -110,7 +112,7 @@ namespace EduPartners.MVVM.View.Pages
                 {
                     pieSeries.Add
                     (
-                        new PieSeries()
+                        new PieSeries
                         {
                             Title = industry.Key,
                             Values = new ChartValues<int> { industry.Value },
@@ -120,7 +122,7 @@ namespace EduPartners.MVVM.View.Pages
                     colorIndex++;
                 }
 
-                LegendItems = [];
+                List<CustomLegendItem> LegendItems = new List<CustomLegendItem>();
                 foreach (Series series in pieSeries)
                 {
                     LegendItems.Add(new CustomLegendItem { Title = series.Title, Color = series.Fill });
@@ -129,30 +131,30 @@ namespace EduPartners.MVVM.View.Pages
                 pieIndustry.Series = pieSeries;
                 lbPieLegend.ItemsSource = LegendItems;
 
-                ChartValues<double> savings = [];
+                ChartValues<double> savings = new ChartValues<double>();
 
                 foreach (double saving in IndustryToSavings.Values)
                 {
                     savings.Add(saving);
                 }
 
-                // Bar Graph
-                ColumnSeries columnSeries = new()
+                // Generate data for the Bar Graph
+                ColumnSeries columnSeries = new ColumnSeries
                 {
                     Title = "Partners",
                     Values = savings,
                 };
 
-                List<string> listLabels = [];
+                List<string> listLabels = new List<string>();
                 foreach (string industry in IndustryToSavings.Keys)
-                { 
+                {
                     listLabels.Add(industry);
                 }
 
                 BarChartLabels = listLabels.ToArray();
                 CurrencyFormatter = value => value.ToString("C");
 
-                SeriesCollection barChartCollection = new SeriesCollection() { columnSeries };
+                SeriesCollection barChartCollection = new SeriesCollection { columnSeries };
                 barIndustrySavings.Series = barChartCollection;
             };
         }
