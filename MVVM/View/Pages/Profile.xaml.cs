@@ -55,20 +55,17 @@ namespace EduPartners.MVVM.View.Pages
                     {
                         byte[] imageData = currentUser.ProfileImage.AsByteArray;
 
-                        using (MemoryStream ms = new MemoryStream(imageData))
-                        {
+                        using MemoryStream ms = new MemoryStream(imageData);
 
-                            BitmapImage profileImageData = new BitmapImage();
-                            profileImageData.BeginInit();
-                            profileImageData.StreamSource = ms;
-                            profileImageData.CacheOption = BitmapCacheOption.OnLoad;
-                            profileImageData.EndInit();
-                            profileImageData.Freeze();
-                          
+                        BitmapImage profileImageData = new BitmapImage();
+                        profileImageData.BeginInit();
+                        profileImageData.StreamSource = ms;
+                        profileImageData.CacheOption = BitmapCacheOption.OnLoad;
+                        profileImageData.EndInit();
+                        profileImageData.Freeze();
 
-                           imgProfile.Source = profileImageData;
-                          
-                        }
+
+                        imgProfile.Source = profileImageData;
                     }
                     else
                     {
