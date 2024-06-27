@@ -185,7 +185,7 @@ namespace EduPartners.MVVM.View.Controls
             // Checks if the email doesn't already exist
             if (users.Any(user => user.Email == tbEmail.Text))
             {
-                ShowErrorMessage("Cannot create account due to the email already existing.", 18);
+                ShowErrorMessage("Cannot create account due to the email already existing.", 15);
                 return;
             }
             

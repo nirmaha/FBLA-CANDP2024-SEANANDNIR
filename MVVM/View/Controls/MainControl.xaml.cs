@@ -350,6 +350,7 @@ namespace EduPartners.MVVM.View.Controls
 
                 MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
                 mainWindow.SetUserControl("HomePage");
+                mainWindow.WindowState = WindowState.Normal;
                 return;
             }
 

@@ -360,7 +360,10 @@ namespace EduPartners.MVVM.View.Pages
 
             // Clear current items in the ViewModel and add filtered partners
             viewModel.Items.Clear();
-            partners.ForEach(filter => viewModel.Items.Add(filter));
+            foreach (Partner partner in partners)
+            {
+                viewModel.Items.Add(partner);
+            }
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
