@@ -118,7 +118,7 @@ namespace EduPartners.MVVM.View.Controls
             if (tbSchoolId.Text != school.Code)
             {
                 lErrorMessage.Visibility = Visibility.Visible;
-                lErrorMessage.Content = "Please enter a school code.";
+                lErrorMessage.Content = "Please enter a valid school code.";
                 return;
             }
 
